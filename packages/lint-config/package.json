@@ -4,9 +4,30 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./react": "./react.js"
+    "./react": "./react.js",
+    "./next": "./next.js",
+    "./fsd": "./fsd/index.ts"
+  },
+  "scripts": {
+    "lint": "oxlint .",
+    "test": "node --test fsd/*.test.ts tests/*.test.mjs",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@next/eslint-plugin-next": "16.3.4",
+    "@oxlint/plugins": "1.88.0",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "eslint-plugin-turbo": "2.10.12"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "26.4.1",
+    "typescript": "7.0.2"
   },
   "peerDependencies": {
     "oxlint": "^1.88.0"
+  },
+  "engines": {
+    "node": ">=24"
   }
 }

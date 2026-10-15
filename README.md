@@ -19,8 +19,8 @@ This Turborepo includes the following packages/apps:
 - `docs`: a [Next.js](https://nextjs.org/) app
 - `web`: another [Next.js](https://nextjs.org/) app
 - `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `@next/eslint-plugin-next` and `eslint-config-prettier`)
-- `@repo/lint-config`: shared Oxlint React configuration used by `@repo/ui`
+- `@repo/eslint-config`: legacy ESLint presets retained from the scaffold
+- `@repo/lint-config`: shared Oxlint React and Next.js configurations, including the FSD plugin
 - `@repo/format-config`: shared Oxfmt React configuration used by `@repo/ui`
 - `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
 
@@ -31,11 +31,10 @@ Applications and UI components use [TypeScript](https://www.typescriptlang.org/)
 This Turborepo has some additional tools already setup for you:
 
 - [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for application linting
-- [Oxlint](https://oxc.rs/docs/guide/usage/linter) for shared UI linting
+- [Oxlint](https://oxc.rs/docs/guide/usage/linter) for Next.js application and shared UI linting
 - [Oxfmt](https://oxc.rs/docs/guide/usage/formatter) for shared UI formatting
 
-루트에서 `pnpm lint`, `pnpm format`, `pnpm format:check`를 실행합니다. 포맷 명령은 해당 스크립트가 있는 패키지에 적용되며, 현재 대상은 `@repo/ui`입니다. React 공유 설정의 사용법은 [lint-config](packages/lint-config/README.md)와 [format-config](packages/format-config/README.md)를 참고합니다.
+루트에서 `pnpm lint`, `pnpm format`, `pnpm format:check`를 실행합니다. 포맷 명령은 해당 스크립트가 있는 패키지에 적용되며, 현재 대상은 `@repo/ui`입니다. Next.js·React·FSD 린트 설정은 [lint-config](packages/lint-config/README.md), React 포맷 설정은 [format-config](packages/format-config/README.md)를 참고합니다.
 
 ### Build
 
