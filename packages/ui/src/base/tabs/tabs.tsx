@@ -1,9 +1,9 @@
 'use client';
 
 import { createContext, useContext } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useTabs } from "./use-tabs";
-import type { TabsApi, TabsOptions } from "./use-tabs";
+import type { PartProps } from '../_shared/react/index';
+import { useTabs } from './use-tabs';
+import type { TabsApi, TabsOptions } from './use-tabs';
 
 const Context = createContext<TabsApi | null>(null);
 function useTabsContext() {

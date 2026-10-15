@@ -2,9 +2,9 @@
 
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useSlider } from "./use-slider";
-import type { SliderApi, SliderOptions } from "./use-slider";
+import type { PartProps } from '../_shared/react/index';
+import { useSlider } from './use-slider';
+import type { SliderApi, SliderOptions } from './use-slider';
 
 const Context = createContext<SliderApi | null>(null);
 function useSliderContext() {

@@ -1,7 +1,7 @@
-import { mergeProps } from "../_shared/react/index";
-import type { PartProps } from "../_shared/react/index";
-import type { PresenceApi } from "../presence/index";
-import type { ToastRecord, ToastStore } from "./toast-store";
+import { mergeProps } from '../_shared/react/index';
+import type { PartProps } from '../_shared/react/index';
+import type { PresenceApi } from '../presence/index';
+import type { ToastRecord, ToastStore } from './toast-store';
 
 export function connectToast(store: ToastStore, item: ToastRecord | undefined, id: string, presence: PresenceApi) {
   const active = item?.status === 'visible';

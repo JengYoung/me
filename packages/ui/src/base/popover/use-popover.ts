@@ -1,11 +1,11 @@
 'use client';
 import { useState } from 'react';
-import { useBooleanState, useDirection, useStableId } from "../_shared/react/index";
-import { useLayerFocus } from "../_shared/focus/index";
-import type { LayerFocusOptions } from "../_shared/focus/index";
-import { usePosition } from "../_shared/positioning/index";
-import type { PositionOptions } from "../_shared/positioning/index";
-import { connectPopover } from "./popover.connect";
+import { useBooleanState, useDirection, useStableId } from '../_shared/react/index';
+import { useLayerFocus } from '../_shared/focus/index';
+import type { LayerFocusOptions } from '../_shared/focus/index';
+import { usePosition } from '../_shared/positioning/index';
+import type { PositionOptions } from '../_shared/positioning/index';
+import { connectPopover } from './popover.connect';
 
 export interface PopoverOptions extends PositionOptions, Omit<LayerFocusOptions, 'open' | 'onDismiss' | 'trigger'> {
   id?: string;
@@ -44,4 +44,4 @@ export function usePopover(options: PopoverOptions = {}) {
   });
   return connectPopover(state, focus, position, { ...options, id, dir }, { setTrigger, setAnchor, setContent });
 }
-export type { PopoverApi } from "./popover.connect";
+export type { PopoverApi } from './popover.connect';

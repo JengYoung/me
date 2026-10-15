@@ -1,5 +1,5 @@
-import { createMachine, flattenTree, isTreeBranch } from "../_shared/core/index";
-import type { Direction, MachineArgs, TreeNode } from "../_shared/core/index";
+import { createMachine, flattenTree, isTreeBranch } from '../_shared/core/index';
+import type { Direction, MachineArgs, TreeNode } from '../_shared/core/index';
 
 export interface CascadeSelectMachineOptions {
   nodes: readonly TreeNode[];

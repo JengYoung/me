@@ -1,9 +1,9 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { useMachine, useStableId } from "../_shared/react/index";
-import { tooltipMachine, tooltipOpen } from "./tooltip.machine";
-import type { TooltipOptions } from "./tooltip.machine";
-import { connectTooltip } from "./tooltip.connect";
+import { useMachine, useStableId } from '../_shared/react/index';
+import { tooltipMachine, tooltipOpen } from './tooltip.machine';
+import type { TooltipOptions } from './tooltip.machine';
+import { connectTooltip } from './tooltip.connect';
 export function useTooltip(options: TooltipOptions = {}) {
   for (const delay of [options.openDelay, options.closeDelay])
     if (delay !== undefined && (!Number.isFinite(delay) || delay < 0 || delay > 2_147_483_647))
@@ -32,5 +32,5 @@ export function useTooltip(options: TooltipOptions = {}) {
   // oxlint-disable-next-line react/refs
   return connectTooltip(service, { ...options, id }, trigger);
 }
-export type { TooltipOptions } from "./tooltip.machine";
-export type { TooltipApi } from "./tooltip.connect";
+export type { TooltipOptions } from './tooltip.machine';
+export type { TooltipApi } from './tooltip.connect';

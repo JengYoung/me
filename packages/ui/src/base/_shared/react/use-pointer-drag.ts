@@ -2,7 +2,7 @@
 
 import { useCallback, useRef } from 'react';
 import type { PointerEvent } from 'react';
-import { useCommitEffect } from "./use-commit-effect";
+import { useCommitEffect } from './use-commit-effect';
 
 export interface PointerDragOptions {
   disabled?: boolean;

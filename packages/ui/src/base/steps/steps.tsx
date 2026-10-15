@@ -1,10 +1,10 @@
 'use client';
 import { createContext, useContext, useEffect, useRef, useSyncExternalStore } from 'react';
 import type { ReactNode } from 'react';
-import { mergeProps } from "../_shared/react/index";
-import type { PartProps } from "../_shared/react/index";
-import { connectStepNavigation } from "./steps.connect";
-import type { StepsApi, StepsContentApi, StepsNavigation } from "./steps.connect";
+import { mergeProps } from '../_shared/react/index';
+import type { PartProps } from '../_shared/react/index';
+import { connectStepNavigation } from './steps.connect';
+import type { StepsApi, StepsContentApi, StepsNavigation } from './steps.connect';
 
 export type StepsRootProps = PartProps<'div'>;
 export type StepsItemProps<Name extends string = string> = PartProps<'li'> & { stepName: Name };

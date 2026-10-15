@@ -2,11 +2,11 @@
 
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { DialogPortal } from "../dialog/index";
-import { ModalFocusProvider } from "../_shared/focus/index";
-import { useAlertDialog } from "./use-alert-dialog";
-import type { AlertDialogApi, AlertDialogOptions } from "./use-alert-dialog";
+import type { PartProps } from '../_shared/react/index';
+import { DialogPortal } from '../dialog/index';
+import { ModalFocusProvider } from '../_shared/focus/index';
+import { useAlertDialog } from './use-alert-dialog';
+import type { AlertDialogApi, AlertDialogOptions } from './use-alert-dialog';
 
 const Context = createContext<AlertDialogApi | null>(null);
 function useAlertDialogContext() {

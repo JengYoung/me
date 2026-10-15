@@ -1,5 +1,5 @@
-import { createMachine } from "../_shared/core/index";
-import type { Direction, MachineArgs } from "../_shared/core/index";
+import { createMachine } from '../_shared/core/index';
+import type { Direction, MachineArgs } from '../_shared/core/index';
 import {
   dateSegmentRange,
   dateUnits,
@@ -9,8 +9,8 @@ import {
   parseDate,
   pasteDate,
   serializeDate,
-} from "./date-value";
-import type { DateParts, DateSegmentType, DateValueOptions } from "./date-value";
+} from './date-value';
+import type { DateParts, DateSegmentType, DateValueOptions } from './date-value';
 
 export interface DateInputMachineOptions extends DateValueOptions {
   value?: string | null;

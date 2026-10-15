@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   DataTable,
   DataTableRoot,
@@ -19,4 +19,4 @@ export {
   DataTableStatus,
   DataTablePrevious,
   DataTableNext,
-} from "./data-table";
+} from './data-table';

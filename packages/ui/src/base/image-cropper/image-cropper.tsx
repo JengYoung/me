@@ -2,10 +2,10 @@
 /* oxlint-disable nextjs/no-img-element -- Native source dimensions and image lifecycle are the public adapter contract. */
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useImageCropper } from "./use-image-cropper";
-import type { ImageCropperApi, ImageCropperOptions } from "./use-image-cropper";
-import type { CropControl } from "./image-cropper.connect";
+import type { PartProps } from '../_shared/react/index';
+import { useImageCropper } from './use-image-cropper';
+import type { ImageCropperApi, ImageCropperOptions } from './use-image-cropper';
+import type { CropControl } from './image-cropper.connect';
 const Context = createContext<ImageCropperApi | null>(null);
 function useImageCropperContext() {
   const api = useContext(Context);

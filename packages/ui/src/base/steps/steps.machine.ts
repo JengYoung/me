@@ -1,5 +1,5 @@
-import { createMachine } from "../_shared/core/index";
-import type { MachineArgs } from "../_shared/core/index";
+import { createMachine } from '../_shared/core/index';
+import type { MachineArgs } from '../_shared/core/index';
 
 export type StepsLabels<Name extends string = string> = Readonly<Record<Name, string>>;
 export type StepsValue<Name extends string = string> = Name | null;

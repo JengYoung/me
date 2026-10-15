@@ -1,7 +1,7 @@
-import { createMachine } from "../_shared/core/index";
-import type { Direction } from "../_shared/core/index";
-import { scrollAxisMetrics } from "./scroll-area.geometry";
-import type { ScrollAxis, ScrollAxisMetrics } from "./scroll-area.geometry";
+import { createMachine } from '../_shared/core/index';
+import type { Direction } from '../_shared/core/index';
+import { scrollAxisMetrics } from './scroll-area.geometry';
+import type { ScrollAxis, ScrollAxisMetrics } from './scroll-area.geometry';
 
 export interface ScrollAreaOptions {
   id?: string;

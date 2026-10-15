@@ -1,8 +1,8 @@
 'use client';
 
-import type { PartProps } from "../_shared/react/index";
-import { usePresence } from "./use-presence";
-import type { PresenceOptions } from "./use-presence";
+import type { PartProps } from '../_shared/react/index';
+import { usePresence } from './use-presence';
+import type { PresenceOptions } from './use-presence';
 
 export type PresenceProps = PresenceOptions & PartProps<'div'>;
 

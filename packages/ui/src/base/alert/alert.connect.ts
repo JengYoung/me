@@ -1,5 +1,5 @@
-import { mergeProps } from "../_shared/react/index";
-import type { PartProps } from "../_shared/react/index";
+import { mergeProps } from '../_shared/react/index';
+import type { PartProps } from '../_shared/react/index';
 
 export function connectAlert(id: string) {
   return {

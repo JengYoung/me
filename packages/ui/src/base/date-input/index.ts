@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   DateInput,
   DateInputRoot,
@@ -10,5 +10,5 @@ export {
   DateInputSegment,
   DateInputHiddenInput,
   DateInputValue,
-} from "./date-input";
-export type { DateInputRootProps, DateInputSegmentProps, DateInputValueProps } from "./date-input";
+} from './date-input';
+export type { DateInputRootProps, DateInputSegmentProps, DateInputValueProps } from './date-input';

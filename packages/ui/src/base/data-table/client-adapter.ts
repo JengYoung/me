@@ -4,7 +4,7 @@ import type {
   DataTableEngineOptions,
   DataTableSnapshot,
   DataTableState,
-} from "./data-table.types";
+} from './data-table.types';
 
 const defaultState = (): DataTableState => ({
   sorting: null,

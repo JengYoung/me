@@ -1,4 +1,4 @@
-import { createMachine } from "../_shared/core/index";
+import { createMachine } from '../_shared/core/index';
 
 export type ClipboardState = 'idle' | 'pending' | 'success' | 'error';
 export interface ClipboardFailure {

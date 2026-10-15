@@ -1,5 +1,5 @@
-import { createMachine } from "../_shared/core/index";
-import type { MachineArgs } from "../_shared/core/index";
+import { createMachine } from '../_shared/core/index';
+import type { MachineArgs } from '../_shared/core/index';
 
 /** Coordinates and pressure are normalized to [0,1]; time is the pointer event timestamp. */
 export interface SignaturePoint {

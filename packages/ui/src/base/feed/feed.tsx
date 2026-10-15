@@ -1,8 +1,8 @@
 'use client';
 import { createContext, useContext } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useFeed } from "./use-feed";
-import type { FeedOptions, FeedApi } from "./use-feed";
+import type { PartProps } from '../_shared/react/index';
+import { useFeed } from './use-feed';
+import type { FeedOptions, FeedApi } from './use-feed';
 const Context = createContext<FeedApi | null>(null);
 function useFeedContext() {
   const api = useContext(Context);

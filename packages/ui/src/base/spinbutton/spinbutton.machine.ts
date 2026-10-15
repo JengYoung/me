@@ -1,5 +1,5 @@
-import { clampNumber, createMachine, numberRange } from "../_shared/core/index";
-import type { MachineArgs, NumberRangeOptions } from "../_shared/core/index";
+import { clampNumber, createMachine, numberRange } from '../_shared/core/index';
+import type { MachineArgs, NumberRangeOptions } from '../_shared/core/index';
 
 export interface SpinbuttonOptions extends NumberRangeOptions {
   value?: number | null;

@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   ScrollArea,
   ScrollAreaRoot,
@@ -9,5 +9,5 @@ export {
   ScrollAreaScrollbar,
   ScrollAreaThumb,
   ScrollAreaValue,
-} from "./scroll-area";
-export type { ScrollAreaRootProps, ScrollAreaAxisProps } from "./scroll-area";
+} from './scroll-area';
+export type { ScrollAreaRootProps, ScrollAreaAxisProps } from './scroll-area';

@@ -2,7 +2,7 @@
 
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { Direction } from "../core/index";
+import type { Direction } from '../core/index';
 
 // Shared here so keyboard and independently installed UI use the same context.
 const DirectionContext = createContext<Direction | undefined>(undefined);

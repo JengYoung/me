@@ -1,10 +1,10 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { useDirectionContext, useMachine, useStableId } from "../_shared/react/index";
-import { useListbox } from "../listbox/index";
-import { comboboxInput, comboboxMachine } from "./combobox.machine";
-import type { ComboboxOptions } from "./combobox.machine";
-import { connectCombobox } from "./combobox.connect";
+import { useDirectionContext, useMachine, useStableId } from '../_shared/react/index';
+import { useListbox } from '../listbox/index';
+import { comboboxInput, comboboxMachine } from './combobox.machine';
+import type { ComboboxOptions } from './combobox.machine';
+import { connectCombobox } from './combobox.connect';
 
 export function useCombobox(options: ComboboxOptions) {
   const id = useStableId('iris-combobox', options.id);
@@ -65,5 +65,5 @@ export function useCombobox(options: ComboboxOptions) {
   );
   /* oxlint-enable react/refs */
 }
-export type { ComboboxOptions } from "./combobox.machine";
-export type { ComboboxApi } from "./combobox.connect";
+export type { ComboboxOptions } from './combobox.machine';
+export type { ComboboxApi } from './combobox.connect';

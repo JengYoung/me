@@ -1,9 +1,9 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
-import type { RovingFocusApi } from "../_shared/keyboard/index";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
+import type { RovingFocusApi } from '../_shared/keyboard/index';
 import type { RefObject } from 'react';
-import { feedFocused } from "./feed.machine";
-import type { FeedOptions, FeedSchema } from "./feed.machine";
+import { feedFocused } from './feed.machine';
+import type { FeedOptions, FeedSchema } from './feed.machine';
 
 export function connectFeed(
   service: MachineApi<FeedSchema>,

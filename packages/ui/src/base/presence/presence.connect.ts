@@ -1,8 +1,8 @@
-import { mergeProps } from "../_shared/react/index";
-import type { PropGetter } from "../_shared/react/index";
+import { mergeProps } from '../_shared/react/index';
+import type { PropGetter } from '../_shared/react/index';
 import type { RefCallback } from 'react';
-import { presenceState } from "./presence.machine";
-import type { PresenceOptions, PresenceState } from "./presence.machine";
+import { presenceState } from './presence.machine';
+import type { PresenceOptions, PresenceState } from './presence.machine';
 
 export interface PresenceApi {
   readonly present: boolean;

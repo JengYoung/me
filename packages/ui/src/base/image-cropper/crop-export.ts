@@ -1,5 +1,5 @@
-import type { CropGeometry, ImageSize } from "./crop-geometry";
-import type { CropExportOptions } from "./image-cropper.machine";
+import type { CropGeometry, ImageSize } from './crop-geometry';
+import type { CropExportOptions } from './image-cropper.machine';
 export interface CropExportRequest {
   src: string;
   image: ImageSize;

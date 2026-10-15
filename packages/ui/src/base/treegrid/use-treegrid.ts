@@ -1,13 +1,13 @@
 'use client';
-import { flattenTree, recoverTreeValue } from "../_shared/core/index";
-import type { TreeNode } from "../_shared/core/index";
-import { useMachine, useStableId } from "../_shared/react/index";
-import { useGrid } from "../grid/index";
-import type { GridOptions, GridCell } from "../grid/index";
+import { flattenTree, recoverTreeValue } from '../_shared/core/index';
+import type { TreeNode } from '../_shared/core/index';
+import { useMachine, useStableId } from '../_shared/react/index';
+import { useGrid } from '../grid/index';
+import type { GridOptions, GridCell } from '../grid/index';
 import { useState } from 'react';
-import { treeGridMachine, treeGridExpanded, treeGridSelected } from "./treegrid.machine";
-import type { TreeGridStateOptions } from "./treegrid.machine";
-import { connectTreeGrid } from "./treegrid.connect";
+import { treeGridMachine, treeGridExpanded, treeGridSelected } from './treegrid.machine';
+import type { TreeGridStateOptions } from './treegrid.machine';
+import { connectTreeGrid } from './treegrid.connect';
 
 export interface TreeGridNode extends TreeNode {
   readonly cells: readonly GridCell[];
@@ -59,4 +59,4 @@ export function useTreeGrid(options: TreeGridOptions) {
     throw new Error('Treegrid cannot switch control modes.');
   return connectTreeGrid(service, grid, { ...options, id }, entries);
 }
-export type { TreeGridApi } from "./treegrid.connect";
+export type { TreeGridApi } from './treegrid.connect';

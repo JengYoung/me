@@ -1,7 +1,7 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
-import type { RovingFocusApi } from "../_shared/keyboard/index";
-import type { ToolbarOptions, ToolbarSchema } from "./toolbar.machine";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
+import type { RovingFocusApi } from '../_shared/keyboard/index';
+import type { ToolbarOptions, ToolbarSchema } from './toolbar.machine';
 
 export function connectToolbar(
   service: MachineApi<ToolbarSchema>,

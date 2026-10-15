@@ -1,8 +1,8 @@
 'use client';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { useDirection, useStableId } from "../_shared/react/index";
-import { useDisclosure } from "../disclosure/index";
-import { connectSidebar } from "./sidebar.connect";
+import { useDirection, useStableId } from '../_shared/react/index';
+import { useDisclosure } from '../disclosure/index';
+import { connectSidebar } from './sidebar.connect';
 const useCommitEffect = typeof document === 'undefined' ? useEffect : useLayoutEffect;
 export interface SidebarShortcut {
   key?: string;
@@ -78,4 +78,4 @@ export function useSidebar(options: SidebarOptions = {}) {
   }, [enabled, trigger, toggle]);
   return connectSidebar(disclosure, { id, dir, toggle }, { setTrigger, setContent });
 }
-export type { SidebarApi } from "./sidebar.connect";
+export type { SidebarApi } from './sidebar.connect';

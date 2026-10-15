@@ -1,8 +1,8 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
 import type { RefObject } from 'react';
-import { carouselValue } from "./carousel.machine";
-import type { CarouselOptions, CarouselSchema } from "./carousel.machine";
+import { carouselValue } from './carousel.machine';
+import type { CarouselOptions, CarouselSchema } from './carousel.machine';
 export function connectCarousel(
   service: MachineApi<CarouselSchema>,
   options: CarouselOptions & { id: string },

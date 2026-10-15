@@ -1,7 +1,7 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
-import { isStepEnabled, stepsValue, stepsVisited } from "./steps.machine";
-import type { StepsMachineProps, StepsSchema, StepsValue } from "./steps.machine";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
+import { isStepEnabled, stepsValue, stepsVisited } from './steps.machine';
+import type { StepsMachineProps, StepsSchema, StepsValue } from './steps.machine';
 
 export function connectSteps<Name extends string>(
   service: MachineApi<StepsSchema>,

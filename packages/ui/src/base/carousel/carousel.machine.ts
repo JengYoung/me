@@ -1,4 +1,10 @@
-import { createMachine, getNavigationTarget, recoverValue, sameCollection, validateCollection } from "../_shared/core/index";
+import {
+  createMachine,
+  getNavigationTarget,
+  recoverValue,
+  sameCollection,
+  validateCollection,
+} from '../_shared/core/index';
 export interface CarouselSlide {
   readonly value: string;
   readonly label?: string;

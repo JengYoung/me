@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   Landmarks,
   LandmarkBanner,
@@ -10,4 +10,4 @@ export {
   LandmarkNavigation,
   LandmarkRegion,
   LandmarkSearch,
-} from "./landmarks";
+} from './landmarks';

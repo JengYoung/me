@@ -5,8 +5,8 @@ import {
   isTreeBranch,
   recoverTreeValue,
   sameTreeEntries,
-} from "../_shared/core/index";
-import type { Direction, TreeEntry, TreeNode } from "../_shared/core/index";
+} from '../_shared/core/index';
+import type { Direction, TreeEntry, TreeNode } from '../_shared/core/index';
 export interface TreeViewOptions {
   nodes: readonly TreeNode[];
   expandedValues?: readonly string[];

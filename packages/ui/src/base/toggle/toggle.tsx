@@ -1,8 +1,8 @@
 'use client';
 
-import type { PartProps } from "../_shared/react/index";
-import { useToggle } from "./use-toggle";
-import type { ToggleOptions } from "./use-toggle";
+import type { PartProps } from '../_shared/react/index';
+import { useToggle } from './use-toggle';
+import type { ToggleOptions } from './use-toggle';
 
 export type ToggleProps = PartProps<'button'> & ToggleOptions;
 

@@ -1,10 +1,10 @@
 'use client';
 import { useCallback, useLayoutEffect, useRef, useState } from 'react';
-import { useDirection, useMachine, useStableId } from "../_shared/react/index";
-import { marqueeMachine, validateMarquee } from "./marquee.machine";
-import type { MarqueeOptions } from "./marquee.machine";
-import { connectMarquee } from "./marquee.connect";
-import { syncMarqueeCopy } from "./marquee.dom";
+import { useDirection, useMachine, useStableId } from '../_shared/react/index';
+import { marqueeMachine, validateMarquee } from './marquee.machine';
+import type { MarqueeOptions } from './marquee.machine';
+import { connectMarquee } from './marquee.connect';
+import { syncMarqueeCopy } from './marquee.dom';
 
 export function useMarquee(options: MarqueeOptions = {}) {
   validateMarquee(options);
@@ -95,5 +95,5 @@ export function useMarquee(options: MarqueeOptions = {}) {
   );
   /* eslint-enable react-hooks/refs */
 }
-export type { MarqueeOptions } from "./marquee.machine";
-export type { MarqueeApi, MarqueeCopyProps } from "./marquee.connect";
+export type { MarqueeOptions } from './marquee.machine';
+export type { MarqueeApi, MarqueeCopyProps } from './marquee.connect';

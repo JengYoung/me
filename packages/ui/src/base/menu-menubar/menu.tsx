@@ -1,8 +1,8 @@
 'use client';
 import { createContext, useContext } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useMenu } from "./use-menu";
-import type { MenuApi, MenuOptions, MenubarOptions } from "./use-menu";
+import type { PartProps } from '../_shared/react/index';
+import { useMenu } from './use-menu';
+import type { MenuApi, MenuOptions, MenubarOptions } from './use-menu';
 const Context = createContext<MenuApi | null>(null);
 /** Share an existing hook owner with thin Menu parts, including MenuButton. */
 export const MenuProvider = Context.Provider;

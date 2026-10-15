@@ -1,10 +1,10 @@
 'use client';
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useFileUpload } from "./use-file-upload";
-import type { FileUploadApi, FileUploadOptions } from "./use-file-upload";
-import type { FileUploadFile } from "./file-upload.machine";
+import type { PartProps } from '../_shared/react/index';
+import { useFileUpload } from './use-file-upload';
+import type { FileUploadApi, FileUploadOptions } from './use-file-upload';
+import type { FileUploadFile } from './file-upload.machine';
 const Context = createContext<FileUploadApi | null>(null);
 function useFileUploadContext() {
   const api = useContext(Context);

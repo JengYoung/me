@@ -1,5 +1,5 @@
-import { createMachine } from "../_shared/core/index";
-import type { MachineArgs, Snapshot, Transition } from "../_shared/core/index";
+import { createMachine } from '../_shared/core/index';
+import type { MachineArgs, Snapshot, Transition } from '../_shared/core/index';
 
 export interface SwitchOptions {
   checked?: boolean;

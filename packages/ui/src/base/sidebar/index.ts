@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   Sidebar,
   SidebarRoot,
@@ -9,5 +9,5 @@ export {
   SidebarTitle,
   SidebarDescription,
   SidebarClose,
-} from "./sidebar";
-export type { SidebarRootProps } from "./sidebar";
+} from './sidebar';
+export type { SidebarRootProps } from './sidebar';

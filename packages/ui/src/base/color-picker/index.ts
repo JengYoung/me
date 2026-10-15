@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   ColorPicker,
   ColorPickerRoot,
@@ -15,11 +15,11 @@ export {
   ColorPickerSwatch,
   ColorPickerHiddenInput,
   ColorPickerValue,
-} from "./color-picker";
+} from './color-picker';
 export type {
   ColorPickerRootProps,
   ColorPickerChannelProps,
   ColorPickerChannelInputProps,
   ColorPickerSwatchProps,
   ColorPickerValueProps,
-} from "./color-picker";
+} from './color-picker';

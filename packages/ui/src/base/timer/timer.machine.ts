@@ -1,4 +1,4 @@
-import { createMachine } from "../_shared/core/index";
+import { createMachine } from '../_shared/core/index';
 
 export type TimerState = 'idle' | 'running' | 'paused' | 'completed';
 export type TimerAction = 'start' | 'pause' | 'resume' | 'reset' | 'restart';

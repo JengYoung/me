@@ -1,11 +1,11 @@
 'use client';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { useField } from "../field/index";
-import type { FieldOptions } from "../field/index";
-import { mergeRefs, useFormReset, useMachine } from "../_shared/react/index";
-import { normalizeOtp, otpInputMachine, otpValue } from "./otp-input.machine";
-import type { OtpInputBehaviorOptions } from "./otp-input.machine";
-import { connectOtpInput } from "./otp-input.connect";
+import { useField } from '../field/index';
+import type { FieldOptions } from '../field/index';
+import { mergeRefs, useFormReset, useMachine } from '../_shared/react/index';
+import { normalizeOtp, otpInputMachine, otpValue } from './otp-input.machine';
+import type { OtpInputBehaviorOptions } from './otp-input.machine';
+import { connectOtpInput } from './otp-input.connect';
 
 export interface OtpInputOptions extends OtpInputBehaviorOptions, Omit<FieldOptions, 'label'> {
   name?: string;
@@ -95,4 +95,4 @@ export function useOtpInput(options: OtpInputOptions = {}) {
   // oxlint-disable-next-line react/refs
   return connectOtpInput(field, options, state, { ref, change, select, send, setValue, focus, activateSlot });
 }
-export type { OtpInputApi, OtpInputInputProps } from "./otp-input.connect";
+export type { OtpInputApi, OtpInputInputProps } from './otp-input.connect';

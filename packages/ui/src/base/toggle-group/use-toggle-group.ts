@@ -1,11 +1,11 @@
 'use client';
-import { validateCollection } from "../_shared/core/index";
-import { useMachine, useStableId } from "../_shared/react/index";
-import { useRovingFocus } from "../_shared/keyboard/index";
+import { validateCollection } from '../_shared/core/index';
+import { useMachine, useStableId } from '../_shared/react/index';
+import { useRovingFocus } from '../_shared/keyboard/index';
 import { useState } from 'react';
-import { toggleGroupMachine, toggleGroupValue } from "./toggle-group.machine";
-import type { ToggleGroupOptions } from "./toggle-group.machine";
-import { connectToggleGroup } from "./toggle-group.connect";
+import { toggleGroupMachine, toggleGroupValue } from './toggle-group.machine';
+import type { ToggleGroupOptions } from './toggle-group.machine';
+import { connectToggleGroup } from './toggle-group.connect';
 
 export function useToggleGroup(options: ToggleGroupOptions) {
   validateCollection(options.items);
@@ -24,5 +24,5 @@ export function useToggleGroup(options: ToggleGroupOptions) {
   if (controlled !== (options.value !== undefined)) throw new Error('ToggleGroup cannot switch control modes.');
   return connectToggleGroup(service, roving, { ...options, id });
 }
-export type { ToggleGroupOptions } from "./toggle-group.machine";
-export type { ToggleGroupApi } from "./toggle-group.connect";
+export type { ToggleGroupOptions } from './toggle-group.machine';
+export type { ToggleGroupApi } from './toggle-group.connect';

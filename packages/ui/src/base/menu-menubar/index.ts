@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   Menu,
   Menubar,
@@ -11,5 +11,5 @@ export {
   MenuSeparator,
   MenuProvider,
   useMenuContext,
-} from "./menu";
-export type { MenuRootProps, MenubarRootProps } from "./menu";
+} from './menu';
+export type { MenuRootProps, MenubarRootProps } from './menu';

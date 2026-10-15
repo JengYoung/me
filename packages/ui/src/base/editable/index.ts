@@ -1,6 +1,6 @@
 'use client';
-export { useEditable } from "./use-editable";
-export type { EditableOptions, EditableApi } from "./use-editable";
+export { useEditable } from './use-editable';
+export type { EditableOptions, EditableApi } from './use-editable';
 export {
   Editable,
   EditableRoot,
@@ -13,4 +13,4 @@ export {
   EditableEditTrigger,
   EditableSubmitTrigger,
   EditableCancelTrigger,
-} from "./editable";
+} from './editable';

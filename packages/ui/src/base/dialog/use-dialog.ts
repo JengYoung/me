@@ -1,12 +1,12 @@
 'use client';
 
 import { useCallback, useRef, useState } from 'react';
-import { useMachine, useStableId } from "../_shared/react/index";
-import { useModalFocus } from "../_shared/focus/index";
-import type { ModalFocusOptions } from "../_shared/focus/index";
-import { dialogMachine } from "./dialog.machine";
-import type { DialogChangeReason, DialogStateOptions } from "./dialog.machine";
-import { connectDialog } from "./dialog.connect";
+import { useMachine, useStableId } from '../_shared/react/index';
+import { useModalFocus } from '../_shared/focus/index';
+import type { ModalFocusOptions } from '../_shared/focus/index';
+import { dialogMachine } from './dialog.machine';
+import type { DialogChangeReason, DialogStateOptions } from './dialog.machine';
+import { connectDialog } from './dialog.connect';
 
 export interface DialogOptions extends DialogStateOptions, Omit<ModalFocusOptions, 'open' | 'onDismiss'> {
   id?: string;
@@ -42,5 +42,5 @@ export function useDialog(options: DialogOptions = {}) {
   return connectDialog({ open, setOpen }, focus, { id, describedBy: options.describedBy, trigger });
 }
 
-export type { DialogApi } from "./dialog.connect";
-export type { DialogChangeDetails, DialogChangeReason } from "./dialog.machine";
+export type { DialogApi } from './dialog.connect';
+export type { DialogChangeDetails, DialogChangeReason } from './dialog.machine';

@@ -1,12 +1,12 @@
 'use client';
 import { useLayoutEffect, useRef, useState } from 'react';
 import type { PointerEvent } from 'react';
-import { useMachine, usePointerDrag, useStableId } from "../_shared/react/index";
-import { normalizeSignature, signaturePadMachine } from "./signature-pad.machine";
-import type { SignatureExportOptions, SignaturePadMachineOptions } from "./signature-pad.machine";
-import { renderSignature, signatureExportOptions } from "./signature-renderer";
-import type { SignatureRenderer } from "./signature-renderer";
-import { connectSignaturePad } from "./signature-pad.connect";
+import { useMachine, usePointerDrag, useStableId } from '../_shared/react/index';
+import { normalizeSignature, signaturePadMachine } from './signature-pad.machine';
+import type { SignatureExportOptions, SignaturePadMachineOptions } from './signature-pad.machine';
+import { renderSignature, signatureExportOptions } from './signature-renderer';
+import type { SignatureRenderer } from './signature-renderer';
+import { connectSignaturePad } from './signature-pad.connect';
 export interface SignaturePadOptions extends SignaturePadMachineOptions {
   id?: string;
   renderer?: SignatureRenderer;
@@ -139,4 +139,4 @@ export function useSignaturePad(options: SignaturePadOptions = {}) {
   );
   /* oxlint-enable react/refs */
 }
-export type { SignaturePadApi } from "./signature-pad.connect";
+export type { SignaturePadApi } from './signature-pad.connect';

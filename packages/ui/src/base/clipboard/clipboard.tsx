@@ -1,8 +1,8 @@
 'use client';
 import { createContext, useContext } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useClipboard } from "./use-clipboard";
-import type { ClipboardApi, ClipboardOptions } from "./use-clipboard";
+import type { PartProps } from '../_shared/react/index';
+import { useClipboard } from './use-clipboard';
+import type { ClipboardApi, ClipboardOptions } from './use-clipboard';
 const Context = createContext<ClipboardApi | null>(null);
 function useClipboardContext() {
   const api = useContext(Context);

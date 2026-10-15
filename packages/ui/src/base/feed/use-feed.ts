@@ -1,10 +1,10 @@
 'use client';
-import { useMachine, useStableId } from "../_shared/react/index";
-import { useRovingFocus } from "../_shared/keyboard/index";
+import { useMachine, useStableId } from '../_shared/react/index';
+import { useRovingFocus } from '../_shared/keyboard/index';
 import { useRef } from 'react';
-import { feedMachine, feedFocused, validateFeed } from "./feed.machine";
-import type { FeedOptions } from "./feed.machine";
-import { connectFeed } from "./feed.connect";
+import { feedMachine, feedFocused, validateFeed } from './feed.machine';
+import type { FeedOptions } from './feed.machine';
+import { connectFeed } from './feed.connect';
 export function useFeed(options: FeedOptions) {
   validateFeed(options);
   const id = useStableId('iris-feed', options.id);
@@ -23,5 +23,5 @@ export function useFeed(options: FeedOptions) {
   // oxlint-disable-next-line react/refs
   return connectFeed(service, roving, { ...options, id }, root);
 }
-export type { FeedOptions, FeedItem } from "./feed.machine";
-export type { FeedApi } from "./feed.connect";
+export type { FeedOptions, FeedItem } from './feed.machine';
+export type { FeedApi } from './feed.connect';

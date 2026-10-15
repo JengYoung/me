@@ -1,9 +1,9 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
 import type { RefObject } from 'react';
-import type { ModalFocusApi } from "../_shared/focus/index";
-import type { usePosition } from "../_shared/positioning/index";
-import type { HoverCardSchema } from "./hover-card.machine";
+import type { ModalFocusApi } from '../_shared/focus/index';
+import type { usePosition } from '../_shared/positioning/index';
+import type { HoverCardSchema } from './hover-card.machine';
 export function connectHoverCard(
   state: { open: boolean; setOpen: (open: boolean) => void; dismiss: () => void; service: MachineApi<HoverCardSchema> },
   focus: ModalFocusApi,

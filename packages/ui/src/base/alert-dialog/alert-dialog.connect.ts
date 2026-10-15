@@ -1,6 +1,6 @@
-import { mergeProps } from "../_shared/react/index";
-import type { PropGetter } from "../_shared/react/index";
-import type { DialogApi } from "../dialog/index";
+import { mergeProps } from '../_shared/react/index';
+import type { PropGetter } from '../_shared/react/index';
+import type { DialogApi } from '../dialog/index';
 import type { RefObject } from 'react';
 
 export interface AlertDialogApi extends Omit<DialogApi, 'getCloseProps'> {

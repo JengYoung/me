@@ -1,12 +1,12 @@
 'use client';
 import { useEffect, useLayoutEffect, useState, useSyncExternalStore } from 'react';
-import { useStableId } from "../_shared/react/index";
-import { useTable } from "../table/index";
-import { useGrid } from "../grid/index";
-import { usePagination } from "../pagination/index";
-import { createDataTableAdapter } from "./client-adapter";
-import { connectDataTable } from "./data-table.connect";
-import type { DataTableAdapter, DataTableEngineOptions } from "./data-table.types";
+import { useStableId } from '../_shared/react/index';
+import { useTable } from '../table/index';
+import { useGrid } from '../grid/index';
+import { usePagination } from '../pagination/index';
+import { createDataTableAdapter } from './client-adapter';
+import { connectDataTable } from './data-table.connect';
+import type { DataTableAdapter, DataTableEngineOptions } from './data-table.types';
 
 export interface DataTableOptions<Row> extends DataTableEngineOptions<Row> {
   adapter?: DataTableAdapter<Row>;

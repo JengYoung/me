@@ -1,8 +1,8 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
-import type { RovingFocusApi } from "../_shared/keyboard/index";
-import { toggleGroupValue } from "./toggle-group.machine";
-import type { ToggleGroupOptions, ToggleGroupSchema } from "./toggle-group.machine";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
+import type { RovingFocusApi } from '../_shared/keyboard/index';
+import { toggleGroupValue } from './toggle-group.machine';
+import type { ToggleGroupOptions, ToggleGroupSchema } from './toggle-group.machine';
 
 export function connectToggleGroup(
   service: MachineApi<ToggleGroupSchema>,

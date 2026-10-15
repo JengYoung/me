@@ -1,9 +1,9 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps, usePointerDrag } from "../_shared/react/index";
-import type { FieldApi } from "../field/index";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps, usePointerDrag } from '../_shared/react/index';
+import type { FieldApi } from '../field/index';
 import type { RefCallback } from 'react';
-import { colorChannelText, colorText, colorValue, parseChannelInput } from "./color-picker.machine";
-import type { ColorPickerSchema } from "./color-picker.machine";
+import { colorChannelText, colorText, colorValue, parseChannelInput } from './color-picker.machine';
+import type { ColorPickerSchema } from './color-picker.machine';
 import {
   colorChannelKey,
   colorChannelRange,
@@ -12,9 +12,9 @@ import {
   formatColor,
   normalizeColor,
   parseColor,
-} from "./color-value";
-import type { ColorChannel, ColorValue } from "./color-value";
-import type { ColorPickerOptions } from "./use-color-picker";
+} from './color-value';
+import type { ColorChannel, ColorValue } from './color-value';
+import type { ColorPickerOptions } from './use-color-picker';
 export function connectColorPicker(
   service: MachineApi<ColorPickerSchema>,
   options: ColorPickerOptions & { id: string },

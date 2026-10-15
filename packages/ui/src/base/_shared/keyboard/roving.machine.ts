@@ -5,8 +5,8 @@ import {
   recoverValue,
   sameCollection,
   validateCollection,
-} from "../core/index";
-import type { CollectionItem, Direction, Orientation } from "../core/index";
+} from '../core/index';
+import type { CollectionItem, Direction, Orientation } from '../core/index';
 
 export interface RovingFocusOptions {
   items: readonly CollectionItem[];

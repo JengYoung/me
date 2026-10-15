@@ -1,13 +1,13 @@
 'use client';
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { ModalFocusProvider } from "../_shared/focus/index";
-import { DialogPortal } from "../dialog/index";
-import { useFloatingPanel } from "./use-floating-panel";
-import type { FloatingPanelApi, FloatingPanelOptions } from "./use-floating-panel";
-import type { FloatingPanelMode } from "./floating-panel.machine";
-import type { PanelResizeEdge } from "./geometry";
+import type { PartProps } from '../_shared/react/index';
+import { ModalFocusProvider } from '../_shared/focus/index';
+import { DialogPortal } from '../dialog/index';
+import { useFloatingPanel } from './use-floating-panel';
+import type { FloatingPanelApi, FloatingPanelOptions } from './use-floating-panel';
+import type { FloatingPanelMode } from './floating-panel.machine';
+import type { PanelResizeEdge } from './geometry';
 
 const Context = createContext<FloatingPanelApi | null>(null);
 function useFloatingPanelContext() {

@@ -1,4 +1,4 @@
-import type { SignatureExportOptions, SignatureValue } from "./signature-pad.machine";
+import type { SignatureExportOptions, SignatureValue } from './signature-pad.machine';
 export type SignatureRenderer = (
   value: SignatureValue,
   options: Required<SignatureExportOptions> & { signal: AbortSignal },

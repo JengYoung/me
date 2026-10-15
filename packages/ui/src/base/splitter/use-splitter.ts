@@ -1,9 +1,9 @@
 'use client';
-import { useDirection, useMachine, usePointerDrag, useStableId } from "../_shared/react/index";
+import { useDirection, useMachine, usePointerDrag, useStableId } from '../_shared/react/index';
 import { useRef, useState } from 'react';
-import { splitterMachine, splitterRange, splitterSize } from "./splitter.machine";
-import type { SplitterOptions } from "./splitter.machine";
-import { connectSplitter } from "./splitter.connect";
+import { splitterMachine, splitterRange, splitterSize } from './splitter.machine';
+import type { SplitterOptions } from './splitter.machine';
+import { connectSplitter } from './splitter.connect';
 
 export function useSplitter(options: SplitterOptions = {}) {
   splitterRange(options);
@@ -43,5 +43,5 @@ export function useSplitter(options: SplitterOptions = {}) {
   if (controlled !== (options.size !== undefined)) throw new Error('Splitter cannot switch control modes.');
   return connectSplitter(service, { ...options, dir, id }, drag);
 }
-export type { SplitterOptions } from "./splitter.machine";
-export type { SplitterApi } from "./splitter.connect";
+export type { SplitterOptions } from './splitter.machine';
+export type { SplitterApi } from './splitter.connect';

@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   OtpInput,
   OtpInputRoot,
@@ -8,4 +8,4 @@ export {
   OtpInputLabel,
   OtpInputDescription,
   OtpInputError,
-} from "./otp-input";
+} from './otp-input';

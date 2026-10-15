@@ -1,4 +1,4 @@
-import type { ClipboardFailure } from "./clipboard.machine";
+import type { ClipboardFailure } from './clipboard.machine';
 
 export async function writeClipboard(value: string): Promise<void> {
   if (typeof navigator === 'undefined' || typeof navigator.clipboard?.writeText !== 'function')

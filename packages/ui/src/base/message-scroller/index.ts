@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   MessageScroller,
   MessageScrollerRoot,
@@ -9,5 +9,5 @@ export {
   MessageScrollerLatestButton,
   MessageScrollerAnnouncer,
   MessageScrollerValue,
-} from "./message-scroller";
-export type { MessageScrollerRootProps, MessageScrollerMessageProps } from "./message-scroller";
+} from './message-scroller';
+export type { MessageScrollerRootProps, MessageScrollerMessageProps } from './message-scroller';

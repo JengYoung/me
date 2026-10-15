@@ -1,5 +1,5 @@
-import { createMachine } from "../_shared/core/index";
-import type { Direction } from "../_shared/core/index";
+import { createMachine } from '../_shared/core/index';
+import type { Direction } from '../_shared/core/index';
 
 export interface MarqueeOptions {
   id?: string;

@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   Slider,
   SliderRoot,
@@ -10,5 +10,5 @@ export {
   SliderLabel,
   SliderHiddenInput,
   SliderValue,
-} from "./slider";
-export type { SliderRootProps, SliderValueProps } from "./slider";
+} from './slider';
+export type { SliderRootProps, SliderValueProps } from './slider';

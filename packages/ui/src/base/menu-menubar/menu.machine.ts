@@ -1,7 +1,7 @@
-import { createMachine, getNavigationTarget, getTypeaheadTarget } from "../_shared/core/index";
-import type { Direction } from "../_shared/core/index";
-import { flattenMenu, menuPath, validateMenu } from "./menu.model";
-import type { MenuItem } from "./menu.model";
+import { createMachine, getNavigationTarget, getTypeaheadTarget } from '../_shared/core/index';
+import type { Direction } from '../_shared/core/index';
+import { flattenMenu, menuPath, validateMenu } from './menu.model';
+import type { MenuItem } from './menu.model';
 
 export type MenuCloseReason = 'escape' | 'select' | 'tab' | 'outside' | 'programmatic';
 export interface MenuStateOptions {

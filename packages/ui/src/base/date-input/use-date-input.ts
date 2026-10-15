@@ -1,12 +1,12 @@
 'use client';
-import { useField } from "../field/index";
-import type { FieldOptions } from "../field/index";
-import { useDirectionContext, useFormReset, useMachine, useStableId } from "../_shared/react/index";
+import { useField } from '../field/index';
+import type { FieldOptions } from '../field/index';
+import { useDirectionContext, useFormReset, useMachine, useStableId } from '../_shared/react/index';
 import { useCallback, useState } from 'react';
-import { dateInputMachine, dateInputParts } from "./date-input.machine";
-import type { DateInputMachineOptions } from "./date-input.machine";
-import { dateValidity, validateDateOptions } from "./date-value";
-import { connectDateInput } from "./date-input.connect";
+import { dateInputMachine, dateInputParts } from './date-input.machine';
+import type { DateInputMachineOptions } from './date-input.machine';
+import { dateValidity, validateDateOptions } from './date-value';
+import { connectDateInput } from './date-input.connect';
 
 export type DateInputOptions = DateInputMachineOptions & FieldOptions;
 export function useDateInput(options: DateInputOptions = {}) {
@@ -31,4 +31,4 @@ export function useDateInput(options: DateInputOptions = {}) {
     throw new Error('Date Input control mode and granularity must stay stable.');
   return connectDateInput(service, props, field, resetRef);
 }
-export type { DateInputApi, DateInputSegmentData } from "./date-input.connect";
+export type { DateInputApi, DateInputSegmentData } from './date-input.connect';

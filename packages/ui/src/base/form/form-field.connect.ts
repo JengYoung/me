@@ -1,10 +1,10 @@
-import { mergeProps } from "../_shared/react/index";
-import type { PartProps } from "../_shared/react/index";
-import type { FieldApi } from "../field/index";
+import { mergeProps } from '../_shared/react/index';
+import type { PartProps } from '../_shared/react/index';
+import type { FieldApi } from '../field/index';
 import type { RefCallback } from 'react';
-import type { FormApi } from "./use-form";
-import type { FormFieldOptions } from "./use-form-field";
-import type { FormValue } from "./form.types";
+import type { FormApi } from './use-form';
+import type { FormFieldOptions } from './use-form-field';
+import type { FormValue } from './form.types';
 
 export function connectFormField(
   form: FormApi,

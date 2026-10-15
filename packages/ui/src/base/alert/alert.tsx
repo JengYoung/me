@@ -1,7 +1,7 @@
 'use client';
-import type { PartProps } from "../_shared/react/index";
-import { useAlert } from "./use-alert";
-import type { AlertOptions } from "./use-alert";
+import type { PartProps } from '../_shared/react/index';
+import { useAlert } from './use-alert';
+import type { AlertOptions } from './use-alert';
 
 export type AlertProps = PartProps<'div'> & AlertOptions;
 export function Alert({ id, ...props }: AlertProps) {

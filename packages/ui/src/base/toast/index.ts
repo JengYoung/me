@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   Toast,
   ToastProvider,
@@ -11,5 +11,5 @@ export {
   ToastAction,
   ToastCloseTrigger,
   useToastContext,
-} from "./toast";
-export type { ToastProviderProps, ToastViewportProps, ToastAnnouncerProps, ToastRootProps } from "./toast";
+} from './toast';
+export type { ToastProviderProps, ToastViewportProps, ToastAnnouncerProps, ToastRootProps } from './toast';

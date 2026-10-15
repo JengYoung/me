@@ -1,8 +1,8 @@
 'use client';
 import { createContext, useContext } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useAccordion } from "./use-accordion";
-import type { AccordionApi, AccordionOptions } from "./use-accordion";
+import type { PartProps } from '../_shared/react/index';
+import { useAccordion } from './use-accordion';
+import type { AccordionApi, AccordionOptions } from './use-accordion';
 
 const Context = createContext<AccordionApi | null>(null);
 function useAccordionContext() {

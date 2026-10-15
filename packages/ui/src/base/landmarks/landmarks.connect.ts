@@ -1,4 +1,4 @@
-import type { PartProps } from "../_shared/react/index";
+import type { PartProps } from '../_shared/react/index';
 
 export const landmarkElements = {
   banner: 'header',

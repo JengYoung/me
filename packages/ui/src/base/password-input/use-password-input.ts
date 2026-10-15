@@ -1,10 +1,10 @@
 'use client';
 
-import { mergeRefs, useBooleanState, useFormReset } from "../_shared/react/index";
-import { useTextField } from "../text-field/index";
-import type { TextFieldOptions } from "../text-field/index";
+import { mergeRefs, useBooleanState, useFormReset } from '../_shared/react/index';
+import { useTextField } from '../text-field/index';
+import type { TextFieldOptions } from '../text-field/index';
 import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { connectPasswordInput } from "./password-input.connect";
+import { connectPasswordInput } from './password-input.connect';
 
 export interface PasswordInputOptions extends Omit<TextFieldOptions, 'type'> {
   visible?: boolean;
@@ -114,4 +114,4 @@ export function usePasswordInput(options: PasswordInputOptions = {}) {
   );
   /* oxlint-enable react/refs */
 }
-export type { PasswordInputApi } from "./password-input.connect";
+export type { PasswordInputApi } from './password-input.connect';

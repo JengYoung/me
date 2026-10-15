@@ -1,5 +1,5 @@
-import { createMachine, firstEnabledValue, isItemEnabled, validateCollection } from "../_shared/core/index";
-import type { CollectionItem, Direction, MachineArgs } from "../_shared/core/index";
+import { createMachine, firstEnabledValue, isItemEnabled, validateCollection } from '../_shared/core/index';
+import type { CollectionItem, Direction, MachineArgs } from '../_shared/core/index';
 
 export interface AccordionOptions {
   items: readonly CollectionItem[];

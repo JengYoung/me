@@ -1,7 +1,7 @@
-import { createActor } from "../_shared/core/index";
-import type { Clock } from "../_shared/core/index";
-import { toastMachine, toastRemaining } from "./toast.machine";
-import type { ToastInput, ToastRecord, ToastSchema } from "./toast.machine";
+import { createActor } from '../_shared/core/index';
+import type { Clock } from '../_shared/core/index';
+import { toastMachine, toastRemaining } from './toast.machine';
+import type { ToastInput, ToastRecord, ToastSchema } from './toast.machine';
 
 export interface ToastStoreOptions {
   limit?: number;
@@ -176,4 +176,4 @@ export function createToastStore(options: ToastStoreOptions = {}) {
   };
 }
 export type ToastStore = ReturnType<typeof createToastStore>;
-export type { ToastInput, ToastRecord } from "./toast.machine";
+export type { ToastInput, ToastRecord } from './toast.machine';

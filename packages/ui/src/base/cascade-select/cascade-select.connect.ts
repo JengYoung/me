@@ -1,12 +1,12 @@
-import { flattenTree, isTreeBranch } from "../_shared/core/index";
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
-import type { FieldApi } from "../field/index";
-import type { TreeViewApi } from "../tree-view/index";
+import { flattenTree, isTreeBranch } from '../_shared/core/index';
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
+import type { FieldApi } from '../field/index';
+import type { TreeViewApi } from '../tree-view/index';
 import type { RefCallback } from 'react';
-import { cascadeExpanded, cascadePath, cascadeValue, normalizeCascadePath } from "./cascade-select.machine";
-import type { CascadeSelectSchema } from "./cascade-select.machine";
-import type { CascadeSelectOptions } from "./use-cascade-select";
+import { cascadeExpanded, cascadePath, cascadeValue, normalizeCascadePath } from './cascade-select.machine';
+import type { CascadeSelectSchema } from './cascade-select.machine';
+import type { CascadeSelectOptions } from './use-cascade-select';
 
 export function connectCascadeSelect(
   service: MachineApi<CascadeSelectSchema>,

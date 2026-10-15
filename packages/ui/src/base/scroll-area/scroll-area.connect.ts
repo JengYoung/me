@@ -1,8 +1,8 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
 import type { RefObject } from 'react';
-import type { ScrollAreaOptions, ScrollAreaSchema } from "./scroll-area.machine";
-import type { ScrollAxis } from "./scroll-area.geometry";
+import type { ScrollAreaOptions, ScrollAreaSchema } from './scroll-area.machine';
+import type { ScrollAxis } from './scroll-area.geometry';
 
 export interface ScrollAreaRefs {
   viewport: RefObject<HTMLDivElement | null>;

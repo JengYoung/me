@@ -1,5 +1,5 @@
 'use client';
-export { useSteps } from "./use-steps";
+export { useSteps } from './use-steps';
 export type {
   StepsLabels,
   StepsOptions,
@@ -8,7 +8,7 @@ export type {
   StepsApi,
   StepsContentApi,
   StepsNavigation,
-} from "./use-steps";
+} from './use-steps';
 export type {
   StepsComponent,
   StepsRootProps,
@@ -17,4 +17,4 @@ export type {
   StepsContentProps,
   StepsCompleteProps,
   StepsRenderChildren,
-} from "./steps";
+} from './steps';

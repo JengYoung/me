@@ -1,12 +1,12 @@
 'use client';
 import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import type { FieldOptions } from "../field/index";
-import { useTextField } from "../text-field/index";
-import { mergeRefs, useDirectionContext, useFormReset, useMachine } from "../_shared/react/index";
-import type { Direction } from "../_shared/react/index";
-import { tagsInputMachine, tagsInput, tagsValue } from "./tags-input.machine";
-import type { TagsInputBehaviorOptions } from "./tags-input.machine";
-import { connectTagsInput } from "./tags-input.connect";
+import type { FieldOptions } from '../field/index';
+import { useTextField } from '../text-field/index';
+import { mergeRefs, useDirectionContext, useFormReset, useMachine } from '../_shared/react/index';
+import type { Direction } from '../_shared/react/index';
+import { tagsInputMachine, tagsInput, tagsValue } from './tags-input.machine';
+import type { TagsInputBehaviorOptions } from './tags-input.machine';
+import { connectTagsInput } from './tags-input.connect';
 
 export interface TagsInputOptions extends TagsInputBehaviorOptions, Omit<FieldOptions, 'label' | 'required'> {
   name?: string;
@@ -120,5 +120,5 @@ export function useTagsInput(options: TagsInputOptions = {}) {
   );
   /* oxlint-enable react/refs */
 }
-export type { TagsInputApi } from "./tags-input.connect";
-export type { TagsInputRejection } from "./tags-input.machine";
+export type { TagsInputApi } from './tags-input.connect';
+export type { TagsInputRejection } from './tags-input.machine';

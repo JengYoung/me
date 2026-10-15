@@ -1,7 +1,7 @@
-import { mergeProps } from "../_shared/react/index";
-import type { PartProps } from "../_shared/react/index";
-import type { FormAdapter, FormSnapshot } from "./form.types";
-import type { FormOptions } from "./use-form";
+import { mergeProps } from '../_shared/react/index';
+import type { PartProps } from '../_shared/react/index';
+import type { FormAdapter, FormSnapshot } from './form.types';
+import type { FormOptions } from './use-form';
 
 export function connectForm(
   adapter: FormAdapter,

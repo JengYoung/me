@@ -1,10 +1,10 @@
 'use client';
 import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
-import { useMachine, useStableId } from "../_shared/react/index";
-import { stepsMachine, validateSteps } from "./steps.machine";
-import type { StepsLabels, StepsMachineProps, StepsOptions, StepsValue } from "./steps.machine";
-import { connectSteps } from "./steps.connect";
-import { createStepsBinding } from "./steps";
+import { useMachine, useStableId } from '../_shared/react/index';
+import { stepsMachine, validateSteps } from './steps.machine';
+import type { StepsLabels, StepsMachineProps, StepsOptions, StepsValue } from './steps.machine';
+import { connectSteps } from './steps.connect';
+import { createStepsBinding } from './steps';
 
 const useBindingEffect = typeof document === 'undefined' ? useEffect : useLayoutEffect;
 
@@ -25,6 +25,6 @@ export function useSteps<Name extends string>(labels: StepsLabels<Name>, options
   useBindingEffect(() => binding.publish(api), [binding, api]);
   return { ...api, Steps: binding.Steps };
 }
-export type { StepsLabels, StepsOptions, StepsValue, StepsChangeDetails } from "./steps.machine";
+export type { StepsLabels, StepsOptions, StepsValue, StepsChangeDetails } from './steps.machine';
 export type StepsApi<Name extends string = string> = ReturnType<typeof useSteps<Name>>;
-export type { StepsContentApi, StepsNavigation } from "./steps.connect";
+export type { StepsContentApi, StepsNavigation } from './steps.connect';

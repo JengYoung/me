@@ -1,7 +1,7 @@
-import { createMachine } from "../_shared/core/index";
-import type { Direction, MachineArgs } from "../_shared/core/index";
-import { colorChannelKey, formatColor, normalizeColor, parseColor, sameColor } from "./color-value";
-import type { ColorChannel, ColorFormat, ColorValue } from "./color-value";
+import { createMachine } from '../_shared/core/index';
+import type { Direction, MachineArgs } from '../_shared/core/index';
+import { colorChannelKey, formatColor, normalizeColor, parseColor, sameColor } from './color-value';
+import type { ColorChannel, ColorFormat, ColorValue } from './color-value';
 export interface ColorPickerMachineOptions {
   value?: ColorValue;
   defaultValue?: ColorValue;

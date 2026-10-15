@@ -1,8 +1,8 @@
-import { mergeProps } from "../_shared/react/index";
-import type { PropGetter } from "../_shared/react/index";
-import type { ModalFocusApi } from "../_shared/focus/index";
+import { mergeProps } from '../_shared/react/index';
+import type { PropGetter } from '../_shared/react/index';
+import type { ModalFocusApi } from '../_shared/focus/index';
 import type { RefObject } from 'react';
-import type { DialogChangeReason } from "./dialog.machine";
+import type { DialogChangeReason } from './dialog.machine';
 
 export interface DialogApi {
   readonly open: boolean;

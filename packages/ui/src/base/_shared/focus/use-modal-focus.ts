@@ -1,11 +1,11 @@
 'use client';
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { mergeProps } from "../react/index";
-import type { PartProps } from "../react/index";
-import { activateLayer, registerModalLayer } from "./modal-layer";
-import type { LayerFocusOptions, ModalFocusOptions } from "./modal-layer";
-import { useModalScope } from "./modal-scope";
+import { mergeProps } from '../react/index';
+import type { PartProps } from '../react/index';
+import { activateLayer, registerModalLayer } from './modal-layer';
+import type { LayerFocusOptions, ModalFocusOptions } from './modal-layer';
+import { useModalScope } from './modal-scope';
 
 const useCommitEffect = typeof document === 'undefined' ? useEffect : useLayoutEffect;
 

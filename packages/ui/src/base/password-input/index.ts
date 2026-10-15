@@ -1,6 +1,6 @@
 'use client';
-export { usePasswordInput } from "./use-password-input";
-export type { PasswordInputOptions, PasswordInputApi } from "./use-password-input";
+export { usePasswordInput } from './use-password-input';
+export type { PasswordInputOptions, PasswordInputApi } from './use-password-input';
 export {
   PasswordInput,
   PasswordInputRoot,
@@ -9,4 +9,4 @@ export {
   PasswordInputLabel,
   PasswordInputDescription,
   PasswordInputError,
-} from "./password-input";
+} from './password-input';

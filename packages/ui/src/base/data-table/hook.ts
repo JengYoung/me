@@ -1,7 +1,7 @@
 'use client';
-export { useDataTable } from "./use-data-table";
-export type { DataTableApi, DataTableOptions } from "./use-data-table";
-export { createDataTableAdapter } from "./client-adapter";
+export { useDataTable } from './use-data-table';
+export type { DataTableApi, DataTableOptions } from './use-data-table';
+export { createDataTableAdapter } from './client-adapter';
 export type {
   DataTableAdapter,
   DataTableCellValue,
@@ -10,4 +10,4 @@ export type {
   DataTableRow,
   DataTableSnapshot,
   DataTableState,
-} from "./data-table.types";
+} from './data-table.types';

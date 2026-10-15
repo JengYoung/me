@@ -1,4 +1,4 @@
-import type { MachineError } from "./errors";
+import type { MachineError } from './errors';
 
 export interface EventObject {
   readonly type: string;

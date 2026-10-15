@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   Popover,
   PopoverRoot,
@@ -11,5 +11,5 @@ export {
   PopoverClose,
   PopoverBackdrop,
   PopoverPortal,
-} from "./popover";
-export type { PopoverRootProps } from "./popover";
+} from './popover';
+export type { PopoverRootProps } from './popover';

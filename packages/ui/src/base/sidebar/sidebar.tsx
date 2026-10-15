@@ -1,9 +1,9 @@
 'use client';
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useSidebar } from "./use-sidebar";
-import type { SidebarOptions, SidebarApi } from "./use-sidebar";
+import type { PartProps } from '../_shared/react/index';
+import { useSidebar } from './use-sidebar';
+import type { SidebarOptions, SidebarApi } from './use-sidebar';
 const Context = createContext<SidebarApi | null>(null);
 function useSidebarContext() {
   const api = useContext(Context);

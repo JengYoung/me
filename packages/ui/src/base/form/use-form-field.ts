@@ -1,9 +1,9 @@
 'use client';
 import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
-import { useField } from "../field/index";
-import { connectFormField } from "./form-field.connect";
-import type { FormFieldRules } from "./form.types";
-import type { FormApi } from "./use-form";
+import { useField } from '../field/index';
+import { connectFormField } from './form-field.connect';
+import type { FormFieldRules } from './form.types';
+import type { FormApi } from './use-form';
 
 export interface FormFieldOptions extends FormFieldRules {
   name: string;

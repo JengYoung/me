@@ -1,9 +1,9 @@
-import { isTreeBranch } from "../_shared/core/index";
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
-import type { RovingFocusApi } from "../_shared/keyboard/index";
-import { treeEntries, treeExpanded, treeFocused, treeSearch, treeSelected } from "./tree-view.machine";
-import type { TreeViewOptions, TreeViewSchema } from "./tree-view.machine";
+import { isTreeBranch } from '../_shared/core/index';
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
+import type { RovingFocusApi } from '../_shared/keyboard/index';
+import { treeEntries, treeExpanded, treeFocused, treeSearch, treeSelected } from './tree-view.machine';
+import type { TreeViewOptions, TreeViewSchema } from './tree-view.machine';
 
 export function connectTreeView(
   service: MachineApi<TreeViewSchema>,

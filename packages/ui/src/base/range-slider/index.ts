@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   RangeSlider,
   RangeSliderRoot,
@@ -10,11 +10,11 @@ export {
   RangeSliderLabel,
   RangeSliderHiddenInput,
   RangeSliderValue,
-} from "./range-slider";
+} from './range-slider';
 export type {
   RangeSliderRootProps,
   RangeSliderThumbProps,
   RangeSliderLabelProps,
   RangeSliderHiddenInputProps,
   RangeSliderValueProps,
-} from "./range-slider";
+} from './range-slider';

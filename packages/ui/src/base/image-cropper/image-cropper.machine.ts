@@ -1,7 +1,7 @@
-import { createMachine } from "../_shared/core/index";
-import type { MachineArgs } from "../_shared/core/index";
-import { defaultCropValue, getCropGeometry, normalizeCropValue } from "./crop-geometry";
-import type { CropValue, ImageSize } from "./crop-geometry";
+import { createMachine } from '../_shared/core/index';
+import type { MachineArgs } from '../_shared/core/index';
+import { defaultCropValue, getCropGeometry, normalizeCropValue } from './crop-geometry';
+import type { CropValue, ImageSize } from './crop-geometry';
 export interface CropExportOptions {
   width?: number;
   height?: number;

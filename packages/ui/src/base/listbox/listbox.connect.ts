@@ -1,9 +1,9 @@
-import { getNavigationIntent } from "../_shared/core/index";
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
+import { getNavigationIntent } from '../_shared/core/index';
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
 import type { RefObject } from 'react';
-import { listboxActive, listboxValue } from "./listbox.machine";
-import type { ListboxOptions, ListboxSchema } from "./listbox.machine";
+import { listboxActive, listboxValue } from './listbox.machine';
+import type { ListboxOptions, ListboxSchema } from './listbox.machine';
 
 export function connectListbox(
   service: MachineApi<ListboxSchema>,

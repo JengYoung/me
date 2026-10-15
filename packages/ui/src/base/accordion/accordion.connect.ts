@@ -1,9 +1,9 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
-import type { RovingFocusApi } from "../_shared/keyboard/index";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
+import type { RovingFocusApi } from '../_shared/keyboard/index';
 import type { FocusEvent } from 'react';
-import { accordionValue } from "./accordion.machine";
-import type { AccordionOptions, AccordionSchema } from "./accordion.machine";
+import { accordionValue } from './accordion.machine';
+import type { AccordionOptions, AccordionSchema } from './accordion.machine';
 
 export function connectAccordion(
   service: MachineApi<AccordionSchema>,

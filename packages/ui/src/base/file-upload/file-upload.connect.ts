@@ -1,10 +1,10 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
-import type { FieldApi } from "../field/index";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
+import type { FieldApi } from '../field/index';
 import type { Ref } from 'react';
-import { fileUploadKey } from "./file-upload.machine";
-import type { FileUploadFile, FileUploadSchema } from "./file-upload.machine";
-import type { FileUploadOptions } from "./use-file-upload";
+import { fileUploadKey } from './file-upload.machine';
+import type { FileUploadFile, FileUploadSchema } from './file-upload.machine';
+import type { FileUploadOptions } from './use-file-upload';
 
 export function connectFileUpload(
   machine: MachineApi<FileUploadSchema>,

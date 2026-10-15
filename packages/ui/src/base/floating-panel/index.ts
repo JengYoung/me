@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   FloatingPanel,
   FloatingPanelRoot,
@@ -12,9 +12,9 @@ export {
   FloatingPanelModeTrigger,
   FloatingPanelClose,
   FloatingPanelPortal,
-} from "./floating-panel";
+} from './floating-panel';
 export type {
   FloatingPanelRootProps,
   FloatingPanelResizeHandleProps,
   FloatingPanelModeTriggerProps,
-} from "./floating-panel";
+} from './floating-panel';

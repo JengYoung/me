@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   Marquee,
   MarqueeRoot,
@@ -9,5 +9,5 @@ export {
   MarqueeCopy,
   MarqueeToggle,
   MarqueeValue,
-} from "./marquee";
-export type { MarqueeRootProps } from "./marquee";
+} from './marquee';
+export type { MarqueeRootProps } from './marquee';

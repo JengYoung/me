@@ -1,4 +1,4 @@
-import type { QrCodeData } from "./qr-encoder";
+import type { QrCodeData } from './qr-encoder';
 export interface QrExportOptions {
   format?: 'svg' | 'png';
   size?: number;

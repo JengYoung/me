@@ -1,8 +1,8 @@
-import type { FieldApi } from "../field/index";
-import { mergeProps } from "../_shared/react/index";
-import type { PartProps } from "../_shared/react/index";
+import type { FieldApi } from '../field/index';
+import { mergeProps } from '../_shared/react/index';
+import type { PartProps } from '../_shared/react/index';
 import type { RefCallback } from 'react';
-import type { TextFieldOptions } from "./use-text-field";
+import type { TextFieldOptions } from './use-text-field';
 
 type Owned = 'value' | 'defaultValue' | 'name' | 'form' | 'id' | 'type';
 export type TextFieldInputProps = Omit<PartProps<'input'>, Owned>;

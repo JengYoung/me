@@ -1,4 +1,4 @@
-import { createMachine, recoverValue, sameCollection, validateCollection } from "../_shared/core/index";
+import { createMachine, recoverValue, sameCollection, validateCollection } from '../_shared/core/index';
 export interface FeedItem {
   readonly value: string;
   readonly position?: number;

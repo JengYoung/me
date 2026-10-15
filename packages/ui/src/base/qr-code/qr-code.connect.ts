@@ -1,9 +1,9 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
-import type { QrCodeSchema } from "./qr-code.machine";
-import type { QrCodeData } from "./qr-encoder";
-import type { QrCodeOptions, QrDownloadOptions } from "./use-qr-code";
-import type { QrExportOptions } from "./qr-export";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
+import type { QrCodeSchema } from './qr-code.machine';
+import type { QrCodeData } from './qr-encoder';
+import type { QrCodeOptions, QrDownloadOptions } from './use-qr-code';
+import type { QrExportOptions } from './qr-export';
 export function connectQrCode(
   machine: MachineApi<QrCodeSchema>,
   options: QrCodeOptions & { id: string },

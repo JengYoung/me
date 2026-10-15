@@ -1,12 +1,12 @@
 'use client';
 import { useMemo, useRef } from 'react';
-import { useMachine, useStableId } from "../_shared/react/index";
-import { encodeQr } from "./qr-encoder";
-import type { QrEncodeOptions, QrEncoder } from "./qr-encoder";
-import { downloadQrBlob, exportQr, qrExportOptions } from "./qr-export";
-import type { QrExportAdapter, QrExportOptions } from "./qr-export";
-import { qrCodeMachine } from "./qr-code.machine";
-import { connectQrCode } from "./qr-code.connect";
+import { useMachine, useStableId } from '../_shared/react/index';
+import { encodeQr } from './qr-encoder';
+import type { QrEncodeOptions, QrEncoder } from './qr-encoder';
+import { downloadQrBlob, exportQr, qrExportOptions } from './qr-export';
+import type { QrExportAdapter, QrExportOptions } from './qr-export';
+import { qrCodeMachine } from './qr-code.machine';
+import { connectQrCode } from './qr-code.connect';
 export interface QrCodeOptions extends QrEncodeOptions {
   value: string;
   label?: string;
@@ -87,4 +87,4 @@ export function useQrCode(options: QrCodeOptions) {
     },
   });
 }
-export type { QrCodeApi } from "./qr-code.connect";
+export type { QrCodeApi } from './qr-code.connect';

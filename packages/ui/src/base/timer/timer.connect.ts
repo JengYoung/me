@@ -1,6 +1,6 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
-import type { TimerAction, TimerOptions, TimerSchema } from "./timer.machine";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
+import type { TimerAction, TimerOptions, TimerSchema } from './timer.machine';
 
 export function connectTimer(machine: MachineApi<TimerSchema>, options: TimerOptions) {
   const { state, send, getProps } = machine;

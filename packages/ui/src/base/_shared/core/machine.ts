@@ -1,4 +1,4 @@
-import type { Machine, MachineDefinition, MachineSchema } from "./types";
+import type { Machine, MachineDefinition, MachineSchema } from './types';
 
 export function record(value: unknown, label: string): Record<string, unknown> {
   if (

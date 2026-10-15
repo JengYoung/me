@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   Spinbutton,
   SpinbuttonRoot,
@@ -9,5 +9,5 @@ export {
   SpinbuttonDecrement,
   SpinbuttonHiddenInput,
   SpinbuttonValue,
-} from "./spinbutton";
-export type { SpinbuttonRootProps, SpinbuttonValueProps } from "./spinbutton";
+} from './spinbutton';
+export type { SpinbuttonRootProps, SpinbuttonValueProps } from './spinbutton';

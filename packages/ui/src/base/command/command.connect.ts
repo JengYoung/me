@@ -1,11 +1,11 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
-import type { ListboxApi } from "../listbox/index";
-import type { TextFieldApi, TextFieldInputProps } from "../text-field/index";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
+import type { ListboxApi } from '../listbox/index';
+import type { TextFieldApi, TextFieldInputProps } from '../text-field/index';
 import type { RefObject } from 'react';
-import { commandQuery } from "./command.machine";
-import type { CommandSchema } from "./command.machine";
-import type { CommandOptions } from "./use-command";
+import { commandQuery } from './command.machine';
+import type { CommandSchema } from './command.machine';
+import type { CommandOptions } from './use-command';
 
 export function connectCommand(
   text: TextFieldApi,

@@ -1,10 +1,10 @@
 'use client';
 
-import { useMachine, useNativeCheckbox, useStableId } from "../_shared/react/index";
+import { useMachine, useNativeCheckbox, useStableId } from '../_shared/react/index';
 import { useCallback, useState } from 'react';
-import { checkboxChecked, checkboxMachine } from "./checkbox.machine";
-import type { CheckboxOptions } from "./checkbox.machine";
-import { connectCheckbox } from "./checkbox.connect";
+import { checkboxChecked, checkboxMachine } from './checkbox.machine';
+import type { CheckboxOptions } from './checkbox.machine';
+import { connectCheckbox } from './checkbox.connect';
 
 export function useCheckbox(options: CheckboxOptions = {}) {
   const [controlled] = useState(options.checked !== undefined);
@@ -22,5 +22,5 @@ export function useCheckbox(options: CheckboxOptions = {}) {
   if (controlled !== (options.checked !== undefined)) throw new Error('Checkbox cannot switch control modes.');
   return connectCheckbox(service, { ...options, id }, inputRef);
 }
-export type { CheckboxOptions, CheckedState } from "./checkbox.machine";
-export type { CheckboxApi } from "./checkbox.connect";
+export type { CheckboxOptions, CheckedState } from './checkbox.machine';
+export type { CheckboxApi } from './checkbox.connect';

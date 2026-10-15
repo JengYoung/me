@@ -1,7 +1,7 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
-import { buttonPressed } from "./button.machine";
-import type { ButtonOptions, ButtonSchema } from "./button.machine";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
+import { buttonPressed } from './button.machine';
+import type { ButtonOptions, ButtonSchema } from './button.machine';
 
 export function connectButton(service: MachineApi<ButtonSchema>, options: ButtonOptions) {
   const pressed = buttonPressed(options, service.state);

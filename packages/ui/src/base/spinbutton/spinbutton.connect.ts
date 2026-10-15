@@ -1,8 +1,8 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
 import type { RefCallback } from 'react';
-import { invalidSpinbutton, parseSpinbutton, spinbuttonText, spinbuttonValue } from "./spinbutton.machine";
-import type { SpinbuttonOptions, SpinbuttonSchema } from "./spinbutton.machine";
+import { invalidSpinbutton, parseSpinbutton, spinbuttonText, spinbuttonValue } from './spinbutton.machine';
+import type { SpinbuttonOptions, SpinbuttonSchema } from './spinbutton.machine';
 
 export function connectSpinbutton(
   service: MachineApi<SpinbuttonSchema>,

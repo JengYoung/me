@@ -1,9 +1,9 @@
 'use client';
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useScrollArea } from "./use-scroll-area";
-import type { ScrollAreaApi, ScrollAreaOptions, ScrollAxis } from "./use-scroll-area";
+import type { PartProps } from '../_shared/react/index';
+import { useScrollArea } from './use-scroll-area';
+import type { ScrollAreaApi, ScrollAreaOptions, ScrollAxis } from './use-scroll-area';
 const Context = createContext<ScrollAreaApi | null>(null);
 function useScrollAreaContext() {
   const api = useContext(Context);

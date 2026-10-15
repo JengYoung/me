@@ -1,6 +1,6 @@
 'use client';
-import { useStableId } from "../_shared/react/index";
-import { connectAlert } from "./alert.connect";
+import { useStableId } from '../_shared/react/index';
+import { connectAlert } from './alert.connect';
 
 export interface AlertOptions {
   id?: string;
@@ -9,4 +9,4 @@ export interface AlertOptions {
 export function useAlert(options: AlertOptions = {}) {
   return connectAlert(useStableId('iris-alert', options.id));
 }
-export type { AlertApi } from "./alert.connect";
+export type { AlertApi } from './alert.connect';

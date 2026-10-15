@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   ImageCropper,
   ImageCropperRoot,
@@ -8,5 +8,5 @@ export {
   ImageCropperSelection,
   ImageCropperControl,
   ImageCropperValue,
-} from "./image-cropper";
-export type { ImageCropperRootProps } from "./image-cropper";
+} from './image-cropper';
+export type { ImageCropperRootProps } from './image-cropper';

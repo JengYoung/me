@@ -1,12 +1,12 @@
 'use client';
 
-import { validateCollection } from "../_shared/core/index";
-import { useMachine, useStableId } from "../_shared/react/index";
-import { useRovingFocus } from "../_shared/keyboard/index";
+import { validateCollection } from '../_shared/core/index';
+import { useMachine, useStableId } from '../_shared/react/index';
+import { useRovingFocus } from '../_shared/keyboard/index';
 import { useRef, useState } from 'react';
-import { tabsMachine } from "./tabs.machine";
-import type { TabsOptions } from "./tabs.machine";
-import { connectTabs } from "./tabs.connect";
+import { tabsMachine } from './tabs.machine';
+import type { TabsOptions } from './tabs.machine';
+import { connectTabs } from './tabs.connect';
 
 export function useTabs(options: TabsOptions) {
   validateCollection(options.items);
@@ -53,5 +53,5 @@ export function useTabs(options: TabsOptions) {
   /* oxlint-enable react/refs */
 }
 
-export type { TabsOptions } from "./tabs.machine";
-export type { TabsApi } from "./tabs.connect";
+export type { TabsOptions } from './tabs.machine';
+export type { TabsApi } from './tabs.connect';

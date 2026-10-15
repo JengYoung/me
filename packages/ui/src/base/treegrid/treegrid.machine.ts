@@ -1,5 +1,5 @@
-import { createMachine, flattenTree, isTreeBranch, sameTreeEntries } from "../_shared/core/index";
-import type { TreeNode, TreeEntry } from "../_shared/core/index";
+import { createMachine, flattenTree, isTreeBranch, sameTreeEntries } from '../_shared/core/index';
+import type { TreeNode, TreeEntry } from '../_shared/core/index';
 export interface TreeGridStateOptions {
   nodes: readonly TreeNode[];
   expandedValues?: readonly string[];

@@ -1,7 +1,7 @@
 'use client';
 
-import { DirectionProvider, mergeProps, useDirection } from "../_shared/react/index";
-import type { Direction, PartProps } from "../_shared/react/index";
+import { DirectionProvider, mergeProps, useDirection } from '../_shared/react/index';
+import type { Direction, PartProps } from '../_shared/react/index';
 
 export type DirectionRootProps = Omit<PartProps<'div'>, 'dir'> & { dir?: Direction };
 

@@ -1,8 +1,8 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
 import type { RefCallback } from 'react';
-import { checkboxChecked } from "./checkbox.machine";
-import type { CheckboxOptions, CheckboxSchema, CheckedState } from "./checkbox.machine";
+import { checkboxChecked } from './checkbox.machine';
+import type { CheckboxOptions, CheckboxSchema, CheckedState } from './checkbox.machine';
 
 export function connectCheckbox(
   service: MachineApi<CheckboxSchema>,

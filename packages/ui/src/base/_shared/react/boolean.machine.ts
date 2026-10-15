@@ -1,4 +1,4 @@
-import { createMachine } from "../core/index";
+import { createMachine } from '../core/index';
 
 export interface BooleanStateOptions {
   value?: boolean;

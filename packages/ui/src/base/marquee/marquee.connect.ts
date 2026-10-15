@@ -1,8 +1,8 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
 import type { RefObject } from 'react';
-import { marqueeGeometry, marqueePlaying, marqueeRequested } from "./marquee.machine";
-import type { MarqueeOptions, MarqueeSchema } from "./marquee.machine";
+import { marqueeGeometry, marqueePlaying, marqueeRequested } from './marquee.machine';
+import type { MarqueeOptions, MarqueeSchema } from './marquee.machine';
 
 export type MarqueeCopyProps = Omit<PartProps<'div'>, 'children' | 'dangerouslySetInnerHTML'>;
 export interface MarqueeBindings {

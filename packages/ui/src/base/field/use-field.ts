@@ -1,7 +1,7 @@
 'use client';
 
-import { useStableId } from "../_shared/react/index";
-import { connectField } from "./field.connect";
+import { useStableId } from '../_shared/react/index';
+import { connectField } from './field.connect';
 
 export interface FieldOptions {
   /** The control ID. Explicit IDs must be unique within the document. */
@@ -25,4 +25,4 @@ export function useField(options: FieldOptions = {}) {
   return connectField({ ...options, id });
 }
 
-export type { FieldApi } from "./field.connect";
+export type { FieldApi } from './field.connect';

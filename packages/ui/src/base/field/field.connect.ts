@@ -1,6 +1,6 @@
-import { mergeProps } from "../_shared/react/index";
-import type { PartProps } from "../_shared/react/index";
-import type { FieldOptions } from "./use-field";
+import { mergeProps } from '../_shared/react/index';
+import type { PartProps } from '../_shared/react/index';
+import type { FieldOptions } from './use-field';
 
 function idRefs(...values: (string | undefined | false)[]): string | undefined {
   const ids = values.flatMap((value) => (value ? value.trim().split(/\s+/).filter(Boolean) : []));

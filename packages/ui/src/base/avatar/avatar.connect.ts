@@ -1,6 +1,6 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
-import type { AvatarOptions, AvatarSchema } from "./avatar.machine";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
+import type { AvatarOptions, AvatarSchema } from './avatar.machine';
 export type AvatarImageProps = Omit<
   PartProps<'img'>,
   'src' | 'srcSet' | 'sizes' | 'alt' | 'crossOrigin' | 'referrerPolicy'

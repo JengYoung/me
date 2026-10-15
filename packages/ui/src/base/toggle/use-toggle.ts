@@ -1,9 +1,9 @@
 'use client';
 
-import { useBooleanState } from "../_shared/react/index";
-import { connectToggle } from "./toggle.connect";
+import { useBooleanState } from '../_shared/react/index';
+import { connectToggle } from './toggle.connect';
 
-export type { ToggleApi } from "./toggle.connect";
+export type { ToggleApi } from './toggle.connect';
 
 export interface ToggleOptions {
   pressed?: boolean;

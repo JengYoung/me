@@ -1,10 +1,10 @@
 'use client';
-import { validateCollection } from "../_shared/core/index";
-import { useDirectionContext, useMachine, useStableId } from "../_shared/react/index";
+import { validateCollection } from '../_shared/core/index';
+import { useDirectionContext, useMachine, useStableId } from '../_shared/react/index';
 import { useEffect, useRef, useState } from 'react';
-import { listboxMachine, listboxActive } from "./listbox.machine";
-import type { ListboxOptions } from "./listbox.machine";
-import { connectListbox } from "./listbox.connect";
+import { listboxMachine, listboxActive } from './listbox.machine';
+import type { ListboxOptions } from './listbox.machine';
+import { connectListbox } from './listbox.connect';
 
 export function useListbox(options: ListboxOptions) {
   validateCollection(options.items);
@@ -26,5 +26,5 @@ export function useListbox(options: ListboxOptions) {
   // oxlint-disable-next-line react/refs
   return connectListbox(service, { ...options, dir: options.dir ?? inherited, id }, root);
 }
-export type { ListboxOptions, ListboxItem } from "./listbox.machine";
-export type { ListboxApi } from "./listbox.connect";
+export type { ListboxOptions, ListboxItem } from './listbox.machine';
+export type { ListboxApi } from './listbox.connect';

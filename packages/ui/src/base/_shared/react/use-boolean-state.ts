@@ -1,11 +1,11 @@
 'use client';
 
 import { useCallback, useState } from 'react';
-import { booleanMachine } from "./boolean.machine";
-import type { BooleanStateOptions } from "./boolean.machine";
-import { useMachine } from "./machine-hook";
+import { booleanMachine } from './boolean.machine';
+import type { BooleanStateOptions } from './boolean.machine';
+import { useMachine } from './machine-hook';
 
-export type { BooleanStateOptions } from "./boolean.machine";
+export type { BooleanStateOptions } from './boolean.machine';
 
 export interface BooleanStateApi {
   readonly value: boolean;

@@ -1,14 +1,14 @@
 'use client';
 import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import type { PointerEvent } from 'react';
-import { useMachine, usePointerDrag, useStableId } from "../_shared/react/index";
-import { cropValue, imageCropperMachine } from "./image-cropper.machine";
-import type { CropExportOptions, ImageCropperMachineOptions } from "./image-cropper.machine";
-import { getCropGeometry, normalizeCropValue } from "./crop-geometry";
-import type { CropValue } from "./crop-geometry";
-import { cropExportSize, exportCrop } from "./crop-export";
-import type { CropExportAdapter } from "./crop-export";
-import { connectImageCropper } from "./image-cropper.connect";
+import { useMachine, usePointerDrag, useStableId } from '../_shared/react/index';
+import { cropValue, imageCropperMachine } from './image-cropper.machine';
+import type { CropExportOptions, ImageCropperMachineOptions } from './image-cropper.machine';
+import { getCropGeometry, normalizeCropValue } from './crop-geometry';
+import type { CropValue } from './crop-geometry';
+import { cropExportSize, exportCrop } from './crop-export';
+import type { CropExportAdapter } from './crop-export';
+import { connectImageCropper } from './image-cropper.connect';
 export interface ImageCropperOptions extends ImageCropperMachineOptions {
   id?: string;
   crossOrigin?: 'anonymous' | 'use-credentials';
@@ -155,4 +155,4 @@ export function useImageCropper(options: ImageCropperOptions) {
   );
   /* oxlint-enable react/refs */
 }
-export type { ImageCropperApi } from "./image-cropper.connect";
+export type { ImageCropperApi } from './image-cropper.connect';

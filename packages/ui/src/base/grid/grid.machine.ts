@@ -1,7 +1,7 @@
-import { createMachine, recoverValue, sameCollection, isItemEnabled } from "../_shared/core/index";
-import type { CollectionItem } from "../_shared/core/index";
-import { cellKey, gridItems, normalizeRows, sameValues, validateGrid } from "./grid.model";
-import type { GridOptions } from "./grid.model";
+import { createMachine, recoverValue, sameCollection, isItemEnabled } from '../_shared/core/index';
+import type { CollectionItem } from '../_shared/core/index';
+import { cellKey, gridItems, normalizeRows, sameValues, validateGrid } from './grid.model';
+import type { GridOptions } from './grid.model';
 export interface GridSchema {
   state: 'navigation' | 'interaction';
   props: GridOptions;

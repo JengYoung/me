@@ -1,11 +1,11 @@
 'use client';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { useMachine, useStableId } from "../_shared/react/index";
-import { useMenu } from "../menu-menubar/index";
-import type { MenuOptions } from "../menu-menubar/index";
-import { useButton } from "../button/index";
-import { menuButtonMachine } from "./menu-button.machine";
-import { connectMenuButton } from "./menu-button.connect";
+import { useMachine, useStableId } from '../_shared/react/index';
+import { useMenu } from '../menu-menubar/index';
+import type { MenuOptions } from '../menu-menubar/index';
+import { useButton } from '../button/index';
+import { menuButtonMachine } from './menu-button.machine';
+import { connectMenuButton } from './menu-button.connect';
 const useCommitEffect = typeof document === 'undefined' ? useEffect : useLayoutEffect;
 export type MenuButtonOptions = Omit<MenuOptions, 'kind' | 'returnFocus'>;
 export function useMenuButton(options: MenuButtonOptions) {
@@ -38,4 +38,4 @@ export function useMenuButton(options: MenuButtonOptions) {
   // oxlint-disable-next-line react/refs
   return connectMenuButton(menu, button, { id, open, setOpen, disabled: options.disabled, trigger });
 }
-export type { MenuButtonApi } from "./menu-button.connect";
+export type { MenuButtonApi } from './menu-button.connect';

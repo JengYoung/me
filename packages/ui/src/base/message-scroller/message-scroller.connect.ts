@@ -1,7 +1,7 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
 import type { RefObject } from 'react';
-import type { MessageScrollerOptions, MessageScrollerSchema, MessageScrollPosition } from "./message-scroller.machine";
+import type { MessageScrollerOptions, MessageScrollerSchema, MessageScrollPosition } from './message-scroller.machine';
 
 export interface MessageScrollOptions {
   behavior?: 'instant' | 'smooth';

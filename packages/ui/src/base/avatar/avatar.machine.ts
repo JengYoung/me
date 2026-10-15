@@ -1,4 +1,4 @@
-import { createMachine } from "../_shared/core/index";
+import { createMachine } from '../_shared/core/index';
 export type AvatarState = 'idle' | 'loading' | 'loaded' | 'error';
 export interface AvatarOptions {
   src?: string;

@@ -1,8 +1,8 @@
-import { mergeProps } from "../_shared/react/index";
-import type { PartProps } from "../_shared/react/index";
-import type { TextFieldApi, TextFieldInputProps, TextFieldTextareaProps } from "../text-field/index";
+import { mergeProps } from '../_shared/react/index';
+import type { PartProps } from '../_shared/react/index';
+import type { TextFieldApi, TextFieldInputProps, TextFieldTextareaProps } from '../text-field/index';
 import type { KeyboardEvent, RefCallback, RefObject } from 'react';
-import type { EditableOptions } from "./use-editable";
+import type { EditableOptions } from './use-editable';
 
 export function connectEditable(
   text: TextFieldApi,

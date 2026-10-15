@@ -1,5 +1,5 @@
-import { createMachine, snapNumber } from "../_shared/core/index";
-import type { NumberRangeOptions } from "../_shared/core/index";
+import { createMachine, snapNumber } from '../_shared/core/index';
+import type { NumberRangeOptions } from '../_shared/core/index';
 
 export interface SliderOptions extends NumberRangeOptions {
   value?: number;

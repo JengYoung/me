@@ -2,9 +2,9 @@
 
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useSwitch } from "./use-switch";
-import type { SwitchApi, SwitchOptions } from "./use-switch";
+import type { PartProps } from '../_shared/react/index';
+import { useSwitch } from './use-switch';
+import type { SwitchApi, SwitchOptions } from './use-switch';
 
 const Context = createContext<SwitchApi | null>(null);
 function useSwitchContext() {

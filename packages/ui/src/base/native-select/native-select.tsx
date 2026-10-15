@@ -2,9 +2,9 @@
 
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useNativeSelect } from "./use-native-select";
-import type { NativeSelectApi, NativeSelectOptions, NativeSelectControlProps } from "./use-native-select";
+import type { PartProps } from '../_shared/react/index';
+import { useNativeSelect } from './use-native-select';
+import type { NativeSelectApi, NativeSelectOptions, NativeSelectControlProps } from './use-native-select';
 
 const Context = createContext<NativeSelectApi | null>(null);
 function useNativeSelectContext() {

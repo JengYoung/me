@@ -2,9 +2,9 @@
 
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useDisclosure } from "./use-disclosure";
-import type { DisclosureApi, DisclosureOptions } from "./use-disclosure";
+import type { PartProps } from '../_shared/react/index';
+import { useDisclosure } from './use-disclosure';
+import type { DisclosureApi, DisclosureOptions } from './use-disclosure';
 
 const DisclosureContext = createContext<DisclosureApi | null>(null);
 

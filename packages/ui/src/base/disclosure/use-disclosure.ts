@@ -1,9 +1,9 @@
 'use client';
 
-import { useBooleanState, useStableId } from "../_shared/react/index";
-import { connectDisclosure } from "./disclosure.connect";
+import { useBooleanState, useStableId } from '../_shared/react/index';
+import { connectDisclosure } from './disclosure.connect';
 
-export type { DisclosureApi } from "./disclosure.connect";
+export type { DisclosureApi } from './disclosure.connect';
 
 export interface DisclosureOptions {
   open?: boolean;

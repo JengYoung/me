@@ -1,10 +1,10 @@
 'use client';
 import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
-import { mergeProps, useStableId } from "../_shared/react/index";
-import type { PartProps } from "../_shared/react/index";
-import { usePresence } from "../presence/index";
-import { connectToast } from "./toast.connect";
-import type { ToastStore } from "./toast-store";
+import { mergeProps, useStableId } from '../_shared/react/index';
+import type { PartProps } from '../_shared/react/index';
+import { usePresence } from '../presence/index';
+import { connectToast } from './toast.connect';
+import type { ToastStore } from './toast-store';
 const useCommitEffect = typeof document === 'undefined' ? useEffect : useLayoutEffect;
 
 /** Read-only subscription; a viewport owns the active timer lifetime. */
@@ -97,4 +97,4 @@ export function useToastViewport(store: ToastStore) {
   };
 }
 export type ToastViewportApi = ReturnType<typeof useToastViewport>;
-export type { ToastApi } from "./toast.connect";
+export type { ToastApi } from './toast.connect';

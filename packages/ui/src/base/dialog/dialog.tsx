@@ -3,10 +3,10 @@
 import { createContext, useContext, useSyncExternalStore } from 'react';
 import type { ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import type { PartProps } from "../_shared/react/index";
-import { ModalFocusProvider } from "../_shared/focus/index";
-import { useDialog } from "./use-dialog";
-import type { DialogApi, DialogOptions } from "./use-dialog";
+import type { PartProps } from '../_shared/react/index';
+import { ModalFocusProvider } from '../_shared/focus/index';
+import { useDialog } from './use-dialog';
+import type { DialogApi, DialogOptions } from './use-dialog';
 
 const Context = createContext<DialogApi | null>(null);
 function useDialogContext() {

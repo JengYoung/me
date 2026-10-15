@@ -1,11 +1,11 @@
-import { flattenTree, isTreeBranch } from "../_shared/core/index";
-import type { TreeEntry } from "../_shared/core/index";
-import { mergeProps } from "../_shared/react/index";
-import type { PartProps, MachineApi } from "../_shared/react/index";
-import type { GridApi } from "../grid/index";
-import { treeGridExpanded, treeGridSelected } from "./treegrid.machine";
-import type { TreeGridSchema } from "./treegrid.machine";
-import type { TreeGridOptions, TreeGridNode } from "./use-treegrid";
+import { flattenTree, isTreeBranch } from '../_shared/core/index';
+import type { TreeEntry } from '../_shared/core/index';
+import { mergeProps } from '../_shared/react/index';
+import type { PartProps, MachineApi } from '../_shared/react/index';
+import type { GridApi } from '../grid/index';
+import { treeGridExpanded, treeGridSelected } from './treegrid.machine';
+import type { TreeGridSchema } from './treegrid.machine';
+import type { TreeGridOptions, TreeGridNode } from './use-treegrid';
 
 export function connectTreeGrid(
   service: MachineApi<TreeGridSchema>,

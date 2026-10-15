@@ -1,4 +1,4 @@
-import type { RtlScrollType } from "./scroll-area.geometry";
+import type { RtlScrollType } from './scroll-area.geometry';
 
 /** Detect per owner document without changing the consumer's viewport or global state. */
 export function detectRtlScrollType(document: Document): RtlScrollType {

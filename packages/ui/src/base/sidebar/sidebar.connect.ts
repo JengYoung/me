@@ -1,6 +1,6 @@
-import { mergeProps } from "../_shared/react/index";
-import type { PartProps } from "../_shared/react/index";
-import type { DisclosureApi } from "../disclosure/index";
+import { mergeProps } from '../_shared/react/index';
+import type { PartProps } from '../_shared/react/index';
+import type { DisclosureApi } from '../disclosure/index';
 export function connectSidebar(
   disclosure: DisclosureApi,
   options: { id: string; dir: 'ltr' | 'rtl'; toggle(): void },

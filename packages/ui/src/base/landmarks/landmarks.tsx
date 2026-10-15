@@ -1,6 +1,6 @@
 'use client';
-import type { PartProps } from "../_shared/react/index";
-import { useLandmark } from "./use-landmark";
+import type { PartProps } from '../_shared/react/index';
+import { useLandmark } from './use-landmark';
 
 export function LandmarkBanner({ id, ...props }: PartProps<'header'>) {
   return <header {...useLandmark({ kind: 'banner', id }).getRootProps(props)} />;

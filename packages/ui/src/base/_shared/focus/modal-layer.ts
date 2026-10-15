@@ -1,5 +1,5 @@
-import { focusElement, getTabbableElements, isAvailable, isVisible } from "./tabbable";
-import type { ModalFocusScope } from "./modal-scope";
+import { focusElement, getTabbableElements, isAvailable, isVisible } from './tabbable';
+import type { ModalFocusScope } from './modal-scope';
 
 export type ModalDismissReason = 'escape' | 'outside';
 export interface ModalFocusOptions {

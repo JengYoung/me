@@ -1,11 +1,11 @@
 'use client';
 import { useCallback, useLayoutEffect, useRef, useState } from 'react';
-import { useMachine, useStableId } from "../_shared/react/index";
-import { messageScrollerMachine, validateMessageScroller } from "./message-scroller.machine";
-import type { MessageScrollerOptions, MessageScrollPosition } from "./message-scroller.machine";
-import { connectMessageScroller } from "./message-scroller.connect";
-import type { MessageScrollOptions } from "./message-scroller.connect";
-import { captureMessagePosition, messageElements, messageOffset, restoredMessageTop } from "./message-scroller.dom";
+import { useMachine, useStableId } from '../_shared/react/index';
+import { messageScrollerMachine, validateMessageScroller } from './message-scroller.machine';
+import type { MessageScrollerOptions, MessageScrollPosition } from './message-scroller.machine';
+import { connectMessageScroller } from './message-scroller.connect';
+import type { MessageScrollOptions } from './message-scroller.connect';
+import { captureMessagePosition, messageElements, messageOffset, restoredMessageTop } from './message-scroller.dom';
 
 export function useMessageScroller(options: MessageScrollerOptions) {
   validateMessageScroller(options);
@@ -209,5 +209,5 @@ export function useMessageScroller(options: MessageScrollerOptions) {
   );
   /* eslint-enable react-hooks/refs */
 }
-export type { MessageScrollerOptions, MessageScrollPosition } from "./message-scroller.machine";
-export type { MessageScrollerApi, MessageScrollOptions } from "./message-scroller.connect";
+export type { MessageScrollerOptions, MessageScrollPosition } from './message-scroller.machine';
+export type { MessageScrollerApi, MessageScrollOptions } from './message-scroller.connect';

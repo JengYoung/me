@@ -5,8 +5,8 @@ import {
   recoverValue,
   sameCollection,
   validateCollection,
-} from "../_shared/core/index";
-import type { CollectionItem, Direction, MachineArgs } from "../_shared/core/index";
+} from '../_shared/core/index';
+import type { CollectionItem, Direction, MachineArgs } from '../_shared/core/index';
 
 export interface RadioGroupOptions {
   items: readonly CollectionItem[];

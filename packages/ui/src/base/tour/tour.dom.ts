@@ -1,4 +1,4 @@
-import type { Rect } from "../_shared/positioning/index";
+import type { Rect } from '../_shared/positioning/index';
 
 /** Inert targets are still valid visual anchors for a modal tour. */
 export function isTourTargetAvailable(element: HTMLElement, document: Document) {

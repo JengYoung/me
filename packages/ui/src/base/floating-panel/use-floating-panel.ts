@@ -1,19 +1,19 @@
 'use client';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { useDirection, useMachine, usePointerDrag, useStableId } from "../_shared/react/index";
-import { useLayerFocus } from "../_shared/focus/index";
-import type { LayerFocusOptions } from "../_shared/focus/index";
+import { useDirection, useMachine, usePointerDrag, useStableId } from '../_shared/react/index';
+import { useLayerFocus } from '../_shared/focus/index';
+import type { LayerFocusOptions } from '../_shared/focus/index';
 import {
   floatingPanelMachine,
   panelMode,
   panelNormalRect,
   panelOpen,
   validateFloatingPanel,
-} from "./floating-panel.machine";
-import type { FloatingPanelStateOptions } from "./floating-panel.machine";
-import { panelBounds, panelEdges, resizePanel } from "./geometry";
-import type { PanelRect, PanelResizeEdge } from "./geometry";
-import { connectFloatingPanel } from "./floating-panel.connect";
+} from './floating-panel.machine';
+import type { FloatingPanelStateOptions } from './floating-panel.machine';
+import { panelBounds, panelEdges, resizePanel } from './geometry';
+import type { PanelRect, PanelResizeEdge } from './geometry';
+import { connectFloatingPanel } from './floating-panel.connect';
 
 const useCommitEffect = typeof document === 'undefined' ? useEffect : useLayoutEffect;
 export interface FloatingPanelOptions
@@ -141,4 +141,4 @@ export function useFloatingPanel(options: FloatingPanelOptions = {}) {
   });
   return connectFloatingPanel(service, { ...options, id, dir }, focus, drag, { setTrigger, setContent });
 }
-export type { FloatingPanelApi } from "./floating-panel.connect";
+export type { FloatingPanelApi } from './floating-panel.connect';

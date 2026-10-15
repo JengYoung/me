@@ -1,13 +1,13 @@
 'use client';
 import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import type { PointerEvent } from 'react';
-import { useDirection, useMachine, usePointerDrag, useStableId } from "../_shared/react/index";
-import { scrollAreaMachine, validateScrollArea } from "./scroll-area.machine";
-import type { ScrollAreaOptions } from "./scroll-area.machine";
-import { connectScrollArea } from "./scroll-area.connect";
-import { clampScroll, logicalScrollLeft, physicalScrollLeft, scrollAxisMetrics } from "./scroll-area.geometry";
-import type { ScrollAxis, RtlScrollType } from "./scroll-area.geometry";
-import { detectRtlScrollType } from "./scroll-area.dom";
+import { useDirection, useMachine, usePointerDrag, useStableId } from '../_shared/react/index';
+import { scrollAreaMachine, validateScrollArea } from './scroll-area.machine';
+import type { ScrollAreaOptions } from './scroll-area.machine';
+import { connectScrollArea } from './scroll-area.connect';
+import { clampScroll, logicalScrollLeft, physicalScrollLeft, scrollAxisMetrics } from './scroll-area.geometry';
+import type { ScrollAxis, RtlScrollType } from './scroll-area.geometry';
+import { detectRtlScrollType } from './scroll-area.dom';
 
 export function useScrollArea(options: ScrollAreaOptions = {}) {
   validateScrollArea(options);
@@ -184,6 +184,6 @@ export function useScrollArea(options: ScrollAreaOptions = {}) {
   );
   /* eslint-enable react-hooks/refs */
 }
-export type { ScrollAreaOptions } from "./scroll-area.machine";
-export type { ScrollAreaApi, ScrollAreaRefs } from "./scroll-area.connect";
-export type { ScrollAxis, ScrollAxisMetrics } from "./scroll-area.geometry";
+export type { ScrollAreaOptions } from './scroll-area.machine';
+export type { ScrollAreaApi, ScrollAreaRefs } from './scroll-area.connect';
+export type { ScrollAxis, ScrollAxisMetrics } from './scroll-area.geometry';

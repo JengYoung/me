@@ -2,9 +2,9 @@
 
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useCheckbox } from "./use-checkbox";
-import type { CheckboxApi, CheckboxOptions } from "./use-checkbox";
+import type { PartProps } from '../_shared/react/index';
+import { useCheckbox } from './use-checkbox';
+import type { CheckboxApi, CheckboxOptions } from './use-checkbox';
 
 const Context = createContext<CheckboxApi | null>(null);
 function useCheckboxContext() {

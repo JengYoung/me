@@ -1,8 +1,8 @@
 'use client';
 import { createContext, useContext } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useProgress } from "./use-progress";
-import type { ProgressApi, ProgressOptions } from "./use-progress";
+import type { PartProps } from '../_shared/react/index';
+import { useProgress } from './use-progress';
+import type { ProgressApi, ProgressOptions } from './use-progress';
 const Context = createContext<ProgressApi | null>(null);
 function useProgressContext() {
   const api = useContext(Context);

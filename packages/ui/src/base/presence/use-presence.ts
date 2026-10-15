@@ -1,11 +1,11 @@
 'use client';
 
-import { useMachine } from "../_shared/react/index";
+import { useMachine } from '../_shared/react/index';
 import { useEffect, useLayoutEffect, useState } from 'react';
-import { presenceMachine, presenceState } from "./presence.machine";
-import type { PresenceOptions } from "./presence.machine";
-import { connectPresence } from "./presence.connect";
-import { observeMotion } from "./presence.dom";
+import { presenceMachine, presenceState } from './presence.machine';
+import type { PresenceOptions } from './presence.machine';
+import { connectPresence } from './presence.connect';
+import { observeMotion } from './presence.dom';
 
 const useCommitEffect = typeof document === 'undefined' ? useEffect : useLayoutEffect;
 
@@ -30,5 +30,5 @@ export function usePresence(options: PresenceOptions) {
   return connectPresence(state.value, options, setElement);
 }
 
-export type { PresenceApi } from "./presence.connect";
-export type { PresenceOptions, PresenceState } from "./presence.machine";
+export type { PresenceApi } from './presence.connect';
+export type { PresenceOptions, PresenceState } from './presence.machine';

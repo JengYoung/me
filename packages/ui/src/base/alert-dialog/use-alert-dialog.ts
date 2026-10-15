@@ -1,9 +1,9 @@
 'use client';
 
 import { useRef } from 'react';
-import { useDialog } from "../dialog/index";
-import type { DialogOptions } from "../dialog/index";
-import { connectAlertDialog } from "./alert-dialog.connect";
+import { useDialog } from '../dialog/index';
+import type { DialogOptions } from '../dialog/index';
+import { connectAlertDialog } from './alert-dialog.connect';
 
 export interface AlertDialogOptions extends Omit<DialogOptions, 'closeOnOutside' | 'describedBy'> {
   /** Message description is required: defaults to the Description part's ID. */
@@ -25,8 +25,8 @@ export function useAlertDialog(options: AlertDialogOptions = {}) {
   return connectAlertDialog(dialog, cancel);
 }
 
-export type { AlertDialogApi } from "./alert-dialog.connect";
+export type { AlertDialogApi } from './alert-dialog.connect';
 export type {
   DialogChangeDetails as AlertDialogChangeDetails,
   DialogChangeReason as AlertDialogChangeReason,
-} from "../dialog/index";
+} from '../dialog/index';

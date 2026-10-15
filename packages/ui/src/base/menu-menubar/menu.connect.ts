@@ -1,9 +1,9 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
 import type { RefObject } from 'react';
-import { menuChecked, menuOpen } from "./menu.machine";
-import type { MenuSchema, MenuStateOptions, MenuCloseReason } from "./menu.machine";
-import { menuPath } from "./menu.model";
+import { menuChecked, menuOpen } from './menu.machine';
+import type { MenuSchema, MenuStateOptions, MenuCloseReason } from './menu.machine';
+import { menuPath } from './menu.model';
 
 export function connectMenu(
   service: MachineApi<MenuSchema>,

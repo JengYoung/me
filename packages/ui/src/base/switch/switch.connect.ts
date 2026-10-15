@@ -1,8 +1,8 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
 import type { RefCallback } from 'react';
-import { switchChecked } from "./switch.machine";
-import type { SwitchOptions, SwitchSchema } from "./switch.machine";
+import { switchChecked } from './switch.machine';
+import type { SwitchOptions, SwitchSchema } from './switch.machine';
 
 export function connectSwitch(
   service: MachineApi<SwitchSchema>,

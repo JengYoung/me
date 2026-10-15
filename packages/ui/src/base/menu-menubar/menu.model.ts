@@ -1,4 +1,4 @@
-import type { TextCollectionItem } from "../_shared/core/index";
+import type { TextCollectionItem } from '../_shared/core/index';
 export interface MenuItem extends TextCollectionItem {
   type?: 'item' | 'checkbox' | 'radio';
   group?: string;

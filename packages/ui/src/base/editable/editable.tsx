@@ -2,10 +2,10 @@
 
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import type { TextFieldInputProps, TextFieldTextareaProps } from "../text-field/index";
-import { useEditable } from "./use-editable";
-import type { EditableApi, EditableOptions } from "./use-editable";
+import type { PartProps } from '../_shared/react/index';
+import type { TextFieldInputProps, TextFieldTextareaProps } from '../text-field/index';
+import { useEditable } from './use-editable';
+import type { EditableApi, EditableOptions } from './use-editable';
 
 const Context = createContext<EditableApi | null>(null);
 function useEditableContext() {

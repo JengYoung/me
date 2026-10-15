@@ -1,11 +1,18 @@
 'use client';
 
-import { numberRange } from "../_shared/core/index";
-import { pointerRatio, useDirection, useFormReset, useMachine, usePointerDrag, useStableId } from "../_shared/react/index";
+import { numberRange } from '../_shared/core/index';
+import {
+  pointerRatio,
+  useDirection,
+  useFormReset,
+  useMachine,
+  usePointerDrag,
+  useStableId,
+} from '../_shared/react/index';
 import { useCallback, useRef, useState } from 'react';
-import { normalizeRangeValues, rangeSliderMachine, rangeSliderValues } from "./range-slider.machine";
-import type { RangeSliderOptions } from "./range-slider.machine";
-import { connectRangeSlider } from "./range-slider.connect";
+import { normalizeRangeValues, rangeSliderMachine, rangeSliderValues } from './range-slider.machine';
+import type { RangeSliderOptions } from './range-slider.machine';
+import { connectRangeSlider } from './range-slider.connect';
 
 export function useRangeSlider(options: RangeSliderOptions = {}) {
   const { min, max } = numberRange(options);
@@ -60,5 +67,5 @@ export function useRangeSlider(options: RangeSliderOptions = {}) {
     throw new Error('RangeSlider control mode and thumb count must stay constant; remount to change them.');
   return connectRangeSlider(service, { ...options, dir, id }, drag, inputRef);
 }
-export type { RangeSliderOptions } from "./range-slider.machine";
-export type { RangeSliderApi } from "./range-slider.connect";
+export type { RangeSliderOptions } from './range-slider.machine';
+export type { RangeSliderApi } from './range-slider.connect';

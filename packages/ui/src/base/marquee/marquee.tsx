@@ -1,9 +1,9 @@
 'use client';
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useMarquee } from "./use-marquee";
-import type { MarqueeApi, MarqueeOptions, MarqueeCopyProps } from "./use-marquee";
+import type { PartProps } from '../_shared/react/index';
+import { useMarquee } from './use-marquee';
+import type { MarqueeApi, MarqueeOptions, MarqueeCopyProps } from './use-marquee';
 const Context = createContext<MarqueeApi | null>(null);
 function useMarqueeContext() {
   const api = useContext(Context);

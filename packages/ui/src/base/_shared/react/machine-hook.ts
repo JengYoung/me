@@ -1,9 +1,9 @@
 'use client';
 
-import { createActor } from "../core/index";
-import type { Actor, ActorOptions, Machine, MachineSchema, Snapshot } from "../core/index";
+import { createActor } from '../core/index';
+import type { Actor, ActorOptions, Machine, MachineSchema, Snapshot } from '../core/index';
 import { useState, useSyncExternalStore } from 'react';
-import { useCommitEffect } from "./use-commit-effect";
+import { useCommitEffect } from './use-commit-effect';
 
 export interface MachineApi<S extends MachineSchema> extends Pick<Actor<S>, 'send' | 'getSnapshot' | 'getProps'> {
   readonly state: Snapshot<S>;

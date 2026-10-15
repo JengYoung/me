@@ -1,10 +1,10 @@
 'use client';
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useSignaturePad } from "./use-signature-pad";
-import type { SignaturePadApi, SignaturePadOptions } from "./use-signature-pad";
-import type { SignatureExportOptions } from "./signature-pad.machine";
+import type { PartProps } from '../_shared/react/index';
+import { useSignaturePad } from './use-signature-pad';
+import type { SignaturePadApi, SignaturePadOptions } from './use-signature-pad';
+import type { SignatureExportOptions } from './signature-pad.machine';
 const Context = createContext<SignaturePadApi | null>(null);
 function useSignaturePadContext() {
   const api = useContext(Context);

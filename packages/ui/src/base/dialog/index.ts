@@ -1,7 +1,7 @@
 'use client';
 
-export { useDialog } from "./use-dialog";
-export type { DialogApi, DialogOptions, DialogChangeDetails, DialogChangeReason } from "./use-dialog";
+export { useDialog } from './use-dialog';
+export type { DialogApi, DialogOptions, DialogChangeDetails, DialogChangeReason } from './use-dialog';
 export {
   Dialog,
   DialogRoot,
@@ -12,5 +12,5 @@ export {
   DialogClose,
   DialogBackdrop,
   DialogPortal,
-} from "./dialog";
-export type { DialogRootProps, DialogPortalProps } from "./dialog";
+} from './dialog';
+export type { DialogRootProps, DialogPortalProps } from './dialog';

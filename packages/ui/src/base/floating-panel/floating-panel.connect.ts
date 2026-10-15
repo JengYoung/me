@@ -1,12 +1,12 @@
-import { mergeProps } from "../_shared/react/index";
+import { mergeProps } from '../_shared/react/index';
 import type { CSSProperties, KeyboardEvent } from 'react';
-import type { MachineApi, PartProps, usePointerDrag } from "../_shared/react/index";
-import type { ModalFocusApi } from "../_shared/focus/index";
-import { panelDisplayRect, panelMode, panelNormalRect, panelOpen } from "./floating-panel.machine";
-import type { FloatingPanelMode, FloatingPanelSchema } from "./floating-panel.machine";
-import { panelBounds, panelEdges, resizePanel } from "./geometry";
-import type { PanelPoint, PanelResizeEdge, PanelSize } from "./geometry";
-import type { FloatingPanelOptions } from "./use-floating-panel";
+import type { MachineApi, PartProps, usePointerDrag } from '../_shared/react/index';
+import type { ModalFocusApi } from '../_shared/focus/index';
+import { panelDisplayRect, panelMode, panelNormalRect, panelOpen } from './floating-panel.machine';
+import type { FloatingPanelMode, FloatingPanelSchema } from './floating-panel.machine';
+import { panelBounds, panelEdges, resizePanel } from './geometry';
+import type { PanelPoint, PanelResizeEdge, PanelSize } from './geometry';
+import type { FloatingPanelOptions } from './use-floating-panel';
 
 export function connectFloatingPanel(
   service: MachineApi<FloatingPanelSchema>,

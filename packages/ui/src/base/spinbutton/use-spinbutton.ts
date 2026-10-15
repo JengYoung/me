@@ -1,9 +1,9 @@
 'use client';
-import { useFormReset, useMachine, useStableId } from "../_shared/react/index";
+import { useFormReset, useMachine, useStableId } from '../_shared/react/index';
 import { useCallback, useState } from 'react';
-import { spinbuttonMachine, spinbuttonRange } from "./spinbutton.machine";
-import type { SpinbuttonOptions } from "./spinbutton.machine";
-import { connectSpinbutton } from "./spinbutton.connect";
+import { spinbuttonMachine, spinbuttonRange } from './spinbutton.machine';
+import type { SpinbuttonOptions } from './spinbutton.machine';
+import { connectSpinbutton } from './spinbutton.connect';
 
 export function useSpinbutton(options: SpinbuttonOptions = {}) {
   spinbuttonRange(options);
@@ -17,5 +17,5 @@ export function useSpinbutton(options: SpinbuttonOptions = {}) {
     throw new Error('Spinbutton cannot switch control modes. Use null for empty.');
   return connectSpinbutton(service, { ...options, id }, inputRef);
 }
-export type { SpinbuttonOptions } from "./spinbutton.machine";
-export type { SpinbuttonApi } from "./spinbutton.connect";
+export type { SpinbuttonOptions } from './spinbutton.machine';
+export type { SpinbuttonApi } from './spinbutton.connect';

@@ -1,12 +1,12 @@
 'use client';
-import { validateCollection } from "../_shared/core/index";
-import { mergeProps, useMachine, useStableId } from "../_shared/react/index";
-import { useRovingFocus } from "../_shared/keyboard/index";
+import { validateCollection } from '../_shared/core/index';
+import { mergeProps, useMachine, useStableId } from '../_shared/react/index';
+import { useRovingFocus } from '../_shared/keyboard/index';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { FocusEvent } from 'react';
-import { accordionMachine, accordionValue } from "./accordion.machine";
-import type { AccordionOptions } from "./accordion.machine";
-import { connectAccordion } from "./accordion.connect";
+import { accordionMachine, accordionValue } from './accordion.machine';
+import type { AccordionOptions } from './accordion.machine';
+import { connectAccordion } from './accordion.connect';
 
 const useCommitEffect = typeof document === 'undefined' ? useEffect : useLayoutEffect;
 export function useAccordion(options: AccordionOptions) {
@@ -59,5 +59,5 @@ export function useAccordion(options: AccordionOptions) {
       api.getRootProps(mergeProps<'div'>(props, { ref: root })),
   };
 }
-export type { AccordionOptions } from "./accordion.machine";
+export type { AccordionOptions } from './accordion.machine';
 export type AccordionApi = ReturnType<typeof useAccordion>;

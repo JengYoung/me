@@ -1,8 +1,8 @@
-import type { FieldApi } from "../field/index";
-import { mergeProps } from "../_shared/react/index";
-import type { PartProps } from "../_shared/react/index";
+import type { FieldApi } from '../field/index';
+import { mergeProps } from '../_shared/react/index';
+import type { PartProps } from '../_shared/react/index';
 import type { Ref } from 'react';
-import type { NativeSelectOptions } from "./use-native-select";
+import type { NativeSelectOptions } from './use-native-select';
 
 export type NativeSelectControlProps = Omit<
   PartProps<'select'>,

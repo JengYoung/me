@@ -1,9 +1,9 @@
 'use client';
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useMessageScroller } from "./use-message-scroller";
-import type { MessageScrollerOptions, MessageScrollerApi } from "./use-message-scroller";
+import type { PartProps } from '../_shared/react/index';
+import { useMessageScroller } from './use-message-scroller';
+import type { MessageScrollerOptions, MessageScrollerApi } from './use-message-scroller';
 const Context = createContext<MessageScrollerApi | null>(null);
 function useMessageScrollerContext() {
   const api = useContext(Context);

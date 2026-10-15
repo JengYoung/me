@@ -1,8 +1,8 @@
-import { mergeProps } from "../_shared/react/index";
-import type { PartProps } from "../_shared/react/index";
-import type { DialogApi } from "../dialog/index";
+import { mergeProps } from '../_shared/react/index';
+import type { PartProps } from '../_shared/react/index';
+import type { DialogApi } from '../dialog/index';
 import type { CSSProperties } from 'react';
-import type { useDrawerDrag, DrawerSide } from "./drawer.dom";
+import type { useDrawerDrag, DrawerSide } from './drawer.dom';
 export function connectDrawer(
   dialog: DialogApi,
   state: { snapPoint: number; snapTo(value: number): void; dragging: boolean; progress: number },

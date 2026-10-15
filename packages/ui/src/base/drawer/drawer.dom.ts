@@ -1,7 +1,7 @@
 'use client';
 import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 import type { PointerEvent } from 'react';
-import { settleDrawer } from "./drawer.machine";
+import { settleDrawer } from './drawer.machine';
 const useCommitEffect = typeof document === 'undefined' ? useEffect : useLayoutEffect;
 export type DrawerSide = 'top' | 'bottom' | 'left' | 'right';
 interface DragOptions {

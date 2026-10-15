@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   Table,
   TableRoot,
@@ -10,5 +10,5 @@ export {
   TableRow,
   TableHeaderCell,
   TableCell,
-} from "./table";
-export type { TableRootProps } from "./table";
+} from './table';
+export type { TableRootProps } from './table';

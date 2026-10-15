@@ -1,5 +1,5 @@
-import { validateCollection } from "../_shared/core/index";
-import type { CollectionItem, Direction } from "../_shared/core/index";
+import { validateCollection } from '../_shared/core/index';
+import type { CollectionItem, Direction } from '../_shared/core/index';
 
 export interface GridCell {
   value: string;

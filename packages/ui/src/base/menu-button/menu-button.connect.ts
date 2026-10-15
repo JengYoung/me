@@ -1,7 +1,7 @@
-import { mergeProps } from "../_shared/react/index";
-import type { PartProps } from "../_shared/react/index";
-import type { MenuApi } from "../menu-menubar/index";
-import type { ButtonApi } from "../button/index";
+import { mergeProps } from '../_shared/react/index';
+import type { PartProps } from '../_shared/react/index';
+import type { MenuApi } from '../menu-menubar/index';
+import type { ButtonApi } from '../button/index';
 import type { RefObject } from 'react';
 export function connectMenuButton(
   menu: MenuApi,

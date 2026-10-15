@@ -1,8 +1,8 @@
-import { mergeProps } from "../_shared/react/index";
-import type { BooleanStateApi, PartProps } from "../_shared/react/index";
-import type { ModalFocusApi } from "../_shared/focus/index";
-import type { usePosition } from "../_shared/positioning/index";
-import type { PopoverOptions } from "./use-popover";
+import { mergeProps } from '../_shared/react/index';
+import type { BooleanStateApi, PartProps } from '../_shared/react/index';
+import type { ModalFocusApi } from '../_shared/focus/index';
+import type { usePosition } from '../_shared/positioning/index';
+import type { PopoverOptions } from './use-popover';
 
 export function connectPopover(
   state: BooleanStateApi,

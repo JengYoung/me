@@ -1,4 +1,4 @@
-import { createMachine } from "../_shared/core/index";
+import { createMachine } from '../_shared/core/index';
 
 /** Browser resources stay in the hook; the machine only receives file metadata. */
 export interface FileUploadFile {

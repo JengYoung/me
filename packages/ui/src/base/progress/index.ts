@@ -1,6 +1,6 @@
 'use client';
-export { useProgress } from "./use-progress";
-export type { ProgressApi, ProgressOptions } from "./use-progress";
+export { useProgress } from './use-progress';
+export type { ProgressApi, ProgressOptions } from './use-progress';
 export {
   Progress,
   ProgressRoot,
@@ -10,5 +10,5 @@ export {
   ProgressTrack,
   ProgressIndicator,
   ProgressCircle,
-} from "./progress";
-export type { ProgressRootProps, ProgressNativeProps } from "./progress";
+} from './progress';
+export type { ProgressRootProps, ProgressNativeProps } from './progress';

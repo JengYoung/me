@@ -1,6 +1,6 @@
-export { createMachine } from "./machine";
-export { createActor } from "./actor";
-export { MachineError } from "./errors";
+export { createMachine } from './machine';
+export { createActor } from './actor';
+export { MachineError } from './errors';
 export type {
   Action,
   Actor,
@@ -23,8 +23,8 @@ export type {
   Transition,
   TransitionList,
   TransitionMap,
-} from "./types";
-export type { ErrorPhase } from "./errors";
+} from './types';
+export type { ErrorPhase } from './errors';
 export {
   validateCollection,
   isItemEnabled,
@@ -34,9 +34,9 @@ export {
   getNavigationIntent,
   getNavigationTarget,
   getTypeaheadTarget,
-} from "./collection";
-export type { CollectionItem, TextCollectionItem, Orientation, Direction, NavigationIntent } from "./collection";
-export { numberRange, clampNumber, snapNumber, numberPercent, sliderKeyValue } from "./number-range";
-export type { NumberRangeOptions } from "./number-range";
-export { flattenTree, isTreeBranch, sameTreeEntries, recoverTreeValue } from "./tree";
-export type { TreeNode, TreeEntry } from "./tree";
+} from './collection';
+export type { CollectionItem, TextCollectionItem, Orientation, Direction, NavigationIntent } from './collection';
+export { numberRange, clampNumber, snapNumber, numberPercent, sliderKeyValue } from './number-range';
+export type { NumberRangeOptions } from './number-range';
+export { flattenTree, isTreeBranch, sameTreeEntries, recoverTreeValue } from './tree';
+export type { TreeNode, TreeEntry } from './tree';

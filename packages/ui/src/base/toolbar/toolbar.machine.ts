@@ -1,5 +1,5 @@
-import { createMachine, isItemEnabled, recoverValue, sameCollection, validateCollection } from "../_shared/core/index";
-import type { CollectionItem, Direction } from "../_shared/core/index";
+import { createMachine, isItemEnabled, recoverValue, sameCollection, validateCollection } from '../_shared/core/index';
+import type { CollectionItem, Direction } from '../_shared/core/index';
 
 export interface ToolbarOptions {
   items: readonly CollectionItem[];

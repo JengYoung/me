@@ -1,4 +1,4 @@
-import type { AvatarOptions } from "./avatar.machine";
+import type { AvatarOptions } from './avatar.machine';
 
 /** Every request owns its listeners; callbacks from disposed requests are ignored. */
 export function loadAvatar(options: AvatarOptions, done: (loaded: boolean) => void) {

@@ -1,5 +1,5 @@
-import { clampNumber, createMachine, numberRange, snapNumber } from "../_shared/core/index";
-import type { NumberRangeOptions } from "../_shared/core/index";
+import { clampNumber, createMachine, numberRange, snapNumber } from '../_shared/core/index';
+import type { NumberRangeOptions } from '../_shared/core/index';
 
 export interface RangeSliderOptions extends NumberRangeOptions {
   value?: readonly number[];

@@ -1,9 +1,9 @@
-import { numberPercent, numberRange, sliderKeyValue } from "../_shared/core/index";
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps, usePointerDrag } from "../_shared/react/index";
+import { numberPercent, numberRange, sliderKeyValue } from '../_shared/core/index';
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps, usePointerDrag } from '../_shared/react/index';
 import type { RefCallback } from 'react';
-import { sliderValue } from "./slider.machine";
-import type { SliderOptions, SliderSchema } from "./slider.machine";
+import { sliderValue } from './slider.machine';
+import type { SliderOptions, SliderSchema } from './slider.machine';
 
 export function connectSlider(
   service: MachineApi<SliderSchema>,

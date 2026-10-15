@@ -1,10 +1,10 @@
-import { mergeProps } from "../_shared/react/index";
+import { mergeProps } from '../_shared/react/index';
 import type { CSSProperties } from 'react';
-import type { MachineApi, PartProps } from "../_shared/react/index";
-import type { ModalFocusApi } from "../_shared/focus/index";
-import type { Rect, usePosition } from "../_shared/positioning/index";
-import type { TourSchema, TourStatus } from "./tour.machine";
-import type { TourOptions, TourStep } from "./use-tour";
+import type { MachineApi, PartProps } from '../_shared/react/index';
+import type { ModalFocusApi } from '../_shared/focus/index';
+import type { Rect, usePosition } from '../_shared/positioning/index';
+import type { TourSchema, TourStatus } from './tour.machine';
+import type { TourOptions, TourStep } from './use-tour';
 
 export function connectTour(
   service: MachineApi<TourSchema>,

@@ -1,9 +1,9 @@
 'use client';
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useSplitter } from "./use-splitter";
-import type { SplitterApi, SplitterOptions } from "./use-splitter";
+import type { PartProps } from '../_shared/react/index';
+import { useSplitter } from './use-splitter';
+import type { SplitterApi, SplitterOptions } from './use-splitter';
 const Context = createContext<SplitterApi | null>(null);
 function useSplitterContext() {
   const api = useContext(Context);

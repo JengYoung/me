@@ -1,10 +1,10 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
-import type { TextFieldApi, TextFieldInputProps } from "../text-field/index";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
+import type { TextFieldApi, TextFieldInputProps } from '../text-field/index';
 import type { KeyboardEvent, RefCallback, RefObject } from 'react';
-import { splitTags, tagsInput, tagsValue } from "./tags-input.machine";
-import type { TagsInputSchema } from "./tags-input.machine";
-import type { TagsInputOptions } from "./use-tags-input";
+import { splitTags, tagsInput, tagsValue } from './tags-input.machine';
+import type { TagsInputSchema } from './tags-input.machine';
+import type { TagsInputOptions } from './use-tags-input';
 
 export function connectTagsInput(
   text: TextFieldApi,

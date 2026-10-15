@@ -1,9 +1,9 @@
 'use client';
-import { useMachine, useStableId } from "../_shared/react/index";
+import { useMachine, useStableId } from '../_shared/react/index';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { carouselMachine, validateCarousel } from "./carousel.machine";
-import type { CarouselOptions } from "./carousel.machine";
-import { connectCarousel } from "./carousel.connect";
+import { carouselMachine, validateCarousel } from './carousel.machine';
+import type { CarouselOptions } from './carousel.machine';
+import { connectCarousel } from './carousel.connect';
 const useCommitEffect = typeof document === 'undefined' ? useEffect : useLayoutEffect;
 export function useCarousel(options: CarouselOptions) {
   validateCarousel(options);
@@ -44,5 +44,5 @@ export function useCarousel(options: CarouselOptions) {
   // eslint-disable-next-line react-hooks/refs
   return connectCarousel(service, { ...options, id }, root, focused, rotationIntent);
 }
-export type { CarouselOptions, CarouselSlide } from "./carousel.machine";
-export type { CarouselApi } from "./carousel.connect";
+export type { CarouselOptions, CarouselSlide } from './carousel.machine';
+export type { CarouselApi } from './carousel.connect';

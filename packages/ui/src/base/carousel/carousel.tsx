@@ -1,9 +1,9 @@
 'use client';
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useCarousel } from "./use-carousel";
-import type { CarouselApi, CarouselOptions } from "./use-carousel";
+import type { PartProps } from '../_shared/react/index';
+import { useCarousel } from './use-carousel';
+import type { CarouselApi, CarouselOptions } from './use-carousel';
 const Context = createContext<CarouselApi | null>(null);
 function useCarouselContext() {
   const api = useContext(Context);

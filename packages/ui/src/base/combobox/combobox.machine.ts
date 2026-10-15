@@ -1,5 +1,5 @@
-import { createMachine, isItemEnabled } from "../_shared/core/index";
-import type { Direction, TextCollectionItem } from "../_shared/core/index";
+import { createMachine, isItemEnabled } from '../_shared/core/index';
+import type { Direction, TextCollectionItem } from '../_shared/core/index';
 
 export interface ComboboxOptions {
   items: readonly TextCollectionItem[];

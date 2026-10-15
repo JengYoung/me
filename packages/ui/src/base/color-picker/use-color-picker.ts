@@ -1,13 +1,20 @@
 'use client';
 import { useCallback, useState } from 'react';
-import { useField } from "../field/index";
-import type { FieldOptions } from "../field/index";
-import { pointerRatio, useDirectionContext, useFormReset, useMachine, usePointerDrag, useStableId } from "../_shared/react/index";
+import { useField } from '../field/index';
+import type { FieldOptions } from '../field/index';
+import {
+  pointerRatio,
+  useDirectionContext,
+  useFormReset,
+  useMachine,
+  usePointerDrag,
+  useStableId,
+} from '../_shared/react/index';
 import type { PointerEvent } from 'react';
-import { colorChannelDraft, colorPickerMachine, colorText, parseChannelInput } from "./color-picker.machine";
-import type { ColorPickerMachineOptions } from "./color-picker.machine";
-import { normalizeColor, parseColor } from "./color-value";
-import { connectColorPicker } from "./color-picker.connect";
+import { colorChannelDraft, colorPickerMachine, colorText, parseChannelInput } from './color-picker.machine';
+import type { ColorPickerMachineOptions } from './color-picker.machine';
+import { normalizeColor, parseColor } from './color-value';
+import { connectColorPicker } from './color-picker.connect';
 export type ColorPickerOptions = ColorPickerMachineOptions & Omit<FieldOptions, 'required'>;
 export function useColorPicker(options: ColorPickerOptions = {}) {
   if (options.value) normalizeColor(options.value);
@@ -60,4 +67,4 @@ export function useColorPicker(options: ColorPickerOptions = {}) {
   if (controlled !== (options.value !== undefined)) throw new Error('Color Picker cannot switch control modes.');
   return connectColorPicker(service, props, field, drag, resetRef);
 }
-export type { ColorPickerApi } from "./color-picker.connect";
+export type { ColorPickerApi } from './color-picker.connect';

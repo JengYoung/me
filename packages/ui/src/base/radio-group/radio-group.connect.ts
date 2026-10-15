@@ -1,8 +1,8 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
-import type { RovingFocusApi } from "../_shared/keyboard/index";
-import { radioGroupValue } from "./radio-group.machine";
-import type { RadioGroupOptions, RadioGroupSchema } from "./radio-group.machine";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
+import type { RovingFocusApi } from '../_shared/keyboard/index';
+import { radioGroupValue } from './radio-group.machine';
+import type { RadioGroupOptions, RadioGroupSchema } from './radio-group.machine';
 
 export function connectRadioGroup(
   service: MachineApi<RadioGroupSchema>,

@@ -1,5 +1,5 @@
-import { mergeProps } from "../_shared/react/index";
-import type { BooleanStateApi, PropGetter } from "../_shared/react/index";
+import { mergeProps } from '../_shared/react/index';
+import type { BooleanStateApi, PropGetter } from '../_shared/react/index';
 
 export interface DisclosureApi {
   readonly open: boolean;

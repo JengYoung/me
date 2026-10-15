@@ -1,9 +1,9 @@
 'use client';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
-import { useDirection } from "../react/index";
-import { computePosition } from "./position";
-import type { PositionOptions } from "./position";
+import { useDirection } from '../react/index';
+import { computePosition } from './position';
+import type { PositionOptions } from './position';
 
 const useCommitEffect = typeof document === 'undefined' ? useEffect : useLayoutEffect;
 export interface UsePositionOptions extends PositionOptions {

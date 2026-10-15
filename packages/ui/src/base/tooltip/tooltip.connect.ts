@@ -1,8 +1,8 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
 import type { RefObject } from 'react';
-import { tooltipOpen } from "./tooltip.machine";
-import type { TooltipOptions, TooltipSchema } from "./tooltip.machine";
+import { tooltipOpen } from './tooltip.machine';
+import type { TooltipOptions, TooltipSchema } from './tooltip.machine';
 export function connectTooltip(
   service: MachineApi<TooltipSchema>,
   options: TooltipOptions & { id: string },

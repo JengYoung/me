@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   FileUpload,
   FileUploadRoot,
@@ -13,5 +13,5 @@ export {
   FileUploadRemove,
   FileUploadFeedback,
   FileUploadValue,
-} from "./file-upload";
-export type { FileUploadRootProps } from "./file-upload";
+} from './file-upload';
+export type { FileUploadRootProps } from './file-upload';

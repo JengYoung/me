@@ -1,10 +1,10 @@
 'use client';
 
-import { useField } from "../field/index";
-import type { FieldOptions } from "../field/index";
-import { mergeRefs, useFormReset } from "../_shared/react/index";
+import { useField } from '../field/index';
+import type { FieldOptions } from '../field/index';
+import { mergeRefs, useFormReset } from '../_shared/react/index';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { connectNativeSelect } from "./native-select.connect";
+import { connectNativeSelect } from './native-select.connect';
 
 export type NativeSelectOptions = Omit<FieldOptions, 'readOnly' | 'label'> & { name?: string; form?: string } & (
     | { multiple?: false; value?: string; defaultValue?: string; onValueChange?: (value: string) => void }
@@ -70,4 +70,4 @@ export function useNativeSelect(options: NativeSelectOptions = {}) {
   // oxlint-disable-next-line react/refs
   return connectNativeSelect(field, options, initial.defaultValue, ref, getValue);
 }
-export type { NativeSelectApi, NativeSelectControlProps } from "./native-select.connect";
+export type { NativeSelectApi, NativeSelectControlProps } from './native-select.connect';

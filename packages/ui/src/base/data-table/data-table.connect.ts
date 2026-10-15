@@ -1,10 +1,10 @@
-import { mergeProps } from "../_shared/react/index";
-import type { PartProps } from "../_shared/react/index";
-import type { GridApi } from "../grid/index";
-import type { TableApi } from "../table/index";
-import type { PaginationApi } from "../pagination/index";
-import type { DataTableAdapter, DataTableSnapshot } from "./data-table.types";
-import type { DataTableOptions } from "./use-data-table";
+import { mergeProps } from '../_shared/react/index';
+import type { PartProps } from '../_shared/react/index';
+import type { GridApi } from '../grid/index';
+import type { TableApi } from '../table/index';
+import type { PaginationApi } from '../pagination/index';
+import type { DataTableAdapter, DataTableSnapshot } from './data-table.types';
+import type { DataTableOptions } from './use-data-table';
 
 export function connectDataTable<Row>(
   snapshot: DataTableSnapshot<Row>,

@@ -1,4 +1,4 @@
-import { qrcodegen } from "./vendor/qrcodegen";
+import { qrcodegen } from './vendor/qrcodegen';
 export type QrErrorCorrection = 'L' | 'M' | 'Q' | 'H';
 export interface QrEncodeOptions {
   errorCorrection?: QrErrorCorrection;

@@ -1,7 +1,7 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps, usePointerDrag } from "../_shared/react/index";
-import { splitterCollapsed, splitterRange, splitterSize } from "./splitter.machine";
-import type { SplitterOptions, SplitterSchema } from "./splitter.machine";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps, usePointerDrag } from '../_shared/react/index';
+import { splitterCollapsed, splitterRange, splitterSize } from './splitter.machine';
+import type { SplitterOptions, SplitterSchema } from './splitter.machine';
 
 export function connectSplitter(
   service: MachineApi<SplitterSchema>,

@@ -1,4 +1,4 @@
-import { createMachine } from "../_shared/core/index";
+import { createMachine } from '../_shared/core/index';
 
 export interface MessageScrollPosition {
   messageId: string | null;

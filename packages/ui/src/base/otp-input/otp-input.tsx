@@ -1,9 +1,9 @@
 'use client';
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useOtpInput } from "./use-otp-input";
-import type { OtpInputApi, OtpInputInputProps, OtpInputOptions } from "./use-otp-input";
+import type { PartProps } from '../_shared/react/index';
+import { useOtpInput } from './use-otp-input';
+import type { OtpInputApi, OtpInputInputProps, OtpInputOptions } from './use-otp-input';
 
 const Context = createContext<OtpInputApi | null>(null);
 function useOtpInputContext() {

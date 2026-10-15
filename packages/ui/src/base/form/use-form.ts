@@ -1,9 +1,9 @@
 'use client';
 import { useCallback, useEffect, useLayoutEffect, useState, useSyncExternalStore } from 'react';
-import { useStableId } from "../_shared/react/index";
-import { createNativeFormAdapter } from "./native-adapter";
-import { connectForm } from "./form.connect";
-import type { FormAdapter, FormEngineOptions } from "./form.types";
+import { useStableId } from '../_shared/react/index';
+import { createNativeFormAdapter } from './native-adapter';
+import { connectForm } from './form.connect';
+import type { FormAdapter, FormEngineOptions } from './form.types';
 
 export interface FormOptions extends FormEngineOptions {
   id?: string;

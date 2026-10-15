@@ -1,17 +1,17 @@
 'use client';
 import { useCallback, useLayoutEffect, useRef, useState } from 'react';
-import { mergeRefs, useFormReset, useMachine, useStableId } from "../_shared/react/index";
-import { useField } from "../field/index";
-import type { FieldOptions } from "../field/index";
+import { mergeRefs, useFormReset, useMachine, useStableId } from '../_shared/react/index';
+import { useField } from '../field/index';
+import type { FieldOptions } from '../field/index';
 import {
   fileUploadKey,
   fileUploadMachine,
   selectedFiles,
   validateFiles,
   validateFileUploadRules,
-} from "./file-upload.machine";
-import type { FileUploadFile, FileUploadRejection, FileUploadRules } from "./file-upload.machine";
-import { connectFileUpload } from "./file-upload.connect";
+} from './file-upload.machine';
+import type { FileUploadFile, FileUploadRejection, FileUploadRules } from './file-upload.machine';
+import { connectFileUpload } from './file-upload.connect';
 
 export interface FileUploadOptions extends FileUploadRules, Omit<FieldOptions, 'readOnly'> {
   files?: readonly File[];
@@ -132,4 +132,4 @@ export function useFileUpload(options: FileUploadOptions = {}) {
   });
   /* oxlint-enable react/refs */
 }
-export type { FileUploadApi } from "./file-upload.connect";
+export type { FileUploadApi } from './file-upload.connect';

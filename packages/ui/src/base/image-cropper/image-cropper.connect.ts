@@ -1,11 +1,11 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps, usePointerDrag } from "../_shared/react/index";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps, usePointerDrag } from '../_shared/react/index';
 import type { Ref } from 'react';
-import { cropValue } from "./image-cropper.machine";
-import type { CropExportOptions, ImageCropperSchema } from "./image-cropper.machine";
-import { getCropGeometry } from "./crop-geometry";
-import type { CropValue } from "./crop-geometry";
-import type { ImageCropperOptions } from "./use-image-cropper";
+import { cropValue } from './image-cropper.machine';
+import type { CropExportOptions, ImageCropperSchema } from './image-cropper.machine';
+import { getCropGeometry } from './crop-geometry';
+import type { CropValue } from './crop-geometry';
+import type { ImageCropperOptions } from './use-image-cropper';
 export type CropControl = 'x' | 'y' | 'zoom' | 'rotation';
 export function connectImageCropper(
   machine: MachineApi<ImageCropperSchema>,

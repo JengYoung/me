@@ -1,7 +1,7 @@
-import { createMachine } from "../_shared/core/index";
-import type { MachineArgs } from "../_shared/core/index";
-import { constrainPanel, panelBounds, validatePanelGeometry } from "./geometry";
-import type { PanelConstraints, PanelPoint, PanelRect, PanelSize } from "./geometry";
+import { createMachine } from '../_shared/core/index';
+import type { MachineArgs } from '../_shared/core/index';
+import { constrainPanel, panelBounds, validatePanelGeometry } from './geometry';
+import type { PanelConstraints, PanelPoint, PanelRect, PanelSize } from './geometry';
 
 export type FloatingPanelMode = 'normal' | 'minimized' | 'maximized';
 export interface FloatingPanelStateOptions extends PanelConstraints {

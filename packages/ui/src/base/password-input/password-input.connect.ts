@@ -1,8 +1,8 @@
-import { mergeProps } from "../_shared/react/index";
-import type { PartProps } from "../_shared/react/index";
-import type { TextFieldApi, TextFieldInputProps } from "../text-field/index";
+import { mergeProps } from '../_shared/react/index';
+import type { PartProps } from '../_shared/react/index';
+import type { TextFieldApi, TextFieldInputProps } from '../text-field/index';
 import type { MouseEvent, RefCallback } from 'react';
-import type { PasswordInputOptions } from "./use-password-input";
+import type { PasswordInputOptions } from './use-password-input';
 
 export function connectPasswordInput(
   text: TextFieldApi,

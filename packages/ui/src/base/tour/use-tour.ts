@@ -1,14 +1,14 @@
 'use client';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { useDirection, useMachine, useStableId } from "../_shared/react/index";
-import { useLayerFocus } from "../_shared/focus/index";
-import type { LayerFocusOptions } from "../_shared/focus/index";
-import { usePosition } from "../_shared/positioning/index";
-import type { Placement, PositionOptions, Rect } from "../_shared/positioning/index";
-import { tourMachine, tourStepId, validateTourState } from "./tour.machine";
-import type { TourStateOptions, TourStatus } from "./tour.machine";
-import { equalRect, isTourTargetAvailable, targetRect } from "./tour.dom";
-import { connectTour } from "./tour.connect";
+import { useDirection, useMachine, useStableId } from '../_shared/react/index';
+import { useLayerFocus } from '../_shared/focus/index';
+import type { LayerFocusOptions } from '../_shared/focus/index';
+import { usePosition } from '../_shared/positioning/index';
+import type { Placement, PositionOptions, Rect } from '../_shared/positioning/index';
+import { tourMachine, tourStepId, validateTourState } from './tour.machine';
+import type { TourStateOptions, TourStatus } from './tour.machine';
+import { equalRect, isTourTargetAvailable, targetRect } from './tour.dom';
+import { connectTour } from './tour.connect';
 
 const useCommitEffect = typeof document === 'undefined' ? useEffect : useLayoutEffect;
 export interface TourStep {
@@ -207,4 +207,4 @@ export function useTour(options: TourOptions) {
     setContent,
   });
 }
-export type { TourApi } from "./tour.connect";
+export type { TourApi } from './tour.connect';

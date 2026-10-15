@@ -1,5 +1,5 @@
-import { createMachine, numberRange, snapNumber } from "../_shared/core/index";
-import type { MachineArgs, NumberRangeOptions } from "../_shared/core/index";
+import { createMachine, numberRange, snapNumber } from '../_shared/core/index';
+import type { MachineArgs, NumberRangeOptions } from '../_shared/core/index';
 
 export interface SplitterOptions extends Omit<NumberRangeOptions, 'pageStep'> {
   size?: number;
@@ -61,7 +61,7 @@ function rememberExternalSize({
   props,
   context,
   event,
-}: MachineArgs<SplitterSchema, import("../_shared/core/index").PropsEvent<SplitterSchema>>) {
+}: MachineArgs<SplitterSchema, import('../_shared/core/index').PropsEvent<SplitterSchema>>) {
   return {
     restoreSize:
       props.size !== undefined &&

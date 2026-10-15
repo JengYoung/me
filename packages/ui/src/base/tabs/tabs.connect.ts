@@ -1,8 +1,8 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
-import type { RovingFocusApi } from "../_shared/keyboard/index";
-import { tabsValue } from "./tabs.machine";
-import type { TabsOptions, TabsSchema } from "./tabs.machine";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
+import type { RovingFocusApi } from '../_shared/keyboard/index';
+import { tabsValue } from './tabs.machine';
+import type { TabsOptions, TabsSchema } from './tabs.machine';
 
 export function connectTabs(
   service: MachineApi<TabsSchema>,

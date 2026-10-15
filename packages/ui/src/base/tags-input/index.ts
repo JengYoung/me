@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   TagsInput,
   TagsInputRoot,
@@ -11,4 +11,4 @@ export {
   TagsInputError,
   TagsInputStatus,
   TagsInputHiddenInputs,
-} from "./tags-input";
+} from './tags-input';

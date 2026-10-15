@@ -1,4 +1,4 @@
-import { emptyFormValue, equalFormValue } from "./form.types";
+import { emptyFormValue, equalFormValue } from './form.types';
 import type {
   FormAdapter,
   FormEngineOptions,
@@ -6,7 +6,7 @@ import type {
   FormFieldRules,
   FormSnapshot,
   FormValues,
-} from "./form.types";
+} from './form.types';
 
 const message = (error: unknown) =>
   error instanceof Error ? error.message : 'The operation failed. Please try again.';

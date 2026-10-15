@@ -1,10 +1,10 @@
 'use client';
 
-import { useField } from "../field/index";
-import type { FieldOptions } from "../field/index";
-import { mergeRefs, useFormReset } from "../_shared/react/index";
+import { useField } from '../field/index';
+import type { FieldOptions } from '../field/index';
+import { mergeRefs, useFormReset } from '../_shared/react/index';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { connectTextField } from "./text-field.connect";
+import { connectTextField } from './text-field.connect';
 
 export type TextFieldType = 'text' | 'search' | 'email' | 'tel' | 'url' | 'password';
 export interface TextFieldOptions extends Omit<FieldOptions, 'label'> {
@@ -46,4 +46,4 @@ export function useTextField(options: TextFieldOptions = {}) {
   return connectTextField(field, { ...options, defaultValue: initial.defaultValue }, ref, getValue);
 }
 
-export type { TextFieldApi, TextFieldInputProps, TextFieldTextareaProps } from "./text-field.connect";
+export type { TextFieldApi, TextFieldInputProps, TextFieldTextareaProps } from './text-field.connect';

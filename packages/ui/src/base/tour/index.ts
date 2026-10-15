@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   Tour,
   TourRoot,
@@ -17,5 +17,5 @@ export {
   TourSpotlight,
   TourBackdrop,
   TourPortal,
-} from "./tour";
-export type { TourRootProps } from "./tour";
+} from './tour';
+export type { TourRootProps } from './tour';

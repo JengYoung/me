@@ -6,8 +6,8 @@ import {
   recoverValue,
   sameCollection,
   validateCollection,
-} from "../_shared/core/index";
-import type { Direction, MachineArgs, NavigationIntent, TextCollectionItem } from "../_shared/core/index";
+} from '../_shared/core/index';
+import type { Direction, MachineArgs, NavigationIntent, TextCollectionItem } from '../_shared/core/index';
 
 export type ListboxItem = TextCollectionItem;
 export interface ListboxOptions {

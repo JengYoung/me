@@ -1,10 +1,10 @@
 'use client';
 /* oxlint-disable nextjs/no-img-element -- This framework-neutral headless part requires a native img, not a Next.js loader. */
 import { createContext, useContext } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useAvatar } from "./use-avatar";
-import type { AvatarApi, AvatarOptions } from "./use-avatar";
-import type { AvatarImageProps } from "./avatar.connect";
+import type { PartProps } from '../_shared/react/index';
+import { useAvatar } from './use-avatar';
+import type { AvatarApi, AvatarOptions } from './use-avatar';
+import type { AvatarImageProps } from './avatar.connect';
 const Context = createContext<AvatarApi | null>(null);
 function useAvatarContext() {
   const api = useContext(Context);

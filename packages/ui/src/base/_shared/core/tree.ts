@@ -1,4 +1,4 @@
-import { recoverValue } from "./collection";
+import { recoverValue } from './collection';
 export interface TreeNode {
   readonly value: string;
   readonly label: string;

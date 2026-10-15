@@ -1,14 +1,14 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps, usePointerDrag } from "../_shared/react/index";
-import { signatureValue } from "./signature-pad.machine";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps, usePointerDrag } from '../_shared/react/index';
+import { signatureValue } from './signature-pad.machine';
 import type {
   SignatureExportOptions,
   SignaturePadSchema,
   SignaturePoint,
   SignatureValue,
-} from "./signature-pad.machine";
-import type { SignaturePadOptions } from "./use-signature-pad";
-import { signaturePath } from "./signature-renderer";
+} from './signature-pad.machine';
+import type { SignaturePadOptions } from './use-signature-pad';
+import { signaturePath } from './signature-renderer';
 export function connectSignaturePad(
   machine: MachineApi<SignaturePadSchema>,
   options: SignaturePadOptions & { id: string },

@@ -1,11 +1,11 @@
-import { mergeProps } from "../_shared/react/index";
-import type { PartProps } from "../_shared/react/index";
-import type { FieldApi } from "../field/index";
-import type { Snapshot } from "../_shared/core/index";
+import { mergeProps } from '../_shared/react/index';
+import type { PartProps } from '../_shared/react/index';
+import type { FieldApi } from '../field/index';
+import type { Snapshot } from '../_shared/core/index';
 import type { RefCallback } from 'react';
-import { otpValue } from "./otp-input.machine";
-import type { OtpInputSchema } from "./otp-input.machine";
-import type { OtpInputOptions } from "./use-otp-input";
+import { otpValue } from './otp-input.machine';
+import type { OtpInputSchema } from './otp-input.machine';
+import type { OtpInputOptions } from './use-otp-input';
 
 export type OtpInputInputProps = Omit<
   PartProps<'input'>,

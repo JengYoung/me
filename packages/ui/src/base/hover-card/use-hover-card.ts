@@ -1,12 +1,12 @@
 'use client';
 import { useCallback, useRef, useState } from 'react';
-import { useDirection, useMachine, useStableId } from "../_shared/react/index";
-import { useLayerFocus } from "../_shared/focus/index";
-import { usePosition } from "../_shared/positioning/index";
-import type { PositionOptions } from "../_shared/positioning/index";
-import { hoverCardMachine, hoverCardOpen } from "./hover-card.machine";
-import type { HoverCardStateOptions } from "./hover-card.machine";
-import { connectHoverCard } from "./hover-card.connect";
+import { useDirection, useMachine, useStableId } from '../_shared/react/index';
+import { useLayerFocus } from '../_shared/focus/index';
+import { usePosition } from '../_shared/positioning/index';
+import type { PositionOptions } from '../_shared/positioning/index';
+import { hoverCardMachine, hoverCardOpen } from './hover-card.machine';
+import type { HoverCardStateOptions } from './hover-card.machine';
+import { connectHoverCard } from './hover-card.connect';
 export interface HoverCardOptions extends HoverCardStateOptions, PositionOptions {
   id?: string;
 }
@@ -47,4 +47,4 @@ export function useHoverCard(options: HoverCardOptions = {}) {
   );
   /* oxlint-enable react/refs */
 }
-export type { HoverCardApi } from "./hover-card.connect";
+export type { HoverCardApi } from './hover-card.connect';

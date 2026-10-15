@@ -1,9 +1,9 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
-import type { ListboxApi } from "../listbox/index";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
+import type { ListboxApi } from '../listbox/index';
 import type { KeyboardEvent, RefObject } from 'react';
-import { comboboxInput, comboboxValue } from "./combobox.machine";
-import type { ComboboxOptions, ComboboxSchema } from "./combobox.machine";
+import { comboboxInput, comboboxValue } from './combobox.machine';
+import type { ComboboxOptions, ComboboxSchema } from './combobox.machine';
 
 export interface ComboboxElements {
   root: RefObject<HTMLDivElement | null>;

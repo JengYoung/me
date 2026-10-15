@@ -1,9 +1,9 @@
 'use client';
 import { createContext, Fragment, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { usePagination } from "./use-pagination";
-import type { PaginationApi, PaginationOptions, PaginationItem, PaginationTarget } from "./use-pagination";
+import type { PartProps } from '../_shared/react/index';
+import { usePagination } from './use-pagination';
+import type { PaginationApi, PaginationOptions, PaginationItem, PaginationTarget } from './use-pagination';
 const Context = createContext<PaginationApi | null>(null);
 function usePaginationContext() {
   const api = useContext(Context);

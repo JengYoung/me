@@ -1,10 +1,10 @@
 'use client';
 
-import { useMachine, useNativeCheckbox, useStableId } from "../_shared/react/index";
+import { useMachine, useNativeCheckbox, useStableId } from '../_shared/react/index';
 import { useCallback, useState } from 'react';
-import { switchChecked, switchMachine } from "./switch.machine";
-import type { SwitchOptions } from "./switch.machine";
-import { connectSwitch } from "./switch.connect";
+import { switchChecked, switchMachine } from './switch.machine';
+import type { SwitchOptions } from './switch.machine';
+import { connectSwitch } from './switch.connect';
 
 export function useSwitch(options: SwitchOptions = {}) {
   const [controlled] = useState(options.checked !== undefined);
@@ -22,5 +22,5 @@ export function useSwitch(options: SwitchOptions = {}) {
   if (controlled !== (options.checked !== undefined)) throw new Error('Switch cannot switch control modes.');
   return connectSwitch(service, { ...options, id }, inputRef);
 }
-export type { SwitchOptions } from "./switch.machine";
-export type { SwitchApi } from "./switch.connect";
+export type { SwitchOptions } from './switch.machine';
+export type { SwitchApi } from './switch.connect';

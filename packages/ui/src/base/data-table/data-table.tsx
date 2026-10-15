@@ -1,9 +1,9 @@
 'use client';
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useDataTable } from "./use-data-table";
-import type { DataTableApi, DataTableOptions } from "./use-data-table";
+import type { PartProps } from '../_shared/react/index';
+import { useDataTable } from './use-data-table';
+import type { DataTableApi, DataTableOptions } from './use-data-table';
 type PartsApi = Pick<
   DataTableApi,
   | 'getTableProps'

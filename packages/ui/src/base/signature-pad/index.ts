@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   SignaturePad,
   SignaturePadRoot,
@@ -7,5 +7,5 @@ export {
   SignaturePadClear,
   SignaturePadExport,
   SignaturePadValue,
-} from "./signature-pad";
-export type { SignaturePadRootProps } from "./signature-pad";
+} from './signature-pad';
+export type { SignaturePadRootProps } from './signature-pad';

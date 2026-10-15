@@ -1,5 +1,5 @@
-import { createMachine } from "../_shared/core/index";
-import type { MachineArgs, Transition } from "../_shared/core/index";
+import { createMachine } from '../_shared/core/index';
+import type { MachineArgs, Transition } from '../_shared/core/index';
 
 export type TourStatus = 'idle' | 'waiting' | 'running' | 'timed-out' | 'error' | 'completed' | 'skipped' | 'closed';
 export type TourChangeReason = 'start' | 'next' | 'previous' | 'go' | 'completed' | 'skipped' | 'closed';
@@ -127,7 +127,7 @@ export const tourMachine = createMachine<TourSchema>({
     },
   },
   onProps: [
-    ...ends.map((status): Transition<TourSchema, import("../_shared/core/index").PropsEvent<TourSchema>> => ({
+    ...ends.map((status): Transition<TourSchema, import('../_shared/core/index').PropsEvent<TourSchema>> => ({
       guard: ({ props, context }) =>
         context.observed !== null && tourStepId(props, context) === null && (context.pending ?? 'closed') === status,
       target: status,

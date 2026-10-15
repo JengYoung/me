@@ -1,12 +1,12 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
-import type { FieldApi } from "../field/index";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
+import type { FieldApi } from '../field/index';
 import type { RefCallback } from 'react';
-import { dateInputParts, dateInputValue } from "./date-input.machine";
-import type { DateInputSchema } from "./date-input.machine";
-import { dateLayout, dateSegmentRange, dateValidity, serializeDate } from "./date-value";
-import type { DateSegmentType } from "./date-value";
-import type { DateInputOptions } from "./use-date-input";
+import { dateInputParts, dateInputValue } from './date-input.machine';
+import type { DateInputSchema } from './date-input.machine';
+import { dateLayout, dateSegmentRange, dateValidity, serializeDate } from './date-value';
+import type { DateSegmentType } from './date-value';
+import type { DateInputOptions } from './use-date-input';
 
 export interface DateInputSegmentData {
   type: DateSegmentType | 'literal';

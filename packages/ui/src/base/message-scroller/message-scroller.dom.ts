@@ -1,4 +1,4 @@
-import type { MessageScrollPosition } from "./message-scroller.machine";
+import type { MessageScrollPosition } from './message-scroller.machine';
 
 export function messageElements(content: HTMLDivElement) {
   return [...content.querySelectorAll<HTMLDivElement>('[data-scope="message-scroller"][data-part="message"]')].filter(

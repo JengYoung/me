@@ -1,8 +1,8 @@
 'use client';
 import { createContext, useContext } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useTable } from "./use-table";
-import type { TableApi, TableOptions } from "./use-table";
+import type { PartProps } from '../_shared/react/index';
+import { useTable } from './use-table';
+import type { TableApi, TableOptions } from './use-table';
 const Context = createContext<TableApi | null>(null);
 function useTableContext() {
   const api = useContext(Context);

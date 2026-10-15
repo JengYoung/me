@@ -1,6 +1,6 @@
-import { MachineError } from "./errors";
-import type { ErrorPhase } from "./errors";
-import { record } from "./machine";
+import { MachineError } from './errors';
+import type { ErrorPhase } from './errors';
+import { record } from './machine';
 import type {
   Action,
   Actor,
@@ -15,7 +15,7 @@ import type {
   Transition,
   TransitionList,
   TransitionMap,
-} from "./types";
+} from './types';
 
 const platformClock: Clock = {
   setTimeout: (callback, delay) => globalThis.setTimeout(callback, delay),

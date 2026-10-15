@@ -1,12 +1,12 @@
 'use client';
 
-import { useMachine, useFormReset, mergeRefs } from "../_shared/react/index";
-import type { FieldOptions } from "../field/index";
-import { useTextField } from "../text-field/index";
+import { useMachine, useFormReset, mergeRefs } from '../_shared/react/index';
+import type { FieldOptions } from '../field/index';
+import { useTextField } from '../text-field/index';
 import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { editableMachine, editableEditing, editableDraft, editableValue } from "./editable.machine";
-import type { EditableBehaviorOptions } from "./editable.machine";
-import { connectEditable } from "./editable.connect";
+import { editableMachine, editableEditing, editableDraft, editableValue } from './editable.machine';
+import type { EditableBehaviorOptions } from './editable.machine';
+import { connectEditable } from './editable.connect';
 
 export interface EditableOptions extends EditableBehaviorOptions, Omit<FieldOptions, 'label'> {
   name?: string;
@@ -103,4 +103,4 @@ export function useEditable(options: EditableOptions = {}) {
   );
   /* oxlint-enable react/refs */
 }
-export type { EditableApi } from "./editable.connect";
+export type { EditableApi } from './editable.connect';

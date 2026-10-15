@@ -1,12 +1,12 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { FieldOptions } from "../field/index";
-import { useListbox } from "../listbox/index";
-import { useTextField } from "../text-field/index";
-import { useMachine, useStableId } from "../_shared/react/index";
-import { commandItems, commandMachine, commandQuery } from "./command.machine";
-import type { CommandBehaviorOptions } from "./command.machine";
-import { connectCommand } from "./command.connect";
+import type { FieldOptions } from '../field/index';
+import { useListbox } from '../listbox/index';
+import { useTextField } from '../text-field/index';
+import { useMachine, useStableId } from '../_shared/react/index';
+import { commandItems, commandMachine, commandQuery } from './command.machine';
+import type { CommandBehaviorOptions } from './command.machine';
+import { connectCommand } from './command.connect';
 
 export interface CommandOptions extends CommandBehaviorOptions, Omit<FieldOptions, 'label' | 'required' | 'readOnly'> {}
 export function useCommand(options: CommandOptions) {
@@ -85,5 +85,5 @@ export function useCommand(options: CommandOptions) {
   // oxlint-disable-next-line react/refs
   return connectCommand(text, listbox, service, { ...options, id, items }, { input, setQuery, clear, execute, focus });
 }
-export type { CommandApi } from "./command.connect";
-export type { CommandItemData, CommandShortcut } from "./command.machine";
+export type { CommandApi } from './command.connect';
+export type { CommandItemData, CommandShortcut } from './command.machine';

@@ -1,9 +1,9 @@
 'use client';
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import { useQrCode } from "./use-qr-code";
-import type { QrCodeApi, QrCodeOptions, QrDownloadOptions } from "./use-qr-code";
+import type { PartProps } from '../_shared/react/index';
+import { useQrCode } from './use-qr-code';
+import type { QrCodeApi, QrCodeOptions, QrDownloadOptions } from './use-qr-code';
 const Context = createContext<QrCodeApi | null>(null);
 function useQrCodeContext() {
   const api = useContext(Context);

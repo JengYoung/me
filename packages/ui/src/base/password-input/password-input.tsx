@@ -2,10 +2,10 @@
 
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { PartProps } from "../_shared/react/index";
-import type { TextFieldInputProps } from "../text-field/index";
-import { usePasswordInput } from "./use-password-input";
-import type { PasswordInputOptions, PasswordInputApi } from "./use-password-input";
+import type { PartProps } from '../_shared/react/index';
+import type { TextFieldInputProps } from '../text-field/index';
+import { usePasswordInput } from './use-password-input';
+import type { PasswordInputOptions, PasswordInputApi } from './use-password-input';
 
 const Context = createContext<PasswordInputApi | null>(null);
 function usePasswordInputContext() {

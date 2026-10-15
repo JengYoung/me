@@ -1,5 +1,5 @@
 import type { ComponentPropsWithRef, JSX, Ref } from 'react';
-import { mergeRefs } from "./refs";
+import { mergeRefs } from './refs';
 
 export type PartProps<Tag extends keyof JSX.IntrinsicElements> = ComponentPropsWithRef<Tag> & {
   [key: `data-${string}`]: string | number | boolean | undefined;

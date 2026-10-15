@@ -1,6 +1,6 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
-import type { ClipboardOptions, ClipboardSchema } from "./clipboard.machine";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
+import type { ClipboardOptions, ClipboardSchema } from './clipboard.machine';
 
 export function connectClipboard(machine: MachineApi<ClipboardSchema>, options: ClipboardOptions) {
   const { state, send } = machine;

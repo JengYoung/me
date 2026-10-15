@@ -1,7 +1,7 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
-import { paginationItems, paginationPage, paginationPageCount, targetPage } from "./pagination.machine";
-import type { PaginationOptions, PaginationSchema, PaginationTarget } from "./pagination.machine";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
+import { paginationItems, paginationPage, paginationPageCount, targetPage } from './pagination.machine';
+import type { PaginationOptions, PaginationSchema, PaginationTarget } from './pagination.machine';
 
 export function connectPagination(service: MachineApi<PaginationSchema>, options: PaginationOptions & { id: string }) {
   const page = paginationPage(options, service.state.context);

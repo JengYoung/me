@@ -1,10 +1,10 @@
 'use client';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { useDirectionContext, useMachine, useStableId } from "../_shared/react/index";
-import { menuMachine, menuOpen } from "./menu.machine";
-import type { MenuStateOptions } from "./menu.machine";
-import { menuPath, validateMenu } from "./menu.model";
-import { connectMenu } from "./menu.connect";
+import { useDirectionContext, useMachine, useStableId } from '../_shared/react/index';
+import { menuMachine, menuOpen } from './menu.machine';
+import type { MenuStateOptions } from './menu.machine';
+import { menuPath, validateMenu } from './menu.model';
+import { connectMenu } from './menu.connect';
 const useCommitEffect = typeof document === 'undefined' ? useEffect : useLayoutEffect;
 export interface MenuOptions extends MenuStateOptions {
   returnFocus?: () => HTMLElement | null;
@@ -84,6 +84,6 @@ export function useMenu(options: MenuOptions) {
 export function useMenubar(options: MenubarOptions) {
   return useMenu({ ...options, kind: 'menubar' });
 }
-export type { MenuApi, MenubarApi } from "./menu.connect";
-export type { MenuItem } from "./menu.model";
-export type { MenuCloseReason } from "./menu.machine";
+export type { MenuApi, MenubarApi } from './menu.connect';
+export type { MenuItem } from './menu.model';
+export type { MenuCloseReason } from './menu.machine';

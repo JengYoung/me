@@ -1,6 +1,6 @@
 'use client';
-export { usePagination } from "./use-pagination";
-export type { PaginationApi, PaginationOptions, PaginationItem, PaginationTarget } from "./use-pagination";
+export { usePagination } from './use-pagination';
+export type { PaginationApi, PaginationOptions, PaginationItem, PaginationTarget } from './use-pagination';
 export {
   Pagination,
   PaginationRoot,
@@ -8,5 +8,5 @@ export {
   PaginationLink,
   PaginationEllipsis,
   PaginationItems,
-} from "./pagination";
-export type { PaginationRootProps, PaginationButtonProps, PaginationLinkProps } from "./pagination";
+} from './pagination';
+export type { PaginationRootProps, PaginationButtonProps, PaginationLinkProps } from './pagination';

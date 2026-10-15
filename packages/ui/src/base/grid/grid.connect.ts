@@ -1,11 +1,11 @@
-import { mergeProps } from "../_shared/react/index";
-import type { MachineApi, PartProps } from "../_shared/react/index";
-import type { RovingFocusApi } from "../_shared/keyboard/index";
+import { mergeProps } from '../_shared/react/index';
+import type { MachineApi, PartProps } from '../_shared/react/index';
+import type { RovingFocusApi } from '../_shared/keyboard/index';
 import type { KeyboardEvent, MouseEvent } from 'react';
-import { cellKey, gridPosition } from "./grid.model";
-import type { GridOptions } from "./grid.model";
-import { gridFocused, gridSelected } from "./grid.machine";
-import type { GridSchema } from "./grid.machine";
+import { cellKey, gridPosition } from './grid.model';
+import type { GridOptions } from './grid.model';
+import { gridFocused, gridSelected } from './grid.machine';
+import type { GridSchema } from './grid.machine';
 
 export function connectGrid(
   service: MachineApi<GridSchema>,

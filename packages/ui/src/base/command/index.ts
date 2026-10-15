@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   Command,
   CommandRoot,
@@ -12,4 +12,4 @@ export {
   CommandLabel,
   CommandDescription,
   CommandError,
-} from "./command";
+} from './command';

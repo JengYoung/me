@@ -1,11 +1,18 @@
 'use client';
 
-import { numberRange } from "../_shared/core/index";
-import { pointerRatio, useDirection, useFormReset, useMachine, usePointerDrag, useStableId } from "../_shared/react/index";
+import { numberRange } from '../_shared/core/index';
+import {
+  pointerRatio,
+  useDirection,
+  useFormReset,
+  useMachine,
+  usePointerDrag,
+  useStableId,
+} from '../_shared/react/index';
 import { useCallback, useRef, useState } from 'react';
-import { sliderMachine, sliderValue } from "./slider.machine";
-import type { SliderOptions } from "./slider.machine";
-import { connectSlider } from "./slider.connect";
+import { sliderMachine, sliderValue } from './slider.machine';
+import type { SliderOptions } from './slider.machine';
+import { connectSlider } from './slider.connect';
 
 export function useSlider(options: SliderOptions = {}) {
   numberRange(options);
@@ -44,5 +51,5 @@ export function useSlider(options: SliderOptions = {}) {
   if (controlled !== (options.value !== undefined)) throw new Error('Slider cannot switch control modes.');
   return connectSlider(service, { ...options, dir, id }, drag, inputRef);
 }
-export type { SliderOptions } from "./slider.machine";
-export type { SliderApi } from "./slider.connect";
+export type { SliderOptions } from './slider.machine';
+export type { SliderApi } from './slider.connect';

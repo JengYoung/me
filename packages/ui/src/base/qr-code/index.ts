@@ -1,5 +1,5 @@
 'use client';
-export * from "./hook";
+export * from './hook';
 export {
   QrCode,
   QrCodeRoot,
@@ -9,5 +9,5 @@ export {
   QrCodeText,
   QrCodeDownload,
   QrCodeValue,
-} from "./qr-code";
-export type { QrCodeRootProps } from "./qr-code";
+} from './qr-code';
+export type { QrCodeRootProps } from './qr-code';

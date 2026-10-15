@@ -1,4 +1,4 @@
-import { createMachine } from "../_shared/core/index";
+import { createMachine } from '../_shared/core/index';
 export interface MenuButtonStateOptions {
   open?: boolean;
   defaultOpen?: boolean;
