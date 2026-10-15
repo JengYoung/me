@@ -8,9 +8,6 @@ importers:
 
   .:
     devDependencies:
-      prettier:
-        specifier: 3.9.6
-        version: 3.9.6
       turbo:
         specifier: ^2.11.8
         version: 2.11.8
@@ -128,6 +125,18 @@ importers:
         specifier: 17.12.0
         version: 17.12.0
 
+  packages/format-config:
+    dependencies:
+      oxfmt:
+        specifier: ^0.73.0
+        version: 0.73.0
+
+  packages/lint-config:
+    dependencies:
+      oxlint:
+        specifier: ^1.88.0
+        version: 1.88.0
+
   packages/typescript-config: {}
 
   packages/ui:
@@ -139,9 +148,12 @@ importers:
         specifier: 19.2.8
         version: 19.2.8(react@19.2.8)
     devDependencies:
-      '@repo/eslint-config':
+      '@repo/format-config':
         specifier: workspace:*
-        version: link:../eslint-config
+        version: link:../format-config
+      '@repo/lint-config':
+        specifier: workspace:*
+        version: link:../lint-config
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
@@ -154,9 +166,6 @@ importers:
       '@types/react-dom':
         specifier: 19.2.5
         version: 19.2.5(@types/react@19.2.18)
-      eslint:
-        specifier: 10.9.1
-        version: 10.9.1(supports-color@7.2.0)
       oxfmt:
         specifier: ^0.73.0
         version: 0.73.0
@@ -1484,10 +1493,6 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
 
-  prettier@3.9.6:
-    resolution: {integrity: sha512-OpN0zzVdiaiAhxpuuj5efpIS4sY9j7bY6uR5mnj5yPzGkdkjNKSJeUThPb60Jw29QuAZgA4o+/iB49kFiaBX6g==}
-    engines: {node: '>=14'}
-
   punycode@2.3.1:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
@@ -2715,8 +2720,6 @@ snapshots:
       source-map-js: 1.2.1
 
   prelude-ls@1.2.1: {}
-
-  prettier@3.9.6: {}
 
   punycode@2.3.1: {}
 

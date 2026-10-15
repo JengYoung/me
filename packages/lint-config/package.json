@@ -1,0 +1,12 @@
+{
+  "name": "@repo/lint-config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./react": "./react.js"
+  },
+  "peerDependencies": {
+    "oxlint": "^1.88.0"
+  }
+}
