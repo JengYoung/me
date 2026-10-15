@@ -63,6 +63,10 @@ node scripts/check-instruction-runtime.mjs
 4. 필요할 때만 JSON 메타데이터와 참조를 추가한다. 참조는 스킬 내 `references/`로 독립 복사되고 상대 링크를 검사한다.
 5. 생성·정적 검사·관련 런타임 검사 후 실제 요청으로 행동을 확인한다.
 
+외부에서 가져온 스킬을 이 구조로 전환할 때는 기존 내용을 보존하고, 공통 계약과 도구별 절차로 나눈 뒤 관리 대상으로 등록한다. 원격 설치 도구의 `skills-lock.json`에서는 전환한 스킬 항목만 제거하여 두 도구가 같은 산출물을 덮어쓰지 않게 한다. 이후 변경은 원천과 어댑터에서 진행한다.
+
+`turborepo`는 [업스트림 스킬](https://github.com/vercel/turborepo/blob/main/skills/turborepo/SKILL.md)의 동봉 문서 우선 원칙을 유지한다. 구체적인 Turborepo 설정법은 이 저장소에 복제하지 않고 실제 설치 버전의 문서에서 확인한다.
+
 프로젝트 공통 계약 변수는 `PURPOSE`, `WORKFLOW`, `QUALITY`, `MAINTENANCE`, `NON_GOALS`다. 각 도구의 기본·상세 문서와 경로별 규칙 전체에서 한 번씩 포함한다. `SKILLS`는 해당 도구의 스킬 목록이다. `RUNTIME_STATUS`는 `targets.json`에서 생성한 실행 보류 지침이며 프로젝트 지침 묶음과 각 스킬 어댑터에 한 번씩 포함한다.
 
 현재 메타데이터 지원 범위는 Codex의 `interface.display_name`, `short_description`, `default_prompt`, `policy.allow_implicit_invocation`과 Claude의 `argument-hint`, `disable-model-invocation`, `user-invocable`다. 이는 생성기의 지원 범위이며 도구 전체 규격을 뜻하지 않는다. 다른 필드나 도구가 필요하면 설치 버전의 공식 규격을 확인하고 생성기 검증을 함께 확장한다. 알 수 없는 필드를 조용히 버리지 않는다.

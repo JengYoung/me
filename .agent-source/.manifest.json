@@ -1,24 +1,29 @@
 {
   "version": 2,
   "inputs": {
-    ".agent-source/adapters/claude/project.md": "fe42db2e782e1a732322dd0897de65f7ba3deb8f50f2605f65528fe95c8662b7",
+    ".agent-source/adapters/claude/project.md": "bc753af73df5084848da289dbc9d5812e06439be382861b818b622e65b7c29fb",
     ".agent-source/adapters/claude/rules/instruction-maintenance.md": "fd4dcc633d51a1a45dd927b1b9fe0bb865024ed1b3f4b2a82840505a38b49a39",
     ".agent-source/adapters/claude/skills/sync-instructions.json": "1755d960bbf5e23d5a621268b3b1c66b9ed1eb9efc421144aadd3dbf8001113f",
     ".agent-source/adapters/claude/skills/sync-instructions.md": "dd85c152ce0ff4d0ebe6c5277a1a22ba8faec9d3e95cd0212aa070f3f5d4a65e",
+    ".agent-source/adapters/claude/skills/turborepo.json": "408d074a4e7a80872e75d72118b1d079b7ec72aeb97c2e3e7354b6d1497785c4",
+    ".agent-source/adapters/claude/skills/turborepo.md": "5e9e821cc9ff4d595eb7a15b08343f639f4a00cab5695715bf6363e748dd22e1",
     ".agent-source/adapters/codex/instructions.md": "3a59a578973a2b2e83f3aaab0af8758f973989a9feb9d08b527727e38dded92c",
-    ".agent-source/adapters/codex/project.md": "8ff320185ed2b097a723800e7de980abed2918e70c4876a3044f600b0da116a9",
+    ".agent-source/adapters/codex/project.md": "ae1b18c426a78486058043fee95359e96c179110c9a02c08d58b8fd2f9420cc1",
     ".agent-source/adapters/codex/skills/sync-instructions.json": "14a76c14a6c29e0ee6a68ee46ec816c527ffbd43ea10be262895fb1a0cf514c1",
     ".agent-source/adapters/codex/skills/sync-instructions.md": "a2b67084d07db26222717215ed3397dc489ee2ec8bc309f9e2b1992866ab9f63",
+    ".agent-source/adapters/codex/skills/turborepo.json": "a1104aa39540993a112e47356ffe2a647d0b3b89b789bfb2a5a6ce904f6f2334",
+    ".agent-source/adapters/codex/skills/turborepo.md": "0726878c4c8a15397ce3bfaaf01123800b4019b9e4ddb34194cf6681a181ea5f",
     ".agent-source/project/source.md": "66f9fcf76ca8a3d45199cd1a2683f4ec10b3a03d4c65ef27d9c76dc80c45f489",
     ".agent-source/skills/sync-instructions/references/recovery.md": "33c639a794a17364d992fb5f04e28305ea7bcfa0d69ddfe0d20fb9cc4ff9ba0c",
     ".agent-source/skills/sync-instructions/source.md": "633cac0b0f2789135364a52e2dd41e7d5f99fe33e6f8eeac29f6ad03cf4f0cbe",
+    ".agent-source/skills/turborepo/source.md": "bf18682c68ec4f729d2f93aaf9ddd7dd10a476de650387e0b7a32ee00d15e23e",
     ".agent-source/targets.json": "70ef5e0f1cde676a1fecffa54c0659a4d6c73a43ef54bb6676e25db8dd1331c9",
     "scripts/instruction-model.mjs": "0de7a4ba6be8e4c18e729e16b47b7c1f70fd1b52283946080a9dfe04e0fce64d",
     "scripts/sync-instructions.mjs": "205cb5b1cc5c4c1c10cad6d178cb5f98db4a1b16118d29aaf636a42342365058"
   },
   "outputs": {
     ".agent-source/registry.md": {
-      "sha256": "b41fa78620d5b978a2491d6d895206a5cb572157fabc3cc72968cebdb40bb9d1",
+      "sha256": "d3238e7446807f294a488b2b2e15db1156aad9fd220a18035665c131b26f29a8",
       "source": ".agent-source/project/source.md",
       "target": "registry",
       "facets": []
@@ -38,6 +43,28 @@
     ".agents/skills/sync-instructions/SKILL.md": {
       "sha256": "a2c7d0aa66769f3283ab85fdecc1647e781150fe04b20d1e23ea73235ee3f806",
       "source": ".agent-source/skills/sync-instructions/source.md",
+      "target": "codex",
+      "facets": [
+        "PURPOSE",
+        "TRIGGERS",
+        "INPUTS",
+        "STEPS",
+        "VERIFICATION",
+        "OUTPUTS",
+        "CONSTRAINTS",
+        "STOP",
+        "NON_GOALS"
+      ]
+    },
+    ".agents/skills/turborepo/agents/openai.yaml": {
+      "sha256": "8794a07c75ebdc4f05f5965032b25710e10a7fa38feb0ef2f44f078d61015f88",
+      "source": ".agent-source/skills/turborepo/source.md",
+      "target": "codex",
+      "facets": []
+    },
+    ".agents/skills/turborepo/SKILL.md": {
+      "sha256": "15eb0086aed5c18da1a76c71ce6ea253bfb35e0ead9170d4a46cbfd47e65c2c7",
+      "source": ".agent-source/skills/turborepo/source.md",
       "target": "codex",
       "facets": [
         "PURPOSE",
@@ -81,6 +108,22 @@
         "NON_GOALS"
       ]
     },
+    ".claude/skills/turborepo/SKILL.md": {
+      "sha256": "8c4380330f699eccd5776328fcf612b5cc9820f77f8c8a1f37dbc15f453f209e",
+      "source": ".agent-source/skills/turborepo/source.md",
+      "target": "claude",
+      "facets": [
+        "PURPOSE",
+        "TRIGGERS",
+        "INPUTS",
+        "STEPS",
+        "VERIFICATION",
+        "OUTPUTS",
+        "CONSTRAINTS",
+        "STOP",
+        "NON_GOALS"
+      ]
+    },
     ".codex/instructions.md": {
       "sha256": "c4ec87f8446e04cacc40cfa903077dab57f8d37b610509119fb3b4df65d9b511",
       "source": ".agent-source/project/source.md",
@@ -90,7 +133,7 @@
       ]
     },
     "AGENTS.md": {
-      "sha256": "0c395591dae3b320ed1d741c0d2c445ae87a7c7216b4c260669b9a63c49b6434",
+      "sha256": "5882fd501bbc9f56e93a7c5d15e170e1bb75190f8da4015c2d4279c4196bb627",
       "source": ".agent-source/project/source.md",
       "target": "codex",
       "facets": [
@@ -101,7 +144,7 @@
       ]
     },
     "CLAUDE.md": {
-      "sha256": "2ce8ab2e2db339cb37fafc3eb327c5d618d7575e0dda10dca7846d5c71acef6a",
+      "sha256": "a4b49209ffa2ff16680fa6ad4460d8dbaed5bf5eb22f810541a333abb8d3c6c1",
       "source": ".agent-source/project/source.md",
       "target": "claude",
       "facets": [
