@@ -1,0 +1,38 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "singleQuote": true,
+  "semi": true,
+  "useTabs": false,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "printWidth": 120,
+  "ignorePatterns": [
+    // 하네스 생성물은 생성기에서 형식을 고정하고 해시로 검사합니다.
+    "AGENTS.md",
+    "CLAUDE.md",
+    ".codex/**",
+    ".claude/**",
+    ".agents/**",
+    ".agent-source/.manifest.json",
+    // 상위 규칙의 Incorrect/Correct 코드 블록은 원문 그대로 보존합니다.
+    ".agent-source/skills/react-best-practices/rules/**",
+    "**/.next/**",
+    "out/**",
+    "build/**",
+    "**/storybook-static/**",
+    "packages/cli/dist/**",
+    "packages/cli/.build/**",
+    "packages/cli/catalog.json",
+    "packages/cli/templates/**",
+    "artifacts/**",
+    "docs/issues/apg-functional-ui/**",
+    "coverage/**",
+    "playwright-report/**",
+    "test-results/**",
+    "**/next-env.d.ts",
+    "pnpm-lock.yaml",
+    // Hermes 설치 기록과 소스의 체크섬을 보존합니다.
+    "apps/playground/no-k.config.ts",
+    "apps/playground/src/shared/libs/hermes/**",
+  ],
+}
