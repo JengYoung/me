@@ -1,0 +1,7 @@
+# AUTO-GENERATED from .agent-source/skills/sync-instructions/source.md by scripts/sync-instructions.mjs. Do not edit; run node scripts/sync-instructions.mjs --write.
+interface:
+  display_name: "AI 지침 동기화"
+  short_description: "공통 원천과 Codex·Claude 프로젝트 지침을 동기화하고 검사합니다"
+  default_prompt: "$sync-instructions check로 현재 프로젝트의 AI 지침 정합성을 검사해줘."
+policy:
+  allow_implicit_invocation: true

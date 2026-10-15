@@ -1,0 +1,40 @@
+{
+  "version": 2,
+  "targets": [
+    {
+      "name": "codex",
+      "entrypoint": "AGENTS.md",
+      "skillRoot": ".agents/skills",
+      "documents": [
+        {
+          "path": ".codex/instructions.md",
+          "template": "instructions.md"
+        }
+      ]
+    },
+    {
+      "name": "claude",
+      "entrypoint": "CLAUDE.md",
+      "skillRoot": ".claude/skills",
+      "runtime": {
+        "status": "deferred",
+        "reason": "로그인 만료 = 잠정 보류"
+      },
+      "rules": [
+        {
+          "path": ".claude/rules/instruction-maintenance.md",
+          "template": "rules/instruction-maintenance.md",
+          "paths": [
+            ".agent-source/**",
+            "AGENTS.md",
+            "CLAUDE.md",
+            ".agents/skills/**",
+            ".codex/**",
+            ".claude/**",
+            "scripts/*instruction*"
+          ]
+        }
+      ]
+    }
+  ]
+}

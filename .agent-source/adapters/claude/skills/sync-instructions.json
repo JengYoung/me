@@ -1,0 +1,5 @@
+{
+  "argument-hint": "[check|write]",
+  "disable-model-invocation": false,
+  "user-invocable": true
+}

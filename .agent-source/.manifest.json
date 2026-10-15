@@ -1,0 +1,115 @@
+{
+  "version": 2,
+  "inputs": {
+    ".agent-source/adapters/claude/project.md": "fe42db2e782e1a732322dd0897de65f7ba3deb8f50f2605f65528fe95c8662b7",
+    ".agent-source/adapters/claude/rules/instruction-maintenance.md": "fd4dcc633d51a1a45dd927b1b9fe0bb865024ed1b3f4b2a82840505a38b49a39",
+    ".agent-source/adapters/claude/skills/sync-instructions.json": "1755d960bbf5e23d5a621268b3b1c66b9ed1eb9efc421144aadd3dbf8001113f",
+    ".agent-source/adapters/claude/skills/sync-instructions.md": "dd85c152ce0ff4d0ebe6c5277a1a22ba8faec9d3e95cd0212aa070f3f5d4a65e",
+    ".agent-source/adapters/codex/instructions.md": "3a59a578973a2b2e83f3aaab0af8758f973989a9feb9d08b527727e38dded92c",
+    ".agent-source/adapters/codex/project.md": "8ff320185ed2b097a723800e7de980abed2918e70c4876a3044f600b0da116a9",
+    ".agent-source/adapters/codex/skills/sync-instructions.json": "14a76c14a6c29e0ee6a68ee46ec816c527ffbd43ea10be262895fb1a0cf514c1",
+    ".agent-source/adapters/codex/skills/sync-instructions.md": "a2b67084d07db26222717215ed3397dc489ee2ec8bc309f9e2b1992866ab9f63",
+    ".agent-source/project/source.md": "66f9fcf76ca8a3d45199cd1a2683f4ec10b3a03d4c65ef27d9c76dc80c45f489",
+    ".agent-source/skills/sync-instructions/references/recovery.md": "33c639a794a17364d992fb5f04e28305ea7bcfa0d69ddfe0d20fb9cc4ff9ba0c",
+    ".agent-source/skills/sync-instructions/source.md": "633cac0b0f2789135364a52e2dd41e7d5f99fe33e6f8eeac29f6ad03cf4f0cbe",
+    ".agent-source/targets.json": "70ef5e0f1cde676a1fecffa54c0659a4d6c73a43ef54bb6676e25db8dd1331c9",
+    "scripts/instruction-model.mjs": "0de7a4ba6be8e4c18e729e16b47b7c1f70fd1b52283946080a9dfe04e0fce64d",
+    "scripts/sync-instructions.mjs": "205cb5b1cc5c4c1c10cad6d178cb5f98db4a1b16118d29aaf636a42342365058"
+  },
+  "outputs": {
+    ".agent-source/registry.md": {
+      "sha256": "b41fa78620d5b978a2491d6d895206a5cb572157fabc3cc72968cebdb40bb9d1",
+      "source": ".agent-source/project/source.md",
+      "target": "registry",
+      "facets": []
+    },
+    ".agents/skills/sync-instructions/agents/openai.yaml": {
+      "sha256": "03ea2b3534fac02fbb366f22f926ae0b63540ba4fb94443ea9c62ecb6e931b0d",
+      "source": ".agent-source/skills/sync-instructions/source.md",
+      "target": "codex",
+      "facets": []
+    },
+    ".agents/skills/sync-instructions/references/recovery.md": {
+      "sha256": "2d20d4d92345eae40261477b1bb6c4065bb56478bf24909203029d97083c95a7",
+      "source": ".agent-source/skills/sync-instructions/source.md",
+      "target": "codex",
+      "facets": []
+    },
+    ".agents/skills/sync-instructions/SKILL.md": {
+      "sha256": "a2c7d0aa66769f3283ab85fdecc1647e781150fe04b20d1e23ea73235ee3f806",
+      "source": ".agent-source/skills/sync-instructions/source.md",
+      "target": "codex",
+      "facets": [
+        "PURPOSE",
+        "TRIGGERS",
+        "INPUTS",
+        "STEPS",
+        "VERIFICATION",
+        "OUTPUTS",
+        "CONSTRAINTS",
+        "STOP",
+        "NON_GOALS"
+      ]
+    },
+    ".claude/rules/instruction-maintenance.md": {
+      "sha256": "5d879222fa563eb3384e4fa1591a55745530870b57c81b048da24b38902e3bbb",
+      "source": ".agent-source/project/source.md",
+      "target": "claude",
+      "facets": [
+        "MAINTENANCE"
+      ]
+    },
+    ".claude/skills/sync-instructions/references/recovery.md": {
+      "sha256": "2d20d4d92345eae40261477b1bb6c4065bb56478bf24909203029d97083c95a7",
+      "source": ".agent-source/skills/sync-instructions/source.md",
+      "target": "claude",
+      "facets": []
+    },
+    ".claude/skills/sync-instructions/SKILL.md": {
+      "sha256": "eb756fc6e7061b5d1e5e82ebc33b7a25eb846e1e82ec5ef09ef6b1834e5c2db3",
+      "source": ".agent-source/skills/sync-instructions/source.md",
+      "target": "claude",
+      "facets": [
+        "PURPOSE",
+        "TRIGGERS",
+        "INPUTS",
+        "STEPS",
+        "VERIFICATION",
+        "OUTPUTS",
+        "CONSTRAINTS",
+        "STOP",
+        "NON_GOALS"
+      ]
+    },
+    ".codex/instructions.md": {
+      "sha256": "c4ec87f8446e04cacc40cfa903077dab57f8d37b610509119fb3b4df65d9b511",
+      "source": ".agent-source/project/source.md",
+      "target": "codex",
+      "facets": [
+        "MAINTENANCE"
+      ]
+    },
+    "AGENTS.md": {
+      "sha256": "0c395591dae3b320ed1d741c0d2c445ae87a7c7216b4c260669b9a63c49b6434",
+      "source": ".agent-source/project/source.md",
+      "target": "codex",
+      "facets": [
+        "PURPOSE",
+        "WORKFLOW",
+        "QUALITY",
+        "NON_GOALS"
+      ]
+    },
+    "CLAUDE.md": {
+      "sha256": "2ce8ab2e2db339cb37fafc3eb327c5d618d7575e0dda10dca7846d5c71acef6a",
+      "source": ".agent-source/project/source.md",
+      "target": "claude",
+      "facets": [
+        "PURPOSE",
+        "WORKFLOW",
+        "QUALITY",
+        "NON_GOALS"
+      ]
+    }
+  }
+}
