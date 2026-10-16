@@ -18,7 +18,7 @@ This Turborepo includes the following packages/apps:
 
 - `docs`: a [Next.js](https://nextjs.org/) app
 - `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
+- `@repo/ui`: shared Iris headless React component library
 - `@repo/eslint-config`: legacy ESLint presets retained from the scaffold
 - `@repo/lint-config`: shared Oxlint React and Next.js configurations, including the FSD plugin
 - `@repo/format-config`: shared Oxfmt React configuration used by `@repo/ui`
