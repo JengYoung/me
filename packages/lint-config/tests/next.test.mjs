@@ -7,6 +7,7 @@ import { dirname, join, resolve } from 'node:path';
 import { test } from 'node:test';
 
 const require = createRequire(import.meta.url);
+const { packageManager } = require('../../../package.json');
 const oxlint = resolve(dirname(require.resolve('oxlint/package.json')), 'bin/oxlint');
 const preset = new URL('../next.js', import.meta.url).href;
 
@@ -18,10 +19,7 @@ function fixture(t, files, options = {}) {
     mkdirSync(dirname(filename), { recursive: true });
     writeFileSync(filename, content);
   };
-  write(
-    join(workspace, 'package.json'),
-    JSON.stringify({ name: 'fixture', private: true, packageManager: 'pnpm@11.25.0' }),
-  );
+  write(join(workspace, 'package.json'), JSON.stringify({ name: 'fixture', private: true, packageManager }));
   write(join(workspace, 'pnpm-workspace.yaml'), "packages:\n  - 'apps/*'\n");
   write(join(workspace, 'turbo.json'), JSON.stringify({ tasks: { lint: {} } }));
   write(join(project, 'package.json'), JSON.stringify({ name: 'fixture-web', private: true, type: 'module' }));

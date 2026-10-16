@@ -5,14 +5,14 @@
     ".agent-source/adapters/claude/rules/code-quality.md": "293be9420285cf5e5739922e41b62c315087388adaf2e7e048cc244867f16b15",
     ".agent-source/adapters/claude/rules/instruction-maintenance.md": "de110ec990c6802f0be31e49c70eeef19212a2a768d35e15c5ee98909d7ab936",
     ".agent-source/adapters/claude/skills/sync-instructions.json": "1755d960bbf5e23d5a621268b3b1c66b9ed1eb9efc421144aadd3dbf8001113f",
-    ".agent-source/adapters/claude/skills/sync-instructions.md": "dd85c152ce0ff4d0ebe6c5277a1a22ba8faec9d3e95cd0212aa070f3f5d4a65e",
+    ".agent-source/adapters/claude/skills/sync-instructions.md": "0514149cc47d73d991554e4bfc9d79f80928e7f06d65d82ce66fb389830825ee",
     ".agent-source/adapters/claude/skills/turborepo.json": "408d074a4e7a80872e75d72118b1d079b7ec72aeb97c2e3e7354b6d1497785c4",
     ".agent-source/adapters/claude/skills/turborepo.md": "5e9e821cc9ff4d595eb7a15b08343f639f4a00cab5695715bf6363e748dd22e1",
     ".agent-source/adapters/codex/code-quality.md": "63269b8e519954e6c0dffd26f64c39f3da15ed1d4757b8f4be8c8453b9de4238",
     ".agent-source/adapters/codex/instructions.md": "2104ceef8a996f4c97ac827ee6d3686d8b8793a202bac2a7faac57a402e5b657",
     ".agent-source/adapters/codex/project.md": "879f8b86b7821b1b1a230bce35cbba910c6951b6f36228a2f2fee3a591037987",
     ".agent-source/adapters/codex/skills/sync-instructions.json": "14a76c14a6c29e0ee6a68ee46ec816c527ffbd43ea10be262895fb1a0cf514c1",
-    ".agent-source/adapters/codex/skills/sync-instructions.md": "a2b67084d07db26222717215ed3397dc489ee2ec8bc309f9e2b1992866ab9f63",
+    ".agent-source/adapters/codex/skills/sync-instructions.md": "a6a83d385950f0e4a177c3483eacd5696a905290503131e0bc8513b4cef03caa",
     ".agent-source/adapters/codex/skills/turborepo.json": "a1104aa39540993a112e47356ffe2a647d0b3b89b789bfb2a5a6ce904f6f2334",
     ".agent-source/adapters/codex/skills/turborepo.md": "0726878c4c8a15397ce3bfaaf01123800b4019b9e4ddb34194cf6681a181ea5f",
     ".agent-source/conventions/code-quality/source.md": "b94809c0fa51d7b063ea90414b30b74377042ee1c45fd4df4e161e0ffc957ec4",
@@ -44,7 +44,7 @@
       "facets": []
     },
     ".agents/skills/sync-instructions/SKILL.md": {
-      "sha256": "a2c7d0aa66769f3283ab85fdecc1647e781150fe04b20d1e23ea73235ee3f806",
+      "sha256": "45225268f074b783479f995c4d01242fac38618108ca0a7c44a8591c4cb6a0b7",
       "source": ".agent-source/skills/sync-instructions/source.md",
       "target": "codex",
       "facets": [
@@ -104,7 +104,7 @@
       "facets": []
     },
     ".claude/skills/sync-instructions/SKILL.md": {
-      "sha256": "eb756fc6e7061b5d1e5e82ebc33b7a25eb846e1e82ec5ef09ef6b1834e5c2db3",
+      "sha256": "d0762373529188f7006bd7bca9a114339c82824ce5a958aa2e27e8b584cf6729",
       "source": ".agent-source/skills/sync-instructions/source.md",
       "target": "claude",
       "facets": [

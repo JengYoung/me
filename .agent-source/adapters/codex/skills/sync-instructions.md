@@ -16,7 +16,7 @@
 
 {{RUNTIME_STATUS}}
 
-1. 현재 프로젝트 루트의 `.agent-source/targets.json`과 변경된 원천을 확인한다. 실행에는 Node.js 22 이상이 필요하다. 셸 명령은 현재 환경의 실행 규칙을 따른다.
+1. 현재 프로젝트 루트의 `.agent-source/targets.json`과 변경된 원천을 확인한다. 실행에는 Node.js 24 이상이 필요하다. 셸 명령은 현재 환경의 실행 규칙을 따른다.
 2. `node scripts/sync-instructions.mjs --check`를 실행한다. 검사 요청이면 차이와 종료 코드를 보고하고 끝낸다.
 3. 동기화 요청이면 필요한 공통 원천 또는 `.agent-source/adapters/`의 대상 도구 어댑터를 수정한다. 생성 파일은 직접 편집하지 않는다.
 4. `node scripts/sync-instructions.mjs --write` 후 `node scripts/sync-instructions.mjs --check`를 실행한다. 생성기를 바꿨다면 `node --test scripts/sync-instructions.test.mjs`도 실행한다.

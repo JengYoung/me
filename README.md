@@ -2,13 +2,18 @@
 
 This Turborepo starter is maintained by the Turborepo core team.
 
-## Using this example
+## 개발 환경
 
-Run the following command:
+[mise](https://mise.jdx.dev/)로 Node.js 24 LTS와 pnpm 12를 사용합니다. 정확한 버전은 [mise.toml](mise.toml)에 고정하며, `package.json`의 `packageManager`도 같은 pnpm 버전을 사용합니다.
 
 ```sh
-npx create-turbo@latest
+mise trust
+mise install
+mise exec -- node --version
+mise exec -- pnpm --version
 ```
+
+셸에 mise가 활성화되어 있으면 이 프로젝트에서 해당 버전이 자동 선택됩니다. 그 외에는 `mise exec -- pnpm <명령>`으로 실행합니다. 버전을 갱신할 때는 `mise.toml`과 `package.json`을 함께 수정합니다.
 
 ## What's inside?
 

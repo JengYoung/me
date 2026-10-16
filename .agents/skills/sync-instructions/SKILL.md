@@ -23,7 +23,7 @@ AI 지침·스킬의 동기화나 검사를 요청받았거나, 해당 원천 �
 
 - Claude Code: **로그인 만료 = 잠정 보류**. 지침·스킬 생성과 정적 검사는 계속한다. 사용자가 재개를 요청할 때까지 해당 도구의 CLI 실행·모델 호출·인증 복구·결제 변경을 시도하지 않는다. `.agent-source/targets.json`의 `runtime.status`를 임의로 해제하지 않는다.
 
-1. 현재 프로젝트 루트의 `.agent-source/targets.json`과 변경된 원천을 확인한다. 실행에는 Node.js 22 이상이 필요하다. 셸 명령은 현재 환경의 실행 규칙을 따른다.
+1. 현재 프로젝트 루트의 `.agent-source/targets.json`과 변경된 원천을 확인한다. 실행에는 Node.js 24 이상이 필요하다. 셸 명령은 현재 환경의 실행 규칙을 따른다.
 2. `node scripts/sync-instructions.mjs --check`를 실행한다. 검사 요청이면 차이와 종료 코드를 보고하고 끝낸다.
 3. 동기화 요청이면 필요한 공통 원천 또는 `.agent-source/adapters/`의 대상 도구 어댑터를 수정한다. 생성 파일은 직접 편집하지 않는다.
 4. `node scripts/sync-instructions.mjs --write` 후 `node scripts/sync-instructions.mjs --check`를 실행한다. 생성기를 바꿨다면 `node --test scripts/sync-instructions.test.mjs`도 실행한다.
