@@ -35,6 +35,8 @@ export default defineConfig({
 
 Oxlint의 `extends`는 상속하는 속성이 제한되어 있으므로, 객체를 직접 가져와 `categories`, `env`, `ignorePatterns`까지 적용합니다. Next.js 규칙과 FSD 플러그인은 React 프리셋에 포함하지 않습니다.
 
+`packages/ui/src/base/**`의 Iris 코어는 스타일·구조 컨벤션 적용 예외입니다. 현재 프리셋은 correctness 중심이고 style 카테고리는 활성화하지 않습니다. 향후 스타일 규칙을 추가할 때는 UI의 해당 경로 override에서 그 규칙만 끄며, 코어를 lint 전체에서 제외하지 않습니다. correctness·타입·동작 검증은 유지하고, 포맷 제외는 `packages/ui/oxfmt.config.mts`에서 관리합니다. AI 작업 정책의 원천은 `.agent-source/conventions/code-quality/source.md`입니다.
+
 ## Next.js
 
 소비 앱에 `@repo/lint-config: workspace:*`와 `oxlint`를 개발 의존성으로 추가하고, `oxlint.config.mts`를 만듭니다.

@@ -5,6 +5,7 @@ import { createHash } from "node:crypto";
 export const MANIFEST = ".agent-source/.manifest.json";
 export const REGISTRY = ".agent-source/registry.md";
 export const PROJECT = ".agent-source/project/source.md";
+export const CODE_QUALITY = ".agent-source/conventions/code-quality/source.md";
 export const SCRIPT = "scripts/sync-instructions.mjs";
 export const MARKER = "AUTO-GENERATED from ";
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -198,7 +199,9 @@ export function build(root) {
   source("scripts/instruction-model.mjs");
   const targets = validateTargets(JSON.parse(source(".agent-source/targets.json")));
   const runtimeStatus = targets.filter((target) => target.runtime?.status === "deferred").map((target) => `- ${target.name === "claude" ? "Claude Code" : "Codex"}: **${target.runtime.reason}**. 지침·스킬 생성과 정적 검사는 계속한다. 사용자가 재개를 요청할 때까지 해당 도구의 CLI 실행·모델 호출·인증 복구·결제 변경을 시도하지 않는다. \`.agent-source/targets.json\`의 \`runtime.status\`를 임의로 해제하지 않는다.`).join("\n") || "현재 보류된 도구는 없다. 실제 실행 가능 여부는 실행 시 확인한다.";
-  const project = facets(source(PROJECT), PROJECT_FACETS, PROJECT);
+  const codeQuality = source(CODE_QUALITY);
+  if (!codeQuality.replace(/<!--[\s\S]*?-->/g, "").trim()) throw new Error(`${CODE_QUALITY}: 코드 품질 정책이 비어 있습니다.`);
+  const project = { ...facets(source(PROJECT), PROJECT_FACETS, PROJECT), CODE_QUALITY: codeQuality };
   const skills = fs.readdirSync(disk.resolve(".agent-source/skills"), { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name, "en")).filter((entry) => {
     if (entry.isSymbolicLink()) throw new Error(`스킬 원천은 심볼릭 링크를 지원하지 않습니다: ${entry.name}`);
     return entry.isDirectory();
@@ -234,9 +237,10 @@ export function build(root) {
     coverage([projectTemplate, ...documents.map((doc) => doc.content), ...rules.map((rule) => rule.content)], { ...project, SKILLS: "", RUNTIME_STATUS: "" }, adapter);
     const values = { ...project, RUNTIME_STATUS: runtimeStatus, SKILLS: skills.map((skill) => `- \`${NATIVE[target.name].prefix}${skill.name}\` — ${skill.description}\n  파일: \`${target.skillRoot}/${skill.name}/SKILL.md\``).join("\n") || "등록된 프로젝트 스킬이 없다." };
     const used = (template) => Object.keys(project).filter((key) => template.includes(`{{${key}}}`));
+    const origin = (template) => used(template).length === 1 && used(template)[0] === "CODE_QUALITY" ? CODE_QUALITY : PROJECT;
     output(target.entrypoint, `${marker(PROJECT)}\n\n${render(projectTemplate, values, adapter)}`, PROJECT, target.name, used(projectTemplate));
-    for (const doc of documents) output(doc.path, `${marker(PROJECT)}\n\n${render(doc.content, values, doc.template)}`, PROJECT, target.name, used(doc.content));
-    for (const rule of rules) output(rule.path, `---\n${yaml({ paths: rule.paths })}\n---\n\n${marker(PROJECT)}\n\n${render(rule.content, values, rule.template)}`, PROJECT, target.name, used(rule.content));
+    for (const doc of documents) output(doc.path, `${marker(origin(doc.content))}\n\n${render(doc.content, values, doc.template)}`, origin(doc.content), target.name, used(doc.content));
+    for (const rule of rules) output(rule.path, `---\n${yaml({ paths: rule.paths })}\n---\n\n${marker(origin(rule.content))}\n\n${render(rule.content, values, rule.template)}`, origin(rule.content), target.name, used(rule.content));
     for (const skill of skills) {
       const templateFile = `${adapter}/skills/${skill.name}.md`;
       const template = source(templateFile);

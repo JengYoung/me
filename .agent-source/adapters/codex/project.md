@@ -8,6 +8,8 @@
 
 {{QUALITY}}
 
+코드 작성·수정·리뷰와 lint·포맷·타입 설정 작업 전에는 [코드 품질 정책](.codex/code-quality.md)을 읽고 적용한다.
+
 ## Codex에서 적용하기
 
 - 이 파일은 프로젝트의 `AGENTS.md`다. 하위 작업 범위에 지침이 있으면 함께 확인하고 적용 범위를 따른다. `AGENTS.override.md`가 있으면 같은 디렉터리의 `AGENTS.md`보다 먼저 선택된다.

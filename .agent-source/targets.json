@@ -9,6 +9,10 @@
         {
           "path": ".codex/instructions.md",
           "template": "instructions.md"
+        },
+        {
+          "path": ".codex/code-quality.md",
+          "template": "code-quality.md"
         }
       ]
     },
@@ -21,6 +25,17 @@
         "reason": "로그인 만료 = 잠정 보류"
       },
       "rules": [
+        {
+          "path": ".claude/rules/code-quality.md",
+          "template": "rules/code-quality.md",
+          "paths": [
+            "apps/**",
+            "packages/**",
+            "scripts/**",
+            "*.{js,jsx,ts,tsx,mjs,cjs,mts,cts,json,jsonc,yaml,yml}",
+            ".agent-source/conventions/code-quality/**"
+          ]
+        },
         {
           "path": ".claude/rules/instruction-maintenance.md",
           "template": "rules/instruction-maintenance.md",

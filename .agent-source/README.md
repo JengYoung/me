@@ -22,13 +22,14 @@ node scripts/check-instruction-runtime.mjs
 | 구분 | Codex | Claude Code |
 | --- | --- | --- |
 | 기본 지침 | 루트 `AGENTS.md` | 루트 `CLAUDE.md` |
-| 상세 지침 | `AGENTS.md`가 지침 작업에서 읽도록 지정한 `.codex/instructions.md` | 해당 경로 작업 시 로딩되는 `.claude/rules/instruction-maintenance.md` |
+| 지침 관리 | `AGENTS.md`가 지침 작업에서 읽도록 지정한 `.codex/instructions.md` | 해당 경로 작업 시 로딩되는 `.claude/rules/instruction-maintenance.md` |
+| 코드 품질 | `AGENTS.md`가 코드·품질 설정 작업에서 읽도록 지정한 `.codex/code-quality.md` | 코드·설정 경로에 적용되는 `.claude/rules/code-quality.md` |
 | 스킬 | `.agents/skills/<name>/SKILL.md` | `.claude/skills/<name>/SKILL.md` |
 | 추가 설정 | 스킬의 `agents/openai.yaml`에 표시명·기본 프롬프트·자동 선택 정책 | SKILL.md frontmatter에 인자 힌트·호출 정책 |
 | 명시적 호출 | `$sync-instructions check` 또는 `write`라는 사용자 요청 | `/sync-instructions check` 또는 `write`; 본문의 `$ARGUMENTS` 치환 |
 | 실행 권한 | 현재 샌드박스·승인 정책과 실행 도구의 권한 상승 절차 | 현재 세션의 도구 권한과 Bash 승인 절차 |
 
-`.codex/instructions.md`는 이름만으로 자동 로딩되는 파일이 아니다. 루트 지침에서 명시적으로 연결한다. `.codex/skills`와 `.agents/skills`에 같은 스킬을 복제하면 설치 버전에 따라 중복 발견되므로 한 곳에만 설치한다.
+`.codex/instructions.md`와 `.codex/code-quality.md`는 이름만으로 자동 로딩되는 파일이 아니다. 루트 지침에서 작업 범위를 구분하여 명시적으로 연결한다. `.codex/skills`와 `.agents/skills`에 같은 스킬을 복제하면 설치 버전에 따라 중복 발견되므로 한 곳에만 설치한다.
 
 기본 지침은 일상 작업에 필요한 짧은 공통 원칙을 담는다. 동기화 절차는 스킬, 충돌 복구는 호출 시 읽는 참조로 분리한다. Claude 경로별 규칙은 일반 제품 작업에 유지보수 절차를 상시 주입하지 않는다.
 
@@ -45,6 +46,7 @@ node scripts/check-instruction-runtime.mjs
 | 원천 경로 | 역할 |
 | --- | --- |
 | `project/source.md` | 도구 공통 목적·작업 원칙·품질·관리 계약 |
+| `conventions/code-quality/source.md` | Oxlint·Oxfmt·타입 검사의 책임, Iris 코어 예외, 실제 설정·명령·검증 범위 |
 | `skills/<name>/source.md` | 스킬 이름·설명과 도구 공통 행동 계약 |
 | `skills/<name>/references/*.md` | 필요한 작업에서만 읽는 공통 참고자료 |
 | `adapters/codex/` | Codex 기본·상세 지침과 스킬 절차 |
@@ -67,7 +69,7 @@ node scripts/check-instruction-runtime.mjs
 
 `turborepo`는 [업스트림 스킬](https://github.com/vercel/turborepo/blob/main/skills/turborepo/SKILL.md)의 동봉 문서 우선 원칙을 유지한다. 구체적인 Turborepo 설정법은 이 저장소에 복제하지 않고 실제 설치 버전의 문서에서 확인한다.
 
-프로젝트 공통 계약 변수는 `PURPOSE`, `WORKFLOW`, `QUALITY`, `MAINTENANCE`, `NON_GOALS`다. 각 도구의 기본·상세 문서와 경로별 규칙 전체에서 한 번씩 포함한다. `SKILLS`는 해당 도구의 스킬 목록이다. `RUNTIME_STATUS`는 `targets.json`에서 생성한 실행 보류 지침이며 프로젝트 지침 묶음과 각 스킬 어댑터에 한 번씩 포함한다.
+프로젝트 공통 계약 변수는 `PURPOSE`, `WORKFLOW`, `QUALITY`, `MAINTENANCE`, `NON_GOALS`다. `CODE_QUALITY`는 `conventions/code-quality/source.md`의 전체 정책이다. 각 계약은 각 도구의 기본·상세 문서와 경로별 규칙 전체에서 한 번씩 포함한다. `CODE_QUALITY`만 사용하는 상세 지침·규칙은 해당 정책 파일을 생성 원천으로 기록한다. `SKILLS`는 해당 도구의 스킬 목록이다. `RUNTIME_STATUS`는 `targets.json`에서 생성한 실행 보류 지침이며 프로젝트 지침 묶음과 각 스킬 어댑터에 한 번씩 포함한다.
 
 현재 메타데이터 지원 범위는 Codex의 `interface.display_name`, `short_description`, `default_prompt`, `policy.allow_implicit_invocation`과 Claude의 `argument-hint`, `disable-model-invocation`, `user-invocable`다. 이는 생성기의 지원 범위이며 도구 전체 규격을 뜻하지 않는다. 다른 필드나 도구가 필요하면 설치 버전의 공식 규격을 확인하고 생성기 검증을 함께 확장한다. 알 수 없는 필드를 조용히 버리지 않는다.
 

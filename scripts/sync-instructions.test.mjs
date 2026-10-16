@@ -16,7 +16,7 @@ const claudeSkill = ".claude/skills/sync-instructions/SKILL.md";
 function fixture(t) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "instruction-sync-"));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
-  for (const relative of [".agent-source/project", ".agent-source/skills", ".agent-source/adapters", ".agent-source/targets.json", "scripts/sync-instructions.mjs", "scripts/instruction-model.mjs", "scripts/check-instruction-runtime.mjs"]) {
+  for (const relative of [".agent-source/project", ".agent-source/conventions", ".agent-source/skills", ".agent-source/adapters", ".agent-source/targets.json", "scripts/sync-instructions.mjs", "scripts/instruction-model.mjs", "scripts/check-instruction-runtime.mjs"]) {
     fs.mkdirSync(path.dirname(path.join(root, relative)), { recursive: true });
     fs.cpSync(path.join(projectRoot, relative), path.join(root, relative), { recursive: true });
   }
@@ -59,6 +59,61 @@ test("check reports missing outputs and content drift without touching files", (
   assert.equal(result.ok, false);
   assert.ok(result.errors.some((error) => error.startsWith("CLAUDE.md:")));
   assert.deepEqual(snapshot(root), before);
+});
+
+test("code quality source reaches both native instructions with its own provenance", (t) => {
+  const root = fixture(t);
+  const source = ".agent-source/conventions/code-quality/source.md";
+  const codex = ".codex/code-quality.md";
+  const claude = ".claude/rules/code-quality.md";
+  assert.equal(sync(root, "write").ok, true);
+  for (const file of [codex, claude]) {
+    assert.ok(read(root, file).includes(read(root, source).trim()));
+    assert.equal(build(root).manifest.outputs[file].source, source);
+    assert.deepEqual(build(root).manifest.outputs[file].facets, ["CODE_QUALITY"]);
+  }
+  assert.ok(read(root, "AGENTS.md").includes(`](${codex})`));
+  assert.ok(read(root, claude).startsWith("---\npaths:\n"));
+  assert.notEqual(read(root, codex), read(root, claude));
+  write(root, source, read(root, source) + "\n공유 품질 계약 변경.\n");
+  const before = snapshot(root);
+  assert.equal(sync(root).ok, false);
+  assert.deepEqual(snapshot(root), before);
+  assert.equal(sync(root, "write").ok, true);
+  for (const file of [codex, claude]) assert.ok(read(root, file).includes("공유 품질 계약 변경."));
+  assert.equal(sync(root).ok, true);
+});
+
+test("missing or empty code quality source blocks generation without writes", (t) => {
+  const root = fixture(t);
+  const file = ".agent-source/conventions/code-quality/source.md";
+  fs.unlinkSync(path.join(root, file));
+  const missing = snapshot(root);
+  assert.throws(() => sync(root, "write"), /필수 원천/);
+  assert.deepEqual(snapshot(root), missing);
+  write(root, file, "<!-- 아직 작성하지 않은 정책 -->\n");
+  const empty = snapshot(root);
+  assert.throws(() => sync(root, "write"), /코드 품질 정책이 비어/);
+  assert.deepEqual(snapshot(root), empty);
+});
+
+test("code quality contract cannot be omitted or duplicated in either adapter", (t) => {
+  const root = fixture(t);
+  for (const file of [".agent-source/adapters/codex/code-quality.md", ".agent-source/adapters/claude/rules/code-quality.md"]) {
+    const original = read(root, file);
+    write(root, file, original.replace("{{CODE_QUALITY}}", ""));
+    assert.throws(() => build(root), /계약 변수 CODE_QUALITY/);
+    write(root, file, original + "\n{{CODE_QUALITY}}\n");
+    assert.throws(() => build(root), /계약 변수 CODE_QUALITY/);
+    write(root, file, original);
+  }
+});
+
+test("Codex code quality guidance must be reachable from AGENTS.md", (t) => {
+  const root = fixture(t);
+  const file = ".agent-source/adapters/codex/project.md";
+  write(root, file, read(root, file).replace("[코드 품질 정책](.codex/code-quality.md)", "코드 품질 정책"));
+  assert.throws(() => build(root), /상세 지침 .codex\/code-quality.md를 명시적으로 연결/);
 });
 
 test("source changes reach both tools and references are copied independently", (t) => {

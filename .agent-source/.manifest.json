@@ -1,29 +1,32 @@
 {
   "version": 2,
   "inputs": {
-    ".agent-source/adapters/claude/project.md": "bc753af73df5084848da289dbc9d5812e06439be382861b818b622e65b7c29fb",
-    ".agent-source/adapters/claude/rules/instruction-maintenance.md": "fd4dcc633d51a1a45dd927b1b9fe0bb865024ed1b3f4b2a82840505a38b49a39",
+    ".agent-source/adapters/claude/project.md": "9af53766afe44791a51fb972d2a48f590f39e69b6a978a7c7abc3e23b0cb50e9",
+    ".agent-source/adapters/claude/rules/code-quality.md": "293be9420285cf5e5739922e41b62c315087388adaf2e7e048cc244867f16b15",
+    ".agent-source/adapters/claude/rules/instruction-maintenance.md": "de110ec990c6802f0be31e49c70eeef19212a2a768d35e15c5ee98909d7ab936",
     ".agent-source/adapters/claude/skills/sync-instructions.json": "1755d960bbf5e23d5a621268b3b1c66b9ed1eb9efc421144aadd3dbf8001113f",
     ".agent-source/adapters/claude/skills/sync-instructions.md": "dd85c152ce0ff4d0ebe6c5277a1a22ba8faec9d3e95cd0212aa070f3f5d4a65e",
     ".agent-source/adapters/claude/skills/turborepo.json": "408d074a4e7a80872e75d72118b1d079b7ec72aeb97c2e3e7354b6d1497785c4",
     ".agent-source/adapters/claude/skills/turborepo.md": "5e9e821cc9ff4d595eb7a15b08343f639f4a00cab5695715bf6363e748dd22e1",
-    ".agent-source/adapters/codex/instructions.md": "3a59a578973a2b2e83f3aaab0af8758f973989a9feb9d08b527727e38dded92c",
-    ".agent-source/adapters/codex/project.md": "ae1b18c426a78486058043fee95359e96c179110c9a02c08d58b8fd2f9420cc1",
+    ".agent-source/adapters/codex/code-quality.md": "63269b8e519954e6c0dffd26f64c39f3da15ed1d4757b8f4be8c8453b9de4238",
+    ".agent-source/adapters/codex/instructions.md": "2104ceef8a996f4c97ac827ee6d3686d8b8793a202bac2a7faac57a402e5b657",
+    ".agent-source/adapters/codex/project.md": "879f8b86b7821b1b1a230bce35cbba910c6951b6f36228a2f2fee3a591037987",
     ".agent-source/adapters/codex/skills/sync-instructions.json": "14a76c14a6c29e0ee6a68ee46ec816c527ffbd43ea10be262895fb1a0cf514c1",
     ".agent-source/adapters/codex/skills/sync-instructions.md": "a2b67084d07db26222717215ed3397dc489ee2ec8bc309f9e2b1992866ab9f63",
     ".agent-source/adapters/codex/skills/turborepo.json": "a1104aa39540993a112e47356ffe2a647d0b3b89b789bfb2a5a6ce904f6f2334",
     ".agent-source/adapters/codex/skills/turborepo.md": "0726878c4c8a15397ce3bfaaf01123800b4019b9e4ddb34194cf6681a181ea5f",
-    ".agent-source/project/source.md": "66f9fcf76ca8a3d45199cd1a2683f4ec10b3a03d4c65ef27d9c76dc80c45f489",
+    ".agent-source/conventions/code-quality/source.md": "b94809c0fa51d7b063ea90414b30b74377042ee1c45fd4df4e161e0ffc957ec4",
+    ".agent-source/project/source.md": "bfa7185d1be8083796b09fa587eb1115a0523416973e6707b0d861590011c98f",
     ".agent-source/skills/sync-instructions/references/recovery.md": "33c639a794a17364d992fb5f04e28305ea7bcfa0d69ddfe0d20fb9cc4ff9ba0c",
     ".agent-source/skills/sync-instructions/source.md": "633cac0b0f2789135364a52e2dd41e7d5f99fe33e6f8eeac29f6ad03cf4f0cbe",
     ".agent-source/skills/turborepo/source.md": "bf18682c68ec4f729d2f93aaf9ddd7dd10a476de650387e0b7a32ee00d15e23e",
-    ".agent-source/targets.json": "70ef5e0f1cde676a1fecffa54c0659a4d6c73a43ef54bb6676e25db8dd1331c9",
-    "scripts/instruction-model.mjs": "0de7a4ba6be8e4c18e729e16b47b7c1f70fd1b52283946080a9dfe04e0fce64d",
+    ".agent-source/targets.json": "cfe79b15cf2ec63303cb7a07cdb967c24591bf3d84cd13ac08277f4d68bcd816",
+    "scripts/instruction-model.mjs": "cb9dfe40a6c49fb4b83bb9c0be7a8bdc582b983c7fe7e61293455eca3881d78f",
     "scripts/sync-instructions.mjs": "205cb5b1cc5c4c1c10cad6d178cb5f98db4a1b16118d29aaf636a42342365058"
   },
   "outputs": {
     ".agent-source/registry.md": {
-      "sha256": "d3238e7446807f294a488b2b2e15db1156aad9fd220a18035665c131b26f29a8",
+      "sha256": "ca3a79f87ad7ee66a1f6569dc7acfd5099a25abbfe48f75e8e000ee2a3a75d22",
       "source": ".agent-source/project/source.md",
       "target": "registry",
       "facets": []
@@ -78,8 +81,16 @@
         "NON_GOALS"
       ]
     },
+    ".claude/rules/code-quality.md": {
+      "sha256": "6891924225dae5ef88aff1c98584f68210c489c5b6e7c3949af8e2da194c32be",
+      "source": ".agent-source/conventions/code-quality/source.md",
+      "target": "claude",
+      "facets": [
+        "CODE_QUALITY"
+      ]
+    },
     ".claude/rules/instruction-maintenance.md": {
-      "sha256": "5d879222fa563eb3384e4fa1591a55745530870b57c81b048da24b38902e3bbb",
+      "sha256": "13a8af203bdf130a1d5eaf972c0b7f217753d659cd90412674feecf6dd8e752d",
       "source": ".agent-source/project/source.md",
       "target": "claude",
       "facets": [
@@ -124,8 +135,16 @@
         "NON_GOALS"
       ]
     },
+    ".codex/code-quality.md": {
+      "sha256": "ed39481a9e691fc9f6e3a3d72dddcb935689d37030f7c54371ac5a969c333cc8",
+      "source": ".agent-source/conventions/code-quality/source.md",
+      "target": "codex",
+      "facets": [
+        "CODE_QUALITY"
+      ]
+    },
     ".codex/instructions.md": {
-      "sha256": "c4ec87f8446e04cacc40cfa903077dab57f8d37b610509119fb3b4df65d9b511",
+      "sha256": "87533ac655e83922018e6e308c6b6dd792dc8e414962aaa382a3267e2ae65517",
       "source": ".agent-source/project/source.md",
       "target": "codex",
       "facets": [
@@ -133,7 +152,7 @@
       ]
     },
     "AGENTS.md": {
-      "sha256": "5882fd501bbc9f56e93a7c5d15e170e1bb75190f8da4015c2d4279c4196bb627",
+      "sha256": "2fdde295a120648145efcf76aa8fc022e473ed5739e2ebda5c6b1103bfeb7730",
       "source": ".agent-source/project/source.md",
       "target": "codex",
       "facets": [
@@ -144,7 +163,7 @@
       ]
     },
     "CLAUDE.md": {
-      "sha256": "a4b49209ffa2ff16680fa6ad4460d8dbaed5bf5eb22f810541a333abb8d3c6c1",
+      "sha256": "64e5c14373322582cf8c8f0ee79571ae8d5891d624984fdcf50cba0df0279ff4",
       "source": ".agent-source/project/source.md",
       "target": "claude",
       "facets": [
