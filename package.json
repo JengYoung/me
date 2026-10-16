@@ -1,0 +1,21 @@
+{
+  "name": "me",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "turbo run format",
+    "format:check": "turbo run format:check",
+    "check-types": "turbo run check-types"
+  },
+  "devDependencies": {
+    "turbo": "^2.11.8",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": "24.x",
+    "pnpm": "12.x"
+  },
+  "packageManager": "pnpm@12.11.2"
+}

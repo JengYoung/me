@@ -1,0 +1,30 @@
+import { defineConfig } from 'oxfmt';
+
+export default defineConfig({
+  singleQuote: true,
+  jsxSingleQuote: false,
+  semi: true,
+  useTabs: false,
+  tabWidth: 2,
+  trailingComma: 'all',
+  printWidth: 120,
+  bracketSameLine: false,
+  sortImports: false,
+  sortTailwindcss: false,
+  ignorePatterns: [
+    '**/node_modules/**',
+    '**/dist/**',
+    '**/build/**',
+    '**/coverage/**',
+    '**/storybook-static/**',
+    '**/.turbo/**',
+    '**/.next/**',
+    '**/out/**',
+    '**/next-env.d.ts',
+    '**/pnpm-lock.yaml',
+    '**/package-lock.json',
+    '**/yarn.lock',
+    '**/bun.lock',
+    '**/bun.lockb',
+  ],
+});

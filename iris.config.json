@@ -1,0 +1,3039 @@
+{
+  "schemaVersion": 1,
+  "directory": "packages/ui/src/base",
+  "catalogVersion": "0.2.1",
+  "installed": [
+    {
+      "name": "accordion",
+      "packageName": "@iris/accordion",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "`iris add accordion --mode hook|component` installs the selected API and core/react/keyboard sources.",
+      "files": {
+        "accordion/accordion.connect.ts": "423a69be1e4d1e981635f898d95b999e03526fa1ecf12f39086401a6913f5998",
+        "accordion/accordion.machine.ts": "a5bd8a8c4411bfe08dd98edadbdfd84be60af4e6a3fa7adb3bf110a96c8263a3",
+        "accordion/accordion.tsx": "e1cc1ab04539d375bfb6f5d027c71c7e58c1fd0f8cf3adfe0b7cd8cdd98659a1",
+        "accordion/hook.ts": "ceb6b3e87a1f8bbacb393bfb6ac6e2ccc28dd64996984f4faafd18c99f137de9",
+        "accordion/index.ts": "680b35fa81e92f8ad077f2e45ad1a5f08a21b605e5ca60bb4b3af89ef25c3f87",
+        "accordion/use-accordion.ts": "4aa169e43129baaa3fbe6af70a9a25a26318ab838882c92b69213de49d2d644c"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/keyboard",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "alert",
+      "packageName": "@iris/alert",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "작업을 방해하지 않고 중요한 메시지를 전달하는 알림 영역입니다. 빈 영역을 먼저 렌더하고 메시지를 갱신하면 포커스를 옮기지 않고 변경을 알릴 수 있습니다.",
+      "files": {
+        "alert/alert.connect.ts": "15e36041d1049679d728f39a55e0c0d3d0a056d9acdcd03e5a466ffdb38706fd",
+        "alert/alert.tsx": "aa5167aba64be48bb9c068f07a0b6fbef52c7e7a6237beeecefbe801a703a0fd",
+        "alert/hook.ts": "be21f7a4e124227194c94d2c53f0a53a4c8ca7f4ed7f1020ffa6b0a546d06824",
+        "alert/index.ts": "41ed97fde3fbef259b69e61e2604be79a1489b6645376eefb91b241cdaab8272",
+        "alert/use-alert.ts": "992e0bb881df330ff07f306ce75a2ae2bb3a2c27c4b700bc7112c4ae8c47b757"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "alert-dialog",
+      "packageName": "@iris/alert-dialog",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "사용자의 응답이 필요한 짧고 중요한 메시지를 표시한다. Dialog의 순수 상태 머신·DOM binding과 공통 focus layer를 그대로 재사용한다. 외부 클릭 닫기를 끄고 role/message/safe initial focus와 응답 parts만 특화한다.",
+      "files": {
+        "alert-dialog/alert-dialog.connect.ts": "47567be3a43ca2fd52dad4f7272f072e6cdfe028a4330a7a58710d61f392ae86",
+        "alert-dialog/alert-dialog.tsx": "47dbbbfd50715c2f287380262d10d39429755ff19658600e70e331c176e2f62b",
+        "alert-dialog/hook.ts": "0f3d4d1e963efdde2aa22acb3024854486d4457542b8734b6a6b23359a20b09e",
+        "alert-dialog/index.ts": "390b72d7283bf4f07edd42c6f6259e92cc04bc07c78633d721cf1b7346dbc881",
+        "alert-dialog/use-alert-dialog.ts": "76e30789b2b5b5b8e845ae3812ba919795b748bdc086606c69d76013ca0fc4cd"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/dialog",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/focus",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "avatar",
+      "packageName": "@iris/avatar",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "이미지 source별 로딩·캐시·재시도와 fallback 지연, Root 한 곳의 접근성 이름을 제공합니다.",
+      "files": {
+        "avatar/avatar.connect.ts": "f5f750c33b3a692e9d58cd3524d6fb3b1acc54cb769227ecd04d4a43753ce943",
+        "avatar/avatar.dom.ts": "0dd1008000420192c7425ae8d66fda97d5b68449e1e802ac093c93fa10e4b9d5",
+        "avatar/avatar.machine.ts": "6a2fe9dff97a0855f306965bd5ffb2f641eb5fde5c6c01ba80a1ee2c6d62c4c7",
+        "avatar/avatar.tsx": "2356b6e52281d36c1cdd2fce2312de9aa137de6f2d352b86d63da47899f4f30d",
+        "avatar/hook.ts": "329b1427e82280261638666b12e7bd6a5cdfb4f2a6f81efcb4246a155f933611",
+        "avatar/index.ts": "5236b07e581294c42b9bac218c7135af12dabefedfd1552f19c1d9221c725fe4",
+        "avatar/use-avatar.ts": "ca929a7aef0187eade0963ceb384a1d81958adc02acc33c14e1ebc6fdbdde11c"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "breadcrumb",
+      "packageName": "@iris/breadcrumb",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "현재 페이지가 사이트 계층에서 어디에 있는지 보여 주는 경로입니다. 이름이 있는 nav 안에 순서 있는 링크 목록을 배치합니다.",
+      "files": {
+        "breadcrumb/breadcrumb.connect.ts": "5b6947823dc6a07d827fd0d9714c86d66b1a2a5a3e4df743ab4220acca8354a7",
+        "breadcrumb/breadcrumb.tsx": "7a4779a904540a42c4b21c8195d06e889037a302289b79a237fc91d94ba87ab0",
+        "breadcrumb/hook.ts": "92b4ce8334f2f6b7b5edf09332ca119349652d011c60f0b6cd2e234bc1f585dc",
+        "breadcrumb/index.ts": "578c292ac2380ec72314b375d0324693a4e5cf90650b798647d93c07d67cdb41",
+        "breadcrumb/use-breadcrumb.ts": "7ac95d3ce0dd826a31b4ad0cae78ea53e11086675877d4d13e8a9317da6744f3"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "button",
+      "packageName": "@iris/button",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "`iris add button --mode hook` installs just the hook dependency graph; component mode also installs Button.",
+      "files": {
+        "button/button.connect.ts": "eea5d2e0c364a64e14d5d9ed1d12806ed0e78e432a51f1b715248eeb26b73deb",
+        "button/button.machine.ts": "247445621d5792e667b1ceea8293f0dd32f3bbecfdba4c56ddacdc65412edeba",
+        "button/button.tsx": "aba3ce661766dcd5d5fdeba88d3decdc51a63f16cf8c1f11d7046982ec2ad434",
+        "button/hook.ts": "646fd16289a6a2e61d905930eb438311a980143a4131ebb245d16df3b0eafe8e",
+        "button/index.ts": "41d684b5eb6ccd5028bb9aaf837aae36f5cf6e619c2b9eab6642c7012ac27ee6",
+        "button/use-button.ts": "8ea7dc31b524e265318360ddae79c435e01ce16b218e1efdcf1b1748b1d8195f"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "carousel",
+      "packageName": "@iris/carousel",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "한 번에 하나의 슬라이드를 보여 주는 콘텐츠 영역입니다. 기본 이전·다음 컨트롤과 선택 버튼 그룹을 제공하며, 자동 재생은 명시적으로 켜는 옵션입니다.",
+      "files": {
+        "carousel/carousel.connect.ts": "394352bbb6d329b72fe339eac11c1af1458969f7b59af7f546ca9965e02f81a0",
+        "carousel/carousel.machine.ts": "b6669d6201e306db77eedbf8ba679651fd52cd1befab29c3a2c8f494afdf113c",
+        "carousel/carousel.tsx": "fd8a8e4849f9af8613d931ff4e44caf12ea638a26f419bae1bd8ae24a7054fca",
+        "carousel/hook.ts": "833128e90222d9afa9a56a75b4db9a59e3cc0369b18a5de9c79bfaf60a84681f",
+        "carousel/index.ts": "10ac1329d74070d8001e9298cae5ef94b7b41d70e9fc461a3119fbb2dde18b04",
+        "carousel/use-carousel.ts": "ab3857de713d163bc027a328ebf37d7b6dae4f9bffc829b8a66f58fd7c33f62f"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "cascade-select",
+      "packageName": "@iris/cascade-select",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "Hierarchical path selection using Iris Tree View semantics. React 19. Install with `iris add cascade-select --mode hook` or `--mode component`.",
+      "files": {
+        "cascade-select/cascade-select.connect.ts": "ccc683d46e4421175af5b3166500a24362fd8a3e94e79ba0583b22efb188540e",
+        "cascade-select/cascade-select.machine.ts": "87fa1447c94c49952d68cf7636981758bc1ff434e654a62ea63f2f2cf8972f39",
+        "cascade-select/cascade-select.tsx": "d986207a0ff9c4d20ff9b98bacd324218151d7ebc4d73fe6fe0c3d743f045135",
+        "cascade-select/hook.ts": "992898c4fb943fb38eeef2d29401a8defe07f15a1b48596170bb632bfff4da16",
+        "cascade-select/index.ts": "33de0174b5d1453e2ff42bdfd3c83d86ed343e94eaf10e4dacf4793c41140592",
+        "cascade-select/use-cascade-select.ts": "1e27885c60065889d69cdd60a3bf7388378f89a3d1772cfe84bf22f0cac7125b"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/field",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/tree-view",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "checkbox",
+      "packageName": "@iris/checkbox",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "Native `input[type=checkbox]`, an Iris FSM and optional unstyled parts. Install with `iris add checkbox --mode hook` or `iris add checkbox --mode component` (default).",
+      "files": {
+        "checkbox/checkbox.connect.ts": "c862754362e6546d65868f9b04b917f8c2b18882a65f29660e8f4cffc11a817a",
+        "checkbox/checkbox.machine.ts": "fb6829065b50d3d5f99eed8b4acb93d4f98c2fcd7c942411c3259a5dc1fcba58",
+        "checkbox/checkbox.tsx": "73300ae49b53610657cee1d419c8b7de7021b77372f206cf80efb02762c7adf3",
+        "checkbox/hook.ts": "a3a5cd4d1206a6b9d54675f81cd89eed2413ab424559198ac481120ce3280ac5",
+        "checkbox/index.ts": "fe94c17e1bb48ff1d8ed1aabdfbf7e8570fa6477def2020e574c56db3c340f69",
+        "checkbox/use-checkbox.ts": "6884da97c4bfcf300a19f266b28866a052a53fa618cad47c1a93b8311ff01d27"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "clipboard",
+      "packageName": "@iris/clipboard",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "비동기 텍스트 쓰기와 idle/pending/success/error 피드백, 최신 요청만 반영하는 수명 계약을 제공합니다.",
+      "files": {
+        "clipboard/clipboard.connect.ts": "b534f48ce97fb2af18b42bd1734c9201479229b54dda7458f3fdc4fab2d96c6f",
+        "clipboard/clipboard.dom.ts": "552f979e9c2a6a7b65a0b47009d29d08b2ae4cfc9bd5e0a4b37a36bdc56c24d1",
+        "clipboard/clipboard.machine.ts": "176f9ff45b63738d85f06c87ea2cf5453e4c7c5a82f248c4218cbf6105c11df3",
+        "clipboard/clipboard.tsx": "f0226182c935696a15112b5c8349282e9563131f63c2d295d0833ab35130be9f",
+        "clipboard/hook.ts": "2c86836f229eed18fa743a4fc805656db83a00b73d5ecab233247779a55e01a8",
+        "clipboard/index.ts": "6bf321638792fb91c183bedc5d988eda52d2033a1d9ee6142da4f54219e189de",
+        "clipboard/use-clipboard.ts": "0da7145875b9c5ab26ced353e7fe19021a8f9b79b40fa73b0ef4777c6603c424"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "color-picker",
+      "packageName": "@iris/color-picker",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "Headless sRGB color editor. React 19. `iris add color-picker --mode component` (or `hook`).",
+      "files": {
+        "color-picker/color-picker.connect.ts": "f8bb5842393f607b3a5433a4139028edf73c93f7fe8af46d85f1aa72a9a3a5c5",
+        "color-picker/color-picker.machine.ts": "5eaebd1612d79188bd360415258aa66439d6bbd45f11724ed8b9a05601d136c4",
+        "color-picker/color-picker.tsx": "89a9159cb388ce9021130a8ff65f9d49032b49d5d969308c7de91e4e78c72851",
+        "color-picker/color-value.ts": "be4967aa6f733f79a9e26e452444c5e3164e53ddd2de2f5c5ba551e6dae51509",
+        "color-picker/hook.ts": "8de72d100b2aa33eb9effe4a2747e47b49476873ebb9fe3438e28f439cbcd038",
+        "color-picker/index.ts": "a644e55889897f501a7bfd74862b77b15d5258d14d4d121b1d3f4150e0fe0e76",
+        "color-picker/use-color-picker.ts": "d935365e727752eb2c0b787b64fb2c5e54ec89af819f100f9114810d1700c0b8"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/field",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "combobox",
+      "packageName": "@iris/combobox",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "[#23](https://github.com/no-k/iris/issues/23)의 Combobox Hook과 headless parts입니다. React 19가 필요합니다.",
+      "files": {
+        "combobox/combobox.connect.ts": "55772d73e5eef9ad61e7dfffd60bc5d35f2266aa08b3ced5deec2ce62405d76a",
+        "combobox/combobox.machine.ts": "de0feac0befc647df9856584bd1f02eb4e3ca81feeb846f29242aa270e560477",
+        "combobox/combobox.tsx": "0dbf71dfe4080c6d39bd5cfd09af85b8024b91251548bbf40ebf55ea4ca1b723",
+        "combobox/hook.ts": "119f7eb156dfde74239a007cccc0048055e6fc52aa577074de3862365e3fa655",
+        "combobox/index.ts": "06ed42baf88bce649568e6629614c88debba769fb23e1f470d197ead0ca33240",
+        "combobox/use-combobox.ts": "93a8b1559a21d5ae3d5b0345af5d7a81758136e2ca19d1c8314619771c0729a5"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/listbox",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "command",
+      "packageName": "@iris/command",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "`useCommand`와 `Command` parts는 검색·정렬, Listbox의 활성 항목 탐색·실행과 선택적 전역 단축키를 제공한다. React 19. `iris add command --mode hook|component`로 설치한다. 팝업은 별도 Dialog와 조합한다.",
+      "files": {
+        "command/command.connect.ts": "038149e94a4778c257e21752952743e1399187baec06630f266d106c71a808f6",
+        "command/command.machine.ts": "58714214f7a3b9952a700f4bba4c9cd2cbfe71f30bd4cc50076e8059d5b3d6df",
+        "command/command.tsx": "b543071fe85f83d53615ebdca987837017bf41006b37dec642795c9a03b0ad66",
+        "command/hook.ts": "a19520f05c85867287451b6454bb3943ceb311a7af75313b09122e10d0429d3f",
+        "command/index.ts": "fd9512fb80954a786daa8c3ed08463449b5a669e1adc9e2b694f24838f04ce62",
+        "command/use-command.ts": "216414fd0801dd95548fe7537da39ef9eef9310447c0b0d83fb76f16d9070e9e"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/field",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/listbox",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/text-field",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "core",
+      "packageName": "@iris/core",
+      "version": "0.2.0",
+      "kind": "core",
+      "description": "React·DOM·외부 FSM 패키지에 의존하지 않는 Iris의 FSM 실행 엔진입니다. 각 actor가 상태·context·props·이벤트 큐·구독·effect와 타이머 수명을 소유합니다.",
+      "files": {
+        "_shared/core/actor.ts": "4bf410d541e2c8afb95415d4c23d3a2a9c9117ebca16d17bd767dd0b021a3d23",
+        "_shared/core/collection.ts": "67a9317c3206209d4663d35137b46f6275ac14b0d7e8f036f92d4b5765ef72f4",
+        "_shared/core/errors.ts": "79443d30e09ec08b27f4116748384451f3dbc969d5a8909d0a056e76eacffcb4",
+        "_shared/core/index.ts": "603d22c63ba49534781b2b25355263b36633ded38538263e147120e2becd42e2",
+        "_shared/core/machine.ts": "717d7df25c753c52551ef0494a49dcc8081b89a82cfa38fa970ae74784463e05",
+        "_shared/core/number-range.ts": "fd392cfcf284bd5a6c8c0cace2c53233d7b55d6174e2da6a8ab8f834b8c966ea",
+        "_shared/core/tree.ts": "abd88de2955fcacb05a14e339b9aa32d6af4173a6206eab88952955474d48c4f",
+        "_shared/core/types.ts": "1c4f5cf76e479d1b131acbe7e1d9c58e7f40ad557ea0d5130469f8d785b3b22e"
+      },
+      "requires": [],
+      "mode": "component"
+    },
+    {
+      "name": "data-table",
+      "packageName": "@iris/data-table",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "`useDataTable`, `DataTable` and `createDataTableAdapter` connect an engine store to native Table or interactive Grid. The default dependency-free engine follows a TanStack-inspired core/filter/sort/page pipeline. It is not a wrapper for a TanStack package. State slices can be controlled independently. Server mode consumes preprocessed data and preserves off-page selections by stable ID.",
+      "files": {
+        "data-table/client-adapter.ts": "611d3c5f3bfde6b4db2b97cb0c985f63474d2dcfbe979b53d5f905bccdff0a12",
+        "data-table/data-table.connect.ts": "de2cb24726bd69d1085d32a36dad9c126d5ca36ae99ba48bb9aa530224b9fe65",
+        "data-table/data-table.tsx": "721badd9ba9289397ab013a06827d461ec1da8d9a445eb4fa2e68eda73cb30e2",
+        "data-table/data-table.types.ts": "3ddba8b7f8516cdc672a7d64cb7ccfd8ea0ba99308ebc327b69a938f764d24c1",
+        "data-table/hook.ts": "f7d25f8ed76f48e6176295e624edf89bcc6740f4e60b59b6550cfad34b370687",
+        "data-table/index.ts": "1fe382adadcfae510a59c224aef03641dc694b9d559374deca891bbbbde7ad2e",
+        "data-table/use-data-table.ts": "bcffe27a19a2be8fa0cca8efe49ca95413c31e4afed2bd9fce165c9d98a3f612"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/grid",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/pagination",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/table",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "date-input",
+      "packageName": "@iris/date-input",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "Gregorian civil date/time segments with one shared hook and headless parts. React 19. Install with `iris add date-input --mode component` or `--mode hook`.",
+      "files": {
+        "date-input/date-input.connect.ts": "11dc63db148e33a442abfce526ae5f3c9bd1a9a12bc44a569346d6c94aeb6167",
+        "date-input/date-input.machine.ts": "aa0d5c51b5320c13d41313d2e6ee54f6725f3c5750b8b4a3fc1c21af3670fdd5",
+        "date-input/date-input.tsx": "2e424e440b331256f5a6e00c9a42dfa1f4781672fc13f7d6170c34b9f3ff2e2e",
+        "date-input/date-value.ts": "534120d5a303719f2cc8f4825e9249963c90f904b2e50a08f87f9796fa72a28d",
+        "date-input/hook.ts": "346dfb290a20a843a2f553763151b9a05ff19c13ed8b0b2aea2e6dfbd32cdb95",
+        "date-input/index.ts": "785db61dc45d68f18098481e51f8980a8e36c823ecffd3c91a2cf0ddd20263b8",
+        "date-input/use-date-input.ts": "06a58e4fbfb5599c7c32fbeaa4464ffd2d7451f98674370ab36631a40c06a941"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/field",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "dialog",
+      "packageName": "@iris/dialog",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "APG Modal Dialog의 `useDialog`와 얇은 headless parts다. `@iris/core`의 순수 `dialogMachine`이 상태를, `@iris/focus`가 브라우저 포커스·모달 레이어를 소유한다.",
+      "files": {
+        "dialog/dialog.connect.ts": "05d35392afb899d5b8af33b08fc4f87a11478968bd2e050f25f639b206a4c229",
+        "dialog/dialog.machine.ts": "6155c07fa725d31ae4459f23fa731b827533e7199654450e9e12d145b9670fa0",
+        "dialog/dialog.tsx": "06caf594a447c293a3dd23a9bd604042317ae5c4ff979730aad69ec576ecb374",
+        "dialog/hook.ts": "9eccabf8362ed272b25650a74af62aa35dd37626f79f5dea3e1c53e695fd279e",
+        "dialog/index.ts": "8381ca1df20ee459b74807f32afc5618638454e0b0c59bb33c91551fdfd4213f",
+        "dialog/use-dialog.ts": "105b4b6d039c0d08f83f7c7f0a00075795d2dd1e81e52eb970e0194297f26ba5"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/focus",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        },
+        {
+          "packageName": "react-dom",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "direction",
+      "packageName": "@iris/direction",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "`useDirection`과 `DirectionProvider`는 위젯의 LTR/RTL 문맥을 공유한다. DOM·스타일을 자동 판독하지 않으며 명시적 `dir` → 가장 가까운 Provider → `ltr` 순서로 결정한다. `Direction`은 `'ltr' | 'rtl'`이다.",
+      "files": {
+        "direction/direction.tsx": "9e5d5b123d73e1c42bd042adf614ec8c55ac28c297d8613dbd5e602abd40f68c",
+        "direction/hook.ts": "671ae766dfe8483f0dc499be3734bdfc7163449c2cdee12ee42900341d826dc7",
+        "direction/index.ts": "4e4125b3b7457f665ff8987c7c46fa4d053ec57a20590238f42ee12420e346be"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "disclosure",
+      "packageName": "@iris/disclosure",
+      "version": "0.1.1",
+      "kind": "ui",
+      "description": "열림/닫힘 상태, trigger와 content의 ID·ARIA 연결을 제공하는 스타일 없는 Disclosure입니다. `useDisclosure`를 단독으로 사용하거나 `Disclosure.Root/Trigger/Content`로 조합합니다.",
+      "files": {
+        "disclosure/disclosure.connect.ts": "b8ef3432d9add63a9ca20fa4328ca18b0e11abfc526cf731098f350285e1cc14",
+        "disclosure/disclosure.tsx": "3ffe6e0108807fb80ced1ac9e194fe2096c8d13b48b1412245496a3a6c8f5302",
+        "disclosure/hook.ts": "b430aa79a6775fd8b1a455894b7e9fcbe2dd4fbfc52e3d5d6be57cb0a8223ecb",
+        "disclosure/index.ts": "4c4eb12c3f8389d347b45c88c8cb84f343629476fff35e3cb8273868d2c0f726",
+        "disclosure/use-disclosure.ts": "59f85511e01fa3723734e1793740ff633c2f49ce5aa5f0a001a1dc8563750e8f"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "drawer",
+      "packageName": "@iris/drawer",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "`useDrawer` / `Drawer`은 Dialog의 모달 계약과 handle 전용 드래그·스냅 FSM을 조합합니다. `snapPoints`는 콘텐츠 전체 크기의 비율 `(0, 1]`이며 기본은 `[1]`입니다. 콘텐츠 위치·크기·overflow는 소비자 CSS로 제공합니다. `side=\"start|end\"`는 Direction에 따라 해석됩니다. Handle은 slider이며 방향 키·Home·End로 snap을 변경합니다. content 자체에는 drag handler나 touch-action을 적용하지 않으므로 내부 스크롤을 보존합니다. 닫힘은 손을 놓은 실제 표시 비율과 `closeThreshold`로 판단합니다. 빠른 드래그의 속도는 열린 snap을 선택하는 데만 사용합니다. 상태 확정은 transitionend를 기다리지 않으며 reduced motion에서도 완료됩니다. 상세 가이드: `apps/playground/src/app/stories/Drawer.mdx` (`Iris/Drawer`).",
+      "files": {
+        "drawer/drawer.connect.ts": "b4fb10f9fa1fe8e45c5e2d52bae564c383f71eddf5401b3ea949368c55636964",
+        "drawer/drawer.dom.ts": "85b2851b00eee9c4ac74a21093408c2ea48e58f091929ec48e798949ac27d016",
+        "drawer/drawer.machine.ts": "17358ae37996825a91cba0672883276c6afdc01e3b5e796fe84070a2dad0f487",
+        "drawer/drawer.tsx": "b6c3e08d93e48065d3bc6f7d5a104e560a8cca82916b678c638cf6292d894d15",
+        "drawer/hook.ts": "39412498202f7552a6874d7befbac30327416ecf7a0833ab44c45aee1c4ed50f",
+        "drawer/index.ts": "9d4b6b666a988abab345096280f63dd08427d9f834bd04a1e35cb8178035a307",
+        "drawer/use-drawer.ts": "db4100cc3d4148f072883058f30479b74586b0cf848233f5f071ef9a7522d929"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/dialog",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/focus",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        },
+        {
+          "packageName": "react-dom",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "editable",
+      "packageName": "@iris/editable",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "확정된 텍스트를 표시하다가 명시적인 편집 동작으로 초안을 수정하고 저장·취소하는 컴포넌트입니다. 제목·설명처럼 화면 안의 값을 편집할 때 사용합니다.",
+      "files": {
+        "editable/editable.connect.ts": "5527d9b475a0cc92eaa332030546c9075127f4b57b07fe30f4eaf4f946928e97",
+        "editable/editable.machine.ts": "6f392ed56fb5ac211ac8f5ad0558561e13b654e1fd7fa1e1389bd3885eda6b31",
+        "editable/editable.tsx": "d5942b1a0ce5d485700c45e0585b9d89d7d1b5a0e2866ca501464ca13d912e16",
+        "editable/hook.ts": "3d5116f5e2a34206c59f355324b732c1c9d38b77f514adcc93841f03014c3eb1",
+        "editable/index.ts": "1f7f4b1444d119e3d0235360e2be6f34c2fed8237a8386525fa30680eb24e3dd",
+        "editable/use-editable.ts": "7fb0df204f82516c435132d878b7ec855aa47e41f64f2c032b11f8f13de4733b"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/field",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/text-field",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "feed",
+      "packageName": "@iris/feed",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "동적으로 이어지는 article 목록의 읽기·포커스·로딩 상태를 연결합니다. Feed는 문서 구조이므로 각 글과 내부 네이티브 컨트롤은 원래 Tab 순서를 유지합니다.",
+      "files": {
+        "feed/feed.connect.ts": "66e0e51ed32a79f50e7267e216dde69527987c6374e77accd9f40c40e7010a47",
+        "feed/feed.machine.ts": "6e4e90a107225d5d4a467c397747edda48b74b3d6be80d4215aa1bb50a4d63b0",
+        "feed/feed.tsx": "54ece92661f247468da08a9e819ba9dd6fc254ded6cc2db7f9e7cbd311e2f67b",
+        "feed/hook.ts": "8db3d3c6118622ce20ed1dc938ab8f9f6df1b65f992fc1eec2aa60670c9303dc",
+        "feed/index.ts": "b393ddbf0a7e175e171480aa3e2f1908719e64937575043c5588eb5f472c50e9",
+        "feed/use-feed.ts": "edd69469cd4b5900ec09c33026b7f852197107c9198dee0cc128f758a90dcda4"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/keyboard",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "field",
+      "packageName": "@iris/field",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "`useField`와 `Field` parts는 제어 요소의 이름·설명·오류·상태를 연결한다. 값, 검증, dirty/touched는 소비자가 소유한다. label 클릭과 폼 동작은 네이티브 요소에 맡기며 별도 FSM이나 등록 effect를 만들지 않는다.",
+      "files": {
+        "field/field.connect.ts": "dc24611c09df8a0b39e509d0ef44a7f85097ccc38c3093c4a30296829e2a73d6",
+        "field/field.tsx": "476de08f1e00fc641c92e5e4f4fb6e86612eac5d20cd23711c72ab3dfb83f7c8",
+        "field/hook.ts": "847092cde459ecb6bf2d211fc5da7010b1ff66aca21402079af1d328a547346e",
+        "field/index.ts": "6d076355fd86bca816afb0782a12d3011e3903d59ed2059e489e1d5ea20bf574",
+        "field/use-field.ts": "26b40ac57dc8814bf7a272939b31bfdc4bcdd8a0cd624392714100334e63952e"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "file-upload",
+      "packageName": "@iris/file-upload",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "React 19의 `useFileUpload`와 `FileUpload` parts. 선택·드롭의 동일 검증, 파일 목록·폼과 전송 adapter 계약을 제공합니다.",
+      "files": {
+        "file-upload/file-upload.connect.ts": "634024b1a3ce1d77b4e1968e3d0e53e7c97687b400a59a4c22b66b4514b40e60",
+        "file-upload/file-upload.machine.ts": "3dcdceee120104953b04573ef5d23e9075c7536ef289bc8ffe15c5aacf9260a6",
+        "file-upload/file-upload.tsx": "58f6ea65dfac5f0d814090acf43f120d9b7031e87b76b15592353328e2788ed3",
+        "file-upload/hook.ts": "1af6af548c1d63ff5d6dbcd19b4724cd31b08958dada731d1bf76ed7db63574c",
+        "file-upload/index.ts": "4735ed9903ac8bc61fb696a5e64e233cb2f4cb6e66a22026dc5964e172f5ba55",
+        "file-upload/transport.ts": "84098bbfe09e4480b310a491e7efc3a8bfd1935912824d9bf0d6d7c43a15b791",
+        "file-upload/use-file-upload.ts": "bb954662259de7f4f637f05bed293a20c4a570e011ba4b1037114510d2d7b0e4"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/field",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "floating-panel",
+      "packageName": "@iris/floating-panel",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "React 19 headless non-modal panel. `useFloatingPanel`과 동일 hook을 공유하는 `FloatingPanel` parts를 제공한다. `open`, `mode`, `position`, `size`는 독립 controlled/uncontrolled 값이다. 위치·크기는 일반 모드의 복원값이며 `rect`는 현재 표시 기하다. fixed 좌표·8방향 resize·viewport 제한·키보드·다중 패널 활성화는 내부가 처리한다.",
+      "files": {
+        "floating-panel/floating-panel.connect.ts": "31dd11b9da8f0c9db7d5778a166a17b64a584dd7327c9e666c07f0c4b1926e9d",
+        "floating-panel/floating-panel.machine.ts": "7e273d5912c931c807e355a60cbb4b0ed4ccbb2dba7a9464134b7a7490ced1b7",
+        "floating-panel/floating-panel.tsx": "0182ccf262187b4e28ca9c9443ae6dfb9480a025a21dc860c90b4769f0db449a",
+        "floating-panel/geometry.ts": "b47d4e5b17eac7985a5cb4684aaca9fd76442158a840b7c77d7d44e26dc508c4",
+        "floating-panel/hook.ts": "c5a07e9591036165d1454dcfe318408a4a695b53329afaf19f8a8fdc4dd95836",
+        "floating-panel/index.ts": "2e60c0ebbef53a634325785a9d76d8179f3dda2bec28bbbbc99e864ff38cefc0",
+        "floating-panel/use-floating-panel.ts": "e12191ea14cfa05fe7c0846cad532feaac137083f03f8e619665ee8b00799df0"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/dialog",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/focus",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        },
+        {
+          "packageName": "react-dom",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "focus",
+      "packageName": "@iris/focus",
+      "version": "0.2.0",
+      "kind": "react",
+      "description": "Dialog·AlertDialog가 공유하는 모달 포커스와 레이어 수명주기다. 브라우저 DOM 부수 효과는 이 모듈이 소유하며 FSM/core는 DOM에 의존하지 않는다.",
+      "files": {
+        "_shared/focus/index.ts": "eda2e26309f3d1169c6e4df59b6de9504f768249725a0c14017781276723364e",
+        "_shared/focus/modal-layer.ts": "4a4006b05fcd7d9b27f2d499e2aca4a403ce6f373ce4476d5458f5578356555d",
+        "_shared/focus/modal-scope.tsx": "98f46bde94e483fb7809290fb099265e8fa103a66f6795be5c1dc8f2789cbb64",
+        "_shared/focus/tabbable.ts": "bbd55ba43d2c4dc5b1403d8952b1a86850554e8b030a004e6fd4408004d4566c",
+        "_shared/focus/use-modal-focus.ts": "fa3a47171d4b05e4b45ec5a04f488c2d6082abc07c55f297a0b473a13c8bb0c3"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "form",
+      "packageName": "@iris/form",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "React 19 headless form: `useForm`, `useFormField`, thin `Form` parts and `createNativeFormAdapter`. The adapter owns values/metadata/validation/submission. Field supplies labels, errors and native controls. Default values are flat literal keys; async results are invalidated on edits/reset/unmount. External engine adapters implement `FormAdapter` without copying engine state into UI state.",
+      "files": {
+        "form/form-field.connect.ts": "fcf59da3ac20407daa2333a482022c62bc15f1381c9634196a52762b534f6067",
+        "form/form.connect.ts": "271cbfa7d10f32eb26f1281abaa5649e22b668fdc37f3a080f7d5baf5c6c8af6",
+        "form/form.tsx": "dd2d84745359606a9343722e9a2a666801ddac036522065234731687b25f6ba3",
+        "form/form.types.ts": "cd503a10624a9b1b32b649b79a3c89391fc543cb187e0b2b673895304cd2f5cc",
+        "form/hook.ts": "81b369891d4cb3afddc5284a951455628b49ef833acf3d43d0156bef99354892",
+        "form/index.ts": "81ff74d280f66c734b4c8872f9427866a534df8347671bdef9055a2ab726d2a8",
+        "form/native-adapter.ts": "6af5ef048080f8e20d2de81ec4744fdcab486d2ee336872b13aa8d2862502eda",
+        "form/use-form-field.ts": "2a6994bcceafc73fd437c258ac935d8fdceb84f7604fae18ab3989801b5d7012",
+        "form/use-form.ts": "cf0fa7a928426f3a20687e5d1888645665f08564e43d9d784fee2419e23635ad"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/field",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "grid",
+      "packageName": "@iris/grid",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "행과 열 사이를 방향 키로 탐색하는 복합 위젯입니다. 단순한 읽기 전용 표에는 Table을 사용하고, 셀 이동·행 선택·셀 내부 입력이 필요한 경우 Grid를 사용하세요.",
+      "files": {
+        "grid/grid.connect.ts": "eefaa821d02bd642983603bd8869d6281c42632dfe632f09599c4c8cbcb5b27e",
+        "grid/grid.machine.ts": "b928dfaf7c856ccc353218f0d592a3fe88f5d2f92d7624af2f23287997bcd5b7",
+        "grid/grid.model.ts": "fc5ff330786900cdb30eeb264c04af9a03804c3e35e3fba82e4685ef015642dc",
+        "grid/grid.tsx": "8a283973ea6d40f48582442a230324939c5631ccb1727e48f1f9111cecb00c38",
+        "grid/hook.ts": "05cd3b228629c50b42755e410a623b5451d471c5f02d651201ecb1f1742ae002",
+        "grid/index.ts": "eebb09b65cc70b8cea09d23e387c8f14d35dd9d4590e641650d76a5afe0ea770",
+        "grid/use-grid.ts": "7a85848a5af0e0ac69b09c14a7844340e248aa2c6f7a0c67ff273b301f1e5507"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/keyboard",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "hover-card",
+      "packageName": "@iris/hover-card",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "`useHoverCard` / `HoverCard`은 링크의 보충 미리보기를 지연 표시합니다. Trigger는 실제 `a href`입니다. 포인터 이동·키보드 focus로 열고 Escape·링크 활성화·외부 상호작용으로 닫습니다. touch에서는 원래 링크로 이동합니다. 미리보기의 정보는 목적지에서도 제공하세요. 콘텐츠는 group이며 상호작용을 포함할 수 있고 자동 focus·focus trap은 없습니다. 상세 가이드: `apps/playground/src/app/stories/HoverCard.mdx` (`Iris/Hover Card`).",
+      "files": {
+        "hover-card/hook.ts": "d8da2dc527e436c63db1e5ac3eb81dc1a21cbfb15d91e6349fce8bfcdc3a0f60",
+        "hover-card/hover-card.connect.ts": "7c0cdcfee2e5d861d5e9659fb0791363dcf20d4c3edfd96f3b8a83bdfa1cd34e",
+        "hover-card/hover-card.machine.ts": "90426b2db050ce6241b6be7a5859132293cd95d81731924c4cfb8c199ab4165d",
+        "hover-card/hover-card.tsx": "5f57d45584d0db2d0cdeb0ef21f891c2ce4778916e6f74d70ed2cdd56edc9102",
+        "hover-card/index.ts": "87361b95bf4906729c2d57560a4ad7e4724139a451e1c008121fc964b6b86870",
+        "hover-card/use-hover-card.ts": "880eef975fbf1fae6e923ab621f47b88d815d9942646f6b92f755c731bc51ce2"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/dialog",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/focus",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/positioning",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        },
+        {
+          "packageName": "react-dom",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "image-cropper",
+      "packageName": "@iris/image-cropper",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "React 19의 `useImageCropper`와 `ImageCropper` parts. 원본 좌표 기하, 드래그·키보드·확대·회전·PNG adapter.",
+      "files": {
+        "image-cropper/crop-export.ts": "bc026f98d127c3e8fbb20f2e0f73879cdb7fee9128280dbf3759c1c92be0104a",
+        "image-cropper/crop-geometry.ts": "cc856f27b10d7db3a483cd3c6bb6a201eda0cdefd481f98a2dbd2a956f713bfc",
+        "image-cropper/hook.ts": "f4d2e8127692a81c7e16eb9152988e7f87fce2abd6d90a3be7d81fabb5351c36",
+        "image-cropper/image-cropper.connect.ts": "e88e63301f2a555e5a5a8eb604a623e800cd32681dd7f7073f8271c24e07b5d8",
+        "image-cropper/image-cropper.machine.ts": "5701f27f6e1140de92b9c0165a5115c096cb24391494a88dc3f14b4e5813ea87",
+        "image-cropper/image-cropper.tsx": "81063f91f9ec108d2784e14160eeadda57d7d0b99a8069b3068d1e809c319e1c",
+        "image-cropper/index.ts": "aa76e5a9cb88c55caac886805c92a13f77b8b45b21482811ea208c7c01f3e569",
+        "image-cropper/use-image-cropper.ts": "9774069c0f51e3b246659111fed3f06759a22dca15bbbb3077a8df29213efa35"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "keyboard",
+      "packageName": "@iris/keyboard",
+      "version": "0.2.0",
+      "kind": "react",
+      "description": "선택 상태와 분리된 React 19 roving tabindex 훅입니다. 항목별 ref를 등록하고 실제 DOM 순서로 키보드 포커스를 이동합니다. 순수 탐색 계산은 `@iris/core`, DOM과 수명 관리는 이 패키지가 소유합니다.",
+      "files": {
+        "_shared/keyboard/index.ts": "bdf859d7134cf052fc429c87abe302b945be56f84348df2613748ae947408153",
+        "_shared/keyboard/roving.machine.ts": "1470af911abbf101b098a51330d853a147602a8f10932ce02cf37e22396f116d",
+        "_shared/keyboard/use-roving-focus.ts": "fc4e11e9c13bae82550588a3ff446c40fdb815c1165cbf3aa2a8d9cef9e550ef"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "landmarks",
+      "packageName": "@iris/landmarks",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "페이지의 주요 영역을 네이티브 HTML 요소로 표현합니다. 보조기술의 영역 탐색에 필요한 구조와 이름을 제공하며 별도 키보드 위젯을 만들지 않습니다.",
+      "files": {
+        "landmarks/hook.ts": "259ab3175d4300787538b0629a375f188bbf92c6293cb10f3f39d598994bc723",
+        "landmarks/index.ts": "147b6eff471e207ddbc3d19f445ea1c6c358e730ede707abd819a354373225bd",
+        "landmarks/landmarks.connect.ts": "3364e16d020a3f6567c16adcf3704f10559a2e574cc6490ab20dfb5670236762",
+        "landmarks/landmarks.tsx": "c8d708af9c122d88ba961772e5927eb03ce43cca300f9e18c515ba387f03cc02",
+        "landmarks/use-landmark.ts": "4b691ccf10096cba5cc819f5dffe923ebce1a1623665c8c291dc267dfd8c514a"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "link",
+      "packageName": "@iris/link",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "리소스나 페이지로 이동하는 네이티브 a 요소입니다. 브라우저의 탐색·새 탭 열기·링크 주소 복사를 보존합니다.",
+      "files": {
+        "link/hook.ts": "e7c9b7adc5fe410d0fe500e38d09361155fa5105f4141ccc124f0717d267c209",
+        "link/index.ts": "5e3ce855edcaf8c6262a5fb1c57b16437aac28e36247f45d83872c0a569affb2",
+        "link/link.connect.ts": "98a5aec72578b48694a887b114fe9df76918df6c232ece5e43a3539b79f062de",
+        "link/link.tsx": "ee74f96c049beed5c9afc211df45837b22f052f789fbb5fa3ab7adac090582bd",
+        "link/use-link.ts": "be29ad1f10887ce6d37b076bde073a1c28d63c3cb2b92ebf6e0ca946229cb37c"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "listbox",
+      "packageName": "@iris/listbox",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "[#28](https://github.com/no-k/iris/issues/28)의 Listbox Hook과 headless parts입니다. React 19가 필요합니다.",
+      "files": {
+        "listbox/hook.ts": "94e97f4e41c8c716e39f9e0df206718d089be1c70b6f764cb3e1de68ded041c5",
+        "listbox/index.ts": "f6fdc59a046fde7cba9240e3cbe42497b9d88a7538ff33edc0cc4c9ae88aef6e",
+        "listbox/listbox.connect.ts": "bc11a8e6f45074f2fbde8833ef8a1677a124f3221bd6ae18a3454cde095a5412",
+        "listbox/listbox.machine.ts": "a3f350e44898afbd23b2fa47daca5fee1861d9231a3cadc5462be36288744136",
+        "listbox/listbox.tsx": "2c4bbd82a15721fd8606b006a2d9f2d3b6e652277b213ee16f7a62b993554cb4",
+        "listbox/use-listbox.ts": "c82ce7190daa5a3642248a6a6524aa76342e37c82393fa5a84a7b53f89030c2b"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "marquee",
+      "packageName": "@iris/marquee",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "React 19 headless Marquee. `useMarquee`와 `Marquee.Root / Viewport / Track / Content / Copy / Toggle / Value`를 제공합니다. duration(ms)·from/to(px)와 playing을 소비자의 CSS animation에 연결합니다. 실제 animation은 패키지에서 삽입하지 않습니다. Copy에는 children을 전달하지 않습니다. 원본의 시각 DOM 복제본은 inert·aria-hidden이며 ID·폼 name을 제거합니다. gap과 실제 CSS 간격을 일치시키고 모션 감소·focus에서는 정적인 원본을 읽을 수 있게 합니다. 정지 버튼을 제공하세요.",
+      "files": {
+        "marquee/hook.ts": "3cc9f683f18e0eb3e74e5c78db3aef9e07c68a1ea257007aea8e862e002b492f",
+        "marquee/index.ts": "9504072e0f9692eaf76b3bdbc1934cba28036639b65b9ddda2324d2587d3e475",
+        "marquee/marquee.connect.ts": "3559dfcddbf2baa9a39f757d427cf20ab60c8039ee3674f26278d5cad7770ab6",
+        "marquee/marquee.dom.ts": "0644816badb719b9458712dc7fefd4114c925cb84a1129465a243f9447a9a1a3",
+        "marquee/marquee.machine.ts": "61076b66f130d6c0baef29900e4b55e01ad55b40a599cd0af46673f4293dacbc",
+        "marquee/marquee.tsx": "20fec2b92fa4675573e132322118c21cd51efb742521e2fac102250f1f8599c5",
+        "marquee/use-marquee.ts": "c2d50b1037f8fc9726d6c4d8ceb21f68fd16a263cec01ff9a84d96d2fe22960c"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "menu-button",
+      "packageName": "@iris/menu-button",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "[#30](https://github.com/no-k/iris/issues/30)의 Menu Button Hook과 headless parts입니다. React 19가 필요합니다.",
+      "files": {
+        "menu-button/hook.ts": "325638a575252ef3182e2ac484a070faecb9bab5715966c6e565465ba1749a40",
+        "menu-button/index.ts": "8eb91ab94f237d3f2a00bc701bb07bf528c96788b733cfdd1acf33a213b57878",
+        "menu-button/menu-button.connect.ts": "3487e82734b12f97ac98ff221438b0784a559ff8375377b7475ac2fece7fea5d",
+        "menu-button/menu-button.machine.ts": "7de9e49233a28d1860e5bc72028323d5ac5d9b37f8cb33b30988adc716a22bf8",
+        "menu-button/menu-button.tsx": "493388e054f3b0533c48662be935500088818a2c056c1ea5a0ba4bfe82daa7de",
+        "menu-button/use-menu-button.ts": "3ecee6e3bba6b2e77a4097e88b83ba464679c9fb813c5d1e90843e5070830290"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/button",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/menu-menubar",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "menu-menubar",
+      "packageName": "@iris/menu-menubar",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "[#29](https://github.com/no-k/iris/issues/29)의 Menu and Menubar Hook과 headless parts입니다. React 19가 필요합니다.",
+      "files": {
+        "menu-menubar/hook.ts": "801ff1d617be753c8a52aa5cd79fd80b31bf09d5050c1f88e617c7546eb53a0b",
+        "menu-menubar/index.ts": "9c904c4c79b7cd860100fcf12ba5e114fc08f5141829bc927f4c7b9c7c6b3fd1",
+        "menu-menubar/menu.connect.ts": "5af3274b6944e09ac19e141dc0ab65aff6abfba09828b271f04794cea9670c5c",
+        "menu-menubar/menu.machine.ts": "ae0e43e1b3087844a2902ba6533c067e397949873c37378af80204d616591a57",
+        "menu-menubar/menu.model.ts": "7080c64932db15b5933f7ff8c448764ecc0ebef3885421117ca6c9dbfc833cfb",
+        "menu-menubar/menu.tsx": "9efb3226ef75f987801b36f857dd457a3a26c223b45e72033e9ac71e7383e014",
+        "menu-menubar/use-menu.ts": "e33fbfe5dc3b3b8dfc8f76a66f3cb95677863442d6fdc15c3d4e35c1326ddb1d"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "message-scroller",
+      "packageName": "@iris/message-scroller",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "React 19 headless Message Scroller. `useMessageScroller`와 `MessageScroller.Root / Viewport / Content / Message / LatestButton / Announcer / Value`를 제공합니다. 고유 messageIds와 같은 순서로 Message를 렌더합니다. Viewport에 이름·유한 높이·overflow:auto·overflow-anchor:none을 적용합니다. 추적 중에만 스트리밍을 따라가며 이탈 중에는 기준 메시지 위치를 보존합니다. 완료 메시지 알림은 독립 Announcer에 앱이 추가합니다.",
+      "files": {
+        "message-scroller/hook.ts": "93aff126bdac2d9d437c83f0d3ce3ff9dc8b0344b5809a5db783b1f56b402ec1",
+        "message-scroller/index.ts": "aa215c2b8a9a4ed434b148eaabf9d0e6624c78b5bb5dd69e192ad5ae9c56ecb9",
+        "message-scroller/message-scroller.connect.ts": "cff5d199790b75ebbda247379c634085edd8e7c61e68a2434d564422867d7d50",
+        "message-scroller/message-scroller.dom.ts": "d58048eb82d66d0286a0db1a37fbd031f50724f61771d2dd38da2373d4986254",
+        "message-scroller/message-scroller.machine.ts": "1f1c080a0c6303c7d5c660b609a4ff7197df53e4c43b60d71fd3fe2c6a687574",
+        "message-scroller/message-scroller.tsx": "22357103bd07c95a06c4f689b4ebcc64fa6c834f3343525cfd4641cb3ef28762",
+        "message-scroller/use-message-scroller.ts": "f4c8418c513860985a59f9d2c737eb4fd53ed26890d29a5c6cde82a63895bb2b"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "meter",
+      "packageName": "@iris/meter",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "최소·최대 범위가 정해진 현재 수치를 네이티브 meter로 표현합니다. 배터리 잔량이나 저장 공간 사용량에 사용합니다.",
+      "files": {
+        "meter/hook.ts": "2bad508632e567bc9ebb2404fc3ad898fb89d6a2b6cd0d94d7ce9a92bae0138e",
+        "meter/index.ts": "6d12c072340181744b9a3ed33856e3477b3d65111a954c470a5ec5459595cd62",
+        "meter/meter.connect.ts": "e431670817953bc001250a1aa100a20ec913e370f69b44814e849d67aae81166",
+        "meter/meter.tsx": "2b59b34cd168ed6f4283b8ad29214d493ee3742f6969978e2e755aaa7e60f841",
+        "meter/use-meter.ts": "6efd677eb54b9e65de7b53f799fdb94796844d7a471e8372780e601cb5d8839d"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "native-select",
+      "packageName": "@iris/native-select",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "브라우저가 제공하는 select·option·optgroup 구조에 Field와 폼 연결을 제공하는 컴포넌트입니다. 네이티브 키보드와 모바일 선택 화면을 유지하면서 단일·복수 선택을 사용할 때 적합합니다.",
+      "files": {
+        "native-select/hook.ts": "4978f88a5b9ae00ac83958bffe7e61764105981a3bdc243312b4c20d3d4deafa",
+        "native-select/index.ts": "3e7c93981948de36b4d64e07bde439194db89e76a154c3aef177d2508fc8fc33",
+        "native-select/native-select.connect.ts": "ac04a91be8c61879c3a8794e18c1d5801fbb7f73fa307a377990dc0bd496ed36",
+        "native-select/native-select.tsx": "6b212c2f324ee02a168857d8f177e56ff0f8ded9493a40ca087c42bdda9770c0",
+        "native-select/use-native-select.ts": "361cbafd9929426bd6022fa1dd66fb9da154a4f44d03cb2b1249a4fbb18f5069"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/field",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "otp-input",
+      "packageName": "@iris/otp-input",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "`useOtpInput`과 `OtpInput.Root/Input/Slot/Label/Description/Error`는 하나의 네이티브 입력과 장식 슬롯을 연결한다. 슬롯을 클릭·탭하면 실제 input의 해당 문자를 선택하여 교체한다. 빈 슬롯은 다음 입력 위치로 연결된다. React 19. `iris add otp-input --mode hook|component`로 설치한다.",
+      "files": {
+        "otp-input/hook.ts": "77078941479bd6407bfc97b9c9484226b702f95b461c7fab61a704e5c856db58",
+        "otp-input/index.ts": "141de09801c484e4f5a9725f12ea94c3110230c5d397a9750586ffe44718b71a",
+        "otp-input/otp-input.connect.ts": "297a8f5c11f2c82c145db1a14126efa5e40276cedf34576b1eaad676acf0e592",
+        "otp-input/otp-input.machine.ts": "b07da294f3ff34a787b81b83b688331b9b78d737d3d4071d3c085915eae6450b",
+        "otp-input/otp-input.tsx": "43e83bdac392dcb6c0eb0c0050a3698e9b73c5f5c5db1682d15ce99925034ce1",
+        "otp-input/use-otp-input.ts": "49fb27f67f6db31803eb1f167bab060bc8047793a22f88831f22bf52e8368816"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/field",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "pagination",
+      "packageName": "@iris/pagination",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "React 19 headless hook와 parts를 제공하는 독립 소스 모듈입니다.",
+      "files": {
+        "pagination/hook.ts": "de97c61355b63a34cdc56fa8310db168d5720b8920b926361c08290bc07f92a8",
+        "pagination/index.ts": "dac10bbf4920f58c6d971ed78287c3e488b98ed2b2794acb2f6c41507236d7fb",
+        "pagination/pagination.connect.ts": "f6df7cfa68ce6d43f31b1cd831c644bbe4b8510001bbee412d48cec485edad34",
+        "pagination/pagination.machine.ts": "a5e69ed6ad0812dc77440815a06dd2cb8840f11ec7e8eb20e346cb8919ba3e49",
+        "pagination/pagination.tsx": "efeac792b6d6302102ebbff2b48ee18d058c03c1ec0844dbd8aa8800ca418ebf",
+        "pagination/use-pagination.ts": "c178ae6a7e8504f19d7937999be8043135dbffc45586d4cee8895f923a41daaa"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "password-input",
+      "packageName": "@iris/password-input",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "비밀번호 문자열 입력과 표시·가림 상태를 분리하는 컴포넌트입니다. Text Field의 네이티브 입력 위에 토글 버튼과 접근성 연결을 제공합니다.",
+      "files": {
+        "password-input/hook.ts": "76a87c07ceed5db46d430968ae04f6655d07b9f014d56d53ae3ea7a67ac8a996",
+        "password-input/index.ts": "913f09b5a372372ef4400b61f30d1283f0b27937ab3ab7d4ba59e6ca7ba33be9",
+        "password-input/password-input.connect.ts": "daaf8378bee5775b610b897a585ad51b2f65283cead2e94ac7b23517f5cbf03a",
+        "password-input/password-input.tsx": "b326886d0586eed9b81b57e54179e90e68be5f2358b184dd098d12ebd03921a7",
+        "password-input/use-password-input.ts": "cdcecfc909cd7559146e1727071d86d2e21c51da8345c1957bf0c9275d1eb483"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/text-field",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "popover",
+      "packageName": "@iris/popover",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "`usePopover` / `Popover`은 trigger에 연결된 dialog를 제공합니다. 기본은 non-modal, `modal`은 포커스 순환·배경 inert·스크롤 잠금을 적용합니다. 열림은 `open`/`onOpenChange` 또는 `defaultOpen`으로 소유하며 `Title` 또는 content의 `aria-label`이 필요합니다. 위치는 `placement`, `offset`, `collisionPadding`으로 지정합니다. Portal과 시각 스타일은 선택 사항입니다. Hook으로 중첩 portal을 만들 때 `ModalFocusProvider scope={api.scope}`로 하위 트리를 감싸세요. 상세 가이드: `apps/playground/src/app/stories/Popover.mdx` (`Iris/Popover`).",
+      "files": {
+        "popover/hook.ts": "e054bd42f4f51224ee3587861ac367200c2e19b07618317c96fdf3401a94bf3c",
+        "popover/index.ts": "2cd117c0eec75113c22260bdd92eb591cd94197e83a0e068a00403cfc6464290",
+        "popover/popover.connect.ts": "467dc2f10cd556d64be9a91d77ddf2dee3232f67f48fffd036ec3b2bd63bc70b",
+        "popover/popover.tsx": "cb24c7a7fc2e987d4e02731ddf8d89421671c274284f078b0ac2f33a6eb3bd75",
+        "popover/use-popover.ts": "e2e938b9dd6efa807d14549e2ecedaf2ce820c1f3da08150c6e1d06bd96f8343"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/dialog",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/focus",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/positioning",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        },
+        {
+          "packageName": "react-dom",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "positioning",
+      "packageName": "@iris/positioning",
+      "version": "0.2.0",
+      "kind": "react",
+      "description": "`computePosition`은 viewport 기준 fixed 좌표를 계산하고 flip·shift·RTL alignment를 적용합니다. `usePosition`은 열린 anchor/content의 resize, 스크롤, visual viewport와 DOM 변경을 관찰합니다. 반환한 `style`은 content에 연결합니다. portal host에는 transform/filter/contain으로 fixed containing block을 만들지 마세요. 임의 CSS transform 애니메이션의 매 프레임 추적은 하지 않습니다. 필요하면 `update()`를 호출하세요.",
+      "files": {
+        "_shared/positioning/index.ts": "32d3a5d855299d7c271f3ea02fb3cb13ca14633c2c423311c7614200b376f3f0",
+        "_shared/positioning/position.ts": "f898895aaff731f609f5eb8b8eb0b169c0ddbc2ead615ceb6d1526076543b847",
+        "_shared/positioning/use-position.ts": "3731418d9af392028f7a0f5f7c144f9de18af682db3e54bab6d49fe3037dd69c"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "presence",
+      "packageName": "@iris/presence",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "`usePresence`는 외부의 표시 요청과 실제 DOM 마운트를 분리한다. `Presence`는 같은 hook에 div를 연결하는 얇은 컴포넌트다. 스타일·숨김·포커스 정책은 사용하는 위젯이 제공한다.",
+      "files": {
+        "presence/hook.ts": "20f311337ab8dadbecbf15e41aeed3205a8e7a2e5d9f8ce67ba0036ecfa46bcc",
+        "presence/index.ts": "203900bb5f325a52320803e46063b3348c818753432b72ddb23c331e2666774c",
+        "presence/presence.connect.ts": "fc0ac1ad43140f0a05736bbcc06bd929e4fffe86ea1c77035dd4f24f15c54d21",
+        "presence/presence.dom.ts": "eb5e828d852d5ae04671a06b9e8cb5091f72a32d54e3f9416aceb74c495d7f90",
+        "presence/presence.machine.ts": "e612caa89700e2b19cb322c176bcc1a74042e7995a30eddacfaccf87418e1dcf",
+        "presence/presence.tsx": "b6a4481c3e938fc8984161e95458f44dadd5dbce1aec5fa4513f0808e9cf1e21",
+        "presence/use-presence.ts": "8a6a88aa2e02d9f2ab5b3c115057353beee270739fc5bc4b8c47858e6af45af2"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "progress",
+      "packageName": "@iris/progress",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "React 19 headless hook와 parts를 제공하는 독립 소스 모듈입니다.",
+      "files": {
+        "progress/hook.ts": "af0d581b98bfa18c0c680c8934e63db352b53fe39fb4aa13bf076045025237ff",
+        "progress/index.ts": "41cf0be1ea777fda95ccf1f262a0dff0e281d3e147bd367adea05a14bf2b06e5",
+        "progress/progress.connect.ts": "bff13a2b1dc5e6c03e5c19e826092d91ca93a6a35296abdfb6691fcd2d1318fa",
+        "progress/progress.tsx": "73004ee5d2554c86f97272aa2a2224ec83d8dee71b17caa2d5d17b7bdcc66ff6",
+        "progress/use-progress.ts": "9e16db83fd4498e5226c778b399fa754df9a1e9e1a397be023c7bca21ed852ae"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "qr-code",
+      "packageName": "@iris/qr-code",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "React 19의 `useQrCode`와 `QrCode` parts. 순수 QR encoder adapter, SVG module/path, SVG/PNG 내보내기·다운로드.",
+      "files": {
+        "qr-code/hook.ts": "3f3b8c1ee254d421583a32702e02ec4bf87c6d4cd3bb7a883ed0d05b55033d30",
+        "qr-code/index.ts": "fa212ffebc732e80719d0ec6153832619a6ea031f702b9ba8c728c2e24c7316d",
+        "qr-code/qr-code.connect.ts": "0fa0530c0aeaf49b8da6fd3dca5419a5f31fe286187877406bdf257d23d99563",
+        "qr-code/qr-code.machine.ts": "8d58e7b82d5a6457405845bd21e21b2ccf7d5adbacd3fc388d294558a6d89ca9",
+        "qr-code/qr-code.tsx": "db8cbe6270e19a6a5771a9f5e13857ed08b31b672b0663c211dff42859efb7f8",
+        "qr-code/qr-encoder.ts": "90f3d76aa84a397628de25f33bfeac4a93a54beaca5ccdc02bceb85514cbb788",
+        "qr-code/qr-export.ts": "f92f19febf2e3384eaa03568f7d4a9d99e29762d2af7d46f5e2bafdeb6c105e6",
+        "qr-code/use-qr-code.ts": "d0401a4776350ef284d7871b6822f87ce819b860d9d2d0ea0f0418343c4b9566",
+        "qr-code/vendor/qrcodegen.ts": "3b69787699ca7ae3ef1030dd435578666d131c347662216fc4b6f3ef26f9755d"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "radio-group",
+      "packageName": "@iris/radio-group",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "일반 Radio Group용 React 19 headless hook과 parts입니다. Item은 native `input type=\"radio\"`여서 label, form 제출, required·disabled를 브라우저 의미와 연결합니다. `inToolbar`로 toolbar 내부 변형도 지원합니다.",
+      "files": {
+        "radio-group/hook.ts": "fff77d81ba30ddc73d9b34d63b4f338aad7afc0c9ff88afbca49da56729f9685",
+        "radio-group/index.ts": "67e4156f84ef9440d07403c2c6ce2ef2cd5b88bf17dce56b20debaa0b8d71362",
+        "radio-group/radio-group.connect.ts": "4b18177f7591b2ddd2126aa421dcabdb6507a5fa6d430876e25b4231f4a9b7b1",
+        "radio-group/radio-group.machine.ts": "4787b02010610951c5952fe2d86feb871497b8a53d71aae9e3873f5acf619d18",
+        "radio-group/radio-group.tsx": "be1cf908f92527c58d2b0003bf2d7706f39e28d56dc364b90054870258d62a25",
+        "radio-group/use-radio-group.ts": "636df9ac032571194a630b3b7b4c63b65a70c737a5b13a62ee72e1633d5d3cf8"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/keyboard",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "range-slider",
+      "packageName": "@iris/range-slider",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "2개 이상 thumb의 headless RangeSlider. 값 배열의 index가 영구적인 thumb 정체성이며 값으로 정렬하지 않는다. 기본 교차 금지, allowCross로 독립 이동, minStepsBetweenThumbs로 최소 간격을 선택한다.",
+      "files": {
+        "range-slider/hook.ts": "a7217094fd634396e7669ecae0ba1b2d983c661637b68b8f1efa15c6f384e66e",
+        "range-slider/index.ts": "4142fba49adf715055f5caf42e6a09532f85c2f7adcedea12c1490f1ae76f6e4",
+        "range-slider/range-slider.connect.ts": "c1937aeaf7ef32e46c4576001c5fa8590b2c13c97be88983980f2b65d1db594b",
+        "range-slider/range-slider.machine.ts": "266799f826ec7b3579a8b0a0007e8e4baf2d09bbeb584530fe6ed50e35229e55",
+        "range-slider/range-slider.tsx": "e79ca18164076e16b88bc63603509b96183648ac922aeaf6b18c51e4ca575307",
+        "range-slider/use-range-slider.ts": "c43409bdabfe6c8124968a129b3bf85a2006ddf5095b48275f99b243281ef6c8"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "react",
+      "packageName": "@iris/react",
+      "version": "0.2.0",
+      "kind": "react",
+      "description": "Iris actor를 `useSyncExternalStore`로 구독하고 네이티브 HTML props·이벤트·ref에 연결하는 React 19 adapter입니다. 소스 생성 시 `_shared/react`와 필요한 `_shared/core`를 함께 복사합니다.",
+      "files": {
+        "_shared/react/boolean.machine.ts": "f5fd41a7dceabf82e1d4f739cca4b22a3990927dd405ea15305c9a73c14a5b50",
+        "_shared/react/direction.tsx": "4eb979041809276132ffa5aec8f8f973ab9eb1d3f6160265b4affe0f42231139",
+        "_shared/react/index.ts": "8134f425d9aa2958cca6aaf3e35860bacef9ca73b6f0a494639c498872a8d705",
+        "_shared/react/machine-hook.ts": "a3bba62a1b39c26b3b88ca91065843e7d2f46f0f3952bd153fa1ee301cd99320",
+        "_shared/react/props.ts": "1d75ed151080032f1355f736594f05f56bf7a21da27133d8f6fe8de071080e98",
+        "_shared/react/refs.ts": "53f68f31443a06ddcee8ae1933a455ff29ca15d24efde275bf7aa2e45d5ede7e",
+        "_shared/react/use-boolean-state.ts": "27544fa65d104593490f1125f4b1be016d51b8993cddb6c88745c90018587688",
+        "_shared/react/use-commit-effect.ts": "484cf2f694f11b6e1096f99b531e787c03bc3a534433eb899af2392ac08894aa",
+        "_shared/react/use-form-reset.ts": "4c08dd8e320e2641d208da69995cb89c8a319e6026ab38fab6097a21e7167d60",
+        "_shared/react/use-native-checkbox.ts": "c3cb980bce4f1c80c7d9202cd05fd8c5d9c8d75921b8d9f114ca6ad648555f70",
+        "_shared/react/use-pointer-drag.ts": "40834fb6790290f44ca6a41fcf83abe233e6cfe305b1e7444c34f9af71c1d357",
+        "_shared/react/use-stable-id.ts": "5852c9ce8fea7ce5f52e634ebfa086484d23348d5bd06d0d307ce078bb834e67"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "scroll-area",
+      "packageName": "@iris/scroll-area",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "React 19 headless Scroll Area. `useScrollArea`와 `ScrollArea.Root / Control / Viewport / Content / Scrollbar / Thumb / Value`는 동일 API를 공유합니다. Viewport에 이름·overflow:auto·유한한 크기, Track에 position:relative·touch-action:none, Thumb에 측정된 크기·물리 offset을 연결합니다. 위치는 네이티브 DOM이 소유하며 RTL position은 inline-start 기준입니다.",
+      "files": {
+        "scroll-area/hook.ts": "04e2d5bd6ca562ff949aaa515af9a366dda0d4a9c55212fbf9fb043719065077",
+        "scroll-area/index.ts": "2d70a4caeeafe8110edd1a8ade2e6f99285851616704efd3d15ab1ddcfe819cc",
+        "scroll-area/scroll-area.connect.ts": "853737b9b3124d069ad05ae303b12165bb6bad8b42bce0892e0dfbe21fc17a96",
+        "scroll-area/scroll-area.dom.ts": "71096c85677b138cbba8541c3f4a385a2cc0802b833e1054f9e5ed4728d094ef",
+        "scroll-area/scroll-area.geometry.ts": "8efed394883f788c3bca37d9c0b796989203d6ee02ffc6dfba8b75ad9e1b1146",
+        "scroll-area/scroll-area.machine.ts": "2bd8ceafea8889c83d8f4448f979b0ccd1dda96001bf10c48825ef9a6a5cdf51",
+        "scroll-area/scroll-area.tsx": "da2b63d07ba7420ba10d92aa64a4d18816561d4b7f892d9283c15e734fe64d8c",
+        "scroll-area/use-scroll-area.ts": "cbceea2a3454f1dada4d2ef72758753570b4f2ed272dc191deb023979e73df9c"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "sidebar",
+      "packageName": "@iris/sidebar",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "`useSidebar` / `Sidebar`은 Disclosure와 native nav를 조합한 페이지 내 탐색 영역입니다. `expanded` / `defaultExpanded` / `onExpandedChange`로 접힘 상태를 관리하며 기본값은 펼침입니다. 접힌 콘텐츠 안에 포커스가 있으면 Trigger로 돌아갑니다. 화면 모드·모바일 상태·미디어 어댑터는 제공하지 않습니다. 모바일 모달 탐색은 별도의 Drawer로 구성합니다. Sidebar는 Dialog·focus 패키지에 의존하지 않습니다. `shortcut`은 opt-in이며 기본 Ctrl/Meta+B입니다. 입력·IME·반복·이미 처리된 이벤트는 무시합니다. nav 이름과 `aria-current=\"page\"`, 너비·배치·색상은 소비자가 제공합니다. persistence는 controlled callbacks로 외부 저장소에 연결합니다. 상세 가이드: `apps/playground/src/app/stories/Sidebar.mdx` (`Iris/Sidebar`).",
+      "files": {
+        "sidebar/hook.ts": "d528e590b8c3a331ebc3de4df350d30342f07f33f003edc56efd3261a0505acc",
+        "sidebar/index.ts": "ce5fb2d9678f9a21403beb03e1b3f9c290742e4872115c809eba5ce0ba625973",
+        "sidebar/sidebar.connect.ts": "0eede1ba7f28adb5a3fc1a0388562c025953e71545d3cc041c73565fe08104e0",
+        "sidebar/sidebar.tsx": "6ddcfc8c4f25648dca9fd24caa425c5e69ce9bd2c71ef491b56b6ee1bf73b743",
+        "sidebar/use-sidebar.ts": "f6b19fcb1aca444b1eaa822fedf35c95ba0495636ddc7ef9dd60f4ce08d3915f"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/disclosure",
+          "range": "^0.1.1",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "signature-pad",
+      "packageName": "@iris/signature-pad",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "React 19의 `useSignaturePad`와 `SignaturePad` parts. 정규화 획, 포인터 캡처·취소와 SVG/PNG/JSON 내보내기.",
+      "files": {
+        "signature-pad/hook.ts": "0eb411802fdcc9078f574e1a5068f0ac6afe35299b45b8b0c7fd6a058d9d5265",
+        "signature-pad/index.ts": "ca99b2bee4e9a29d476848d4cd43c0447fd04b89f7fe588fe301952fda5e8d69",
+        "signature-pad/signature-pad.connect.ts": "b8525736572ad5b02cbacadc79b7930d10670dd574557b6c190bab8db66d1fcd",
+        "signature-pad/signature-pad.machine.ts": "2798b08c3c7c670c581112c0671f7b173fc76a9f94b9a4fac79509815b65628b",
+        "signature-pad/signature-pad.tsx": "65c4aca584943230a1cba31ee09bf8b15a6b1e853364d89d8f1c42b1a2cc031f",
+        "signature-pad/signature-renderer.ts": "07858270520ae34e5cd400a5ad2051833714b1625ac31c813e4b3f04727238bf",
+        "signature-pad/use-signature-pad.ts": "597df66b247934fdc7f1d4cd3f2fa642907a1bb730e33baecaa53549be1a0e19"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "slider",
+      "packageName": "@iris/slider",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "단일 값의 headless Slider. 범위·간격·RTL·수직 방향, controlled 요청, pointer capture와 hidden input 폼 제출을 제공한다.",
+      "files": {
+        "slider/hook.ts": "17116a604da9720e203541bc2690282e7e2d328fdc1ad36912c2a6873111410b",
+        "slider/index.ts": "3b6ad8ceeabaffb942a96ca89666fc378c840d2b0dd8175c208d38104f664198",
+        "slider/slider.connect.ts": "44945c93b673d7b8cb1629ebe5197350cc299ca71f3aed13d74f1a1a4efe996c",
+        "slider/slider.machine.ts": "9557580b6789136c2005060b0bf17268ab4c28888ccd38996bc5b63d974aa85e",
+        "slider/slider.tsx": "fc63b2db0ccfde241cfd12796603eb03cc85a033bd58e63185184ea773645538",
+        "slider/use-slider.ts": "b461ce4395f8eb405d45b11b86b4635138cfe7a8ff6052a4c901e3388a2b1551"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "spinbutton",
+      "packageName": "@iris/spinbutton",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "숫자 입력과 증감의 headless Spinbutton. 편집 문자열과 확정 값을 분리하고 Enter/blur 확정, Escape 복귀, 잘못된 문자열 보존, 소수 간격과 IME 조합을 처리한다.",
+      "files": {
+        "spinbutton/hook.ts": "8a71bf44f44590080d6ea0625215d9d9e364b8b1b3459baf22d67b2987810ce0",
+        "spinbutton/index.ts": "7e8978e8fda56b73ca5739f0cde615a01c19eff110d722ac25134349acc7c264",
+        "spinbutton/spinbutton.connect.ts": "f1be86dcdf705ccd35e9c9e660132591f3319f5b0ec5def2b179bf1d1f074f9d",
+        "spinbutton/spinbutton.machine.ts": "b5859e93021a875c57307dcc1c76a009d1a02b72df33ac043f63458406f16a4d",
+        "spinbutton/spinbutton.tsx": "def7b015fd073cafa6c65b151cb42ef24620d4629bacce87f6aacc7caba7d5fc",
+        "spinbutton/use-spinbutton.ts": "51f46d7a321c722a923d8dd87662c41149d92f5e5eb919f646c3cb774905fe63"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "splitter",
+      "packageName": "@iris/splitter",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "두 pane의 크기 변경·접기·복귀를 제공하는 headless Window Splitter. size는 primary pane의 백분율이며 orientation은 separator의 방향이다. 기본 vertical separator는 좌우 pane, horizontal은 위아래 pane이다.",
+      "files": {
+        "splitter/hook.ts": "d99ca77d6ee9fb1e6fe726e4dc893c1c65ac258715a5862c2c8d11e11aa66910",
+        "splitter/index.ts": "59320215d59ca499d748cf8aec331de59dabff701e4eb55df9c8fd4ca360ad21",
+        "splitter/splitter.connect.ts": "86ec2fb4a55bf0125dcd4e627ffd0ad29bd9579d2d97ad9eb2f0244d741845dd",
+        "splitter/splitter.machine.ts": "745f3e8bae47e9216a071303410e5a230f59cfaac4ae06832e29708b3ee78d0c",
+        "splitter/splitter.tsx": "546dfa43e7969a9914cec7b530f62b56cc18c6ba0391c085563ddd5a53267f21",
+        "splitter/use-splitter.ts": "815550b89b00e4b63e5b4c2c17e530771945972b270da172394af2a5959a09ce"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "steps",
+      "packageName": "@iris/steps",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "단계 이름·라벨을 전달하면 해당 흐름에 연결된 `Steps`와 `go`를 반환합니다. 이동 경로는 각 Content의 콜백에서 정의합니다.",
+      "files": {
+        "steps/hook.ts": "ce058ce7366b30e7949e44dd2874a65a148ccaec05ed5dc217595a2147279c6e",
+        "steps/index.ts": "ce058ce7366b30e7949e44dd2874a65a148ccaec05ed5dc217595a2147279c6e",
+        "steps/steps.connect.ts": "fc8cd0e01f4f97a3f7ef1003adaf8d9b221eeeb255cb50bdfde749eff4289120",
+        "steps/steps.machine.ts": "0fcd80cdd1253e1f5eb12d38199469d81969b3deb7345e0de2831a90b7144048",
+        "steps/steps.tsx": "e22cbc7e94c644b0f0d511abf7d1ee6c62dd378fe5b63bfd181d75b357393fd9",
+        "steps/use-steps.ts": "9cefded35d0a5b921f497306776de1caacce438c4b1c2e0c65c9616c7b7372f4"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "switch",
+      "packageName": "@iris/switch",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "Install with `iris add switch --mode hook` or `--mode component` (default).",
+      "files": {
+        "switch/hook.ts": "79484d6d7dcf9b78b818a926b04bc06a1feb3629179e5a165cc4c31a7057be96",
+        "switch/index.ts": "f1ec0abd8f2bc7463d2034ae9ee8b18446ae103b82d2a6a1e27fe7c162c93568",
+        "switch/switch.connect.ts": "1bc607f44f7e3ca755bf4067c9b9c67caf641445ed7fa27c4021a3ae23b68171",
+        "switch/switch.machine.ts": "9abe44d0df48a406643b8a1cae1a44da2c6786e2a6d62367ec8f89a4362a93d9",
+        "switch/switch.tsx": "6c59163560e4f6b16ab063b7d8c05f593d1562c8c115e46645aa79bab1d2b6ee",
+        "switch/use-switch.ts": "de1dfaef0e1b053385a36bf79717af74ae577922667d30c4b7e99bf20a2c42b4"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "table",
+      "packageName": "@iris/table",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "행·열·머리글 관계를 네이티브 table로 표현합니다. 표 안의 버튼·링크는 각각 일반 Tab 순서로 동작합니다.",
+      "files": {
+        "table/hook.ts": "12b36618069050dcf686920fe4c291e538aa66beb3b265b99d5499250d88d0e8",
+        "table/index.ts": "9e3d48b98d363ebc62fa567d982f9f72612fee3c95890929698412542323b5fb",
+        "table/table.connect.ts": "08d2f2cb871d08a289655247a19101094d9bb3e83253615255cd0a5c41728473",
+        "table/table.tsx": "c211f3afd08792ca2a3cc13e384e3038015c6bc9bc2e4f2699b1098e60c415b9",
+        "table/use-table.ts": "8de51f661d3f6ba7326c5bf83875236f33de4b752c9ca5ef28f2b93b09c3b69c"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "tabs",
+      "packageName": "@iris/tabs",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "React 19용 headless Tabs입니다. 같은 machine/connect를 사용하는 `useTabs`와 `Tabs.Root`, `Tabs.List`, `Tabs.Trigger`, `Tabs.Content`를 제공합니다. 스타일은 포함하지 않습니다.",
+      "files": {
+        "tabs/hook.ts": "892aad255d123a59d46a9703c9310e1cf0f7749de1576e84f856df62a5e9e0b7",
+        "tabs/index.ts": "1bcd313ef48140f78eeba03804dba145e1aa919c3bbac47ef825f2dc3ca13faa",
+        "tabs/tabs.connect.ts": "062729e409952c1d59ccbffa3afb3264bfd73abd44e62940bbbe1015aa5de76d",
+        "tabs/tabs.machine.ts": "1b823dec7fb44f00c98eeec842a71ee083e61925aef8933b72185f3f15d58a07",
+        "tabs/tabs.tsx": "dd222157b298aa5e87ee69f0e36371f7b5945683d129678622a1321d050dba53",
+        "tabs/use-tabs.ts": "d5095b01e1252793ce900c29a8858dc796a657f0eb7b62d661fd479e62533c43"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/keyboard",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "tags-input",
+      "packageName": "@iris/tags-input",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "`useTagsInput`과 `TagsInput` parts는 고유 문자열 태그의 추가·수정·삭제, RTL 이동·IME·폼 reset을 제공한다. React 19. `iris add tags-input --mode hook|component`로 설치한다.",
+      "files": {
+        "tags-input/hook.ts": "ed0ff2553fdcd44199cc4362c04d456432093003181e0c3e977d09347a7f123d",
+        "tags-input/index.ts": "767a864ab45ca197eb7ca5c9e0226889fc4a34dd91c8c20e0d9a1b54902590de",
+        "tags-input/tags-input.connect.ts": "17fd8c151fd1f896089d8bb257831f38cfe52a433c0c42f239874edff88752f4",
+        "tags-input/tags-input.machine.ts": "418957f1d40ec3348096ace40c68b1a91554a976f34d4b90c45478bb4015f9b8",
+        "tags-input/tags-input.tsx": "6ff5f25fbf20786a9373de6e210a05639232b5a3b1041ca151c35d399f99af81",
+        "tags-input/use-tags-input.ts": "7e0bd1f1c551ac4af4b39e70761738bd366ccd1b474004f73cc4e1bf74fae61c"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/field",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/text-field",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "text-field",
+      "packageName": "@iris/text-field",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "네이티브 input·textarea에 이름·설명·오류와 폼 연결을 제공하는 컴포넌트입니다. 일반 문자열 입력과 여러 줄 텍스트를 같은 Field 계약으로 다룰 때 사용합니다.",
+      "files": {
+        "text-field/hook.ts": "84381f176c76016458e04f1dd1e4c0b6ca05b1cfcac8b79ec7a7e0090a63d4bf",
+        "text-field/index.ts": "931ab618faba3e0bcfd8fe6ebff69c0ba646316713e08661a61331ed9d74f7d9",
+        "text-field/text-field.connect.ts": "bd38854647028bc448906e9bbbfdc1d3188758f31ddc2fedaa79f7cbb72a09f7",
+        "text-field/text-field.tsx": "93e0f77cfdf5c973e27a9481d1e5a4e4c55c84848c692d40f877d40a5eada987",
+        "text-field/use-text-field.ts": "5fb891777c7100ae8c800a8e09a8a92ff12b2105c0e403984b2e8ac00ebd2bef"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/field",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "timer",
+      "packageName": "@iris/timer",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "기준 시각 기반 countdown/countup, start/pause/resume/reset/restart, 완료 1회 통지와 timer 의미를 제공합니다.",
+      "files": {
+        "timer/hook.ts": "0cd412b11f7a8bf2697c2cea7717f6f12f1d3d18944bf835548d8d20cc20333a",
+        "timer/index.ts": "2c3252319d7e42b47de64259965d6c2424abcd08ff21fec77fb25d95d7e37768",
+        "timer/timer.connect.ts": "81e8c27898b67036ab24c9432ae0962c050fabe82ec09d038a79dcd25fe57e2a",
+        "timer/timer.machine.ts": "6162c9ef1d24df7eef02de177e5fd57c119aedeb01ada730392951afabd5451b",
+        "timer/timer.tsx": "0fc93682e826ce3be4999784263e472570a95e1594c873e1ad086346207cd272",
+        "timer/use-timer.ts": "3f97adc38b782c757e7b7962f1da47af444a069cb7226c9a6bb88b3fafbc5dc1"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "toast",
+      "packageName": "@iris/toast",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "인스턴스별 알림 store, FIFO 큐·표시 제한·수명·다중 이유 pause와 Presence 기반 제거를 제공합니다.",
+      "files": {
+        "toast/hook.ts": "1902f226d9c027ecaf78c2e421dda09db65d8a3dbe719ff4b2bd0e91ebc111d4",
+        "toast/index.ts": "e9c95986015f1ba05e0b186eda408b71b0a94b52262df69726c50f1365f1fde3",
+        "toast/toast-store.ts": "d4b2e1105b9bc32e1003d78ab18a3ce8063207b5393480129856ac7b51db985a",
+        "toast/toast.connect.ts": "be02fafb12e24ad3e94e4c66abca4437160c5b88adf95f6f033ce992836855e5",
+        "toast/toast.machine.ts": "0d3164a5f85c911b5ae5dedfd3567fa2c725d66af9089d2da0583221cfd5c20c",
+        "toast/toast.tsx": "29e6f8bd6ca1b56ca440ed0840d0825129d2923cee7adec70481b78dcddca110",
+        "toast/use-toast.ts": "f1308fea92b40a8d00871835145f920ec3ae3f930a6801e58dadf0e6e7532309"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/presence",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "toggle",
+      "packageName": "@iris/toggle",
+      "version": "0.1.1",
+      "kind": "ui",
+      "description": "네이티브 button의 `aria-pressed`와 선택 상태를 연결하는 스타일 없는 Toggle입니다. `useToggle`의 props getter와 같은 계약을 사용하는 `Toggle` 컴포넌트를 제공합니다.",
+      "files": {
+        "toggle/hook.ts": "661eb83c7cb34db384918f12b1c7155230303d0747807186c9cd7c4f31c9ad87",
+        "toggle/index.ts": "4a457b06071a2869976c07c2ea855c97df030720a1222cf5c93f03c00991bd7f",
+        "toggle/toggle.connect.ts": "94fb353b3bc950d31adc3d439d67507d86109f3efecb87b8225de934aa4819e4",
+        "toggle/toggle.tsx": "b70244c3c134f63924fd5fd0f8ba8d05d25767129b13dc030909840d42196193",
+        "toggle/use-toggle.ts": "ef4a02b2e6507f7c7ab49b83d0767b817bf0236526dd6dcc81322270c7490923"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "toggle-group",
+      "packageName": "@iris/toggle-group",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "React 19 headless hook와 parts를 제공하는 독립 소스 모듈입니다.",
+      "files": {
+        "toggle-group/hook.ts": "a2b84a983aae9161c3d4af5c6f0ac8cded78727e8bcdc6a17f9dbdc23c1232b6",
+        "toggle-group/index.ts": "133ede2af9c95e914bb98e4fc6c06dc734a70b015cdfc9e5f28abacd1aabce34",
+        "toggle-group/toggle-group.connect.ts": "f12767ae737d276ea7574be63ed6d67896d6c2fbce083c8efd569a2e4548aec4",
+        "toggle-group/toggle-group.machine.ts": "aa92a17a52febcc72122e175233429df4792d7c35c4ec4af2c42837f9740d41e",
+        "toggle-group/toggle-group.tsx": "da9e385945e78b0bbb7560930d0196153c466f4464948ca2997d1f8a3d7e68a9",
+        "toggle-group/use-toggle-group.ts": "94feb0a2fee6be1e8e58a07dabf594c0630c4fecd2a8b70e4f2bcca019545665"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/keyboard",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "toolbar",
+      "packageName": "@iris/toolbar",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "`iris add toolbar --mode hook|component` installs toolbar plus core/react/keyboard. It does not install other UI.",
+      "files": {
+        "toolbar/hook.ts": "7eed1f4854af0a4375410d1ae81027f7c02ea59c0c4e3864d608507163057de5",
+        "toolbar/index.ts": "f47cce9b56c67a0412adc99031691d9e161668f4921ec9b875b0bfee17fbfd59",
+        "toolbar/toolbar.connect.ts": "481c5ffe89ac4c914ea14d028e729580b93ae733930c3253be2a2c090ef87097",
+        "toolbar/toolbar.machine.ts": "06f0692b61f359c11335584dab548a2dee86aa6c4fd71a6abd2b07864ab291af",
+        "toolbar/toolbar.tsx": "79b8654a432213edf50f5bd128ba231a159c1ea764baff1222be4d73b34f8954",
+        "toolbar/use-toolbar.ts": "cdccf03d05ecc8f1d4b387ad1443fef5d16f93998df344407576ede0cbfbeaf3"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/keyboard",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "tooltip",
+      "packageName": "@iris/tooltip",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "[#37](https://github.com/no-k/iris/issues/37)의 Tooltip Hook과 headless parts입니다. React 19가 필요합니다.",
+      "files": {
+        "tooltip/hook.ts": "3442036157cf293f57f73e167d1cf1ed62c9ba2146ad143ab5d37d3ea1502e1b",
+        "tooltip/index.ts": "6db99c1f2fb3770722ed1a0ea1ec6295af90940c54713a75c701cbf2677093d4",
+        "tooltip/tooltip.connect.ts": "f7c5234600622e606c6624f887acca0fcc162f5d76fb2db6ad61a60207eca550",
+        "tooltip/tooltip.machine.ts": "5c3e775b88b6cbd1e7e7fb2ef072e6ab4982bfd648379860eb8f56a8ad11e8ee",
+        "tooltip/tooltip.tsx": "bb9739bbdaa972d182896613fc1f6836d46a336e7671c85ab1d7bfd63ad56ee0",
+        "tooltip/use-tooltip.ts": "45d806c858f52f06b53a730d7c4e578ec8f5e8e46c6d3937c6838cb6c4d718cf"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "tour",
+      "packageName": "@iris/tour",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "React 19 headless tour. `useTour({ steps })`와 같은 API를 공유하는 `Tour` parts를 제공한다. `stepId`가 열림/현재 단계의 단일 원천이고 null은 닫힘이다. start/next/previous/goTo/skip/close/retry를 지원한다. 대상 resolver의 AbortSignal·세대 검증으로 대기 취소와 늦은 결과를 처리한다. timeout/error는 현재 단계에서 Retry/Next/Close를 허용한다. modal은 공통 focus, 대상 배치는 공통 positioning을 사용한다. DOM·스타일은 소비자가 구성한다.",
+      "files": {
+        "tour/hook.ts": "3f95bcee470d52f08dcb68002c2bc47b1a3ff471269a9cb884739d6cfea93982",
+        "tour/index.ts": "4bbe84584d4cab00fca50dc9182fa55c39b72ffa34d2ec873451bbd1430c2f92",
+        "tour/tour.connect.ts": "c14b4d18178731a120a9b2f0bd84686dae2f37b25df9a6540ecb7e0c6cbfcc15",
+        "tour/tour.dom.ts": "1e37e38264dc4f94410268cadfedafcfb2fab237b89def59cc697790e3236a9c",
+        "tour/tour.machine.ts": "112a089245950504aa89febccbb3da9cb4641cf0a421f98fc5dcdcfcb4fcc9a7",
+        "tour/tour.tsx": "609f489cc184b965443004b69a5787dbf9663c1af0b33a3985a7b218dda01c2b",
+        "tour/use-tour.ts": "17be85a65afe7da3c45772ff9cc2f2e88e3a69227c674a0ac86598f511cb8229"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/dialog",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/focus",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/positioning",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        },
+        {
+          "packageName": "react-dom",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "tree-view",
+      "packageName": "@iris/tree-view",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "폴더·분류처럼 중첩된 항목을 탐색하고 펼치며 선택하는 위젯입니다. 선택과 포커스, 가지 펼침은 각각 독립적으로 관리합니다.",
+      "files": {
+        "tree-view/hook.ts": "9059448dd9b21a6da72773b20981d31f3b9d46e055d7284eff090e3fa9e7cb30",
+        "tree-view/index.ts": "0f061411676463f56b61a70ce68ad3e0ba76bd81a669d01d9bc11622fdeadcbd",
+        "tree-view/tree-view.connect.ts": "38b0794fca99d9048309319ca800161b7aec34de1150fd4a9df9ea06a9af9262",
+        "tree-view/tree-view.machine.ts": "a5a2e10ba2bc2fec8f23401c8ee87f34f47f240193190f4bce73f43096726d2c",
+        "tree-view/tree-view.tsx": "7a441bf885dfe50e7361128ae0b9147594bc8540cd038d317261d92f29e43cc9",
+        "tree-view/use-tree-view.ts": "535294035531e902279793c58bb58af6a5e2fa63184173ed90c73b0eed2eb541"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/keyboard",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    },
+    {
+      "name": "treegrid",
+      "packageName": "@iris/treegrid",
+      "version": "0.2.0",
+      "kind": "ui",
+      "description": "계층을 가진 행에 여러 열을 표시합니다. Grid의 셀 탐색과 트리의 펼침·조상 포커스 복구를 결합하며 셀에만 포커스를 두는 모델을 제공합니다.",
+      "files": {
+        "treegrid/hook.ts": "1212066a9a38fb10b204d393617ade20dd35c3ed8dd854964b57d38e4c4089cb",
+        "treegrid/index.ts": "fad34392aa8500a945c998b985d2228ae748134c87506f0dc8822a66e5709a4b",
+        "treegrid/treegrid.connect.ts": "10bb11de0448bdc3957a50307972af3c3a00db44d71558caea651fc5fa20214a",
+        "treegrid/treegrid.machine.ts": "86f9436e0731edb554a1656d965f7c64faf25ac604931fece75856ffa7043d80",
+        "treegrid/treegrid.tsx": "97f8be74b5e0d44df2905c87a7a412f0f5a79fa8916526ae7e9f45a9a49efc44",
+        "treegrid/use-treegrid.ts": "bf890db6ad7922905aaa36bb07aefe0ff547a95783008c5b51c213a8f87b1c88"
+      },
+      "requires": [
+        {
+          "packageName": "@iris/core",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/grid",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "@iris/react",
+          "range": "^0.2.0",
+          "internal": true,
+          "kind": "dependency",
+          "optional": false
+        },
+        {
+          "packageName": "react",
+          "range": "^19.0.0",
+          "internal": false,
+          "kind": "peer",
+          "optional": false
+        }
+      ],
+      "mode": "component"
+    }
+  ]
+}

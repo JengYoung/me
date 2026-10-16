@@ -2,14 +2,14 @@
 
 검증일: 2026-10-15. 이 기록은 아래 버전과 실행 범위에 대한 관찰이며 모든 클라이언트 버전이나 모델 동작을 보증하지 않는다.
 
-## 결과
+## 동기화 스킬 구축 검증
 
 | 검증 | 결과 | 확인 범위 |
 | --- | --- | --- |
 | 원천·생성물 정합성 | 통과 | `node scripts/sync-instructions.mjs --check`, 계약 변수·참조·관리 파일·해시 |
 | 생성기 자동 테스트 | 26개 통과 | 읽기 전용 검사, 반복 생성 안정성, 도구별 어댑터, 수동 수정 보존, 삭제·마이그레이션, 권한 오류 후 복구, 보류 정책 |
 | Codex 스킬 기본 검사 | 통과 | skill-creator의 `quick_validate.py`로 프로젝트 Codex 스킬 형식 검사 |
-| Codex CLI 0.162.1 로더 | 통과 | app-server `skills/list`에서 프로젝트 스킬 한 개, `.agents/skills/` 경로, 활성 상태, 설명, `openai.yaml` 표시명·설명·기본 프롬프트 확인 |
+| Codex CLI 0.162.1 로더 | 통과 | app-server `skills/list`에서 `sync-instructions` 한 개, `.agents/skills/` 경로, 활성 상태, 설명, `openai.yaml` 표시명·설명·기본 프롬프트 확인 |
 | Codex CLI 실제 모델 실행 | 검사 요청 통과 | 임시 프로젝트에서 명시적으로 스킬을 호출하여 변경 금지 요청과 불일치 보고 동작 확인 |
 | 별도 에이전트의 스킬 실행 평가 | 검사·재생성 시나리오 통과 | 아래 평가 조건 참고. Claude 모델 실행 결과가 아님 |
 | Claude Code 2.1.236 로더 | 보류 전 확인 통과 | 초기화 응답에서 프로젝트 명령 한 개, 설명, `[check\|write]` 인자 힌트 확인 |
@@ -36,3 +36,24 @@ Codex의 `agents/openai.yaml`은 실제 로더로 해석을 확인했다. 자동
 권한 오류 후 부분 생성 복구와 수동 변경 보존은 임시 파일 시스템에서 자동 검증했다. 실제 CLI의 모든 승인 UI와 설정 조합을 검증한 것은 아니다. 프로젝트 동기화는 전역 지침·인증·모델·권한 설정을 관리하지 않는다. 네이티브 CLI 자체는 실행 중 상태 DB나 캐시를 사용할 수 있다.
 
 재검증 명령과 규격 근거는 [관리 문서](README.md)에 있다. Claude 실행 재개는 사용자가 요청한 뒤 `targets.json`의 보류 상태를 변경하고 재생성하는 순서로 진행한다.
+
+## Turborepo 스킬 원천 편입 검증
+
+같은 날짜에 `turborepo`를 공통 원천과 Codex·Claude 어댑터로 전환했다. 설치 버전의 동봉 문서를 우선하는 기존 원칙을 유지하고, 프로젝트 스킬 목록·관리 기록에 등록했다. 원격 설치 잠금 파일에서는 해당 스킬 항목만 제거했다.
+
+- 생성 정합성 검사, 기존 자동 테스트 26개, Codex용 `quick_validate.py`, Git 공백 검사 통과.
+- Codex CLI 0.162.1의 실제 로더가 `sync-instructions`와 `turborepo`를 각각 한 번 발견하고 활성 상태·설명·UI 메타데이터를 확인했다.
+- Claude 스킬은 생성·정적 검사만 수행했다. 런타임 검사는 CLI 실행 없이 `deferred`를 반환했다.
+- Turborepo 구성 작업을 실제 모델에 맡기는 행동 검증은 수행하지 않았다. 현재 프로젝트에 Turborepo 앱·설치 패키지가 없으므로 해당 앱의 빌드·캐시·CI도 검증 대상에 포함하지 않았다.
+
+## 코드 품질 정책 검증
+
+검증일: 2026-10-16. 코드 품질 원천을 Codex 상세 지침과 Claude 경로별 규칙에 연결하고, 현재 Oxlint·Oxfmt·TypeScript 구성에 맞게 검증했다.
+
+- `node scripts/sync-instructions.mjs --check` 통과. `CODE_QUALITY` 계약을 각 도구에 한 번씩 포함하고 별도 정책 원천의 해시·생성 기록을 관리한다.
+- `node --test scripts/sync-instructions.test.mjs scripts/code-quality.test.mjs` 32개 통과: 생성기 30개와 실제 품질 도구 CLI 검사 2개다. 원천 누락·중복·연결 누락, 동기화 반복 안정성, 수동 변경 보존도 검사했다.
+- 임시 프로젝트의 실제 Oxfmt 실행에서 Iris·의존성·생성물·lockfile은 보존되고 외부 소스는 포맷되는 것을 확인했다. import와 Tailwind 클래스 순서도 보존됐다. 실제 Oxlint는 코어 안팎의 correctness 위반을 모두 검출했다.
+- 설치된 Oxlint CLI로 `packages/lint-config` 12개, `packages/ui` 444개, `apps/web`·`apps/docs` 각 4개 파일을 검사해 진단 0개를 확인했다. 네 패키지의 `tsc --noEmit`도 통과했다. 루트 pnpm/Turborepo 작업을 재실행한 결과로 해석하지 않는다.
+- UI의 실제 Oxfmt 설정으로 `--check .`를 실행해 포맷 대상 5개 파일이 통과했다. 새 CLI 테스트와 공유 포맷 설정 파일의 포맷 검사도 통과했다. Iris 코어 442개 파일의 내용은 변경하지 않았다.
+- Codex CLI 0.162.1 로더는 두 프로젝트 스킬을 각각 한 번 발견하고 메타데이터를 해석했다. 이는 새 코드 품질 정책의 실제 모델 준수 검증이 아니다.
+- Claude는 CLI 실행 없이 `deferred`를 반환했다. **로그인 만료 = 잠정 보류**를 유지하며, 새 경로별 규칙의 실제 Claude 로딩·모델 실행은 미검증이다.

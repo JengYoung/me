@@ -7,9 +7,14 @@
 | `.agents/skills/sync-instructions/agents/openai.yaml` | codex | 보조 자료/메타데이터 |
 | `.agents/skills/sync-instructions/references/recovery.md` | codex | 보조 자료/메타데이터 |
 | `.agents/skills/sync-instructions/SKILL.md` | codex | PURPOSE, TRIGGERS, INPUTS, STEPS, VERIFICATION, OUTPUTS, CONSTRAINTS, STOP, NON_GOALS |
+| `.agents/skills/turborepo/agents/openai.yaml` | codex | 보조 자료/메타데이터 |
+| `.agents/skills/turborepo/SKILL.md` | codex | PURPOSE, TRIGGERS, INPUTS, STEPS, VERIFICATION, OUTPUTS, CONSTRAINTS, STOP, NON_GOALS |
+| `.claude/rules/code-quality.md` | claude | CODE_QUALITY |
 | `.claude/rules/instruction-maintenance.md` | claude | MAINTENANCE |
 | `.claude/skills/sync-instructions/references/recovery.md` | claude | 보조 자료/메타데이터 |
 | `.claude/skills/sync-instructions/SKILL.md` | claude | PURPOSE, TRIGGERS, INPUTS, STEPS, VERIFICATION, OUTPUTS, CONSTRAINTS, STOP, NON_GOALS |
+| `.claude/skills/turborepo/SKILL.md` | claude | PURPOSE, TRIGGERS, INPUTS, STEPS, VERIFICATION, OUTPUTS, CONSTRAINTS, STOP, NON_GOALS |
+| `.codex/code-quality.md` | codex | CODE_QUALITY |
 | `.codex/instructions.md` | codex | MAINTENANCE |
 | `AGENTS.md` | codex | PURPOSE, WORKFLOW, QUALITY, NON_GOALS |
 | `CLAUDE.md` | claude | PURPOSE, WORKFLOW, QUALITY, NON_GOALS |

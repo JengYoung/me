@@ -1,0 +1,7 @@
+# AUTO-GENERATED from .agent-source/skills/turborepo/source.md by scripts/sync-instructions.mjs. Do not edit; run node scripts/sync-instructions.mjs --write.
+interface:
+  display_name: "Turborepo 구성·진단"
+  short_description: "설치 버전의 문서에 맞춰 Turborepo 구성과 작업 흐름을 점검합니다"
+  default_prompt: "$turborepo 현재 저장소의 설정과 설치 버전 문서를 확인해 개선할 점을 설명해줘."
+policy:
+  allow_implicit_invocation: true
