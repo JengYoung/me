@@ -1,39 +1,27 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import 'tailwindcss' source('..');
+@import '../public/fonts/pretendard/pretendard-variable.css';
+@import './design-token.css';
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* 원본 블로그와 같은 경계이며, 1199.xpx도 mobile에 포함합니다. */
+@custom-variant mobile (@media (width < 1200px));
+@custom-variant desktop (@media (width >= 1200px));
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   html {
+    color-scheme: light dark;
+  }
+
+  [data-theme='light'] {
+    color-scheme: light;
+  }
+
+  [data-theme='dark'] {
     color-scheme: dark;
+  }
+
+  html,
+  body {
+    max-width: 100vw;
+    overflow-x: hidden;
   }
 }
