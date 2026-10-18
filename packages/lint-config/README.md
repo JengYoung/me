@@ -65,7 +65,9 @@ export default createNextConfig({ rootDir: import.meta.dirname });
 - 기본 소스 루트는 앱의 `src`와 앱 루트입니다. 루트 `app/`과 `src/app/` 양쪽의 라우트에서 FSD 공개 API 사용을 검사합니다. 기본 `@/`와 `~/` 별칭은 `src/`를 가리킵니다.
 - `app` 내부는 Next.js 파일 규약을 따르므로 구조와 공개 진입점 요구에서 제외합니다. 하위 계층에서 `app`으로 향하는 import는 여전히 금지합니다.
 - 같은 계층의 다른 슬라이스 import는 금지하며, `entities/<slice>/@x/<사용하는 슬라이스>`의 명시적 교차 API는 허용합니다.
+- `entities`, `features`, `widgets`, `screens`의 `<slice>/index.ts`는 자기 슬라이스의 구현과 타입을 재수출할 수 있습니다. 예를 들어 `features/auth/index.ts`의 `export { login } from './model/login'`은 허용합니다. 다른 슬라이스가 이 내부 경로를 직접 가져오거나 재수출하는 것은 금지합니다. 단독 FSD 설정의 `pages`에도 같은 원칙을 적용합니다.
 - `shared/ui`와 `shared/lib`는 각 모듈의 공개 API를 허용합니다. 예를 들어 `@/shared/ui/button`은 허용하고 외부에서 `@/shared/ui/button/button`을 가져오면 실패합니다.
+- 같은 소스 루트의 `shared/ui/index.ts`, `shared/lib/index.ts`는 자신이 포함하는 하위 모듈의 구현을 직접 재수출해 세그먼트 공개 API를 구성할 수 있습니다. 예를 들어 `shared/ui/index.ts`의 `export { Header } from './layout/header'`는 허용합니다. 이 예외는 설정된 공개 진입점의 직접 재수출에만 적용하며, 일반 import·다른 세그먼트·형제 모듈·다른 소스 루트의 내부 접근은 허용하지 않습니다. `publicApiFiles`와 `sharedModuleSegments`를 변경한 경우에도 같은 경계로 판정합니다.
 
 앱별 루트, 별칭, 계층은 `fsd` 옵션으로 바꿉니다. 별칭 대상은 해당 소스 루트 기준의 경로입니다.
 

@@ -88,6 +88,93 @@ test('reports all three FSD policies across multiple files, including root App R
   assert.equal(messages.length, 4, JSON.stringify(result.diagnostics));
 });
 
+test('allows Shared segment entrypoints to re-export their child implementations', (t) => {
+  const project = fixture(t, {
+    'app/page.tsx': "export { Header as default } from '../shared/ui';",
+    'shared/ui/index.ts': "export { Header } from './layout/header';",
+    'shared/ui/layout/header.tsx': 'export function Header() { return <header />; }',
+    'shared/lib/index.ts': "export { formatDate } from './date/format';",
+    'shared/lib/date/format.ts': 'export const formatDate = (date: Date) => date.toISOString();',
+  });
+  for (const fromWorkspace of [false, true]) {
+    const result = project.lint(fromWorkspace);
+    assert.equal(result.status, 0, JSON.stringify(result.diagnostics));
+    assert.deepEqual(result.diagnostics, []);
+  }
+});
+
+test('still rejects Shared implementation access from consumers, sibling modules and non-entrypoints', (t) => {
+  const project = fixture(t, {
+    'shared/ui/index.ts': "export { Header } from './layout/header';",
+    'shared/ui/layout/header.tsx': 'export function Header() { return <header />; }',
+    'shared/ui/button/index.ts': "export { Header } from '../layout/header';",
+    'shared/ui/registry.ts': "export { Header } from './layout/header';",
+    'screens/home/ui/home.tsx': "export { Header } from '../../../shared/ui/layout/header';",
+  });
+  const result = project.lint(true);
+  assert.equal(result.status, 1);
+  assert.equal(result.diagnostics.length, 3, JSON.stringify(result.diagnostics));
+  assert.ok(result.diagnostics.every((diagnostic) => diagnostic.message.includes("public API of 'shared/ui/layout'")));
+});
+
+test('allows public entrypoints in every Next.js FSD layer from both source roots', (t) => {
+  const files = {};
+  for (const root of ['', 'src/']) {
+    for (const scope of [
+      'entities/example',
+      'features/example',
+      'widgets/example',
+      'screens/example',
+      'shared/api',
+      'shared/config',
+      'app/providers',
+    ]) {
+      files[`${root}${scope}/index.ts`] = [
+        "export { value } from './model/nested/value';",
+        "export type { Value } from './model/types';",
+        "export * from './ui/view';",
+      ].join('\n');
+      files[`${root}${scope}/model/nested/value.ts`] = 'export const value = 1;';
+      files[`${root}${scope}/model/types.ts`] = 'export type Value = number;';
+      files[`${root}${scope}/ui/view.ts`] = 'export const view = 1;';
+    }
+    files[`${root}app/index.ts`] = "export { value } from './providers/model/nested/value';";
+  }
+  const project = fixture(t, files);
+  for (const fromWorkspace of [false, true]) {
+    const result = project.lint(fromWorkspace);
+    assert.equal(result.status, 0, JSON.stringify(result.diagnostics));
+    assert.deepEqual(result.diagnostics, []);
+    assert.ok(result.number_of_files >= Object.keys(files).length, 'all layer entrypoints must actually be linted');
+  }
+});
+
+test('keeps slice isolation and rejects external implementation re-exports in every slice layer', (t) => {
+  const layers = ['entities', 'features', 'widgets', 'screens'];
+  const files = {};
+  for (const layer of layers) {
+    files[`${layer}/example/index.ts`] = "export { value } from './model/nested/value';";
+    files[`${layer}/example/model/nested/value.ts`] = 'export const value = 1;';
+    files[`${layer}/consumer/index.ts`] = "export { value } from '../example/model/nested/value';";
+    files[`app/check-${layer}.ts`] = `export { value } from '../${layer}/example/model/nested/value';`;
+    files[`app/use-${layer}.ts`] = `export { value } from '../${layer}/example';`;
+  }
+  const project = fixture(t, files);
+  for (const fromWorkspace of [false, true]) {
+    const result = project.lint(fromWorkspace);
+    assert.equal(result.status, 1);
+    const messages = result.diagnostics.map((diagnostic) => diagnostic.message);
+    assert.equal(messages.length, layers.length * 3, JSON.stringify(result.diagnostics));
+    for (const layer of layers) {
+      assert.equal(messages.filter((message) => message.includes(`public API of '${layer}/example'`)).length, 2);
+      assert.equal(
+        messages.filter((message) => message.includes(`'${layer}/consumer' cannot import '${layer}/example'`)).length,
+        1,
+      );
+    }
+  }
+});
+
 test('runs native Next.js rules and the compatibility rule through Oxlint', (t) => {
   const project = fixture(t, {
     'app/page.tsx': 'export default function Page() { return <script src="/script.js" />; }',
