@@ -16,7 +16,7 @@
     ".agent-source/adapters/codex/skills/turborepo.json": "a1104aa39540993a112e47356ffe2a647d0b3b89b789bfb2a5a6ce904f6f2334",
     ".agent-source/adapters/codex/skills/turborepo.md": "0726878c4c8a15397ce3bfaaf01123800b4019b9e4ddb34194cf6681a181ea5f",
     ".agent-source/conventions/code-quality/source.md": "b94809c0fa51d7b063ea90414b30b74377042ee1c45fd4df4e161e0ffc957ec4",
-    ".agent-source/project/source.md": "bfa7185d1be8083796b09fa587eb1115a0523416973e6707b0d861590011c98f",
+    ".agent-source/project/source.md": "70421611642ba29fc2ebf4f8d3a5adbc33f18058dd80aee4de75d1525e5835fc",
     ".agent-source/skills/sync-instructions/references/recovery.md": "33c639a794a17364d992fb5f04e28305ea7bcfa0d69ddfe0d20fb9cc4ff9ba0c",
     ".agent-source/skills/sync-instructions/source.md": "633cac0b0f2789135364a52e2dd41e7d5f99fe33e6f8eeac29f6ad03cf4f0cbe",
     ".agent-source/skills/turborepo/source.md": "bf18682c68ec4f729d2f93aaf9ddd7dd10a476de650387e0b7a32ee00d15e23e",
@@ -152,7 +152,7 @@
       ]
     },
     "AGENTS.md": {
-      "sha256": "2fdde295a120648145efcf76aa8fc022e473ed5739e2ebda5c6b1103bfeb7730",
+      "sha256": "1afdd026de21e47f83bd310afe2bb0f0ea7144d56ab66e7742d9f813d988735a",
       "source": ".agent-source/project/source.md",
       "target": "codex",
       "facets": [
@@ -163,7 +163,7 @@
       ]
     },
     "CLAUDE.md": {
-      "sha256": "64e5c14373322582cf8c8f0ee79571ae8d5891d624984fdcf50cba0df0279ff4",
+      "sha256": "d82753298db8be6cd5054fe42bc353e8baac459e277e76c7506071ad6c5e2f0b",
       "source": ".agent-source/project/source.md",
       "target": "claude",
       "facets": [
