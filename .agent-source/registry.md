@@ -30,7 +30,7 @@
 | `.codex/instructions.md` | codex | MAINTENANCE |
 | `.codex/react-best-practices.md` | codex | REACT_BEST_PRACTICES |
 | `.codex/test-writing.md` | codex | TEST_WRITING |
-| `AGENTS.md` | codex | PURPOSE, WORKFLOW, QUALITY, NON_GOALS |
-| `CLAUDE.md` | claude | PURPOSE, WORKFLOW, QUALITY, NON_GOALS |
+| `AGENTS.md` | codex | PURPOSE, WORKFLOW, QUALITY, DESIGN_TOKENS, CONTENT, VERSIONING, NON_GOALS |
+| `CLAUDE.md` | claude | PURPOSE, WORKFLOW, QUALITY, DESIGN_TOKENS, CONTENT, VERSIONING, NON_GOALS |
 
 입력과 산출물의 해시는 `.agent-source/.manifest.json`에서 관리한다. 계약 포함 검사는 문장 의미의 동등성이나 모델 실행 성공을 증명하지 않는다.

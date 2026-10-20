@@ -18,12 +18,15 @@ export const REACT_BEST_PRACTICES = '.agent-source/conventions/react-best-practi
 export const SCRIPT = 'scripts/sync-instructions.mjs';
 export const MARKER = 'AUTO-GENERATED from ';
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const PROJECT_FACETS = {
-  목적: 'PURPOSE',
-  '작업 방식': 'WORKFLOW',
-  '품질 기준': 'QUALITY',
-  '지침 관리': 'MAINTENANCE',
-  'Non-goals': 'NON_GOALS',
+const PROJECT_SOURCES = {
+  PURPOSE: '.agent-source/project/purpose.md',
+  WORKFLOW: '.agent-source/project/workflow.md',
+  QUALITY: '.agent-source/project/quality.md',
+  DESIGN_TOKENS: '.agent-source/project/design-tokens.md',
+  CONTENT: '.agent-source/project/content.md',
+  VERSIONING: '.agent-source/project/versioning.md',
+  MAINTENANCE: '.agent-source/project/maintenance.md',
+  NON_GOALS: '.agent-source/project/scope.md',
 };
 const SKILL_FACETS = {
   목적: 'PURPOSE',
@@ -113,6 +116,14 @@ function object(value, allowed, file) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error(`${file}: 객체가 필요합니다.`);
   for (const key of Object.keys(value))
     if (!allowed.includes(key)) throw new Error(`${file}: 지원하지 않는 필드 ${key}`);
+}
+
+function projectTopic(content, file) {
+  const match = /^# [^\n]+\n+([\s\S]*)$/.exec(content);
+  const body = match?.[1].trim();
+  if (!body?.replace(/<!--[\s\S]*?-->/g, '').trim())
+    throw new Error(`${file}: 주제 제목과 비어 있지 않은 본문이 필요합니다.`);
+  return body;
 }
 
 function facets(content, mapping, file) {
@@ -332,8 +343,11 @@ export function build(root) {
   const reactBestPractices = source(REACT_BEST_PRACTICES);
   if (!reactBestPractices.replace(/<!--[\s\S]*?-->/g, '').trim())
     throw new Error(`${REACT_BEST_PRACTICES}: React 작성 지침이 비어 있습니다.`);
+  source(PROJECT);
   const project = {
-    ...facets(source(PROJECT), PROJECT_FACETS, PROJECT),
+    ...Object.fromEntries(
+      Object.entries(PROJECT_SOURCES).map(([variable, file]) => [variable, projectTopic(source(file), file)]),
+    ),
     CODE_QUALITY: codeQuality,
     TEST_WRITING: testWriting,
     REACT_BEST_PRACTICES: reactBestPractices,

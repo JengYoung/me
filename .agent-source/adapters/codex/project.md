@@ -12,6 +12,18 @@
 테스트 작성·수정·리뷰와 fixture·테스트 환경 변경 전에는 [테스트 작성 지침](.codex/test-writing.md)을 읽고 적용한다.
 React·Next.js 컴포넌트·Hook·페이지·데이터 조회·성능 관련 코드를 작성·수정·리뷰하기 전에는 [React Best Practices](.codex/react-best-practices.md)를 읽고 적용한다.
 
+## 디자인 토큰
+
+{{DESIGN_TOKENS}}
+
+## 콘텐츠 저장과 수정 이력
+
+{{CONTENT}}
+
+## 앱·패키지 버전 관리
+
+{{VERSIONING}}
+
 ## Codex에서 적용하기
 
 - 이 파일은 프로젝트의 `AGENTS.md`다. 하위 작업 범위에 지침이 있으면 함께 확인하고 적용 범위를 따른다. `AGENTS.override.md`가 있으면 같은 디렉터리의 `AGENTS.md`보다 먼저 선택된다.
