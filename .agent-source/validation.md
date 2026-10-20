@@ -57,3 +57,16 @@ Codex의 `agents/openai.yaml`은 실제 로더로 해석을 확인했다. 자동
 - UI의 실제 Oxfmt 설정으로 `--check .`를 실행해 포맷 대상 5개 파일이 통과했다. 새 CLI 테스트와 공유 포맷 설정 파일의 포맷 검사도 통과했다. Iris 코어 442개 파일의 내용은 변경하지 않았다.
 - Codex CLI 0.162.1 로더는 두 프로젝트 스킬을 각각 한 번 발견하고 메타데이터를 해석했다. 이는 새 코드 품질 정책의 실제 모델 준수 검증이 아니다.
 - Claude는 CLI 실행 없이 `deferred`를 반환했다. **로그인 만료 = 잠정 보류**를 유지하며, 새 경로별 규칙의 실제 Claude 로딩·모델 실행은 미검증이다.
+
+## React Best Practices 지침 검증
+
+검증일: 2026-10-20. [Vercel React Best Practices](https://github.com/vercel-labs/agent-skills/tree/063bee94c3f4df8453406c830b0a7df0f2860278/skills/react-best-practices)의 8개 분야·70개 규칙을 공통 원천과 양쪽 도구의 상세 지침에 연결했다. 기준 커밋·라이선스 표기·프로젝트 적용 조건을 기록했다.
+
+- GitHub API의 기준 커밋 규칙 목록과 원천의 식별자를 대조해 70개 모두 대응하고 누락·추가·중복이 없음을 확인했다. FSD 공개 API·디자인 토큰·Iris 예외를 보존하고 Effect Event의 함수 동일성 설명을 공식 React 계약에 맞췄다.
+- 커밋 분리를 위해 HEAD에 React 관련 원천·어댑터·생성기 변경만 적용한 임시 작업 공간을 구성했다. 이 상태에서 `node scripts/sync-instructions.mjs --write`, `--check`, `node --test scripts/sync-instructions.test.mjs`를 실행했다. 동기화 검사와 생성기 테스트 35개가 통과했다.
+- 새 회귀 테스트는 양쪽 도구의 원천 반영·출처, 적용 경로, 원천 누락·공백·어댑터 누락·중복·Codex 연결 누락, 수동 변경 보존 및 반복 생성의 무변경을 검사했다. 기존 테스트 작성 지침과 별도 제품 변경은 커밋에 포함하지 않았다.
+- 전체 작업 공간에서는 생성기 테스트 40개와 수정 스크립트의 Oxlint·Oxfmt 검사가 통과했다. 이 결과와 위 React 단독 커밋 검증은 구분한다. 기존 스크립트의 일괄 포맷 변경과 별도 경로 검사 변경은 커밋에서 제외했다.
+- 작업 공간의 `node scripts/check-instruction-runtime.mjs`는 권한 오류 뒤 승인된 재실행에서 Codex CLI `0.163.0`의 기존 프로젝트 스킬 두 개를 각각 한 번 발견했다. 임시 커밋 작업 공간에서 CLI 로더를 다시 실행한 결과나 새 지침의 모델 준수 검증은 아니다.
+- Claude는 CLI를 시작하지 않고 `deferred`를 반환했다. **로그인 만료 = 잠정 보류**를 유지하며 새 규칙의 실제 Claude 로딩·모델 실행, Codex 모델의 지침 준수, 제품 성능·브라우저·SSR·hydration은 별도로 검증하지 않았다.
+
+명령은 현재 환경의 `rtk` 규칙을 따랐다. 생성 정합성, CLI 발견, 실제 모델 행동 및 제품 성능은 서로 다른 검증이다.

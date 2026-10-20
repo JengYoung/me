@@ -116,6 +116,112 @@ test("Codex code quality guidance must be reachable from AGENTS.md", (t) => {
   assert.throws(() => build(root), /상세 지침 .codex\/code-quality.md를 명시적으로 연결/);
 });
 
+test('React guidance reaches both tools with native loading and preserves source provenance', (t) => {
+  const root = fixture(t);
+  const source = '.agent-source/conventions/react-best-practices/source.md';
+  const codex = '.codex/react-best-practices.md';
+  const claude = '.claude/rules/react-best-practices.md';
+  assert.equal(sync(root, 'write').ok, true);
+  const generated = build(root);
+  for (const file of [codex, claude]) {
+    assert.ok(read(root, file).includes(read(root, source).trim()));
+    assert.equal(generated.manifest.outputs[file].source, source);
+    assert.deepEqual(generated.manifest.outputs[file].facets, ['REACT_BEST_PRACTICES']);
+  }
+  assert.ok(read(root, 'AGENTS.md').includes(`](${codex})`));
+  assert.ok(read(root, 'CLAUDE.md').includes(`](${claude})`));
+  assert.notEqual(read(root, codex), read(root, claude));
+  const rules = generated.targets.find((target) => target.name === 'claude').rules;
+  const paths = rules.find((rule) => rule.path === claude).paths;
+  for (const file of [
+    'apps/web/shared/ui/layout/sidebar.tsx',
+    'apps/docs/app/page.tsx',
+    'apps/web/widgets/blog-frame/lib/header-plugin.ts',
+    'apps/web/app/api/example/route.ts',
+    'apps/web/next.config.js',
+    'packages/ui/src/base/button/button.tsx',
+    'packages/hooks/src/use-selection.ts',
+    'package.json',
+    'apps/web/package.json',
+    source,
+  ])
+    assert.ok(
+      paths.some((pattern) => path.matchesGlob(file, pattern)),
+      file,
+    );
+  for (const file of ['docs/guide.md', 'scripts/sync-instructions.mjs'])
+    assert.ok(!paths.some((pattern) => path.matchesGlob(file, pattern)), file);
+  write(root, source, read(root, source) + '\n공유 React 계약 변경.\n');
+  const before = snapshot(root);
+  assert.equal(sync(root).ok, false);
+  assert.deepEqual(snapshot(root), before);
+  assert.equal(sync(root, 'write').ok, true);
+  for (const file of [codex, claude]) assert.ok(read(root, file).includes('공유 React 계약 변경.'));
+  assert.equal(sync(root).ok, true);
+  const after = snapshot(root);
+  assert.deepEqual(sync(root, 'write').changes, []);
+  assert.deepEqual(snapshot(root), after);
+});
+
+test('missing or empty React guidance prevents all writes', (t) => {
+  const root = fixture(t);
+  const file = '.agent-source/conventions/react-best-practices/source.md';
+  fs.unlinkSync(path.join(root, file));
+  const missing = snapshot(root);
+  assert.throws(() => sync(root, 'write'), /필수 원천/);
+  assert.deepEqual(snapshot(root), missing);
+  write(root, file, '<!-- 아직 작성하지 않은 React 계약 -->\n');
+  const empty = snapshot(root);
+  assert.throws(() => sync(root, 'write'), /React 작성 지침이 비어/);
+  assert.deepEqual(snapshot(root), empty);
+});
+
+test('React guidance cannot be omitted or duplicated in either adapter', (t) => {
+  const root = fixture(t);
+  for (const file of [
+    '.agent-source/adapters/codex/react-best-practices.md',
+    '.agent-source/adapters/claude/rules/react-best-practices.md',
+  ]) {
+    const original = read(root, file);
+    for (const content of [
+      original.replace('{{REACT_BEST_PRACTICES}}', ''),
+      original + '\n{{REACT_BEST_PRACTICES}}\n',
+    ]) {
+      write(root, file, content);
+      const before = snapshot(root);
+      assert.throws(() => sync(root, 'write'), /계약 변수 REACT_BEST_PRACTICES/);
+      assert.deepEqual(snapshot(root), before);
+    }
+    write(root, file, original);
+  }
+});
+
+test('Codex React guidance must be reachable from AGENTS.md before any writes', (t) => {
+  const root = fixture(t);
+  const file = '.agent-source/adapters/codex/project.md';
+  write(
+    root,
+    file,
+    read(root, file).replace('[React Best Practices](.codex/react-best-practices.md)', 'React Best Practices'),
+  );
+  const before = snapshot(root);
+  assert.throws(() => sync(root, 'write'), /상세 지침 .codex\/react-best-practices.md를 명시적으로 연결/);
+  assert.deepEqual(snapshot(root), before);
+});
+
+test('manual changes to either React document block regeneration and stay intact', (t) => {
+  const root = fixture(t);
+  assert.equal(sync(root, 'write').ok, true);
+  for (const file of ['.codex/react-best-practices.md', '.claude/rules/react-best-practices.md']) {
+    const original = read(root, file);
+    write(root, file, original + '\n보존할 React 지침\n');
+    const before = snapshot(root);
+    assert.equal(sync(root, 'write').ok, false);
+    assert.deepEqual(snapshot(root), before);
+    write(root, file, original);
+  }
+});
+
 test("source changes reach both tools and references are copied independently", (t) => {
   const root = fixture(t);
   sync(root, "write");

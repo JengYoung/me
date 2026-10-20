@@ -1,32 +1,35 @@
 {
   "version": 2,
   "inputs": {
-    ".agent-source/adapters/claude/project.md": "9af53766afe44791a51fb972d2a48f590f39e69b6a978a7c7abc3e23b0cb50e9",
+    ".agent-source/adapters/claude/project.md": "b833fcae70bcd13a612490fcbdf074d79d72e9e944a773bf4ae3501b051cfc63",
     ".agent-source/adapters/claude/rules/code-quality.md": "293be9420285cf5e5739922e41b62c315087388adaf2e7e048cc244867f16b15",
-    ".agent-source/adapters/claude/rules/instruction-maintenance.md": "de110ec990c6802f0be31e49c70eeef19212a2a768d35e15c5ee98909d7ab936",
+    ".agent-source/adapters/claude/rules/instruction-maintenance.md": "2bce8c98613ce2a6dd25ac2df4fc0efc50eb54f79b9fb64b6607c65c427a1043",
+    ".agent-source/adapters/claude/rules/react-best-practices.md": "6dd5b26cd4f4b075d4d50de0e46c79c0c36c6e6c5736851f8d10b021c283c413",
     ".agent-source/adapters/claude/skills/sync-instructions.json": "1755d960bbf5e23d5a621268b3b1c66b9ed1eb9efc421144aadd3dbf8001113f",
     ".agent-source/adapters/claude/skills/sync-instructions.md": "0514149cc47d73d991554e4bfc9d79f80928e7f06d65d82ce66fb389830825ee",
     ".agent-source/adapters/claude/skills/turborepo.json": "408d074a4e7a80872e75d72118b1d079b7ec72aeb97c2e3e7354b6d1497785c4",
     ".agent-source/adapters/claude/skills/turborepo.md": "5e9e821cc9ff4d595eb7a15b08343f639f4a00cab5695715bf6363e748dd22e1",
     ".agent-source/adapters/codex/code-quality.md": "63269b8e519954e6c0dffd26f64c39f3da15ed1d4757b8f4be8c8453b9de4238",
-    ".agent-source/adapters/codex/instructions.md": "2104ceef8a996f4c97ac827ee6d3686d8b8793a202bac2a7faac57a402e5b657",
-    ".agent-source/adapters/codex/project.md": "879f8b86b7821b1b1a230bce35cbba910c6951b6f36228a2f2fee3a591037987",
+    ".agent-source/adapters/codex/instructions.md": "8a0eb6d37723c0ad370cd64c7fae52c20f5337310b41b5feecb1ae787abfc2a7",
+    ".agent-source/adapters/codex/project.md": "fa8872c990d04024d0137f87dd145c1bf3fbb9014b6bef33a4fa77e76d1e1ae9",
+    ".agent-source/adapters/codex/react-best-practices.md": "056f8231592b638fa4d1c32e458ca15df0cec8ddf8100be29275048ec8280ef5",
     ".agent-source/adapters/codex/skills/sync-instructions.json": "14a76c14a6c29e0ee6a68ee46ec816c527ffbd43ea10be262895fb1a0cf514c1",
     ".agent-source/adapters/codex/skills/sync-instructions.md": "a6a83d385950f0e4a177c3483eacd5696a905290503131e0bc8513b4cef03caa",
     ".agent-source/adapters/codex/skills/turborepo.json": "a1104aa39540993a112e47356ffe2a647d0b3b89b789bfb2a5a6ce904f6f2334",
     ".agent-source/adapters/codex/skills/turborepo.md": "0726878c4c8a15397ce3bfaaf01123800b4019b9e4ddb34194cf6681a181ea5f",
     ".agent-source/conventions/code-quality/source.md": "b94809c0fa51d7b063ea90414b30b74377042ee1c45fd4df4e161e0ffc957ec4",
-    ".agent-source/project/source.md": "70421611642ba29fc2ebf4f8d3a5adbc33f18058dd80aee4de75d1525e5835fc",
+    ".agent-source/conventions/react-best-practices/source.md": "c98c26a26d85726b859f6553d1546a4666b62f4e5706fbff448a616122ac1b85",
+    ".agent-source/project/source.md": "bda82b8696b79b2884962a853e2d334eb65f6914ae14b587a2f57eb7f3ccdd5f",
     ".agent-source/skills/sync-instructions/references/recovery.md": "33c639a794a17364d992fb5f04e28305ea7bcfa0d69ddfe0d20fb9cc4ff9ba0c",
     ".agent-source/skills/sync-instructions/source.md": "633cac0b0f2789135364a52e2dd41e7d5f99fe33e6f8eeac29f6ad03cf4f0cbe",
     ".agent-source/skills/turborepo/source.md": "bf18682c68ec4f729d2f93aaf9ddd7dd10a476de650387e0b7a32ee00d15e23e",
-    ".agent-source/targets.json": "cfe79b15cf2ec63303cb7a07cdb967c24591bf3d84cd13ac08277f4d68bcd816",
-    "scripts/instruction-model.mjs": "cb9dfe40a6c49fb4b83bb9c0be7a8bdc582b983c7fe7e61293455eca3881d78f",
+    ".agent-source/targets.json": "b64ea4174ee10343882569f3913c356a8475b561e47819c00b896888c36412e7",
+    "scripts/instruction-model.mjs": "e55b003d457f179fff03b24e406f1cb37f10c14553355f09700eb2bc94aacf91",
     "scripts/sync-instructions.mjs": "205cb5b1cc5c4c1c10cad6d178cb5f98db4a1b16118d29aaf636a42342365058"
   },
   "outputs": {
     ".agent-source/registry.md": {
-      "sha256": "ca3a79f87ad7ee66a1f6569dc7acfd5099a25abbfe48f75e8e000ee2a3a75d22",
+      "sha256": "9eb2ba109e7e7aced93bf614a703c6f7764891a0f427bc86c50c84456bd50e0c",
       "source": ".agent-source/project/source.md",
       "target": "registry",
       "facets": []
@@ -90,11 +93,19 @@
       ]
     },
     ".claude/rules/instruction-maintenance.md": {
-      "sha256": "13a8af203bdf130a1d5eaf972c0b7f217753d659cd90412674feecf6dd8e752d",
+      "sha256": "1b75dc633c6409af7ab24e8b5efabc79a92884c061dbf4a4cb33e2844a8ad70e",
       "source": ".agent-source/project/source.md",
       "target": "claude",
       "facets": [
         "MAINTENANCE"
+      ]
+    },
+    ".claude/rules/react-best-practices.md": {
+      "sha256": "c494ac2f45c3de8175b906dfa48ce36ae2ee6692659b5ace243ec2728adab4e0",
+      "source": ".agent-source/conventions/react-best-practices/source.md",
+      "target": "claude",
+      "facets": [
+        "REACT_BEST_PRACTICES"
       ]
     },
     ".claude/skills/sync-instructions/references/recovery.md": {
@@ -144,15 +155,23 @@
       ]
     },
     ".codex/instructions.md": {
-      "sha256": "87533ac655e83922018e6e308c6b6dd792dc8e414962aaa382a3267e2ae65517",
+      "sha256": "3cb610a139b51d90a3dc72b180909b47f22b404800286f9db991b5e22a0d1dc6",
       "source": ".agent-source/project/source.md",
       "target": "codex",
       "facets": [
         "MAINTENANCE"
       ]
     },
+    ".codex/react-best-practices.md": {
+      "sha256": "030a3a4184099ee1b9cd5356a493097651fa4c2093b4b5bc778fb1d509d52fad",
+      "source": ".agent-source/conventions/react-best-practices/source.md",
+      "target": "codex",
+      "facets": [
+        "REACT_BEST_PRACTICES"
+      ]
+    },
     "AGENTS.md": {
-      "sha256": "1afdd026de21e47f83bd310afe2bb0f0ea7144d56ab66e7742d9f813d988735a",
+      "sha256": "d612f2422abdedb467bd9e9ea26c4d1cdbd2bd6aa7388d37d25adb4c3b8632ad",
       "source": ".agent-source/project/source.md",
       "target": "codex",
       "facets": [
@@ -163,7 +182,7 @@
       ]
     },
     "CLAUDE.md": {
-      "sha256": "d82753298db8be6cd5054fe42bc353e8baac459e277e76c7506071ad6c5e2f0b",
+      "sha256": "8a48bc07e0b42f37426b9cced77327116fa005e7a1391e4bad690e949c1b35a0",
       "source": ".agent-source/project/source.md",
       "target": "claude",
       "facets": [

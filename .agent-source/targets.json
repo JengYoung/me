@@ -13,6 +13,10 @@
         {
           "path": ".codex/code-quality.md",
           "template": "code-quality.md"
+        },
+        {
+          "path": ".codex/react-best-practices.md",
+          "template": "react-best-practices.md"
         }
       ]
     },
@@ -25,6 +29,17 @@
         "reason": "로그인 만료 = 잠정 보류"
       },
       "rules": [
+        {
+          "path": ".claude/rules/react-best-practices.md",
+          "template": "rules/react-best-practices.md",
+          "paths": [
+            "apps/**/*.{js,jsx,ts,tsx,mjs,cjs,mts,cts}",
+            "packages/**/*.{js,jsx,ts,tsx,mjs,cjs,mts,cts}",
+            "**/package.json",
+            "**/next.config.*",
+            ".agent-source/conventions/react-best-practices/**"
+          ]
+        },
         {
           "path": ".claude/rules/code-quality.md",
           "template": "rules/code-quality.md",

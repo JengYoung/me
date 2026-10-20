@@ -11,11 +11,13 @@
 | `.agents/skills/turborepo/SKILL.md` | codex | PURPOSE, TRIGGERS, INPUTS, STEPS, VERIFICATION, OUTPUTS, CONSTRAINTS, STOP, NON_GOALS |
 | `.claude/rules/code-quality.md` | claude | CODE_QUALITY |
 | `.claude/rules/instruction-maintenance.md` | claude | MAINTENANCE |
+| `.claude/rules/react-best-practices.md` | claude | REACT_BEST_PRACTICES |
 | `.claude/skills/sync-instructions/references/recovery.md` | claude | 보조 자료/메타데이터 |
 | `.claude/skills/sync-instructions/SKILL.md` | claude | PURPOSE, TRIGGERS, INPUTS, STEPS, VERIFICATION, OUTPUTS, CONSTRAINTS, STOP, NON_GOALS |
 | `.claude/skills/turborepo/SKILL.md` | claude | PURPOSE, TRIGGERS, INPUTS, STEPS, VERIFICATION, OUTPUTS, CONSTRAINTS, STOP, NON_GOALS |
 | `.codex/code-quality.md` | codex | CODE_QUALITY |
 | `.codex/instructions.md` | codex | MAINTENANCE |
+| `.codex/react-best-practices.md` | codex | REACT_BEST_PRACTICES |
 | `AGENTS.md` | codex | PURPOSE, WORKFLOW, QUALITY, NON_GOALS |
 | `CLAUDE.md` | claude | PURPOSE, WORKFLOW, QUALITY, NON_GOALS |
 
