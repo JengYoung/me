@@ -6,11 +6,12 @@
   "exports": {
     "./react": "./react.js",
     "./next": "./next.js",
-    "./fsd": "./fsd/index.ts"
+    "./fsd": "./fsd/index.ts",
+    "./plugin-lifecycle": "./plugin-lifecycle/index.ts"
   },
   "scripts": {
     "lint": "oxlint .",
-    "test": "node --test fsd/*.test.ts tests/*.test.mjs",
+    "test": "node --test fsd/*.test.ts plugin-lifecycle/*.test.ts tests/*.test.mjs",
     "check-types": "tsc --noEmit"
   },
   "dependencies": {

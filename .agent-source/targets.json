@@ -13,6 +13,14 @@
         {
           "path": ".codex/code-quality.md",
           "template": "code-quality.md"
+        },
+        {
+          "path": ".codex/test-writing.md",
+          "template": "test-writing.md"
+        },
+        {
+          "path": ".codex/react-best-practices.md",
+          "template": "react-best-practices.md"
         }
       ]
     },
@@ -25,6 +33,30 @@
         "reason": "로그인 만료 = 잠정 보류"
       },
       "rules": [
+        {
+          "path": ".claude/rules/react-best-practices.md",
+          "template": "rules/react-best-practices.md",
+          "paths": [
+            "apps/**/*.{js,jsx,ts,tsx,mjs,cjs,mts,cts}",
+            "packages/**/*.{js,jsx,ts,tsx,mjs,cjs,mts,cts}",
+            "**/package.json",
+            "**/next.config.*",
+            ".agent-source/conventions/react-best-practices/**"
+          ]
+        },
+        {
+          "path": ".claude/rules/test-writing.md",
+          "template": "rules/test-writing.md",
+          "paths": [
+            "**/*.{test,spec}.{js,jsx,ts,tsx,mjs,cjs,mts,cts}",
+            "**/{test,tests,__tests__,e2e,fixtures,__fixtures__,test-utils}/**",
+            "**/{vitest,jest,playwright}*.config.*",
+            "**/{vitest,jest,test}.setup.*",
+            "**/{setupTests,test-setup}.*",
+            "**/package.json",
+            ".agent-source/conventions/test-writing/**"
+          ]
+        },
         {
           "path": ".claude/rules/code-quality.md",
           "template": "rules/code-quality.md",

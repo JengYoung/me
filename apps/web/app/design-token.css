@@ -1,0 +1,506 @@
+/* Figma Brand / Color Palette
+   https://www.figma.com/design/GfYyF8klIKTizVSaE9g34S?node-id=13-616
+   원시 색상 79개 + 의미 토큰 45개. Neutral은 기존 ink 이름으로 노출합니다.
+   원시 색상은 고정하고, Light / Dark 전환은 의미 토큰의 참조만 바꿉니다.
+   static으로 아직 쓰지 않는 토큰도 CSS 변수로 유지합니다. */
+
+/* Tailwind 기본 시각 토큰을 비우고 아래 Figma 토큰만 노출합니다.
+   레이아웃 계산에 쓰는 기본 --spacing, breakpoint, container는 유지합니다. */
+@theme {
+  --color-*: initial;
+  --text-*: initial;
+  --font-weight-*: initial;
+  --tracking-*: initial;
+  --leading-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+  --inset-shadow-*: initial;
+  --drop-shadow-*: initial;
+  --text-shadow-*: initial;
+  --blur-*: initial;
+}
+
+@theme static {
+  /* Primary */
+  --color-primary-0: #fbfbfe;
+  --color-primary-50: #f1f2fb;
+  --color-primary-100: #dddff5;
+  --color-primary-200: #bfc2e9;
+  --color-primary-300: #9da0dc;
+  --color-primary-400: #7a7bc8;
+  --color-primary-500: #5551ad;
+  --color-primary-600: #423e8e;
+  --color-primary-700: #302c6d;
+  --color-primary-800: #1e1e41;
+  --color-primary-900: #101026;
+
+  /* Secondary */
+  --color-secondary-0: #fffef9;
+  --color-secondary-50: #fffcf0;
+  --color-secondary-100: #fff9e3;
+  --color-secondary-200: #fff5d1;
+  --color-secondary-300: #fff0bb;
+  --color-secondary-400: #ffeaa1;
+  --color-secondary-500: #fee383;
+  --color-secondary-600: #dec158;
+  --color-secondary-700: #b09738;
+  --color-secondary-800: #786518;
+  --color-secondary-900: #3e3306;
+
+  /* Neutral / Ink */
+  --color-ink-0: #faf9fc;
+  --color-ink-50: #e8e8ec;
+  --color-ink-100: #c4c4ce;
+  --color-ink-200: #9a9aac;
+  --color-ink-300: #6e6e84;
+  --color-ink-400: #4a4a5c;
+  --color-ink-500: #2e2e3e;
+  --color-ink-600: #242434;
+  --color-ink-700: #1a1a28;
+  --color-ink-800: #12121e;
+  --color-ink-900: #0a0a14;
+
+  /* Success */
+  --color-success-0: #f9fdf9;
+  --color-success-50: #eef9ed;
+  --color-success-100: #d8f1d7;
+  --color-success-200: #ade2ab;
+  --color-success-300: #72ce72;
+  --color-success-400: #00b424;
+  --color-success-500: #009e1e;
+  --color-success-600: #008317;
+  --color-success-700: #006810;
+  --color-success-800: #004b09;
+  --color-success-900: #002e04;
+
+  /* Error */
+  --color-error-0: #fffbfb;
+  --color-error-50: #fff3f2;
+  --color-error-100: #ffe4e1;
+  --color-error-200: #ffc3be;
+  --color-error-300: #ff9892;
+  --color-error-400: #ff5a5a;
+  --color-error-500: #f1303d;
+  --color-error-600: #cf162b;
+  --color-error-700: #a7081e;
+  --color-error-800: #7c0012;
+  --color-error-900: #4e030a;
+
+  /* Warning */
+  --color-warning-0: #fffdfa;
+  --color-warning-50: #fff8ef;
+  --color-warning-100: #ffefdc;
+  --color-warning-200: #ffddb3;
+  --color-warning-300: #ffc77c;
+  --color-warning-400: #ffaa00;
+  --color-warning-500: #df9400;
+  --color-warning-600: #bb7b00;
+  --color-warning-700: #956200;
+  --color-warning-800: #6e4700;
+  --color-warning-900: #372100;
+
+  /* Info */
+  --color-info-0: #fafdff;
+  --color-info-50: #f0f8ff;
+  --color-info-100: #ddefff;
+  --color-info-200: #b6ddff;
+  --color-info-300: #83c6ff;
+  --color-info-400: #37abff;
+  --color-info-500: #0090e4;
+  --color-info-600: #0076bd;
+  --color-info-700: #005d95;
+  --color-info-800: #00436d;
+  --color-info-900: #002945;
+
+  /* Base */
+  --color-white: #fefefe;
+  --color-black: #111111;
+
+  /* Light */
+  /* Brand */
+  --color-primary: var(--color-primary-500);
+  --color-secondary: var(--color-secondary-500);
+
+  /* Background */
+  --color-bg-canvas: var(--color-ink-0);
+  --color-bg-surface: var(--color-white);
+  --color-bg-subtle: var(--color-ink-50);
+  --color-bg-inverse: var(--color-ink-900);
+
+  /* Text */
+  --color-ink: var(--color-ink-700);
+  --color-ink-secondary: var(--color-ink-500);
+  --color-ink-muted: var(--color-ink-400);
+  --color-text-inverse: var(--color-white);
+
+  /* Border */
+  --color-border: var(--color-ink-100);
+  --color-border-strong: var(--color-ink-300);
+
+  /* Focus */
+  --color-ring: var(--color-primary-500);
+
+  /* Action */
+  --color-action-primary-bg: var(--color-primary-500);
+  --color-action-primary-hover: var(--color-primary-600);
+  --color-action-primary-pressed: var(--color-primary-700);
+  --color-action-primary-fg: var(--color-white);
+  --color-action-secondary-bg: var(--color-secondary-500);
+  --color-action-secondary-hover: var(--color-secondary-600);
+  --color-action-secondary-pressed: var(--color-secondary-700);
+  --color-action-secondary-fg: var(--color-ink-900);
+
+  /* Status */
+  --color-status-success-bg: var(--color-success-50);
+  --color-status-success-border: var(--color-success-500);
+  --color-status-success-fg: var(--color-success-700);
+  --color-status-success-icon: var(--color-success-600);
+  --color-success: var(--color-success-600);
+  --color-status-success-on-solid: var(--color-white);
+  --color-status-error-bg: var(--color-error-50);
+  --color-status-error-border: var(--color-error-500);
+  --color-status-error-fg: var(--color-error-700);
+  --color-status-error-icon: var(--color-error-600);
+  --color-error: var(--color-error-600);
+  --color-status-error-on-solid: var(--color-white);
+  /* 밝은 경고색에는 어두운 글자를 사용합니다. 아이콘·테두리는 상태 텍스트와 함께 사용합니다. */
+  --color-status-warning-bg: var(--color-warning-50);
+  --color-status-warning-border: var(--color-warning-400);
+  --color-status-warning-fg: var(--color-ink-700);
+  --color-status-warning-icon: var(--color-warning-400);
+  --color-warning: var(--color-warning-400);
+  --color-status-warning-on-solid: var(--color-ink-900);
+  --color-status-info-bg: var(--color-info-50);
+  --color-status-info-border: var(--color-info-500);
+  --color-status-info-fg: var(--color-info-700);
+  --color-status-info-icon: var(--color-info-600);
+  --color-info: var(--color-info-600);
+  --color-status-info-on-solid: var(--color-white);
+}
+
+/* Figma Brand / Padding & Radius
+   https://www.figma.com/design/GfYyF8klIKTizVSaE9g34S?node-id=34-490
+   여백 11개 + 반경 8개. Light / Dark 공통입니다.
+   여백·반경은 값으로만 정의하며 용도별 별칭을 만들지 않습니다.
+   p-16px = 16px, rounded-16 = 16px. Tailwind 기본 p-4 = 16px도 유지합니다.
+   예: p-20px md:p-24px rounded-24 · px-16px py-12px gap-8px.
+   Figma Corner smoothing은 0%로 CSS border-radius와 맞춥니다. */
+
+@theme static {
+  /* 4px 기반 여백 */
+  --spacing-0px: 0px;
+  --spacing-4px: 4px;
+  --spacing-8px: 8px;
+  --spacing-12px: 12px;
+  --spacing-16px: 16px;
+  --spacing-20px: 20px;
+  --spacing-24px: 24px;
+  --spacing-32px: 32px;
+  --spacing-40px: 40px;
+  --spacing-48px: 48px;
+  --spacing-64px: 64px;
+
+  /* 모서리 반경 */
+  --radius-0: 0px;
+  --radius-4: 4px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-24: 24px;
+  --radius-32: 32px;
+  --radius-full: 9999px;
+}
+
+/* Brand / Typography · Pretendard Variable
+   https://www.figma.com/design/GfYyF8klIKTizVSaE9g34S?node-id=39-514
+   heading-1~6, title-1~4, body-1~4, detail · 최소 12px.
+   1rem = 16px 기준이며 사용자의 기본 글자 크기에 맞춰 확대됩니다.
+   굵기 기본값: Heading 700 / Title 600·500 / Body·Detail 400.
+   크기 역할과 HTML h1~h6 문서 계층은 독립적으로 선택합니다.
+   예: text-heading-3 md:text-heading-1, text-body-2 md:text-body-1. */
+
+@theme static {
+  --font-sans:
+    'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue',
+    'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', sans-serif;
+
+  /* 원시 크기·행간·굵기·자간 */
+  --type-size-12: 0.75rem;
+  --type-size-13: 0.8125rem;
+  --type-size-14: 0.875rem;
+  --type-size-16: 1rem;
+  --type-size-18: 1.125rem;
+  --type-size-20: 1.25rem;
+  --type-size-24: 1.5rem;
+  --type-size-28: 1.75rem;
+  --type-size-32: 2rem;
+  --type-size-36: 2.25rem;
+  --type-size-40: 2.5rem;
+  --type-size-48: 3rem;
+  --type-leading-18: 1.125rem;
+  --type-leading-20: 1.25rem;
+  --type-leading-24: 1.5rem;
+  --type-leading-28: 1.75rem;
+  --type-leading-32: 2rem;
+  --type-leading-36: 2.25rem;
+  --type-leading-40: 2.5rem;
+  --type-leading-44: 2.75rem;
+  --type-leading-48: 3rem;
+  --type-leading-56: 3.5rem;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --type-tracking-normal: 0em;
+
+  /* 역할별 합성 유틸리티: text-heading-1, text-title-4, text-body-2, text-detail */
+  --text-heading-1: var(--type-size-48);
+  --text-heading-1--line-height: var(--type-leading-56);
+  --text-heading-1--font-weight: var(--font-weight-bold);
+  --text-heading-1--letter-spacing: var(--type-tracking-normal);
+
+  --text-heading-2: var(--type-size-40);
+  --text-heading-2--line-height: var(--type-leading-48);
+  --text-heading-2--font-weight: var(--font-weight-bold);
+  --text-heading-2--letter-spacing: var(--type-tracking-normal);
+
+  --text-heading-3: var(--type-size-36);
+  --text-heading-3--line-height: var(--type-leading-44);
+  --text-heading-3--font-weight: var(--font-weight-bold);
+  --text-heading-3--letter-spacing: var(--type-tracking-normal);
+
+  --text-heading-4: var(--type-size-32);
+  --text-heading-4--line-height: var(--type-leading-40);
+  --text-heading-4--font-weight: var(--font-weight-bold);
+  --text-heading-4--letter-spacing: var(--type-tracking-normal);
+
+  --text-heading-5: var(--type-size-28);
+  --text-heading-5--line-height: var(--type-leading-36);
+  --text-heading-5--font-weight: var(--font-weight-bold);
+  --text-heading-5--letter-spacing: var(--type-tracking-normal);
+
+  --text-heading-6: var(--type-size-24);
+  --text-heading-6--line-height: var(--type-leading-32);
+  --text-heading-6--font-weight: var(--font-weight-bold);
+  --text-heading-6--letter-spacing: var(--type-tracking-normal);
+
+  --text-title-1: var(--type-size-24);
+  --text-title-1--line-height: var(--type-leading-32);
+  --text-title-1--font-weight: var(--font-weight-semibold);
+  --text-title-1--letter-spacing: var(--type-tracking-normal);
+
+  --text-title-2: var(--type-size-20);
+  --text-title-2--line-height: var(--type-leading-28);
+  --text-title-2--font-weight: var(--font-weight-semibold);
+  --text-title-2--letter-spacing: var(--type-tracking-normal);
+
+  --text-title-3: var(--type-size-18);
+  --text-title-3--line-height: var(--type-leading-28);
+  --text-title-3--font-weight: var(--font-weight-medium);
+  --text-title-3--letter-spacing: var(--type-tracking-normal);
+
+  --text-title-4: var(--type-size-16);
+  --text-title-4--line-height: var(--type-leading-24);
+  --text-title-4--font-weight: var(--font-weight-medium);
+  --text-title-4--letter-spacing: var(--type-tracking-normal);
+
+  --text-body-1: var(--type-size-18);
+  --text-body-1--line-height: var(--type-leading-32);
+  --text-body-1--font-weight: var(--font-weight-regular);
+  --text-body-1--letter-spacing: var(--type-tracking-normal);
+
+  --text-body-2: var(--type-size-16);
+  --text-body-2--line-height: var(--type-leading-28);
+  --text-body-2--font-weight: var(--font-weight-regular);
+  --text-body-2--letter-spacing: var(--type-tracking-normal);
+
+  --text-body-3: var(--type-size-14);
+  --text-body-3--line-height: var(--type-leading-24);
+  --text-body-3--font-weight: var(--font-weight-regular);
+  --text-body-3--letter-spacing: var(--type-tracking-normal);
+
+  --text-body-4: var(--type-size-13);
+  --text-body-4--line-height: var(--type-leading-20);
+  --text-body-4--font-weight: var(--font-weight-regular);
+  --text-body-4--letter-spacing: var(--type-tracking-normal);
+
+  --text-detail: var(--type-size-12);
+  --text-detail--line-height: var(--type-leading-18);
+  --text-detail--font-weight: var(--font-weight-regular);
+  --text-detail--letter-spacing: var(--type-tracking-normal);
+}
+
+/* html의 테마와 독립적으로 하위 화면에 data-theme을 지정할 수 있습니다.
+   코드블록처럼 항상 어두운 영역도 같은 Dark Semantic 계약을 사용합니다. */
+[data-theme='light'] {
+  --color-primary: var(--color-primary-500);
+  --color-secondary: var(--color-secondary-500);
+  --color-bg-canvas: var(--color-ink-0);
+  --color-bg-surface: var(--color-white);
+  --color-bg-subtle: var(--color-ink-50);
+  --color-bg-inverse: var(--color-ink-900);
+  --color-ink: var(--color-ink-700);
+  --color-ink-secondary: var(--color-ink-500);
+  --color-ink-muted: var(--color-ink-400);
+  --color-text-inverse: var(--color-white);
+  --color-border: var(--color-ink-100);
+  --color-border-strong: var(--color-ink-300);
+  --color-ring: var(--color-primary-500);
+  --color-action-primary-bg: var(--color-primary-500);
+  --color-action-primary-hover: var(--color-primary-600);
+  --color-action-primary-pressed: var(--color-primary-700);
+  --color-action-primary-fg: var(--color-white);
+  --color-action-secondary-bg: var(--color-secondary-500);
+  --color-action-secondary-hover: var(--color-secondary-600);
+  --color-action-secondary-pressed: var(--color-secondary-700);
+  --color-action-secondary-fg: var(--color-ink-900);
+  --color-status-success-bg: var(--color-success-50);
+  --color-status-success-border: var(--color-success-500);
+  --color-status-success-fg: var(--color-success-700);
+  --color-status-success-icon: var(--color-success-600);
+  --color-success: var(--color-success-600);
+  --color-status-success-on-solid: var(--color-white);
+  --color-status-error-bg: var(--color-error-50);
+  --color-status-error-border: var(--color-error-500);
+  --color-status-error-fg: var(--color-error-700);
+  --color-status-error-icon: var(--color-error-600);
+  --color-error: var(--color-error-600);
+  --color-status-error-on-solid: var(--color-white);
+  --color-status-warning-bg: var(--color-warning-50);
+  --color-status-warning-border: var(--color-warning-400);
+  --color-status-warning-fg: var(--color-ink-700);
+  --color-status-warning-icon: var(--color-warning-400);
+  --color-warning: var(--color-warning-400);
+  --color-status-warning-on-solid: var(--color-ink-900);
+  --color-status-info-bg: var(--color-info-50);
+  --color-status-info-border: var(--color-info-500);
+  --color-status-info-fg: var(--color-info-700);
+  --color-status-info-icon: var(--color-info-600);
+  --color-info: var(--color-info-600);
+  --color-status-info-on-solid: var(--color-white);
+}
+
+[data-theme='dark'] {
+  /* Brand */
+  --color-primary: var(--color-primary-500);
+  --color-secondary: var(--color-secondary-500);
+
+  /* Background */
+  --color-bg-canvas: var(--color-ink-900);
+  --color-bg-surface: var(--color-ink-800);
+  --color-bg-subtle: var(--color-ink-700);
+  --color-bg-inverse: var(--color-white);
+
+  /* Text */
+  --color-ink: var(--color-ink-50);
+  --color-ink-secondary: var(--color-ink-100);
+  --color-ink-muted: var(--color-ink-200);
+  --color-text-inverse: var(--color-ink-700);
+
+  /* Border */
+  --color-border: var(--color-ink-500);
+  --color-border-strong: var(--color-ink-300);
+
+  /* Focus */
+  --color-ring: var(--color-primary-300);
+
+  /* Action */
+  --color-action-primary-bg: var(--color-primary-300);
+  --color-action-primary-hover: var(--color-primary-200);
+  --color-action-primary-pressed: var(--color-primary-100);
+  --color-action-primary-fg: var(--color-ink-900);
+  --color-action-secondary-bg: var(--color-secondary-500);
+  --color-action-secondary-hover: var(--color-secondary-400);
+  --color-action-secondary-pressed: var(--color-secondary-300);
+  --color-action-secondary-fg: var(--color-ink-900);
+
+  /* Status */
+  --color-status-success-bg: var(--color-success-900);
+  --color-status-success-border: var(--color-success-400);
+  --color-status-success-fg: var(--color-success-100);
+  --color-status-success-icon: var(--color-success-300);
+  --color-success: var(--color-success-300);
+  --color-status-success-on-solid: var(--color-success-900);
+  --color-status-error-bg: var(--color-error-900);
+  --color-status-error-border: var(--color-error-400);
+  --color-status-error-fg: var(--color-error-100);
+  --color-status-error-icon: var(--color-error-300);
+  --color-error: var(--color-error-300);
+  --color-status-error-on-solid: var(--color-error-900);
+  --color-status-warning-bg: var(--color-warning-900);
+  --color-status-warning-border: var(--color-warning-400);
+  --color-status-warning-fg: var(--color-warning-100);
+  --color-status-warning-icon: var(--color-warning-300);
+  --color-warning: var(--color-warning-300);
+  --color-status-warning-on-solid: var(--color-warning-900);
+  --color-status-info-bg: var(--color-info-900);
+  --color-status-info-border: var(--color-info-400);
+  --color-status-info-fg: var(--color-info-100);
+  --color-status-info-icon: var(--color-info-300);
+  --color-info: var(--color-info-300);
+  --color-status-info-on-solid: var(--color-info-900);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) {
+    /* Brand */
+    --color-primary: var(--color-primary-500);
+    --color-secondary: var(--color-secondary-500);
+
+    /* Background */
+    --color-bg-canvas: var(--color-ink-900);
+    --color-bg-surface: var(--color-ink-800);
+    --color-bg-subtle: var(--color-ink-700);
+    --color-bg-inverse: var(--color-white);
+
+    /* Text */
+    --color-ink: var(--color-ink-50);
+    --color-ink-secondary: var(--color-ink-100);
+    --color-ink-muted: var(--color-ink-200);
+    --color-text-inverse: var(--color-ink-700);
+
+    /* Border */
+    --color-border: var(--color-ink-500);
+    --color-border-strong: var(--color-ink-300);
+
+    /* Focus */
+    --color-ring: var(--color-primary-300);
+
+    /* Action */
+    --color-action-primary-bg: var(--color-primary-300);
+    --color-action-primary-hover: var(--color-primary-200);
+    --color-action-primary-pressed: var(--color-primary-100);
+    --color-action-primary-fg: var(--color-ink-900);
+    --color-action-secondary-bg: var(--color-secondary-500);
+    --color-action-secondary-hover: var(--color-secondary-400);
+    --color-action-secondary-pressed: var(--color-secondary-300);
+    --color-action-secondary-fg: var(--color-ink-900);
+
+    /* Status */
+    --color-status-success-bg: var(--color-success-900);
+    --color-status-success-border: var(--color-success-400);
+    --color-status-success-fg: var(--color-success-100);
+    --color-status-success-icon: var(--color-success-300);
+    --color-success: var(--color-success-300);
+    --color-status-success-on-solid: var(--color-success-900);
+    --color-status-error-bg: var(--color-error-900);
+    --color-status-error-border: var(--color-error-400);
+    --color-status-error-fg: var(--color-error-100);
+    --color-status-error-icon: var(--color-error-300);
+    --color-error: var(--color-error-300);
+    --color-status-error-on-solid: var(--color-error-900);
+    --color-status-warning-bg: var(--color-warning-900);
+    --color-status-warning-border: var(--color-warning-400);
+    --color-status-warning-fg: var(--color-warning-100);
+    --color-status-warning-icon: var(--color-warning-300);
+    --color-warning: var(--color-warning-300);
+    --color-status-warning-on-solid: var(--color-warning-900);
+    --color-status-info-bg: var(--color-info-900);
+    --color-status-info-border: var(--color-info-400);
+    --color-status-info-fg: var(--color-info-100);
+    --color-status-info-icon: var(--color-info-300);
+    --color-info: var(--color-info-300);
+    --color-status-info-on-solid: var(--color-info-900);
+  }
+}

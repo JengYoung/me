@@ -19,17 +19,19 @@ node scripts/check-instruction-runtime.mjs
 
 ## 도구별 구조
 
-| 구분 | Codex | Claude Code |
-| --- | --- | --- |
-| 기본 지침 | 루트 `AGENTS.md` | 루트 `CLAUDE.md` |
-| 지침 관리 | `AGENTS.md`가 지침 작업에서 읽도록 지정한 `.codex/instructions.md` | 해당 경로 작업 시 로딩되는 `.claude/rules/instruction-maintenance.md` |
-| 코드 품질 | `AGENTS.md`가 코드·품질 설정 작업에서 읽도록 지정한 `.codex/code-quality.md` | 코드·설정 경로에 적용되는 `.claude/rules/code-quality.md` |
-| 스킬 | `.agents/skills/<name>/SKILL.md` | `.claude/skills/<name>/SKILL.md` |
-| 추가 설정 | 스킬의 `agents/openai.yaml`에 표시명·기본 프롬프트·자동 선택 정책 | SKILL.md frontmatter에 인자 힌트·호출 정책 |
-| 명시적 호출 | `$sync-instructions check` 또는 `write`라는 사용자 요청 | `/sync-instructions check` 또는 `write`; 본문의 `$ARGUMENTS` 치환 |
-| 실행 권한 | 현재 샌드박스·승인 정책과 실행 도구의 권한 상승 절차 | 현재 세션의 도구 권한과 Bash 승인 절차 |
+| 구분          | Codex                                                                                                        | Claude Code                                                                                                                 |
+| ------------- | ------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| 기본 지침     | 루트 `AGENTS.md`                                                                                             | 루트 `CLAUDE.md`                                                                                                            |
+| 지침 관리     | `AGENTS.md`가 지침 작업에서 읽도록 지정한 `.codex/instructions.md`                                           | 해당 경로 작업 시 로딩되는 `.claude/rules/instruction-maintenance.md`                                                       |
+| 코드 품질     | `AGENTS.md`가 코드·품질 설정 작업에서 읽도록 지정한 `.codex/code-quality.md`                                 | 코드·설정 경로에 적용되는 `.claude/rules/code-quality.md`                                                                   |
+| 테스트 작성   | `AGENTS.md`가 테스트·fixture·환경 작업 전에 읽도록 지정한 `.codex/test-writing.md`                           | 테스트·fixture·설정 경로에 적용되는 `.claude/rules/test-writing.md`; `CLAUDE.md`에서도 작업 전에 확인하도록 연결            |
+| React·Next.js | `AGENTS.md`가 컴포넌트·Hook·페이지·데이터 조회·성능 작업 전에 읽도록 지정한 `.codex/react-best-practices.md` | 앱·패키지의 JS/TS·설정 경로에 적용되는 `.claude/rules/react-best-practices.md`; `CLAUDE.md`에서도 작업 전에 확인하도록 연결 |
+| 스킬          | `.agents/skills/<name>/SKILL.md`                                                                             | `.claude/skills/<name>/SKILL.md`                                                                                            |
+| 추가 설정     | 스킬의 `agents/openai.yaml`에 표시명·기본 프롬프트·자동 선택 정책                                            | SKILL.md frontmatter에 인자 힌트·호출 정책                                                                                  |
+| 명시적 호출   | `$sync-instructions check` 또는 `write`라는 사용자 요청                                                      | `/sync-instructions check` 또는 `write`; 본문의 `$ARGUMENTS` 치환                                                           |
+| 실행 권한     | 현재 샌드박스·승인 정책과 실행 도구의 권한 상승 절차                                                         | 현재 세션의 도구 권한과 Bash 승인 절차                                                                                      |
 
-`.codex/instructions.md`와 `.codex/code-quality.md`는 이름만으로 자동 로딩되는 파일이 아니다. 루트 지침에서 작업 범위를 구분하여 명시적으로 연결한다. `.codex/skills`와 `.agents/skills`에 같은 스킬을 복제하면 설치 버전에 따라 중복 발견되므로 한 곳에만 설치한다.
+`.codex/instructions.md`, `.codex/code-quality.md`, `.codex/test-writing.md`, `.codex/react-best-practices.md`는 이름만으로 자동 로딩되는 파일이 아니다. 루트 지침에서 작업 범위를 구분하여 명시적으로 연결한다. `.codex/skills`와 `.agents/skills`에 같은 스킬을 복제하면 설치 버전에 따라 중복 발견되므로 한 곳에만 설치한다.
 
 기본 지침은 일상 작업에 필요한 짧은 공통 원칙을 담는다. 동기화 절차는 스킬, 충돌 복구는 호출 시 읽는 참조로 분리한다. Claude 경로별 규칙은 일반 제품 작업에 유지보수 절차를 상시 주입하지 않는다.
 
@@ -43,17 +45,19 @@ node scripts/check-instruction-runtime.mjs
 
 ## 수정할 파일
 
-| 원천 경로 | 역할 |
-| --- | --- |
-| `project/source.md` | 도구 공통 목적·작업 원칙·품질·관리 계약 |
-| `conventions/code-quality/source.md` | Oxlint·Oxfmt·타입 검사의 책임, Iris 코어 예외, 실제 설정·명령·검증 범위 |
-| `skills/<name>/source.md` | 스킬 이름·설명과 도구 공통 행동 계약 |
-| `skills/<name>/references/*.md` | 필요한 작업에서만 읽는 공통 참고자료 |
-| `adapters/codex/` | Codex 기본·상세 지침과 스킬 절차 |
-| `adapters/claude/` | Claude 기본 지침·경로별 규칙·스킬 절차 |
-| `adapters/<tool>/skills/<name>.json` | 각 도구의 선택적인 스킬 메타데이터 |
-| `targets.json` | 공식 진입점·발견 경로·상세 문서·조건부 규칙·도구 실행 보류 상태 |
-| `registry.md`, `.manifest.json` | 생성기가 관리하는 산출물 목록·계약 포함 위치·해시 |
+| 원천 경로                                    | 역할                                                                                   |
+| -------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `project/source.md`                          | 도구 공통 목적·작업 원칙·품질·관리 계약                                                |
+| `conventions/code-quality/source.md`         | Oxlint·Oxfmt·타입 검사의 책임, Iris 코어 예외, 실제 설정·명령·검증 범위                |
+| `conventions/test-writing/source.md`         | Vitest 컴포넌트·Playwright 앱 E2E의 역할, 독립성·정리·React 검증 계약과 현재 실행 범위 |
+| `conventions/react-best-practices/source.md` | Vercel의 React·Next.js 70개 규칙, 기준 커밋·출처와 프로젝트 적용 조건                  |
+| `skills/<name>/source.md`                    | 스킬 이름·설명과 도구 공통 행동 계약                                                   |
+| `skills/<name>/references/*.md`              | 필요한 작업에서만 읽는 공통 참고자료                                                   |
+| `adapters/codex/`                            | Codex 기본·상세 지침과 스킬 절차                                                       |
+| `adapters/claude/`                           | Claude 기본 지침·경로별 규칙·스킬 절차                                                 |
+| `adapters/<tool>/skills/<name>.json`         | 각 도구의 선택적인 스킬 메타데이터                                                     |
+| `targets.json`                               | 공식 진입점·발견 경로·상세 문서·조건부 규칙·도구 실행 보류 상태                        |
+| `registry.md`, `.manifest.json`              | 생성기가 관리하는 산출물 목록·계약 포함 위치·해시                                      |
 
 표의 경로는 이 디렉터리 기준이다. 생성 코드는 `scripts/instruction-model.mjs`와 `scripts/sync-instructions.mjs`에 있다. 원천과 어댑터를 바꾼 뒤 재생성하며, 생성물만 편집하지 않는다.
 
@@ -69,7 +73,11 @@ node scripts/check-instruction-runtime.mjs
 
 `turborepo`는 [업스트림 스킬](https://github.com/vercel/turborepo/blob/main/skills/turborepo/SKILL.md)의 동봉 문서 우선 원칙을 유지한다. 구체적인 Turborepo 설정법은 이 저장소에 복제하지 않고 실제 설치 버전의 문서에서 확인한다.
 
-프로젝트 공통 계약 변수는 `PURPOSE`, `WORKFLOW`, `QUALITY`, `MAINTENANCE`, `NON_GOALS`다. `CODE_QUALITY`는 `conventions/code-quality/source.md`의 전체 정책이다. 각 계약은 각 도구의 기본·상세 문서와 경로별 규칙 전체에서 한 번씩 포함한다. `CODE_QUALITY`만 사용하는 상세 지침·규칙은 해당 정책 파일을 생성 원천으로 기록한다. `SKILLS`는 해당 도구의 스킬 목록이다. `RUNTIME_STATUS`는 `targets.json`에서 생성한 실행 보류 지침이며 프로젝트 지침 묶음과 각 스킬 어댑터에 한 번씩 포함한다.
+프로젝트 공통 계약 변수는 `PURPOSE`, `WORKFLOW`, `QUALITY`, `MAINTENANCE`, `NON_GOALS`다. `CODE_QUALITY`는 `conventions/code-quality/source.md`, `TEST_WRITING`은 `conventions/test-writing/source.md`, `REACT_BEST_PRACTICES`는 `conventions/react-best-practices/source.md`의 전체 계약이다. 각 계약은 각 도구의 기본·상세 문서와 경로별 규칙 전체에서 한 번씩 포함한다. 하나의 컨벤션 계약만 사용하는 상세 지침·규칙은 해당 정책 파일을 생성 원천으로 기록한다. `SKILLS`는 해당 도구의 스킬 목록이다. `RUNTIME_STATUS`는 `targets.json`에서 생성한 실행 보류 지침이며 프로젝트 지침 묶음과 각 스킬 어댑터에 한 번씩 포함한다.
+
+테스트 작성 계약은 사용자 지정 `blog` 저장소의 `.agent-source/conventions/test-writing/source.md`와 `reference.md`를 참고했다. 독립성·정리·React 검증 원칙을 보존하고 제품의 함수·Hook·컴포넌트 검증은 Vitest, 실제 앱을 실행하는 앱 단위 통합 테스트는 Playwright E2E로 구분한다. 테스트는 별도 디렉터리를 만들지 않고 대상 파일 옆에 두며 E2E는 `<대상 파일명>.e2e.spec.ts`로 수집한다. 현재 구현된 실행 환경과 검증 범위·미검증 앱 흐름을 구분해 기록하며, 블로그의 `client/` 경로나 테스트 설정을 그대로 가져오지 않는다. 기존 개발 도구의 Node 테스트는 유지한다. 공통 계약과 짧은 예시는 각 도구의 상세 문서에 함께 생성하므로 다른 작업 공간이나 다른 도구의 파일에 의존하지 않는다.
+
+React 작성 계약은 [Vercel React Best Practices](https://github.com/vercel-labs/agent-skills/tree/main/skills/react-best-practices)의 8개 분야·70개 규칙을 프로젝트 지침으로 적용한다. 기준 커밋·라이선스 표기·규칙 식별자는 원천에 기록하고 양쪽 상세 지침에 함께 생성한다. 원문 예시보다 FSD 공개 API, 디자인 토큰, Iris 예외 및 공식 React API 계약을 우선한다. 별도 외부 스킬 설치나 제품 코드·의존성 변경은 포함하지 않는다.
 
 현재 메타데이터 지원 범위는 Codex의 `interface.display_name`, `short_description`, `default_prompt`, `policy.allow_implicit_invocation`과 Claude의 `argument-hint`, `disable-model-invocation`, `user-invocable`다. 이는 생성기의 지원 범위이며 도구 전체 규격을 뜻하지 않는다. 다른 필드나 도구가 필요하면 설치 버전의 공식 규격을 확인하고 생성기 검증을 함께 확장한다. 알 수 없는 필드를 조용히 버리지 않는다.
 

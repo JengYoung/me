@@ -9,6 +9,8 @@
 {{QUALITY}}
 
 코드 작성·수정·리뷰와 lint·포맷·타입 설정 작업 전에는 [코드 품질 정책](.codex/code-quality.md)을 읽고 적용한다.
+테스트 작성·수정·리뷰와 fixture·테스트 환경 변경 전에는 [테스트 작성 지침](.codex/test-writing.md)을 읽고 적용한다.
+React·Next.js 컴포넌트·Hook·페이지·데이터 조회·성능 관련 코드를 작성·수정·리뷰하기 전에는 [React Best Practices](.codex/react-best-practices.md)를 읽고 적용한다.
 
 ## Codex에서 적용하기
 

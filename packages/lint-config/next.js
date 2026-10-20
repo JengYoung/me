@@ -26,6 +26,7 @@ export function createNextConfig({ rootDir = process.cwd(), fsd = {} } = {}) {
     ...react,
     plugins: [...react.plugins, 'nextjs'],
     jsPlugins: [
+      ...react.jsPlugins,
       ...fsdConfig.jsPlugins,
       // These rules have no native equivalent in Oxlint 1.88.0.
       { name: 'next-compat', specifier: fileURLToPath(import.meta.resolve('@next/eslint-plugin-next')) },
