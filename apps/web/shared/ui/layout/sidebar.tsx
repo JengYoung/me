@@ -2,6 +2,7 @@
 
 import { Drawer, type DrawerRootProps } from '@repo/ui';
 import type { ComponentProps, ReactNode } from 'react';
+import { CloseIcon } from '../icons';
 
 const ICON_BUTTON_CLASS_NAME =
   'inline-flex size-48px shrink-0 cursor-pointer items-center justify-center rounded-full text-ink transition-colors hover:bg-bg-subtle active:bg-bg-subtle focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring motion-reduce:transition-none';
@@ -40,19 +41,7 @@ function SidebarContent({ title, closeLabel = '사이드바 닫기', children }:
         >
           <Drawer.Title className="min-w-0 truncate text-title-2">{title}</Drawer.Title>
           <Drawer.Close aria-label={closeLabel} className={ICON_BUTTON_CLASS_NAME}>
-            <svg
-              aria-hidden="true"
-              focusable="false"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="size-24px"
-            >
-              <path d="M18 6 6 18M6 6l12 12" />
-            </svg>
+            <CloseIcon aria-hidden="true" focusable="false" className="size-24px" />
           </Drawer.Close>
         </div>
         <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-24px">{children}</div>

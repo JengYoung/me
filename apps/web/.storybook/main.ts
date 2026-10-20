@@ -1,6 +1,8 @@
 import type { StorybookConfig } from '@storybook/nextjs-vite';
 import tailwindcss from '@tailwindcss/vite';
 import { mergeConfig } from 'vite';
+import svgr from 'vite-plugin-svgr';
+import svgrOptions from '../svgr.config.js';
 
 const config: StorybookConfig = {
   stories: ['../{app,shared,entities,features,widgets,screens}/**/*.stories.@(ts|tsx)'],
@@ -15,7 +17,7 @@ const config: StorybookConfig = {
   },
   viteFinal: (viteConfig) =>
     mergeConfig(viteConfig, {
-      plugins: [tailwindcss()],
+      plugins: [svgr({ svgrOptions }), tailwindcss()],
       // Vite가 폰트 URL을 처리하도록 하고 Next.js용 PostCSS의 중복 실행을 막습니다.
       css: { postcss: { plugins: [] } },
     }),
