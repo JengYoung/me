@@ -1,5 +1,33 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).
 
+## 캐릭터 · issue-9
+
+`shared/ui/character`에서 `Character`, `AnimatedCharacter`, `CharacterExpression`을 가져옵니다.
+정적 SVG 11종은 `public/characters/character`에 있으며, `app/favicon.ico`, `app/icon.svg`,
+`app/apple-icon.png`는 Next.js 파일 규약으로 자동 적용됩니다.
+
+```tsx
+import { AnimatedCharacter } from '../shared/ui/character';
+
+<AnimatedCharacter expression="happy" size={240} playing speed={1} loop />;
+```
+
+루트에서 `pnpm storybook`을 실행하고 `Shared / Character`를 열면 표정 도감, 애니메이션 갤러리,
+props 플레이그라운드, Light/Dark 비교 스토리를 볼 수 있습니다. `Playground`의 Controls에서
+props를 조절하고, 공통 도구 모음에서 테마와 화면 크기를 바꿉니다.
+`playing`, `speed`(0.1–3배), `loop`, `replayKey`, `showEffects`로 재생을 제어합니다.
+화면 밖이나 숨겨진 탭에서는 일시정지하고, `prefers-reduced-motion: reduce`에서는 정지 상태를 보여줍니다.
+의미가 있는 이미지는 표정별 접근 가능한 이름을 제공하며, 장식용은 `decorative`로 숨깁니다.
+
+SVG와 React 도형 데이터의 편집 원본은 `scripts/generate-character.mjs`입니다.
+`pnpm --filter web characters:generate`로 함께 재생성합니다. 파비콘은 별도로 보존한 자산입니다.
+캐릭터 원색은 [Figma Brand](https://www.figma.com/design/GfYyF8klIKTizVSaE9g34S?node-id=13-616)의
+`primary/500` · `secondary/500`이며, 스토리 표면·텍스트·액션은 앱의 Semantic 토큰을 사용합니다.
+
+검증 명령은 `pnpm --filter web test`, `pnpm --filter web lint`,
+`pnpm --filter web check-types`, `pnpm build-storybook`, `pnpm --filter web build`입니다.
+캐릭터 테스트는 기존 Vitest Browser Mode의 모바일 Light·데스크톱 Dark 환경에서 실행합니다.
+
 ## Getting Started
 
 First, run the development server:
@@ -56,6 +84,7 @@ pnpm build-storybook
 - Header: 기본, 긴 제목, 모바일, 스크롤 플러그인 스토리.
 - Sidebar: 기본, 처음부터 열림, 모바일, 열기·닫기 상호작용 스토리.
 - Close: 기본, 16·20·24·32px 크기, 부모 색상 상속, 아이콘 버튼, 접근성 이름 스토리. `Shared / Icons / Close`에서 확인합니다.
+- Character: 표정 도감, 재생 제어가 있는 애니메이션 갤러리, Controls 플레이그라운드, Light/Dark 비교 스토리. `Shared / Character`에서 확인합니다.
 - Docs에서 컴포넌트 사용법을 확인하고 Controls에서 Header의 제목을 변경할 수 있습니다. 고정 헤더와 Sidebar portal은 Docs에서도 개별 iframe 안에 표시됩니다.
 - 도구 모음에서 Light/Dark와 390·1199·1200·1440px 화면 크기를 선택합니다. `Mobile` 스토리는 390px로 고정되므로 크기를 자유롭게 바꾸려면 `Default` 스토리를 사용합니다.
 - `Sidebar / Open And Close`의 `play`는 열기, Escape로 닫기, 닫기 버튼, 트리거로의 포커스 복귀를 검증합니다. 이 스토리를 열면 실행되며 결과는 Interactions 패널에서 확인합니다. `build-storybook`은 `play`를 실행하지 않습니다.
@@ -80,7 +109,7 @@ Vite 8의 정적 빌드에는 기존 컴포넌트의 `use client` 지시문에 �
 
 ## 컴포넌트 테스트
 
-Header·Sidebar는 Vitest Browser Mode와 Playwright의 실제 Chromium으로 검사합니다. 저장소 루트에서 최초 한 번 브라우저를 설치한 뒤 실행합니다. Next.js나 Storybook 서버는 필요하지 않습니다.
+Header·Sidebar·Character는 Vitest Browser Mode와 Playwright의 실제 Chromium으로 검사합니다. 저장소 루트에서 최초 한 번 브라우저를 설치한 뒤 실행합니다. Next.js나 Storybook 서버는 필요하지 않습니다.
 
 ```bash
 pnpm --filter web exec playwright install chromium --only-shell
