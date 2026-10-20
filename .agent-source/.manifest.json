@@ -6,6 +6,8 @@
     ".agent-source/adapters/claude/rules/instruction-maintenance.md": "8fcdc6e2ec062dd9a994fc398ee3a05ab81d5cc3cd227b057fd486d145e54a03",
     ".agent-source/adapters/claude/rules/react-best-practices.md": "6dd5b26cd4f4b075d4d50de0e46c79c0c36c6e6c5736851f8d10b021c283c413",
     ".agent-source/adapters/claude/rules/test-writing.md": "f3cb96533bb17fa8ce3564adeaf45ece2eaf13e7c8b19244df52e7919404822d",
+    ".agent-source/adapters/claude/skills/changesets-version.json": "ca297589d05d277c34d8c95ae1ef32f5fb939e61a28b3c7887ffadfd352fa90d",
+    ".agent-source/adapters/claude/skills/changesets-version.md": "0eaec8eb571194ed211d4087051e52135cfcbe07324adceac8f0c5cee1f9d70f",
     ".agent-source/adapters/claude/skills/sync-instructions.json": "1755d960bbf5e23d5a621268b3b1c66b9ed1eb9efc421144aadd3dbf8001113f",
     ".agent-source/adapters/claude/skills/sync-instructions.md": "0514149cc47d73d991554e4bfc9d79f80928e7f06d65d82ce66fb389830825ee",
     ".agent-source/adapters/claude/skills/turborepo.json": "408d074a4e7a80872e75d72118b1d079b7ec72aeb97c2e3e7354b6d1497785c4",
@@ -14,6 +16,8 @@
     ".agent-source/adapters/codex/instructions.md": "f2c960ea3693df78d12d7672eba93db34eff25a06a12cbc0d8113f355b92edb4",
     ".agent-source/adapters/codex/project.md": "700c3df2feda923bff7e4b2c65bc266ceff117d5e6679f05b75814ad53a2740c",
     ".agent-source/adapters/codex/react-best-practices.md": "056f8231592b638fa4d1c32e458ca15df0cec8ddf8100be29275048ec8280ef5",
+    ".agent-source/adapters/codex/skills/changesets-version.json": "adf7e633282b95bcc7e37087876fbebd621001308ad9c050690bb4a985a8bda8",
+    ".agent-source/adapters/codex/skills/changesets-version.md": "74474de0c0a20daa16d68ee241abff2b4e3ce927221c9c22e08579f8928183f8",
     ".agent-source/adapters/codex/skills/sync-instructions.json": "14a76c14a6c29e0ee6a68ee46ec816c527ffbd43ea10be262895fb1a0cf514c1",
     ".agent-source/adapters/codex/skills/sync-instructions.md": "a6a83d385950f0e4a177c3483eacd5696a905290503131e0bc8513b4cef03caa",
     ".agent-source/adapters/codex/skills/turborepo.json": "a1104aa39540993a112e47356ffe2a647d0b3b89b789bfb2a5a6ce904f6f2334",
@@ -22,7 +26,8 @@
     ".agent-source/conventions/code-quality/source.md": "b94809c0fa51d7b063ea90414b30b74377042ee1c45fd4df4e161e0ffc957ec4",
     ".agent-source/conventions/react-best-practices/source.md": "c98c26a26d85726b859f6553d1546a4666b62f4e5706fbff448a616122ac1b85",
     ".agent-source/conventions/test-writing/source.md": "190411f5f00699a4038e8b35d77a2cf655b1157753f28e4607352b4c964104c1",
-    ".agent-source/project/source.md": "1e38e5daa4744bfb69789619b86da78e89cf3c839002b267ac9a2aaf7f53f9b5",
+    ".agent-source/project/source.md": "2340709e38b5557ea876f91b2d046b85997cb516477b7fd7198d3e58d47c678c",
+    ".agent-source/skills/changesets-version/source.md": "3fcde6f04a67e8327c4d64a34ebe3ebc85b0fe473459540db350aba6966311e3",
     ".agent-source/skills/sync-instructions/references/recovery.md": "33c639a794a17364d992fb5f04e28305ea7bcfa0d69ddfe0d20fb9cc4ff9ba0c",
     ".agent-source/skills/sync-instructions/source.md": "633cac0b0f2789135364a52e2dd41e7d5f99fe33e6f8eeac29f6ad03cf4f0cbe",
     ".agent-source/skills/turborepo/source.md": "bf18682c68ec4f729d2f93aaf9ddd7dd10a476de650387e0b7a32ee00d15e23e",
@@ -32,10 +37,32 @@
   },
   "outputs": {
     ".agent-source/registry.md": {
-      "sha256": "5f0b66be2f5322c290c552ae3f5c30e8274f65f0fcabc86f20a33749be79bec7",
+      "sha256": "775eec30297b2c03a36efbd21fd812fb2211a474b16ced831b4dc42a6a56ed3f",
       "source": ".agent-source/project/source.md",
       "target": "registry",
       "facets": []
+    },
+    ".agents/skills/changesets-version/agents/openai.yaml": {
+      "sha256": "2562ba4864f33837a4a29f6171d81e1a27edf822bd79f726a28e80a92d1dae6d",
+      "source": ".agent-source/skills/changesets-version/source.md",
+      "target": "codex",
+      "facets": []
+    },
+    ".agents/skills/changesets-version/SKILL.md": {
+      "sha256": "59175ee7cea49a50bf1b30a3dc35c484aff31253fdcff5fbf27f9f5179651e0c",
+      "source": ".agent-source/skills/changesets-version/source.md",
+      "target": "codex",
+      "facets": [
+        "PURPOSE",
+        "TRIGGERS",
+        "INPUTS",
+        "STEPS",
+        "VERIFICATION",
+        "OUTPUTS",
+        "CONSTRAINTS",
+        "STOP",
+        "NON_GOALS"
+      ]
     },
     ".agents/skills/sync-instructions/agents/openai.yaml": {
       "sha256": "03ea2b3534fac02fbb366f22f926ae0b63540ba4fb94443ea9c62ecb6e931b0d",
@@ -119,6 +146,22 @@
         "TEST_WRITING"
       ]
     },
+    ".claude/skills/changesets-version/SKILL.md": {
+      "sha256": "d204ec13f78bf4f4edf26c9b94f9320a4070020e46da72456fe848dcf95b5048",
+      "source": ".agent-source/skills/changesets-version/source.md",
+      "target": "claude",
+      "facets": [
+        "PURPOSE",
+        "TRIGGERS",
+        "INPUTS",
+        "STEPS",
+        "VERIFICATION",
+        "OUTPUTS",
+        "CONSTRAINTS",
+        "STOP",
+        "NON_GOALS"
+      ]
+    },
     ".claude/skills/sync-instructions/references/recovery.md": {
       "sha256": "2d20d4d92345eae40261477b1bb6c4065bb56478bf24909203029d97083c95a7",
       "source": ".agent-source/skills/sync-instructions/source.md",
@@ -190,7 +233,7 @@
       ]
     },
     "AGENTS.md": {
-      "sha256": "933c34c79cac1492d5973bc3f08f270800582301fcee84893ee3ec47054cbf42",
+      "sha256": "39ce23dc09555dabc46bee3d0431611acaf572d04f82793d39b7e286d04463ee",
       "source": ".agent-source/project/source.md",
       "target": "codex",
       "facets": [
@@ -201,7 +244,7 @@
       ]
     },
     "CLAUDE.md": {
-      "sha256": "0524e64d0a854360f31e1b97fab5089bc2415427b1a687949b466d331c98f963",
+      "sha256": "ebc5d8ff70e8c20687f89f7ed1dad4c7efdda95f2ec31f0eef5b69b5b781e135",
       "source": ".agent-source/project/source.md",
       "target": "claude",
       "facets": [
