@@ -1,6 +1,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
+import {
+  HOOK_SOURCE,
+  HOOK_FILES,
+  managedContent,
+  renderWorkPlanHook,
+  mergeWorkPlanHook,
+} from './instruction-hooks.mjs';
 
 export const MANIFEST = '.agent-source/.manifest.json';
 export const REGISTRY = '.agent-source/registry.md';
@@ -175,10 +182,16 @@ function validateTargets(config) {
   const names = new Set();
   const paths = [];
   for (const target of config.targets) {
-    object(target, ['name', 'entrypoint', 'skillRoot', 'documents', 'rules', 'runtime'], 'targets.json');
+    object(
+      target,
+      ['name', 'entrypoint', 'skillRoot', 'documents', 'rules', 'runtime', 'workPlanHook'],
+      'targets.json',
+    );
     const native = NATIVE[target.name];
     if (!native || names.has(target.name)) throw new Error('targets.json: 지원하지 않거나 중복된 도구입니다.');
     names.add(target.name);
+    if (target.workPlanHook !== undefined && typeof target.workPlanHook !== 'boolean')
+      throw new Error(`${target.name}: workPlanHook은 boolean이어야 합니다.`);
     if (target.runtime !== undefined) {
       object(target.runtime, ['status', 'reason'], `${target.name}.runtime`);
       if (!['enabled', 'deferred'].includes(target.runtime.status))
@@ -227,7 +240,11 @@ function validateTargets(config) {
       )
         throw new Error(`${rule.path}: 유효한 paths 배열이 필요합니다.`);
     }
-    for (const file of [...projectPaths(target), ...skillRoots(target)]) {
+    for (const file of [
+      ...projectPaths(target),
+      ...skillRoots(target),
+      ...(target.workPlanHook ? [HOOK_FILES[target.name]] : []),
+    ]) {
       relativePath(file);
       if (paths.some((other) => file === other || file.startsWith(`${other}/`) || other.startsWith(`${file}/`)))
         throw new Error(`${target.name}: 겹치는 대상 경로 ${file}`);
@@ -296,6 +313,7 @@ export function build(root) {
   }
   source(SCRIPT);
   source('scripts/instruction-model.mjs');
+  source('scripts/instruction-hooks.mjs');
   const targets = validateTargets(JSON.parse(source('.agent-source/targets.json')));
   const runtimeStatus =
     targets
@@ -355,6 +373,17 @@ export function build(root) {
   }
   for (const target of targets) {
     const adapter = `.agent-source/adapters/${target.name}`;
+    if (target.workPlanHook) {
+      if (!skills.some((skill) => skill.name === 'work-plan'))
+        throw new Error(`${target.name}: hook에 필요한 work-plan 스킬이 없습니다.`);
+      const desired = renderWorkPlanHook(
+        source(`${adapter}/work-plan-hook.json`),
+        source(HOOK_SOURCE),
+        marker(HOOK_SOURCE, true),
+      );
+      const file = HOOK_FILES[target.name];
+      output(file, mergeWorkPlanHook(file, disk.read(file), desired), HOOK_SOURCE, target.name, ['WORK_PLAN_REMINDER']);
+    }
     const projectTemplate = source(`${adapter}/project.md`);
     const documents = (target.documents ?? []).map((doc) => ({
       ...doc,
@@ -481,7 +510,12 @@ export function build(root) {
       Object.fromEntries(
         Object.entries(outputs).map(([file, value]) => [
           file,
-          { sha256: hash(value.content), source: value.source, target: value.target, facets: value.facets },
+          {
+            sha256: hash(managedContent(file, value.content)),
+            source: value.source,
+            target: value.target,
+            facets: value.facets,
+          },
         ]),
       ),
     ),

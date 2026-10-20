@@ -9,11 +9,12 @@ Node.js 24 이상이 필요하다. 패키지 설치 없이 프로젝트 루트�
 ```sh
 node scripts/sync-instructions.mjs --check
 node scripts/sync-instructions.mjs --write
-node --test scripts/sync-instructions.test.mjs
+node --test scripts/sync-instructions.test.mjs scripts/instruction-hooks.test.mjs
 node scripts/check-instruction-runtime.mjs
+node scripts/benchmark-instruction-hooks.mjs
 ```
 
-첫 명령은 읽기 전용 검사다. 재생성이 필요하면 두 번째 명령 후 다시 검사한다. 생성기 변경에는 테스트를, 경로·스킬 메타데이터 변경에는 런타임 검사를 추가한다. 런타임 검사는 `--codex` 또는 `--claude`로 한 도구만 선택할 수도 있다.
+첫 명령은 읽기 전용 검사다. 재생성이 필요하면 두 번째 명령 후 다시 검사한다. 생성기 변경에는 테스트를, 경로·스킬 메타데이터·hook 변경에는 런타임 검사를 추가한다. 런타임 검사는 `--codex` 또는 `--claude`로 한 도구만 선택할 수도 있다. 마지막 명령은 생성된 hook 명령만 로컬에서 실행하여 텍스트 크기와 실행 시간을 측정한다.
 
 현재 Claude Code는 **로그인 만료 = 잠정 보류**다. 지침·스킬 생성과 정적 검사는 유지한다. `targets.json`의 Claude `runtime.status`가 `deferred`이므로 런타임 검사에서도 버전 조회를 포함한 Claude CLI 실행을 건너뛴다. `--claude`를 지정해도 보류가 해제되지 않는다. 사용자가 재개를 요청하기 전에는 인증 복구나 결제 변경을 시도하지 않는다. 재개 요청이 있을 때만 해당 상태를 `enabled`로 바꾸고 `reason`을 제거한 뒤 재생성한다.
 
@@ -40,7 +41,7 @@ node scripts/check-instruction-runtime.mjs
 - 두 도구 모두 관련 요청에서 스킬을 자동 선택할 수 있다. 검사 요청은 읽기만 하고 명확한 동기화 요청이나 승인된 지침 변경에서만 쓴다.
 - Claude는 `user-invocable: true`, `disable-model-invocation: false`를 사용한다. `allowed-tools`로 쓰기를 사전 허용하지 않으며 `context: fork`나 모델 강제 지정 없이 현재 대화에서 실행한다.
 - Codex의 `allow_implicit_invocation: true`를 유지한다. UI 기본 프롬프트는 검사 요청이다.
-- 프로젝트 `config.toml`, `settings.json`, `settings.local.json`을 생성하지 않는다. 현재 사용자·프로젝트·관리자 설정은 CLI가 해석하며, 이 동기화는 모델·인증·권한 설정을 관리하지 않는다.
+- 프로젝트 `.codex/hooks.json`과 `.claude/settings.json`의 work-plan hook 그룹만 생성·병합한다. `config.toml`, `settings.local.json`, 모델·인증·권한·hook 신뢰 설정은 관리하지 않는다. 기존 설정과 다른 hook은 보존한다.
 - Claude의 새 버전에 있는 AGENTS.md 지원에 의존하지 않고 CLAUDE.md를 직접 생성한다.
 
 ## 수정할 파일
@@ -53,13 +54,25 @@ node scripts/check-instruction-runtime.mjs
 | `conventions/react-best-practices/source.md` | Vercel의 React·Next.js 70개 규칙, 기준 커밋·출처와 프로젝트 적용 조건                  |
 | `skills/<name>/source.md`                    | 스킬 이름·설명과 도구 공통 행동 계약                                                   |
 | `skills/<name>/references/*.md`              | 필요한 작업에서만 읽는 공통 참고자료                                                   |
+| `hooks/work-plan/source.md`                 | 요청마다 전달하는 짧은 작업 전 안내 알림                                               |
+| `adapters/<tool>/work-plan-hook.json`       | 도구별 UserPromptSubmit 설정; 명령 본문은 공통 알림에서 생성                             |
 | `adapters/codex/`                            | Codex 기본·상세 지침과 스킬 절차                                                       |
 | `adapters/claude/`                           | Claude 기본 지침·경로별 규칙·스킬 절차                                                 |
 | `adapters/<tool>/skills/<name>.json`         | 각 도구의 선택적인 스킬 메타데이터                                                     |
 | `targets.json`                               | 공식 진입점·발견 경로·상세 문서·조건부 규칙·도구 실행 보류 상태                        |
 | `registry.md`, `.manifest.json`              | 생성기가 관리하는 산출물 목록·계약 포함 위치·해시                                      |
 
-표의 경로는 이 디렉터리 기준이다. 생성 코드는 `scripts/instruction-model.mjs`와 `scripts/sync-instructions.mjs`에 있다. 원천과 어댑터를 바꾼 뒤 재생성하며, 생성물만 편집하지 않는다.
+표의 경로는 이 디렉터리 기준이다. 생성 코드는 `scripts/instruction-model.mjs`, `scripts/instruction-hooks.mjs`, `scripts/sync-instructions.mjs`에 있다. 원천과 어댑터를 바꾼 뒤 재생성하며, 생성물만 편집하지 않는다.
+
+## 작업 전 안내와 hook
+
+`work-plan`은 작업 착수 전에 목표·담당·순서와 구체적인 방법을 설명한다. 상세 규칙은 스킬, 필요한 예시는 스킬의 참조 문서에 두며 기본 지침에는 첫 도구 호출 전에 안내할 수 있는 짧은 계약을 둔다.
+
+`targets.json`에서 도구별 `workPlanHook: true`로 `UserPromptSubmit` hook을 생성한다. 알림은 `hooks/work-plan/source.md`에서 읽어 동기화 시 JSON 출력 명령으로 만든다. 실행 시에는 셸 내장 `printf`만 사용하며 지침 파일·사용자 프롬프트·대화 기록을 읽거나 별도 모델을 호출하지 않는다. 다른 hook 이벤트를 추가하거나 timeout을 2초보다 길게 하는 어댑터는 거절한다.
+
+hook 설정 파일에서는 생성 표시가 있는 그룹만 비교·갱신한다. 매니페스트의 해당 JSON 해시는 파일 전체가 아니라 관리 그룹의 JSON에 대한 해시다. 다른 설정 변경은 충돌로 취급하지 않지만 관리 그룹의 수동 수정·삭제·중복은 보존을 위해 동기화를 중단한다. `workPlanHook: false`로 바꾸고 재생성하면 수정되지 않은 관리 그룹만 제거하며 남은 설정은 보존한다.
+
+설정 발견, hook 신뢰, 실제 hook 실행, 모델의 안내 준수는 다른 검증이다. Codex는 프로젝트와 hook의 신뢰가 필요하며 검사 스크립트가 이를 대신 승인하지 않는다. Claude 실행 보류도 유지한다. 활성화 조건, 비용 측정 방법과 한계는 [work-plan hook 안내](hooks/work-plan/README.md)에 정리했다.
 
 ## 스킬 추가
 
@@ -85,7 +98,7 @@ React 작성 계약은 [Vercel React Best Practices](https://github.com/vercel-l
 
 - 정적 검사: 원천 계약 포함, 지원 메타데이터의 타입, 상대 참조, 산출물·해시·관리 범위. 문장 의미나 모델 판단을 자동 증명하지 않는다.
 - 생성기 테스트: 임시 작업 공간에서 생성·변경·삭제·충돌 보존·이전 구조 마이그레이션을 실행한다.
-- 런타임 검사: Codex app-server의 `skills/list`, Claude Code 초기화 응답의 명령 목록을 조회해 중복 발견·설명·인자·UI 메타데이터를 확인한다. 모델 요청은 보내지 않는다. Claude 조회에서는 프로젝트·로컬 설정만 선택하고 훅·MCP를 끈다. CLI 자체 상태 DB나 캐시 접근 때문에 환경 승인이 필요할 수 있다.
+- 런타임 검사: Codex app-server의 `skills/list`·`hooks/list`, Claude Code 초기화 응답의 명령 목록을 조회해 중복 발견·설명·인자·UI 메타데이터·Codex hook 설정을 확인한다. 모델 요청이나 hook 신뢰 승인은 보내지 않는다. Claude 조회에서는 프로젝트·로컬 설정만 선택하고 훅·MCP를 끈다. CLI 자체 상태 DB나 캐시 접근 때문에 환경 승인이 필요할 수 있다.
 - 보류된 도구는 CLI를 시작하지 않고 `deferred`와 이유를 반환한다. 검사 종료 코드 0은 실행한 검사에 실패가 없다는 뜻이며, 보류된 도구의 통과를 뜻하지 않는다. 결과를 도구별로 확인한다.
 - 실제 행동: 각 도구에서 검사와 재생성 요청, 수동 수정 충돌, 권한 거절을 별도로 관찰한다. 런타임 발견 성공만으로 이 단계까지 통과했다고 보고하지 않는다.
 
@@ -95,8 +108,8 @@ React 작성 계약은 [Vercel React Best Practices](https://github.com/vercel-l
 
 ## 규격 근거
 
-- [Codex 프로젝트 지침](https://learn.chatgpt.com/docs/agent-configuration/agents-md), [스킬과 openai.yaml](https://learn.chatgpt.com/docs/build-skills), [app-server 조회](https://learn.chatgpt.com/docs/app-server)
-- [Claude 프로젝트 지침과 경로별 규칙](https://code.claude.com/docs/en/memory), [스킬 frontmatter와 인자](https://code.claude.com/docs/en/skills)
+- [Codex 프로젝트 지침](https://learn.chatgpt.com/docs/agent-configuration/agents-md), [스킬과 openai.yaml](https://learn.chatgpt.com/docs/build-skills), [app-server 조회](https://learn.chatgpt.com/docs/app-server), [hooks](https://developers.openai.com/codex/hooks)
+- [Claude 프로젝트 지침과 경로별 규칙](https://code.claude.com/docs/en/memory), [스킬 frontmatter와 인자](https://code.claude.com/docs/en/skills), [hooks](https://code.claude.com/docs/en/hooks)
 - [Claude SDK의 초기화 프로토콜](https://github.com/anthropics/claude-agent-sdk-python/blob/main/src/claude_agent_sdk/_internal/query.py)
 
 공식 문서와 설치 버전이 다를 수 있다. 실제 확인 버전과 실행 결과는 [검증 기록](validation.md)에 구분해 기록한다.

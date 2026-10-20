@@ -20,10 +20,12 @@ function fixture(t) {
     '.agent-source/project',
     '.agent-source/conventions',
     '.agent-source/skills',
+    '.agent-source/hooks',
     '.agent-source/adapters',
     '.agent-source/targets.json',
     'scripts/sync-instructions.mjs',
     'scripts/instruction-model.mjs',
+    'scripts/instruction-hooks.mjs',
     'scripts/check-instruction-runtime.mjs',
   ]) {
     fs.mkdirSync(path.dirname(path.join(root, relative)), { recursive: true });
@@ -674,3 +676,82 @@ test('a permission failure leaves the manifest unchanged and can be retried', (t
   assert.equal(sync(root, 'write').ok, true);
   assert.equal(sync(root).ok, true);
 });
+
+for (const file of ['.codex/hooks.json', '.claude/settings.json']) {
+  test(`${file}: hook sync preserves existing settings and accepts later user settings`, (t) => {
+    const root = fixture(t);
+    const existing = {
+      permissions: { deny: ['Read(.env)'] },
+      hooks: {
+        UserPromptSubmit: [{ hooks: [{ type: 'command', command: 'printf existing' }] }],
+        Stop: [{ hooks: [{ type: 'command', command: 'printf stop' }] }],
+      },
+    };
+    write(root, file, JSON.stringify(existing));
+    assert.equal(sync(root, 'write').ok, true);
+    const installed = JSON.parse(read(root, file));
+    assert.deepEqual(installed.permissions, existing.permissions);
+    assert.deepEqual(installed.hooks.Stop, existing.hooks.Stop);
+    assert.deepEqual(installed.hooks.UserPromptSubmit[0], existing.hooks.UserPromptSubmit[0]);
+    assert.equal(installed.hooks.UserPromptSubmit.length, 2);
+    installed.permissions.deny.push('Read(secret.txt)');
+    write(root, file, JSON.stringify(installed));
+    const before = snapshot(root);
+    assert.equal(sync(root).ok, true);
+    assert.deepEqual(sync(root, 'write').changes, []);
+    assert.deepEqual(snapshot(root), before);
+    const source = '.agent-source/hooks/work-plan/source.md';
+    write(root, source, `${read(root, source).trim()} New reminder.\n`);
+    assert.equal(sync(root, 'write').ok, true);
+    const updated = JSON.parse(read(root, file));
+    assert.deepEqual(updated.permissions, installed.permissions);
+    assert.deepEqual(updated.hooks.Stop, installed.hooks.Stop);
+    assert.deepEqual(updated.hooks.UserPromptSubmit[0], installed.hooks.UserPromptSubmit[0]);
+    assert.equal(updated.hooks.UserPromptSubmit.length, 2);
+    assert.ok(updated.hooks.UserPromptSubmit[1].hooks[0].command.includes('New reminder.'));
+  });
+
+  test(`${file}: edited or removed owned hooks stop all writes`, (t) => {
+    const root = fixture(t);
+    assert.equal(sync(root, 'write').ok, true);
+    const original = read(root, file);
+    const edited = JSON.parse(original);
+    edited.hooks.UserPromptSubmit[0].hooks[0].timeout = 10;
+    for (const content of [JSON.stringify(edited), '{"hooks":{}}']) {
+      write(root, file, content);
+      const before = snapshot(root);
+      assert.equal(sync(root, 'write').ok, false);
+      assert.deepEqual(snapshot(root), before);
+    }
+  });
+
+  test(`${file}: disabling a managed hook preserves unrelated settings and hooks`, (t) => {
+    const root = fixture(t);
+    const existing = { hooks: { Stop: [{ hooks: [{ type: 'command', command: 'printf kept' }] }] } };
+    write(root, file, JSON.stringify(existing));
+    assert.equal(sync(root, 'write').ok, true);
+    const targets = JSON.parse(read(root, '.agent-source/targets.json'));
+    for (const target of targets.targets) target.workPlanHook = false;
+    write(root, '.agent-source/targets.json', JSON.stringify(targets));
+    assert.equal(sync(root, 'write').ok, true);
+    assert.deepEqual(JSON.parse(read(root, file)), existing);
+    const other = file === '.codex/hooks.json' ? '.claude/settings.json' : '.codex/hooks.json';
+    assert.equal(fs.existsSync(path.join(root, other)), false);
+    assert.equal(sync(root).ok, true);
+  });
+
+  test(`${file}: invalid existing JSON and symlink destinations are preserved`, (t) => {
+    const root = fixture(t);
+    write(root, file, '{ invalid');
+    const before = snapshot(root);
+    assert.throws(() => sync(root, 'write'), SyntaxError);
+    assert.deepEqual(snapshot(root), before);
+    fs.unlinkSync(path.join(root, file));
+    const outside = fs.mkdtempSync(path.join(os.tmpdir(), 'hook-outside-'));
+    t.after(() => fs.rmSync(outside, { recursive: true, force: true }));
+    write(outside, 'settings.json', '{}');
+    fs.symlinkSync(path.join(outside, 'settings.json'), path.join(root, file));
+    assert.throws(() => sync(root, 'write'), /심볼릭 링크/);
+    assert.equal(read(outside, 'settings.json'), '{}');
+  });
+}
