@@ -11,10 +11,15 @@ export function scrollHeaderPlugin(header: HTMLElement) {
 
   let lastScroll = Math.max(0, view.scrollY);
   let translateY = 0;
+  let isScrolled: boolean | undefined;
 
   const updateAppearance = (scrollY: number) => {
-    header.dataset.scrolled = String(scrollY > 0);
-    header.dataset.borderVisible = String(scrollY > 0);
+    const nextIsScrolled = scrollY > 0;
+    if (nextIsScrolled === isScrolled) return;
+
+    isScrolled = nextIsScrolled;
+    header.dataset.scrolled = String(isScrolled);
+    header.dataset.borderVisible = String(isScrolled);
   };
 
   const showHeader = () => {
@@ -26,13 +31,13 @@ export function scrollHeaderPlugin(header: HTMLElement) {
 
   const onScroll = () => {
     const scrollY = Math.max(0, view.scrollY);
-    updateAppearance(scrollY);
-
+    // 레이아웃을 읽은 뒤에 속성과 스타일을 갱신합니다.
     const nextTranslateY =
       scrollY === 0 || header.contains(document.activeElement)
         ? 0
         : Math.max(-header.offsetHeight, Math.min(0, translateY + lastScroll - scrollY));
 
+    updateAppearance(scrollY);
     if (nextTranslateY !== translateY) {
       translateY = nextTranslateY;
       header.style.transform = `translateY(${translateY}px)`;
