@@ -33,7 +33,7 @@ const meta = {
     docs: {
       description: {
         component:
-          '유령 강아지 젱영의 표정 11종과 애니메이션입니다. Playground의 Controls에서 표정·재생·속도·반복·효과를 바꿀 수 있습니다. 화면 밖과 숨겨진 탭에서는 일시정지하며, 기기의 모션 감소 설정을 따릅니다.',
+          '캐릭터의 표정 11종과 애니메이션입니다. Playground의 Controls에서 표정·재생·속도·반복·효과를 바꿀 수 있습니다. 화면 밖과 숨겨진 탭에서는 일시정지하며, 기기의 모션 감소 설정을 따릅니다.',
       },
     },
   },
@@ -59,10 +59,8 @@ export const Gallery: Story = {
   render: () => (
     <section className="flex flex-col gap-24px" aria-label="캐릭터 표정 도감">
       <header className="flex flex-col gap-8px">
-        <h1 className="text-heading-5">말없이, 마음을 전하는 젱영</h1>
-        <p className="text-body-2 text-ink-secondary">
-          기본형과 열 가지 감정. 눈과 귀로 마음을 표현하는 유령 강아지예요.
-        </p>
+        <h1 className="text-heading-5">젱영</h1>
+        <p className="text-body-2 text-ink-secondary">기본형과 열 가지 감정. 눈과 귀로 마음을 표현해요.</p>
       </header>
       <div className="grid gap-24px mobile:grid-cols-1 desktop:grid-cols-3">
         {GHOST_PUPPY_VARIANTS.map(({ expression, label, caption, src }) => (
