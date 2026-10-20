@@ -1,12 +1,13 @@
 # @repo/lint-config
 
-Oxlint용 공유 설정과 FSD 플러그인 패키지입니다.
+Oxlint용 공유 설정과 FSD·Plugin 생명주기 플러그인 패키지입니다.
 
-| 진입점                    | 용도                                 | 적용 대상                         |
-| ------------------------- | ------------------------------------ | --------------------------------- |
-| `@repo/lint-config/react` | React·TypeScript·JSX 접근성          | `packages/ui`                     |
-| `@repo/lint-config/next`  | Next.js·React·Turborepo 환경변수·FSD | `apps/web`, `apps/docs`           |
-| `@repo/lint-config/fsd`   | FSD 플러그인과 설정 생성 함수        | FSD 정책을 별도로 구성하는 패키지 |
+| 진입점                               | 용도                                 | 적용 대상                              |
+| ------------------------------------ | ------------------------------------ | -------------------------------------- |
+| `@repo/lint-config/react`            | React·TypeScript·JSX 접근성          | `packages/ui`                          |
+| `@repo/lint-config/next`             | Next.js·React·Turborepo 환경변수·FSD | `apps/web`, `apps/docs`                |
+| `@repo/lint-config/fsd`              | FSD 플러그인과 설정 생성 함수        | FSD 정책을 별도로 구성하는 패키지      |
+| `@repo/lint-config/plugin-lifecycle` | Plugin의 단일 effect와 cleanup 구조  | 프로젝트에서 정의한 `*Plugin` 컴포넌트 |
 
 Node.js 24 이상을 사용합니다. FSD 플러그인은 이 패키지의 `fsd/`에 있으며, TypeScript 소스를 Node.js의 타입 제거 기능으로 직접 실행합니다.
 
@@ -33,9 +34,9 @@ export default defineConfig({
 });
 ```
 
-Oxlint의 `extends`는 상속하는 속성이 제한되어 있으므로, 객체를 직접 가져와 `categories`, `env`, `ignorePatterns`까지 적용합니다. Next.js 규칙과 FSD 플러그인은 React 프리셋에 포함하지 않습니다.
+Oxlint의 `extends`는 상속하는 속성이 제한되어 있으므로, 객체를 직접 가져와 `categories`, `env`, `ignorePatterns`까지 적용합니다. React 프리셋에는 Plugin 생명주기 규칙이 포함됩니다. Next.js 규칙과 FSD 플러그인은 React 프리셋에 포함하지 않습니다.
 
-`packages/ui/src/base/**`의 Iris 코어는 스타일·구조 컨벤션 적용 예외입니다. 현재 프리셋은 correctness 중심이고 style 카테고리는 활성화하지 않습니다. 향후 스타일 규칙을 추가할 때는 UI의 해당 경로 override에서 그 규칙만 끄며, 코어를 lint 전체에서 제외하지 않습니다. correctness·타입·동작 검증은 유지하고, 포맷 제외는 `packages/ui/oxfmt.config.mts`에서 관리합니다. AI 작업 정책의 원천은 `.agent-source/conventions/code-quality/source.md`입니다.
+`packages/ui/src/base/**`의 Iris 코어는 스타일·구조 컨벤션 적용 예외입니다. UI 설정의 해당 경로 override에서 `plugin-lifecycle/single-effect`만 끕니다. 현재 프리셋은 correctness 중심이고 style 카테고리는 활성화하지 않습니다. 향후 스타일 규칙을 추가할 때도 해당 규칙만 끄며, 코어를 lint 전체에서 제외하지 않습니다. correctness·타입·동작 검증은 유지하고, 포맷 제외는 `packages/ui/oxfmt.config.mts`에서 관리합니다. AI 작업 정책의 원천은 `.agent-source/conventions/code-quality/source.md`입니다.
 
 ## Next.js
 
@@ -96,7 +97,7 @@ const fsd = createConfig({ roots: ['src'] });
 
 export default defineConfig({
   ...react,
-  jsPlugins: fsd.jsPlugins,
+  jsPlugins: [...react.jsPlugins, ...fsd.jsPlugins],
   rules: { ...react.rules, ...fsd.rules },
 });
 ```
@@ -112,6 +113,38 @@ export default defineConfig({
 정적 import, 재수출, 문자열 동적 import, TypeScript의 `import()` 타입을 검사합니다. 경로는 설정한 별칭과 상대 경로로 판정하며, `tsconfig.paths`를 자동으로 읽거나 실제 파일 존재를 검사하지 않습니다. 계산된 동적 경로와 CommonJS `require()`는 분석하지 않습니다.
 
 플러그인은 Oxlint의 `createOnce` API를 사용하며, 파일마다 경로와 옵션 상태를 초기화합니다. 원본의 ISC 고지는 [fsd/LICENSE](fsd/LICENSE)에 보존합니다.
+
+## Plugin의 단일 effect
+
+`plugin-lifecycle/single-effect`는 **프로젝트 소스에서 직접 정의한, 이름이 대문자로 시작하고 `Plugin`으로 끝나는 함수 컴포넌트**에 적용합니다. `ScrollHeaderPlugin`, `SidebarPlugin`, `FocusPlugin` 모두 같은 규칙을 따릅니다. 공유 React 프리셋에 등록되어 `apps/web`, `apps/docs`, `packages/ui`에 공통 적용되며, 앱별 등록은 필요하지 않습니다.
+
+외부에서 import·재수출한 Plugin이나 외부 컴포넌트를 `memo`로 감싼 참조의 구현은 검사하지 않습니다. `node_modules` 경로는 규칙 자체에서 제외하므로 Git ignore나 CLI 대상 지정에 의존하지 않습니다. Iris 코어는 위의 UI override로 이 규칙만 제외합니다. `Header`, `PluginProvider`처럼 suffix가 다른 컴포넌트와 `scrollHeaderPlugin` 같은 소문자 설치 함수도 대상이 아닙니다. `HeaderPlugin`·`HeaderPluginProps` 같은 **타입 이름으로 검사 대상을 추가하지 않습니다.**
+
+검사하는 구조는 다음과 같습니다.
+
+- 컴포넌트 본문의 최상위 문장에서 React `useEffect`를 정확히 하나 호출해야 합니다. 0개와 2개 이상 모두 오류입니다.
+- `useLayoutEffect`, `useInsertionEffect`, 별도 구독 생명주기를 만드는 `useSyncExternalStore` 호출은 허용하지 않습니다.
+- 커스텀 Hook 호출은 내부 effect 수를 확인할 수 없으므로 허용하지 않습니다. `useState`, `useRef`, `useMemo` 같은 나머지 React Hook과 일반 함수 호출은 허용합니다.
+- effect는 동기 콜백이어야 하며, cleanup으로 사용할 값을 반환하는 구문이 있어야 합니다. `return () => stop()`, `return cleanup`, `return install(header)`와 `() => install(header)`를 허용합니다. ref가 없을 때의 조기 `return`은 허용합니다.
+- 같은 파일의 로컬 callback은 선언을 찾아 검사합니다. 외부 callback을 `useEffect(install, [])`로 직접 전달하면 설치와 정리가 드러나도록 `useEffect(() => install(), [])`로 작성해야 합니다.
+
+React import 별칭, default·namespace import, 문자열 멤버 접근, `const` 별칭과 구조 분해를 추적합니다. 같은 이름의 지역 변수를 React Hook으로 오인하지 않습니다. 함수 선언·화살표 함수·함수 표현식과 React `memo`·`forwardRef`에 직접 전달한 함수 구현을 지원하고, 컴포넌트별로 개수를 셉니다.
+
+```tsx
+export function ScrollHeaderPlugin({ headerRef }: HeaderPluginProps) {
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+    return scrollHeaderPlugin(header);
+  }, [headerRef]);
+
+  return null;
+}
+```
+
+설치·계산·정리의 공통 함수는 자유롭게 분리할 수 있습니다. 의존성과 Hook 호출 순서 검사는 기존 `react/exhaustive-deps`와 `react/rules-of-hooks`가 함께 담당합니다. effect를 자동으로 합치면 의존성과 정리 순서가 달라질 수 있으므로 자동 수정은 제공하지 않습니다.
+
+이 규칙은 AST 구조를 검사합니다. 반환한 식이 실제로 cleanup 함수인지, 모든 실행 경로에서 구독을 해제하는지, 일반 함수 안에 숨긴 부수 효과나 자식 컴포넌트의 effect까지 하나인지는 보장하지 않습니다. `use` + 대문자·숫자라는 Hook 명명 규약을 벗어난 외부 함수, CommonJS·동적 import, 계산된 멤버 이름을 추적하는 전체 프로그램 분석은 수행하지 않습니다. **스크롤보다 포커스를 우선하는 판단과 실제 이벤트 정리는 별도의 동작 검증이 필요합니다.**
 
 ## 검증과 버전
 
