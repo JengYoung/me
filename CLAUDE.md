@@ -29,6 +29,16 @@
 - 필요한 토큰을 정본에서 확인할 수 없으면 해당 스타일 적용을 보류하고 누락·불일치를 보고한다. 값을 추정하거나 비슷한 새 토큰을 만들어 채우지 않는다. 구현에 맞추기 위해 Figma 변수·가이드를 임의로 추가·수정하지 않는다.
 - 변경 후 사용한 토큰과 정본의 대응, Light/Dark, mobile/desktop, 관련 상호작용 상태를 검증한다. 미등록 값이나 토큰 우회가 남아 있으면 완료로 보고하지 않는다. Figma 조회·시각 검증을 하지 못한 항목은 미검증으로 구분한다. Iris 코어의 스타일·구조 컨벤션 예외는 소비 UI의 디자인 토큰 계약을 면제하지 않는다.
 
+### 버전 관리
+
+- `apps/*`와 `packages/*`는 Changesets로 각각 독립 버전을 관리한다. 루트 `package.json`에는 제품 버전을 두지 않으며, `.changeset/config.json`의 `fixed`·`linked`는 빈 배열로 유지한다.
+- 버전 변경은 `.changeset/*.md`의 패키지명·SemVer bump·변경 요약을 근거로 한다. 패키지 버전을 수동으로 올리거나 모든 패키지를 같은 버전으로 맞추지 않는다.
+- 사용자에게 영향을 주는 변경을 릴리즈에 포함할 때 해당 패키지의 changeset을 작성한다. 문서·테스트·개발 도구 변경만으로 제품 버전을 올리지 않으며, changeset 작성과 버전 적용을 구분한다.
+- 버전 조회·changeset 작성·릴리즈 버전 적용에는 프로젝트의 `changesets-version` 스킬을 사용한다. 일반 구현·커밋·배포 요청에 `release:version` 실행을 자동으로 포함하지 않는다.
+- 버전 적용은 `pnpm changeset:status`로 전체 대기 changeset과 의존성 전파를 확인한 뒤, 요청 범위가 맞으면 `pnpm release:version`으로 실행한다. `package.json`·패키지별 `CHANGELOG.md`·소비된 changeset·`pnpm-lock.yaml`을 함께 검증한다.
+- 내부 의존성은 `workspace:` 프로토콜을 유지한다. 독립 버전이어도 Changesets의 의존성 전파로 소비 패키지가 함께 bump될 수 있으므로 전체 계획을 확인한다. 제품 변경으로 특정 앱 릴리즈가 필요하면 해당 앱을 changeset에 명시한다.
+- `private: true`를 유지하며 private 패키지도 버전 관리한다. 자동 커밋·태그·npm 게시·외부 배포는 버전 적용에 포함하지 않는다. prerelease·snapshot은 명시적으로 요청한 경우에만 별도 범위를 확인한다.
+
 코드 작성·수정·리뷰와 lint·포맷·타입 설정 작업에서는 [코드 품질 규칙](.claude/rules/code-quality.md)을 확인하고 적용한다.
 테스트 작성·수정·리뷰와 fixture·테스트 환경 변경 전에는 [테스트 작성 규칙](.claude/rules/test-writing.md)을 읽고 적용한다.
 React·Next.js 컴포넌트·Hook·페이지·데이터 조회·성능 관련 코드를 작성·수정·리뷰하기 전에는 [React Best Practices](.claude/rules/react-best-practices.md)를 읽고 적용한다.
@@ -42,6 +52,8 @@ React·Next.js 컴포넌트·Hook·페이지·데이터 조회·성능 관련 �
 
 ## 프로젝트 스킬
 
+- `/changesets-version` — Changesets로 앱·패키지의 독립 버전, changelog와 lockfile을 동기화한다. 버전 현황·릴리즈 계획 조회, changeset 작성, 버전 적용 요청에 사용하며 일반 구현·커밋·배포만으로 버전을 올리지 않는다.
+  파일: `.claude/skills/changesets-version/SKILL.md`
 - `/sync-instructions` — 프로젝트 AI 지침과 스킬을 공통 원천에서 동기화하거나 검사한다. AI 지침 변경·재생성·불일치 점검에 사용하며, 일반 제품 코드나 문서 수정에는 사용하지 않는다.
   파일: `.claude/skills/sync-instructions/SKILL.md`
 - `/turborepo` — Turborepo의 작업 실행·캐시·환경변수·패키지 경계·CI 구성을 설치 버전의 문서에 맞춰 설정하거나 진단한다. turbo 설정과 모노레포 작업 흐름에 사용하며, 일반 Next.js·NestJS 기능 구현에는 적용하지 않는다.

@@ -41,6 +41,12 @@ This Turborepo has some additional tools already setup for you:
 
 루트에서 `pnpm lint`, `pnpm format`, `pnpm format:check`를 실행합니다. 포맷 명령은 해당 스크립트가 있는 패키지에 적용되며, 현재 대상은 `@repo/ui`입니다. Next.js·React·FSD 린트 설정은 [lint-config](packages/lint-config/README.md), React 포맷 설정은 [format-config](packages/format-config/README.md)를 참고합니다.
 
+### Versioning
+
+Changesets로 앱·패키지별 독립 버전을 관리합니다. `pnpm changeset`으로 변경을 기록하고, `pnpm changeset:status`로 다음 버전을 확인한 뒤, 릴리즈 준비 시 `pnpm release:version`으로 버전·changelog·lockfile을 갱신합니다.
+
+설정과 상세 절차는 [버전 관리 안내](.changeset/README.md)를 참고합니다. AI 작업에는 Codex의 `$changesets-version` 또는 Claude Code의 `/changesets-version`을 사용합니다.
+
 ### Build
 
 To build all apps and packages, run the following command:

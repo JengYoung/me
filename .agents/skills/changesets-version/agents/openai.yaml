@@ -1,0 +1,7 @@
+# AUTO-GENERATED from .agent-source/skills/changesets-version/source.md by scripts/sync-instructions.mjs. Do not edit; run node scripts/sync-instructions.mjs --write.
+interface:
+  display_name: "Changesets 버전 관리"
+  short_description: "앱·패키지의 독립 버전과 changelog·lockfile을 관리합니다"
+  default_prompt: "$changesets-version 현재 패키지별 버전과 대기 중인 릴리즈 계획을 확인해줘."
+policy:
+  allow_implicit_invocation: true
