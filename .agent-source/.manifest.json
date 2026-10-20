@@ -1,35 +1,38 @@
 {
   "version": 2,
   "inputs": {
-    ".agent-source/adapters/claude/project.md": "b833fcae70bcd13a612490fcbdf074d79d72e9e944a773bf4ae3501b051cfc63",
+    ".agent-source/adapters/claude/project.md": "a9703ebd0235aff8dd2f4991c52ef1025bdc3f1f0c10deeaa0c0f1e7549b83df",
     ".agent-source/adapters/claude/rules/code-quality.md": "293be9420285cf5e5739922e41b62c315087388adaf2e7e048cc244867f16b15",
-    ".agent-source/adapters/claude/rules/instruction-maintenance.md": "2bce8c98613ce2a6dd25ac2df4fc0efc50eb54f79b9fb64b6607c65c427a1043",
+    ".agent-source/adapters/claude/rules/instruction-maintenance.md": "8fcdc6e2ec062dd9a994fc398ee3a05ab81d5cc3cd227b057fd486d145e54a03",
     ".agent-source/adapters/claude/rules/react-best-practices.md": "6dd5b26cd4f4b075d4d50de0e46c79c0c36c6e6c5736851f8d10b021c283c413",
+    ".agent-source/adapters/claude/rules/test-writing.md": "f3cb96533bb17fa8ce3564adeaf45ece2eaf13e7c8b19244df52e7919404822d",
     ".agent-source/adapters/claude/skills/sync-instructions.json": "1755d960bbf5e23d5a621268b3b1c66b9ed1eb9efc421144aadd3dbf8001113f",
     ".agent-source/adapters/claude/skills/sync-instructions.md": "0514149cc47d73d991554e4bfc9d79f80928e7f06d65d82ce66fb389830825ee",
     ".agent-source/adapters/claude/skills/turborepo.json": "408d074a4e7a80872e75d72118b1d079b7ec72aeb97c2e3e7354b6d1497785c4",
     ".agent-source/adapters/claude/skills/turborepo.md": "5e9e821cc9ff4d595eb7a15b08343f639f4a00cab5695715bf6363e748dd22e1",
     ".agent-source/adapters/codex/code-quality.md": "63269b8e519954e6c0dffd26f64c39f3da15ed1d4757b8f4be8c8453b9de4238",
-    ".agent-source/adapters/codex/instructions.md": "8a0eb6d37723c0ad370cd64c7fae52c20f5337310b41b5feecb1ae787abfc2a7",
-    ".agent-source/adapters/codex/project.md": "fa8872c990d04024d0137f87dd145c1bf3fbb9014b6bef33a4fa77e76d1e1ae9",
+    ".agent-source/adapters/codex/instructions.md": "f2c960ea3693df78d12d7672eba93db34eff25a06a12cbc0d8113f355b92edb4",
+    ".agent-source/adapters/codex/project.md": "700c3df2feda923bff7e4b2c65bc266ceff117d5e6679f05b75814ad53a2740c",
     ".agent-source/adapters/codex/react-best-practices.md": "056f8231592b638fa4d1c32e458ca15df0cec8ddf8100be29275048ec8280ef5",
     ".agent-source/adapters/codex/skills/sync-instructions.json": "14a76c14a6c29e0ee6a68ee46ec816c527ffbd43ea10be262895fb1a0cf514c1",
     ".agent-source/adapters/codex/skills/sync-instructions.md": "a6a83d385950f0e4a177c3483eacd5696a905290503131e0bc8513b4cef03caa",
     ".agent-source/adapters/codex/skills/turborepo.json": "a1104aa39540993a112e47356ffe2a647d0b3b89b789bfb2a5a6ce904f6f2334",
     ".agent-source/adapters/codex/skills/turborepo.md": "0726878c4c8a15397ce3bfaaf01123800b4019b9e4ddb34194cf6681a181ea5f",
+    ".agent-source/adapters/codex/test-writing.md": "c8de141e10dc33ccf4623b50de438494a623a90724f0bc0289b95e3d6846446b",
     ".agent-source/conventions/code-quality/source.md": "b94809c0fa51d7b063ea90414b30b74377042ee1c45fd4df4e161e0ffc957ec4",
     ".agent-source/conventions/react-best-practices/source.md": "c98c26a26d85726b859f6553d1546a4666b62f4e5706fbff448a616122ac1b85",
-    ".agent-source/project/source.md": "bda82b8696b79b2884962a853e2d334eb65f6914ae14b587a2f57eb7f3ccdd5f",
+    ".agent-source/conventions/test-writing/source.md": "190411f5f00699a4038e8b35d77a2cf655b1157753f28e4607352b4c964104c1",
+    ".agent-source/project/source.md": "1e38e5daa4744bfb69789619b86da78e89cf3c839002b267ac9a2aaf7f53f9b5",
     ".agent-source/skills/sync-instructions/references/recovery.md": "33c639a794a17364d992fb5f04e28305ea7bcfa0d69ddfe0d20fb9cc4ff9ba0c",
     ".agent-source/skills/sync-instructions/source.md": "633cac0b0f2789135364a52e2dd41e7d5f99fe33e6f8eeac29f6ad03cf4f0cbe",
     ".agent-source/skills/turborepo/source.md": "bf18682c68ec4f729d2f93aaf9ddd7dd10a476de650387e0b7a32ee00d15e23e",
-    ".agent-source/targets.json": "b64ea4174ee10343882569f3913c356a8475b561e47819c00b896888c36412e7",
-    "scripts/instruction-model.mjs": "e55b003d457f179fff03b24e406f1cb37f10c14553355f09700eb2bc94aacf91",
+    ".agent-source/targets.json": "dcc8b1135ec2468759dbafd7f2408b185318f5016f120df4726c426de21dec08",
+    "scripts/instruction-model.mjs": "b5cc8acae916e4d28f4cd9f9c301171059cebc54289d2c7bba852cfbe86ba27a",
     "scripts/sync-instructions.mjs": "205cb5b1cc5c4c1c10cad6d178cb5f98db4a1b16118d29aaf636a42342365058"
   },
   "outputs": {
     ".agent-source/registry.md": {
-      "sha256": "9eb2ba109e7e7aced93bf614a703c6f7764891a0f427bc86c50c84456bd50e0c",
+      "sha256": "5f0b66be2f5322c290c552ae3f5c30e8274f65f0fcabc86f20a33749be79bec7",
       "source": ".agent-source/project/source.md",
       "target": "registry",
       "facets": []
@@ -93,7 +96,7 @@
       ]
     },
     ".claude/rules/instruction-maintenance.md": {
-      "sha256": "1b75dc633c6409af7ab24e8b5efabc79a92884c061dbf4a4cb33e2844a8ad70e",
+      "sha256": "8c0adcbb1668d907e100b4b53c6ee9464e5268d3a5afc0d818fb35d2825093d7",
       "source": ".agent-source/project/source.md",
       "target": "claude",
       "facets": [
@@ -106,6 +109,14 @@
       "target": "claude",
       "facets": [
         "REACT_BEST_PRACTICES"
+      ]
+    },
+    ".claude/rules/test-writing.md": {
+      "sha256": "c4bc86d370210b3edeaccb0338f643c07d23c2753b915f1417255ac4d6ef9039",
+      "source": ".agent-source/conventions/test-writing/source.md",
+      "target": "claude",
+      "facets": [
+        "TEST_WRITING"
       ]
     },
     ".claude/skills/sync-instructions/references/recovery.md": {
@@ -155,7 +166,7 @@
       ]
     },
     ".codex/instructions.md": {
-      "sha256": "3cb610a139b51d90a3dc72b180909b47f22b404800286f9db991b5e22a0d1dc6",
+      "sha256": "0f7f8091eadc535e79fe424a60053716eb834b6e5baa9f59b5445e6ef6146418",
       "source": ".agent-source/project/source.md",
       "target": "codex",
       "facets": [
@@ -170,8 +181,16 @@
         "REACT_BEST_PRACTICES"
       ]
     },
+    ".codex/test-writing.md": {
+      "sha256": "ed5ef7b5afcee712fcc7e790fb2843c3a275499b724b6a1433257bb72232e31a",
+      "source": ".agent-source/conventions/test-writing/source.md",
+      "target": "codex",
+      "facets": [
+        "TEST_WRITING"
+      ]
+    },
     "AGENTS.md": {
-      "sha256": "d612f2422abdedb467bd9e9ea26c4d1cdbd2bd6aa7388d37d25adb4c3b8632ad",
+      "sha256": "933c34c79cac1492d5973bc3f08f270800582301fcee84893ee3ec47054cbf42",
       "source": ".agent-source/project/source.md",
       "target": "codex",
       "facets": [
@@ -182,7 +201,7 @@
       ]
     },
     "CLAUDE.md": {
-      "sha256": "8a48bc07e0b42f37426b9cced77327116fa005e7a1391e4bad690e949c1b35a0",
+      "sha256": "0524e64d0a854360f31e1b97fab5089bc2415427b1a687949b466d331c98f963",
       "source": ".agent-source/project/source.md",
       "target": "claude",
       "facets": [

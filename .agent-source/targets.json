@@ -15,6 +15,10 @@
           "template": "code-quality.md"
         },
         {
+          "path": ".codex/test-writing.md",
+          "template": "test-writing.md"
+        },
+        {
           "path": ".codex/react-best-practices.md",
           "template": "react-best-practices.md"
         }
@@ -38,6 +42,19 @@
             "**/package.json",
             "**/next.config.*",
             ".agent-source/conventions/react-best-practices/**"
+          ]
+        },
+        {
+          "path": ".claude/rules/test-writing.md",
+          "template": "rules/test-writing.md",
+          "paths": [
+            "**/*.{test,spec}.{js,jsx,ts,tsx,mjs,cjs,mts,cts}",
+            "**/{test,tests,__tests__,e2e,fixtures,__fixtures__,test-utils}/**",
+            "**/{vitest,jest,playwright}*.config.*",
+            "**/{vitest,jest,test}.setup.*",
+            "**/{setupTests,test-setup}.*",
+            "**/package.json",
+            ".agent-source/conventions/test-writing/**"
           ]
         },
         {
