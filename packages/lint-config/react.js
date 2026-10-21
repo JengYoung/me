@@ -15,6 +15,11 @@ export default defineConfig({
     'react/react-in-jsx-scope': 'off',
     'react/rules-of-hooks': 'error',
     'react/exhaustive-deps': 'warn',
+    // Vercel React Best Practices 중 구문으로 검사할 수 있는 성능·구조 규칙입니다.
+    'react/no-object-type-as-default-prop': 'warn',
+    'import/no-dynamic-require': ['error', { esmodule: true }],
+    'unicorn/prefer-set-has': 'warn',
+    'unicorn/no-array-sort': ['warn', { allowAfterSpread: true, allowExpressionStatement: false }],
   },
   env: {
     browser: true,
