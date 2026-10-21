@@ -4,8 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev --port 3000",
-    "build": "next build",
+    "content:generate": "node scripts/generate-posts.ts",
+    "dev": "pnpm content:generate && next dev --port 3000",
+    "build": "pnpm content:generate && next build",
     "start": "next start",
     "storybook": "storybook dev --port 6006 --no-open",
     "build-storybook": "storybook build",
@@ -16,7 +17,7 @@
     "test:e2e:report": "playwright show-report",
     "lint": "oxlint --max-warnings 0 .",
     "lint:fix": "oxlint --fix --max-warnings 0 .",
-    "check-types": "next typegen && tsc --noEmit",
+    "check-types": "pnpm content:generate && next typegen && tsc --noEmit",
     "characters:generate": "node scripts/generate-character.mjs && oxfmt --config ../../packages/format-config/react.js --write shared/ui/character/character.generated.ts"
   },
   "dependencies": {

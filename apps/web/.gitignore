@@ -44,3 +44,6 @@ yarn-error.log*
 next-env.d.ts
 
 *.local.*
+
+# MDX 빌드 생성물과 독립된 E2E 빌드
+/screens/posts/generated/
