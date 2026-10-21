@@ -28,6 +28,13 @@ const PROJECT_SOURCES = {
   MAINTENANCE: '.agent-source/project/maintenance.md',
   NON_GOALS: '.agent-source/project/scope.md',
 };
+const PROJECT_REFERENCES = {
+  CONTENT: [
+    '.agent-source/project/content/storage.md',
+    '.agent-source/project/content/mdx.md',
+    '.agent-source/project/content/publishing.md',
+  ],
+};
 const SKILL_FACETS = {
   목적: 'PURPOSE',
   트리거: 'TRIGGERS',
@@ -352,6 +359,13 @@ export function build(root) {
     TEST_WRITING: testWriting,
     REACT_BEST_PRACTICES: reactBestPractices,
   };
+  for (const [variable, files] of Object.entries(PROJECT_REFERENCES)) {
+    for (const file of files) {
+      projectTopic(source(file), file);
+      if (!project[variable].includes(`\`${file}\``))
+        throw new Error(`${PROJECT_SOURCES[variable]}: 상세 원천 ${file}를 명시적으로 연결해야 합니다.`);
+    }
+  }
   const conventionSources = { CODE_QUALITY, TEST_WRITING, REACT_BEST_PRACTICES };
   const skills = fs
     .readdirSync(disk.resolve('.agent-source/skills'), { withFileTypes: true })

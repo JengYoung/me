@@ -4,7 +4,7 @@
 
 {{MAINTENANCE}}
 
-프로젝트 공통 규칙은 `.agent-source/project/source.md`의 목차에서 주제를 찾고 같은 디렉터리의 해당 Markdown 파일에서 수정한다. 코드 품질·테스트 작성·React 상세 정책은 `.agent-source/conventions/*/source.md`, 스킬 계약은 `.agent-source/skills/*/source.md`, Codex 실행 방식은 `.agent-source/adapters/codex/`에서 관리한다.
+프로젝트 공통 규칙은 `.agent-source/project/source.md`의 목차에서 주제를 찾고 연결된 Markdown 원천에서 수정한다. 콘텐츠 상세 계약은 `.agent-source/project/content/`, 코드 품질·테스트 작성·React 상세 정책은 `.agent-source/conventions/*/source.md`, 스킬 계약은 `.agent-source/skills/*/source.md`, Codex 실행 방식은 `.agent-source/adapters/codex/`에서 관리한다.
 
 스킬은 `.agents/skills/<name>/SKILL.md`에 한 번만 설치한다. 일부 Codex 버전은 `.codex/skills/`도 발견하므로 같은 이름의 복사본을 두지 않는다. Codex UI 메타데이터와 호출 정책은 각 스킬의 `agents/openai.yaml`에서 읽는다.
 

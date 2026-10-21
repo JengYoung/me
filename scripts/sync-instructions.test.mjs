@@ -164,6 +164,57 @@ test('project source index is tracked without becoming a second policy body', (t
   for (const [file, content] of Object.entries(before)) assert.equal(read(root, file), content, file);
 });
 
+for (const name of ['storage.md', 'mdx.md', 'publishing.md']) {
+  const source = `.agent-source/project/content/${name}`;
+
+  test(`${name}: selective source changes are tracked without copying the body into outputs`, (t) => {
+    const root = fixture(t);
+    assert.equal(sync(root, 'write').ok, true);
+    const beforeOutputs = Object.fromEntries(Object.keys(build(root).outputs).map((file) => [file, read(root, file)]));
+    for (const entrypoint of ['AGENTS.md', 'CLAUDE.md']) assert.ok(beforeOutputs[entrypoint].includes(`\`${source}\``));
+
+    write(root, source, `${read(root, source)}\n해당 작업에서만 읽을 상세 계약.\n`);
+    const beforeCheck = snapshot(root);
+    assert.equal(sync(root).ok, false);
+    assert.deepEqual(snapshot(root), beforeCheck);
+
+    const result = sync(root, 'write');
+    assert.equal(result.ok, true);
+    assert.deepEqual(result.changes, ['update: .agent-source/.manifest.json']);
+    const manifest = JSON.parse(read(root, '.agent-source/.manifest.json'));
+    assert.equal(manifest.inputs[source], createHash('sha256').update(read(root, source)).digest('hex'));
+    for (const [file, content] of Object.entries(beforeOutputs)) assert.equal(read(root, file), content, file);
+    assert.equal(sync(root).ok, true);
+  });
+
+  for (const [condition, content] of [
+    ['missing', null],
+    ['empty', '# 상세 계약\n\n<!-- 미작성 -->\n'],
+    ['without a title', '- 제목 없는 상세 계약\n'],
+  ]) {
+    test(`${name}: ${condition} selective source blocks generation without writes`, (t) => {
+      const root = fixture(t);
+      if (content === null) fs.unlinkSync(path.join(root, source));
+      else write(root, source, content);
+      const before = snapshot(root);
+      assert.throws(
+        () => sync(root, 'write'),
+        (error) => error.message.startsWith(`${source}:`) && /필수 원천|주제 제목/.test(error.message),
+      );
+      assert.deepEqual(snapshot(root), before);
+    });
+  }
+
+  test(`${name}: a missing entrypoint reference blocks generation without writes`, (t) => {
+    const root = fixture(t);
+    const routing = '.agent-source/project/content.md';
+    write(root, routing, read(root, routing).replace(source, '.agent-source/project/content/missing.md'));
+    const before = snapshot(root);
+    assert.throws(() => sync(root, 'write'), /상세 원천 .*를 명시적으로 연결해야 합니다/);
+    assert.deepEqual(snapshot(root), before);
+  });
+}
+
 for (const target of ['codex', 'claude']) {
   for (const variable of ['DESIGN_TOKENS', 'CONTENT', 'VERSIONING']) {
     test(`${target}: ${variable} cannot be omitted or duplicated`, (t) => {

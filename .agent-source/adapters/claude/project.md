@@ -16,7 +16,7 @@ React·Next.js 컴포넌트·Hook·페이지·데이터 조회·성능 관련 �
 
 {{DESIGN_TOKENS}}
 
-## 콘텐츠 저장과 수정 이력
+## 콘텐츠 지침
 
 {{CONTENT}}
 

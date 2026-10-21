@@ -46,33 +46,38 @@ node scripts/benchmark-instruction-hooks.mjs
 
 ## 수정할 파일
 
-| 원천 경로                                            | 역할                                                                                   |
-| ---------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| [project/source.md](project/source.md)               | 주제별 원천을 찾는 목차와 생성 연결 안내                                               |
-| [project/purpose.md](project/purpose.md)             | 프로젝트 목적과 판단 근거                                                              |
-| [project/workflow.md](project/workflow.md)           | 작업 진행·소통·사용자 변경 보존                                                        |
-| [project/quality.md](project/quality.md)             | 품질 도구 적용·검증·결과 보고                                                          |
-| [project/design-tokens.md](project/design-tokens.md) | Figma 정본·디자인 토큰·반응형 계약                                                     |
-| [project/content.md](project/content.md)             | 콘텐츠 경로·발행·수정 이력·콘텐츠 버전과 상세 제품 계약 연결                           |
-| [project/versioning.md](project/versioning.md)       | 앱·패키지의 Changesets 버전 관리                                                       |
-| [project/maintenance.md](project/maintenance.md)     | 공통 원천·도구별 어댑터·재생성 원칙                                                    |
-| [project/scope.md](project/scope.md)                 | 작업 범위와 제외 사항                                                                  |
-| `conventions/code-quality/source.md`                 | Oxlint·Oxfmt·타입 검사의 책임, Iris 코어 예외, 실제 설정·명령·검증 범위                |
-| `conventions/test-writing/source.md`                 | Vitest 컴포넌트·Playwright 앱 E2E의 역할, 독립성·정리·React 검증 계약과 현재 실행 범위 |
-| `conventions/react-best-practices/source.md`         | Vercel의 React·Next.js 70개 규칙, 기준 커밋·출처와 프로젝트 적용 조건                  |
-| `skills/<name>/source.md`                            | 스킬 이름·설명과 도구 공통 행동 계약                                                   |
-| `skills/<name>/references/*.md`                      | 필요한 작업에서만 읽는 공통 참고자료                                                   |
-| `hooks/work-plan/source.md`                          | 요청마다 전달하는 짧은 작업 전 안내 알림                                               |
-| `adapters/<tool>/work-plan-hook.json`                | 도구별 UserPromptSubmit 설정; 명령 본문은 공통 알림에서 생성                           |
-| `adapters/codex/`                                    | Codex 기본·상세 지침과 스킬 절차                                                       |
-| `adapters/claude/`                                   | Claude 기본 지침·경로별 규칙·스킬 절차                                                 |
-| `adapters/<tool>/skills/<name>.json`                 | 각 도구의 선택적인 스킬 메타데이터                                                     |
-| `targets.json`                                       | 공식 진입점·발견 경로·상세 문서·조건부 규칙·도구 실행 보류 상태                        |
-| `registry.md`, `.manifest.json`                      | 생성기가 관리하는 산출물 목록·계약 포함 위치·해시                                      |
+| 원천 경로                                                      | 역할                                                                                   |
+| -------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| [project/source.md](project/source.md)                         | 주제별 원천을 찾는 목차와 생성 연결 안내                                               |
+| [project/purpose.md](project/purpose.md)                       | 프로젝트 목적과 판단 근거                                                              |
+| [project/workflow.md](project/workflow.md)                     | 작업 진행·소통·사용자 변경 보존                                                        |
+| [project/quality.md](project/quality.md)                       | 품질 도구 적용·검증·결과 보고                                                          |
+| [project/design-tokens.md](project/design-tokens.md)           | Figma 정본·디자인 토큰·반응형 계약                                                     |
+| [project/content.md](project/content.md)                       | 콘텐츠 작업 범위별로 필요한 상세 원천을 선택하는 안내                                  |
+| [project/content/storage.md](project/content/storage.md)       | 콘텐츠 저장·공개 판정·버전·자산·조회·이력 계약                                         |
+| [project/content/mdx.md](project/content/mdx.md)               | 아티클 Markdown·MDX 작성과 전용 컴포넌트 계약                                          |
+| [project/content/publishing.md](project/content/publishing.md) | 로컬 발행 명령·검증·Git 반영과 배포의 경계                                             |
+| [project/versioning.md](project/versioning.md)                 | 앱·패키지의 Changesets 버전 관리                                                       |
+| [project/maintenance.md](project/maintenance.md)               | 공통 원천·도구별 어댑터·재생성 원칙                                                    |
+| [project/scope.md](project/scope.md)                           | 작업 범위와 제외 사항                                                                  |
+| `conventions/code-quality/source.md`                           | Oxlint·Oxfmt·타입 검사의 책임, Iris 코어 예외, 실제 설정·명령·검증 범위                |
+| `conventions/test-writing/source.md`                           | Vitest 컴포넌트·Playwright 앱 E2E의 역할, 독립성·정리·React 검증 계약과 현재 실행 범위 |
+| `conventions/react-best-practices/source.md`                   | Vercel의 React·Next.js 70개 규칙, 기준 커밋·출처와 프로젝트 적용 조건                  |
+| `skills/<name>/source.md`                                      | 스킬 이름·설명과 도구 공통 행동 계약                                                   |
+| `skills/<name>/references/*.md`                                | 필요한 작업에서만 읽는 공통 참고자료                                                   |
+| `hooks/work-plan/source.md`                                    | 요청마다 전달하는 짧은 작업 전 안내 알림                                               |
+| `adapters/<tool>/work-plan-hook.json`                          | 도구별 UserPromptSubmit 설정; 명령 본문은 공통 알림에서 생성                           |
+| `adapters/codex/`                                              | Codex 기본·상세 지침과 스킬 절차                                                       |
+| `adapters/claude/`                                             | Claude 기본 지침·경로별 규칙·스킬 절차                                                 |
+| `adapters/<tool>/skills/<name>.json`                           | 각 도구의 선택적인 스킬 메타데이터                                                     |
+| `targets.json`                                                 | 공식 진입점·발견 경로·상세 문서·조건부 규칙·도구 실행 보류 상태                        |
+| `registry.md`, `.manifest.json`                                | 생성기가 관리하는 산출물 목록·계약 포함 위치·해시                                      |
 
 표의 경로는 이 디렉터리 기준이다. 생성 코드는 `scripts/instruction-model.mjs`, `scripts/instruction-hooks.mjs`, `scripts/sync-instructions.mjs`에 있다. 원천과 어댑터를 바꾼 뒤 재생성하며, 생성물만 편집하지 않는다.
 
 `project/source.md`에는 목차만 두며 규칙은 주제별 파일에서 수정한다. 생성기의 `PROJECT_SOURCES`가 각 파일과 계약 변수를 연결하고, 파일의 첫 `#` 제목을 제외한 본문을 어댑터에 전달한다. 필수 파일의 누락·빈 본문·제목 누락은 쓰기 전에 검출한다. 목차와 모든 주제 원천의 해시를 관리하며, 여러 주제를 합친 생성물의 원천 표시는 `project/source.md`를 유지한다. 목차의 탐색용 링크는 생성 지침에 삽입하지 않는다.
+
+`CONTENT`에는 작업별 원천 경로 안내만 넣는다. `PROJECT_REFERENCES`에 등록한 `project/content/`의 세 상세 원천은 Codex·Claude가 필요한 작업에서 직접 읽으며, 기본 지침이나 도구별 파일에 본문을 복제하지 않는다. 생성기는 이 원천의 누락·빈 본문·제목 누락과 안내의 참조 누락을 검사하고 입력 해시를 관리한다. 상세 원천만 바뀌면 기본 지침 본문은 그대로이고 관리 해시만 갱신된다. 이 방식으로 기본 로딩과 무관한 작업에서 읽는 분량을 줄인다.
 
 ## 작업 전 안내와 hook
 
