@@ -1,4 +1,5 @@
 import type { ComponentPropsWithoutRef } from 'react';
+import type { StaticImageData } from 'next/image';
 
 const PC_WIDTHS = {
   auto: 'desktop:w-fit',
@@ -22,7 +23,7 @@ export type ArticleImageProps = Pick<
   ComponentPropsWithoutRef<'img'>,
   'title' | 'width' | 'height' | 'loading' | 'decoding'
 > & {
-  src: string;
+  src: string | StaticImageData;
   alt: string;
   caption?: string;
   pcWidth?: ArticleImageWidth;
@@ -43,14 +44,18 @@ export function ArticleImage({
   width,
   height,
 }: ArticleImageProps) {
+  const image =
+    typeof src === 'string'
+      ? { src, width, height }
+      : { src: src.src, width: width ?? src.width, height: height ?? src.height };
   const picture = (
     // oxlint-disable-next-line nextjs/no-img-element -- 콘텐츠 로더가 해석한 자산 URL을 사용한다. 원본 치수는 선택적으로 전달받으며 Next Image의 임의 치수를 만들지 않는다.
     <img
-      src={src}
+      src={image.src}
       alt={alt}
       title={title}
-      width={width}
-      height={height}
+      width={image.width}
+      height={image.height}
       loading={loading}
       decoding={decoding}
       className="block h-auto w-full max-w-full rounded-8"
