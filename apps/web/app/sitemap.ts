@@ -1,0 +1,10 @@
+import type { MetadataRoute } from 'next';
+import { posts } from '../screens/posts';
+import { postPath } from '../entities/post';
+import { absoluteUrl } from '../shared/seo';
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  return posts
+    .filter((post) => !post.isDraft)
+    .map((post) => ({ url: absoluteUrl(postPath(post.id)), lastModified: post.publishedAt }));
+}
