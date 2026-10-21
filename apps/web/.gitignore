@@ -47,3 +47,5 @@ next-env.d.ts
 
 # MDX 빌드 생성물과 독립된 E2E 빌드
 /screens/posts/generated/
+/screens/posts/generated-preview/
+/.next-preview/

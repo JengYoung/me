@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "content:generate": "node scripts/generate-posts.ts",
-    "dev": "pnpm content:generate && next dev --port 3000",
+    "content:preview": "pnpm dev",
+    "dev": "node scripts/preview-posts.ts",
     "build": "pnpm content:generate && next build",
     "start": "next start",
     "storybook": "storybook dev --port 6006 --no-open",
