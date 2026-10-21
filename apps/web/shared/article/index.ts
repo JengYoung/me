@@ -1,4 +1,6 @@
 export { articleMdxComponents } from './mdx-components';
+export { ArticleBody } from './ui/article-body';
+export { ArticleTableOfContents } from './ui/article-table-of-contents';
 export { ArticleProse } from './ui/article-prose';
 export type { ArticleProseProps } from './ui/article-prose';
 export { ArticleImage } from './ui/article-image';

@@ -164,3 +164,91 @@
     padding-inline: var(--spacing-48px);
   }
 }
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: var(--spacing-32px);
+}
+
+.toc {
+  min-width: 0;
+  color: var(--color-ink-muted);
+}
+.toc ol {
+  list-style: none;
+  padding: 0;
+}
+.toc li {
+  margin-block: 0;
+}
+.toc li[data-depth='3'] a {
+  padding-left: var(--spacing-24px);
+}
+.toc li[data-depth='4'] a {
+  padding-left: var(--spacing-40px);
+}
+.toc li[data-depth='5'] a {
+  padding-left: calc(var(--spacing-8px) + var(--spacing-48px));
+}
+.toc li[data-depth='6'] a {
+  padding-left: calc(var(--spacing-8px) + var(--spacing-64px));
+}
+.toc a {
+  display: flex;
+  align-items: center;
+  min-height: var(--spacing-48px);
+  border-radius: var(--radius-8);
+  padding: var(--spacing-8px);
+  color: var(--color-ink-muted);
+  font-size: var(--text-body-4);
+  line-height: var(--text-body-4--line-height);
+  font-weight: var(--text-body-4--font-weight);
+  letter-spacing: var(--text-body-4--letter-spacing);
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+.toc a[aria-current='location'] {
+  color: var(--color-action-primary-bg);
+}
+.toc a:hover,
+.toc a:focus-visible {
+  background: var(--color-bg-subtle);
+  color: var(--color-action-primary-bg);
+}
+.toc a:active {
+  color: var(--color-action-primary-pressed);
+}
+.toc a:focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: -2px;
+}
+
+@media (width >= 1200px) {
+  .layout {
+    /* 레퍼런스와 같은 중앙 본문 폭을 유지하고 목차를 오른쪽 여백에 배치한다. */
+    width: calc(50% + 50vw - var(--spacing-24px));
+    grid-template-columns: minmax(0, var(--container-3xl)) minmax(0, 1fr);
+  }
+  .layout > .prose {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .toc {
+    position: sticky;
+    top: calc(var(--spacing-64px) + var(--spacing-24px));
+    grid-column: 2;
+    grid-row: 1;
+    max-height: calc(100svh - var(--spacing-64px) - var(--spacing-48px));
+    overflow-y: auto;
+    padding-inline: var(--spacing-4px);
+  }
+}
+
+@media (width >= 1200px) and (pointer: fine) {
+  .toc a {
+    min-height: var(--spacing-32px);
+    padding-block: var(--spacing-4px);
+  }
+}
