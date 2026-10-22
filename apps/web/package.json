@@ -6,10 +6,11 @@
   "scripts": {
     "post:new": "node scripts/post-new.ts",
     "post:edit": "node scripts/post-edit.ts",
+    "content:validate": "node scripts/content-validate.ts",
     "content:generate": "node scripts/generate-posts.ts",
     "content:preview": "pnpm dev",
     "dev": "node scripts/preview-posts.ts",
-    "build": "pnpm content:generate && next build",
+    "build": "pnpm content:validate && pnpm content:generate && next build",
     "start": "next start",
     "storybook": "storybook dev --port 6006 --no-open",
     "build-storybook": "storybook build",

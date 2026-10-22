@@ -4,6 +4,7 @@
   "scripts": {
     "post:new": "pnpm --filter web post:new",
     "post:edit": "pnpm --filter web post:edit",
+    "content:validate": "pnpm --filter web content:validate",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "storybook": "turbo run storybook --filter=web",
