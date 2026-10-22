@@ -181,7 +181,7 @@ export function ArticleTable({ label = '표', ...props }: ArticleTableProps) {
       tabIndex={0}
       className="min-w-0 overflow-x-auto rounded-12 border border-border bg-bg-surface focus-visible:outline-2 focus-visible:outline-ring"
     >
-      <table {...props} className={`${styles.table} w-full border-separate border-spacing-0 text-body-2`} />
+      <table {...props} className={`${styles.table} w-full border-separate border-spacing-0 text-body-3`} />
     </section>
   );
 }
