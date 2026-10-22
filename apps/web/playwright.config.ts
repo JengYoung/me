@@ -5,6 +5,7 @@ const baseURL = 'http://127.0.0.1:3100';
 export default defineConfig({
   testDir: '.',
   testMatch: '**/*.e2e.spec.ts',
+  testIgnore: '**/*.preview.e2e.spec.ts',
   respectGitIgnore: true,
   fullyParallel: true,
   forbidOnly: true,
@@ -30,6 +31,9 @@ export default defineConfig({
     },
   ],
   webServer: {
+    env: {
+      BLOG_NEXT_DIST_DIR: '.next-e2e',
+    },
     command: 'pnpm run build && pnpm exec next start --hostname 127.0.0.1 --port 3100',
     url: baseURL,
     // 다른 개발 서버나 오래된 빌드에 연결하지 않고 이번 실행의 앱을 검증한다.
