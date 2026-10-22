@@ -6,6 +6,7 @@
   "scripts": {
     "post:new": "node scripts/post-new.ts",
     "post:edit": "node scripts/post-edit.ts",
+    "post:publish": "node scripts/post-publish.ts",
     "content:validate": "node scripts/content-validate.ts",
     "content:generate": "node scripts/generate-posts.ts",
     "content:preview": "pnpm dev",
