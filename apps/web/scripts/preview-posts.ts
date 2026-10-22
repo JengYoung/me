@@ -3,9 +3,18 @@ import { watch } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import { generatePosts } from './generate-posts.ts';
+import { generateDiary } from './generate-diary.ts';
 
 const appRoot = fileURLToPath(new URL('../', import.meta.url));
 const outputRoot = fileURLToPath(new URL('../screens/posts/generated-preview', import.meta.url));
+const diaryOutputRoot = fileURLToPath(new URL('../screens/diary/generated-preview', import.meta.url));
+async function generatePreview() {
+  const [posts, diary] = await Promise.all([
+    generatePosts({ includeDrafts: true, outputRoot }),
+    generateDiary({ includeDrafts: true, outputRoot: diaryOutputRoot }),
+  ]);
+  return { posts, diary };
+}
 const { values } = parseArgs({ options: { port: { type: 'string', default: '3000' } } });
 const port = Number(values.port);
 if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('port는 1~65535의 정수여야 합니다.');
@@ -27,16 +36,16 @@ function stop() {
 process.on('SIGINT', stop);
 process.on('SIGTERM', stop);
 try {
-  const result = await generatePosts({ includeDrafts: true, outputRoot });
-  console.log(`실제 docs 미리보기: 글 ${result.posts}개, 초안 ${result.drafts}개`);
-  console.log(`http://127.0.0.1:${port}/posts`);
+  const result = await generatePreview();
+  console.log(`실제 docs 미리보기: 포스트 ${result.posts.posts}개, 일기 ${result.diary.entries}개`);
+  console.log(`http://127.0.0.1:${port}/posts · http://127.0.0.1:${port}/diary`);
   watcher = watch(new URL('../docs', import.meta.url), { recursive: true }, () => {
     clearTimeout(timer);
     timer = setTimeout(() => {
       if (stopped) return;
       pending = pending
         .then(async () => {
-          await generatePosts({ includeDrafts: true, outputRoot });
+          await generatePreview();
         })
         .catch((error: unknown) => console.error(error));
     }, 100);

@@ -42,10 +42,16 @@ export default function config(phase) {
     ...nextConfig,
     turbopack: {
       ...nextConfig.turbopack,
-      resolveAlias: { '@post-content/*': `./screens/posts/${preview ? 'generated-preview' : 'generated'}/*` },
+      resolveAlias: {
+        '@post-content/*': `./screens/posts/${preview ? 'generated-preview' : 'generated'}/*`,
+        '@diary-content/*': `./screens/diary/${preview ? 'generated-preview' : 'generated'}/*`,
+      },
     },
     webpack(config) {
       config.resolve.alias['@post-content'] = generatedRoot;
+      config.resolve.alias['@diary-content'] = fileURLToPath(
+        new URL(`./screens/diary/${preview ? 'generated-preview' : 'generated'}`, import.meta.url),
+      );
       return config;
     },
     ...(preview

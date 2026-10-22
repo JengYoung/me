@@ -10,6 +10,7 @@ import { Character } from '../../../shared/ui/character';
 const navigation = [
   { href: '/', label: '홈' },
   { href: '/posts', label: '포스트' },
+  { href: '/diary', label: '일기' },
 ] as const;
 
 function HeaderNavigation({ pathname }: { pathname: string }) {

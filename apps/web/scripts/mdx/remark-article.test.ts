@@ -1,7 +1,8 @@
-import { mkdtemp, writeFile, rm } from 'node:fs/promises';
+import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { compile } from '@mdx-js/mdx';
+import remarkFrontmatter from 'remark-frontmatter';
 import { expect, onTestFinished, test } from 'vitest';
 import remarkArticle from './remark-article.mjs';
 
@@ -48,4 +49,27 @@ test('일반 Markdown 초안의 기존 이미지는 로컬 미리보기에서만
 test('미리보기에서도 공개 원고에는 초안 이미지 규칙을 적용하지 않는다', async () => {
   const file = await articleFile('![초안 이미지](./0.0.0.그림.png)');
   await expect(compile(file, { remarkPlugins: [[remarkArticle, { preview: true }]] })).rejects.toThrow();
+});
+
+test('일기의 비버전 이미지는 공개 원고에서 재사용하고 초안 본문은 빌드에서 차단한다', async () => {
+  const root = await mkdtemp(path.join(tmpdir(), 'me-diary-mdx-'));
+  onTestFinished(() => rm(root, { recursive: true, force: true }));
+  const directory = path.join(root, 'diary', '2026');
+  await mkdir(directory, { recursive: true });
+  await writeFile(path.join(directory, 'photo.png'), 'test-image');
+  const filename = path.join(directory, '261022.mdx');
+  const body = '\n## 산책\n\n![사진](./photo.png)\n\n<ArticleImage src="./photo.png" alt="산책 사진" />';
+  const published = {
+    path: filename,
+    value: `---\ntitle: 일기\npublishedAt: "2026-10-22T15:00:00+09:00"\n---\n${body}`,
+  };
+  const output = String(await compile(published, { remarkPlugins: [remarkFrontmatter, remarkArticle] }));
+  expect(output.match(/import _articleImage/g)).toHaveLength(1);
+  expect(output).toContain('./photo.png');
+  expect(output).toContain('ArticleTableOfContents');
+  const draft = { path: filename, value: `---\ntitle: 일기\npublishedAt: ""\n---\n${body}` };
+  await expect(compile(draft, { remarkPlugins: [remarkFrontmatter, remarkArticle] })).rejects.toThrow('초안');
+  expect(
+    String(await compile(draft, { remarkPlugins: [remarkFrontmatter, [remarkArticle, { preview: true }]] })),
+  ).toContain('ArticleImage');
 });

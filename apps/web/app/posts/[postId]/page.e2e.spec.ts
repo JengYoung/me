@@ -36,7 +36,9 @@ test('사이트맵에는 실제 공개 글의 기본 주소만 포함한다', as
   const response = await request.get('/sitemap.xml');
   expect(response.status()).toBe(200);
   const xml = await response.text();
-  const urls = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1]);
+  const urls = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)]
+    .map((match) => match[1]!)
+    .filter((url) => url.includes('/posts/'));
   expect(new Set(urls)).toEqual(new Set(published.map(({ id }) => `https://jengyoung.co.kr${postUrl(id)}`)));
 });
 

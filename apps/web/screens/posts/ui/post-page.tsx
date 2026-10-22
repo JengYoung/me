@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { postPath } from '../../../entities/post';
 import { absoluteUrl, pageMetadata } from '../../../shared/seo';
+import { ArticleLayout, ArticleBackLink } from '../../../shared/article';
 import { posts } from '@post-content/catalog.generated';
 import { currentPosts } from '@post-content/current.generated';
 import { PostArticle } from './post-article';
@@ -58,23 +59,14 @@ export function PostPage({ postId }: { postId: string }) {
     keywords: post.tags,
   };
   return (
-    <main
-      id="main-content"
-      tabIndex={-1}
-      className="mx-auto max-w-3xl space-y-32px px-24px py-40px desktop:px-0 desktop:py-64px"
-    >
+    <ArticleLayout>
       {!post.isDraft && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replaceAll('<', '\\u003c') }}
         />
       )}
-      <Link
-        href="/posts"
-        className="inline-flex min-h-48px items-center rounded-4 text-title-4 text-ink-secondary underline focus-visible:outline-2 focus-visible:outline-ring"
-      >
-        포스트 목록 보러가기
-      </Link>
+      <ArticleBackLink href="/posts">포스트 목록 보러가기</ArticleBackLink>
       {post.isDraft ? (
         article
       ) : (
@@ -104,6 +96,6 @@ export function PostPage({ postId }: { postId: string }) {
           )}
         </nav>
       )}
-    </main>
+    </ArticleLayout>
   );
 }

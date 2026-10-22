@@ -1,15 +1,10 @@
-import { mkdir, readdir, readFile, unlink, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadPosts } from '../entities/post/api/load-posts.ts';
+import { importPath, writeGeneratedFiles } from './content/generated-files.ts';
 
 const appRoot = fileURLToPath(new URL('../', import.meta.url));
 const header = '// generate-posts.ts가 생성합니다. 직접 수정하지 마세요.\n';
-
-function importPath(from: string, target: string) {
-  const relative = path.relative(path.dirname(from), target).split(path.sep).join('/');
-  return relative.startsWith('.') ? relative : `./${relative}`;
-}
 
 export async function generatePosts({
   contentRoot = path.join(appRoot, 'docs'),
@@ -72,23 +67,7 @@ import type { ComponentType } from 'react';
 export const archiveComponents = new Map<string, ReadonlyMap<string, ComponentType>>([${archives.join(',\n')}]);
 `,
   );
-  await mkdir(outputRoot, { recursive: true });
-  const previous = await readdir(outputRoot, { recursive: true });
-  for (const [name, source] of files) {
-    const filename = path.join(outputRoot, name);
-    await mkdir(path.dirname(filename), { recursive: true });
-    const old = await readFile(filename, 'utf8').catch((error: NodeJS.ErrnoException) => {
-      if (error.code !== 'ENOENT') throw error;
-      return undefined;
-    });
-    if (old !== source) await writeFile(filename, source);
-  }
-  // 이 생성기가 소유한 파일만 정리한다. 원고·자산은 읽기 전용이다.
-  for (const filename of previous) {
-    if (/\.generated\.tsx?$/.test(filename) && !files.has(filename.split(path.sep).join('/'))) {
-      await unlink(path.join(outputRoot, filename));
-    }
-  }
+  await writeGeneratedFiles(outputRoot, files);
   return {
     posts: posts.length,
     drafts: posts.filter(({ latest }) => latest.post.isDraft).length,

@@ -33,10 +33,10 @@
     ".agent-source/conventions/react-best-practices/source.md": "c98c26a26d85726b859f6553d1546a4666b62f4e5706fbff448a616122ac1b85",
     ".agent-source/conventions/test-writing/source.md": "f39044c5e7c277ae5b17a44bdf76867ce1e584b5d89e277b21205cb8ea0c9fe3",
     ".agent-source/hooks/work-plan/source.md": "eec8be577224d26fd15c899173f16d03bcd9d633bda6a378062807cf6ec29189",
-    ".agent-source/project/content.md": "5562b53101dd9406b1326d4d1f45a344bdabb521065a7e0bdae4fc0992609949",
-    ".agent-source/project/content/mdx.md": "2fb74204bb9c7b70b45cc6f5eabffa5dd8de2308cab97911816f42955b489929",
-    ".agent-source/project/content/publishing.md": "bb03ef3e6470c28a7466e014afa4ab8fd8f3624656b8e5b47864c3c8d429e87a",
-    ".agent-source/project/content/storage.md": "d8a40ede6b95b899b3c84b51e3717138e1b7f27a1cf7566be257e0bd2458c20f",
+    ".agent-source/project/content.md": "02cd81bdf689d64720c8e5a13642910772e52266bbebfa6987dfa90fd12d92b3",
+    ".agent-source/project/content/mdx.md": "1c73b41348c9f9927425317e99557a245fb54fc1550bbb8e215277336fceb65b",
+    ".agent-source/project/content/publishing.md": "ea4cc225344535a222aef15a02d0f5665f8095bf0a0260c9838f7b8299b3d31e",
+    ".agent-source/project/content/storage.md": "8d1130ed9974e0408fff771a638bb041b7814e520e49594f5e5ee26e19686065",
     ".agent-source/project/design-tokens.md": "a61e7decca90600d4ba27a10e2046f1cc9e05695ea2bee9db86a3c78f49bb53f",
     ".agent-source/project/maintenance.md": "cbfb9dc4305446f115f9b03dc44b2354b73ee7e6d7202d72f2406b2da2a49334",
     ".agent-source/project/purpose.md": "4b28d8c9259987f7f84aad17ea368155c15ce0d778abd05b26b790a1357fe174",
@@ -320,7 +320,7 @@
       ]
     },
     "AGENTS.md": {
-      "sha256": "f6254017da6766311e08c74f7e25169983738fa405b984f828112f363a1198c5",
+      "sha256": "d5ba122ecd5f8f608876878eb78162ebb615f958ac931b0939f5dc3bc2c3978f",
       "source": ".agent-source/project/source.md",
       "target": "codex",
       "facets": [
@@ -334,7 +334,7 @@
       ]
     },
     "CLAUDE.md": {
-      "sha256": "dc0a217a10ecc92405138853622aee4a450c610b594cc17f6933cd726f2feda8",
+      "sha256": "cda314d5c713cb0646a6fd87295856e62e5bd809255f3e97c4fb623288f961c1",
       "source": ".agent-source/project/source.md",
       "target": "claude",
       "facets": [

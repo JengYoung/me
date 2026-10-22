@@ -3,6 +3,7 @@ import path from 'node:path';
 import GithubSlugger from 'github-slugger';
 import { toString } from 'mdast-util-to-string';
 import { visit } from 'unist-util-visit';
+import { parse } from 'yaml';
 
 const attribute = (name, value) => ({ type: 'mdxJsxAttribute', name, value });
 const element = (name, attributes = [], children = [], flow = true) => ({
@@ -27,7 +28,13 @@ const expressionAttribute = (name, identifier) =>
 /** Next.js 빌드 전용: 본문 앵커·목차와 참조된 공개 이미지의 정적 import를 생성한다. */
 export default function remarkArticle({ preview = false } = {}) {
   return (tree, file) => {
-    const isDraft = /^0\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:\.local)?\.mdx?$/.test(path.basename(file.path ?? ''));
+    const sourceDirectory = path.dirname(file.path ?? '');
+    const isDiary =
+      path.basename(path.dirname(sourceDirectory)) === 'diary' && /^\d{4}$/.test(path.basename(sourceDirectory));
+    const diaryMetadata = isDiary ? parse(tree.children.find((node) => node.type === 'yaml')?.value ?? '') : undefined;
+    const isDraft = isDiary
+      ? !diaryMetadata?.publishedAt || /\.local\./.test(file.path ?? '')
+      : /^0\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:\.local)?\.mdx?$/.test(path.basename(file.path ?? ''));
     if (!preview && (isDraft || /\.local\./.test(file.path ?? ''))) {
       file.fail('초안은 content:preview 명령으로만 읽을 수 있습니다.');
     }
@@ -42,11 +49,16 @@ export default function remarkArticle({ preview = false } = {}) {
 
     function validateImage(source, node) {
       const imagePattern =
-        preview && isDraft
+        (preview && isDraft) || isDiary
           ? /^\.\/[^/\\]+\.(?:png|jpe?g|webp|avif|gif)$/i
           : /^\.\/[1-9]\d*\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.[^/\\]+\.(?:png|jpe?g|webp|avif|gif)$/i;
-      if (!imagePattern.test(source)) {
-        file.fail('이미지는 같은 글 폴더의 ./1.0.0.이미지.png처럼 공개 버전 파일을 참조하세요.', node);
+      if (!imagePattern.test(source) || (isDiary && !isDraft && /\.local\./.test(source))) {
+        file.fail(
+          isDiary
+            ? '일기 이미지는 같은 폴더의 ./이미지.png를 참조하고 공개 원고에서 .local. 자산은 제외하세요.'
+            : '이미지는 같은 글 폴더의 ./1.0.0.이미지.png처럼 공개 버전 파일을 참조하세요.',
+          node,
+        );
       }
       try {
         const directory = realpathSync(path.dirname(file.path));

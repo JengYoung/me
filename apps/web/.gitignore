@@ -51,3 +51,7 @@ next-env.d.ts
 /.next-e2e/
 /.next-preview/
 /.next-preview-e2e/
+
+# Diary content modules
+/screens/diary/generated/
+/screens/diary/generated-preview/

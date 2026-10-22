@@ -1,4 +1,20 @@
 @font-face {
+  font-family: 'Gowun Batang';
+  src: url('../../../public/fonts/gowun-batang/GowunBatang-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gowun Batang';
+  src: url('../../../public/fonts/gowun-batang/GowunBatang-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Chosun Ilbo Myungjo';
   src: url('../../../public/fonts/chosun-ilbo-myungjo/Chosunilbo_myungjo.woff') format('woff');
   font-weight: 400;
@@ -14,6 +30,22 @@
   /* 기존 블로그의 아티클 본문 굵기를 유지한다. 전역 typography는 바꾸지 않는다. */
   font-weight: 300;
   overflow-wrap: anywhere;
+}
+
+/* 사용자가 지정한 일기 표현. 제목·본문의 명조체는 이 영역에 한정한다. */
+.serif,
+.serif .prose,
+.serif .quote {
+  font-family: 'Gowun Batang', 'AppleMyungjo', 'Batang', serif;
+  word-break: keep-all;
+}
+
+.serif .prose,
+.serif .summary {
+  font-size: var(--text-body-3);
+  line-height: var(--text-body-3--line-height);
+  font-weight: var(--text-body-3--font-weight);
+  letter-spacing: var(--text-body-3--letter-spacing);
 }
 
 .prose > * + *,

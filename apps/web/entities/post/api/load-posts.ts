@@ -1,6 +1,6 @@
 import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { parse } from 'yaml';
+import { isRecord as record, parseFrontmatter, parseArticleMetadata } from '../../../shared/content/index.ts';
 import { compareVersions, isPublicVersion } from '../model/post.ts';
 import type { Post, PostMetadata, PostRevision } from '../model/post.ts';
 
@@ -15,36 +15,13 @@ export interface PostEntry {
   revisions: PostRevision[];
 }
 
-function record(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null && !Array.isArray(value);
-}
-
 export function parsePostMetadata(source: string, filename: string, isDraft = false): PostMetadata {
   function fail(message: string): never {
     throw new Error(`${filename}: ${message}`);
   }
-  const match = /^\uFEFF?---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/.exec(source);
-  if (!match) return fail('frontmatter가 필요합니다.');
-  let data: unknown;
-  try {
-    data = parse(match[1]!);
-  } catch (error) {
-    return fail(error instanceof Error ? error.message : 'frontmatter를 읽을 수 없습니다.');
-  }
-  if (!record(data)) return fail('frontmatter는 객체여야 합니다.');
-  if (typeof data.title !== 'string' || !data.title.trim()) return fail('title은 빈 문자열일 수 없습니다.');
-  if (
-    !(isDraft && (data.publishedAt === undefined || data.publishedAt === '')) &&
-    (typeof data.publishedAt !== 'string' ||
-      !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(data.publishedAt) ||
-      !Number.isFinite(Date.parse(data.publishedAt)))
-  )
-    return fail('publishedAt에 시간대가 포함된 발행 시각을 작성하세요.');
-  if (data.summary !== undefined && typeof data.summary !== 'string') return fail('summary는 문자열이어야 합니다.');
+  const data = parseFrontmatter(source, filename);
+  const metadata = parseArticleMetadata(data, filename, isDraft);
   if (data.reason !== undefined && typeof data.reason !== 'string') return fail('reason은 문자열이어야 합니다.');
-  if (data.tags !== undefined && (!Array.isArray(data.tags) || !data.tags.every((tag) => typeof tag === 'string'))) {
-    return fail('tags는 문자열 배열이어야 합니다.');
-  }
   if (
     data.series !== undefined &&
     (!record(data.series) ||
@@ -56,10 +33,7 @@ export function parsePostMetadata(source: string, filename: string, isDraft = fa
   )
     return fail('series에는 id와 1 이상의 정수 order가 필요합니다.');
   return {
-    title: data.title,
-    summary: (data.summary as string | undefined) ?? '',
-    publishedAt: (data.publishedAt as string | undefined) ?? '',
-    tags: (data.tags as string[] | undefined) ?? [],
+    ...metadata,
     ...(data.reason === undefined ? {} : { reason: data.reason as string }),
     ...(data.series === undefined ? {} : { series: data.series as PostMetadata['series'] }),
   };

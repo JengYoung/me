@@ -8,7 +8,7 @@
     "post:edit": "node scripts/post-edit.ts",
     "post:publish": "node scripts/post-publish.ts",
     "content:validate": "node scripts/content-validate.ts",
-    "content:generate": "node scripts/generate-posts.ts",
+    "content:generate": "node scripts/generate-content.ts",
     "content:preview": "pnpm dev",
     "dev": "node scripts/preview-posts.ts",
     "build": "pnpm content:validate && pnpm content:generate && next build",
@@ -24,7 +24,10 @@
     "lint": "oxlint --max-warnings 0 .",
     "lint:fix": "oxlint --fix --max-warnings 0 .",
     "check-types": "pnpm content:generate && next typegen && tsc --noEmit",
-    "characters:generate": "node scripts/generate-character.mjs && oxfmt --config ../../packages/format-config/react.js --write shared/ui/character/character.generated.ts"
+    "characters:generate": "node scripts/generate-character.mjs && oxfmt --config ../../packages/format-config/react.js --write shared/ui/character/character.generated.ts",
+    "diary:new": "node scripts/diary.ts new",
+    "diary:edit": "node scripts/diary.ts edit",
+    "diary:publish": "node scripts/diary.ts publish"
   },
   "dependencies": {
     "@repo/ui": "workspace:*",

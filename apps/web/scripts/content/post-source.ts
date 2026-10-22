@@ -1,26 +1,10 @@
 import { mkdir, open, readFile, readdir, realpath, rmdir, unlink } from 'node:fs/promises';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { parseDocument, stringify } from 'yaml';
+import { stringify } from 'yaml';
+import { docsRoot, postIdError, updateFrontmatter } from './source.ts';
+export { docsRoot, postIdError, parseTags, updateFrontmatter } from './source.ts';
 import { loadPosts, parsePostMetadata } from '../../entities/post/api/load-posts.ts';
 import type { PostMetadata } from '../../entities/post/model/post.ts';
-
-export const docsRoot = fileURLToPath(new URL('../../docs', import.meta.url));
-
-export function postIdError(id: string) {
-  return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id) ? undefined : '글 ID는 소문자 영문·숫자·하이픈으로 입력하세요.';
-}
-
-export function parseTags(value: string) {
-  return [
-    ...new Set(
-      value
-        .split(',')
-        .map((tag) => tag.trim())
-        .filter(Boolean),
-    ),
-  ];
-}
 
 async function writeNewFile(filename: string, source: string) {
   const file = await open(filename, 'wx');
@@ -61,18 +45,6 @@ export async function postDirectory(contentRoot: string, postId: string) {
   const directory = await realpath(path.join(postsRoot, postId));
   if (path.dirname(directory) !== postsRoot) throw new Error('글 폴더가 docs/posts 밖을 가리킵니다.');
   return directory;
-}
-
-export function updateFrontmatter(source: string, changes: Record<string, unknown>) {
-  const match = /^(\uFEFF?---\r?\n)([\s\S]*?)(\r?\n---(?:\r?\n|$))/.exec(source);
-  if (!match) throw new Error('frontmatter가 필요합니다.');
-  const document = parseDocument(match[2]!);
-  if (document.errors.length) throw new Error(document.errors[0]!.message);
-  for (const [key, value] of Object.entries(changes)) {
-    if (value === undefined) document.delete(key);
-    else document.set(key, value);
-  }
-  return `---\n${document.toString({ lineWidth: 0 })}---\n${source.slice(match[0].length)}`;
 }
 
 export async function createPost({

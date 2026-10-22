@@ -5,7 +5,7 @@
 - 웹폰트 배포 안내: https://noonnu.cc/font_page/63
 - 파일 원본: https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Chosunilbo_myungjo.woff
 
-웹폰트 배포본을 변환·수정하지 않고 보관한다. 아티클 인용문에서만 사용한다.
+웹폰트 배포본을 변환·수정하지 않고 보관한다. 포스트의 아티클 인용문에서 사용한다.
 
 공식 배포처의 조선일보 전용서체 이용 안내:
 
