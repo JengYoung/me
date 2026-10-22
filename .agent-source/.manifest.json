@@ -31,7 +31,7 @@
     ".agent-source/adapters/codex/work-plan-hook.json": "241269917594ee3292e184c03be1b0785f07d941ad06248a011e9fc38257ed9b",
     ".agent-source/conventions/code-quality/source.md": "b94809c0fa51d7b063ea90414b30b74377042ee1c45fd4df4e161e0ffc957ec4",
     ".agent-source/conventions/react-best-practices/source.md": "c98c26a26d85726b859f6553d1546a4666b62f4e5706fbff448a616122ac1b85",
-    ".agent-source/conventions/test-writing/source.md": "190411f5f00699a4038e8b35d77a2cf655b1157753f28e4607352b4c964104c1",
+    ".agent-source/conventions/test-writing/source.md": "f39044c5e7c277ae5b17a44bdf76867ce1e584b5d89e277b21205cb8ea0c9fe3",
     ".agent-source/hooks/work-plan/source.md": "eec8be577224d26fd15c899173f16d03bcd9d633bda6a378062807cf6ec29189",
     ".agent-source/project/content.md": "5562b53101dd9406b1326d4d1f45a344bdabb521065a7e0bdae4fc0992609949",
     ".agent-source/project/content/mdx.md": "2fb74204bb9c7b70b45cc6f5eabffa5dd8de2308cab97911816f42955b489929",
@@ -188,7 +188,7 @@
       ]
     },
     ".claude/rules/test-writing.md": {
-      "sha256": "c4bc86d370210b3edeaccb0338f643c07d23c2753b915f1417255ac4d6ef9039",
+      "sha256": "ec379936eb3dd5956d1c1fe906219b98b23d3b27ad1e276e788cd21d292ecbe3",
       "source": ".agent-source/conventions/test-writing/source.md",
       "target": "claude",
       "facets": [
@@ -312,7 +312,7 @@
       ]
     },
     ".codex/test-writing.md": {
-      "sha256": "ed5ef7b5afcee712fcc7e790fb2843c3a275499b724b6a1433257bb72232e31a",
+      "sha256": "6f359c30bd3a71017b6214c5892d5c952ff492758abb8b79ffb23821b54b4239",
       "source": ".agent-source/conventions/test-writing/source.md",
       "target": "codex",
       "facets": [
