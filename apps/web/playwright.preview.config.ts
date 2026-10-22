@@ -9,6 +9,7 @@ export default defineConfig({
   testIgnore: [],
   use: { ...config.use, baseURL },
   webServer: {
+    env: { BLOG_NEXT_DIST_DIR: '.next-preview-e2e' },
     command: 'pnpm dev --port 3102',
     url: `${baseURL}/posts`,
     reuseExistingServer: false,

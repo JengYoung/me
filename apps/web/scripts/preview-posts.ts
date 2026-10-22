@@ -53,7 +53,11 @@ try {
     ],
     {
       cwd: appRoot,
-      env: { ...process.env, BLOG_CONTENT_PREVIEW: '1', BLOG_NEXT_DIST_DIR: '.next-preview' },
+      env: {
+        ...process.env,
+        BLOG_CONTENT_PREVIEW: '1',
+        BLOG_NEXT_DIST_DIR: process.env.BLOG_NEXT_DIST_DIR ?? '.next-preview',
+      },
       stdio: 'inherit',
     },
   );

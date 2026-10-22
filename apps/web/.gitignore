@@ -50,3 +50,4 @@ next-env.d.ts
 /screens/posts/generated-preview/
 /.next-e2e/
 /.next-preview/
+/.next-preview-e2e/

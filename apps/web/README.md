@@ -167,6 +167,8 @@ pnpm --filter web test:e2e
 
 루트 레이아웃은 `widgets/blog-frame`의 `BlogFrame`으로 공통 Header·Sidebar와 본문 상단 여백을 연결합니다. 홈 본문은 아직 `null`이며, 메뉴에는 구현된 홈·포스트 경로를 제공합니다. `app/page.e2e.spec.ts`는 문서·리소스 로딩과 404 응답을, `app/layout.e2e.spec.ts`는 기본 라이트 테마, 헤더와 본문의 배치, 사이드바의 키보드 닫기·포커스 복귀·메뉴 이동을 검사합니다.
 
+상세 목차는 데스크톱에서 본문 오른쪽, 모바일에서 접이식 메뉴로 스크롤 중에도 유지됩니다. 모바일 목차를 선택하면 메뉴를 접고 고정 영역 아래의 제목으로 이동합니다. 실제 원고를 읽는 `page.preview.e2e.spec.ts`에서 스크롤 중 목차 위치와 제목 이동을 검사합니다. 미리보기 E2E의 Next.js 산출물은 `.next-preview-e2e/`로 분리해 `.next-preview/`를 쓰는 로컬 개발 서버와 충돌하지 않게 합니다.
+
 테스트 소스는 대상 파일과 같은 디렉터리에 둡니다. `e2e/`, `tests/`, `__tests__/` 같은 별도 테스트 디렉터리를 만들지 않습니다. E2E 파일명은 `<대상 파일명>.e2e.spec.ts`이며, 여러 페이지를 거치는 흐름은 주된 대상 페이지·기능 파일 옆에 둡니다. 공용 setup은 설정 파일 옆에, 테스트 전용 helper·fixture는 사용하는 테스트 옆에 둡니다.
 
 `playwright.config.ts`는 앱 루트의 `**/*.e2e.spec.ts`만 수집하고 `.gitignore`의 제외 경로를 따릅니다. Vitest의 `.browser.test.tsx`·`.ssr.test.tsx`와 구분되며, 생성 보고서·빌드 산출물은 수집하지 않습니다. 특정 페이지의 테스트만 실행할 수도 있습니다.

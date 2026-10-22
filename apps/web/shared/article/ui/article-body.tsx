@@ -41,6 +41,23 @@ export function ArticleBody({ children }: { children?: ReactNode }) {
       }
       schedule();
     }
+    function closeMobileToc(event: MouseEvent) {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      )
+        return;
+      const link = event.currentTarget;
+      if (link instanceof HTMLAnchorElement) {
+        const details = link.closest('details');
+        if (details) details.open = false;
+      }
+    }
+    for (const link of links) link.addEventListener('click', closeMobileToc);
     window.addEventListener('scroll', schedule, { passive: true });
     window.addEventListener('resize', schedule);
     window.addEventListener('hashchange', restoreFragment);
@@ -50,7 +67,10 @@ export function ArticleBody({ children }: { children?: ReactNode }) {
       window.removeEventListener('scroll', schedule);
       window.removeEventListener('resize', schedule);
       window.removeEventListener('hashchange', restoreFragment);
-      for (const link of links) link.removeAttribute('aria-current');
+      for (const link of links) {
+        link.removeEventListener('click', closeMobileToc);
+        link.removeAttribute('aria-current');
+      }
     };
   }, [children]);
   return (

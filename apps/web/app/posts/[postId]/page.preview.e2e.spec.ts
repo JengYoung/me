@@ -22,6 +22,7 @@ const documents = (
         const { title } = parse(frontmatter[1]!);
         return [
           {
+            sourceLength: source.length,
             latest: {
               post: {
                 id: entry.name,
@@ -35,6 +36,67 @@ const documents = (
       }),
   )
 ).flat();
+
+test('스크롤 중에도 목차를 열고 가려지지 않는 본문 제목으로 이동한다', async ({ page }, testInfo) => {
+  const document = documents.reduce<(typeof documents)[number] | undefined>(
+    (longest, current) => (!longest || current.sourceLength > longest.sourceLength ? current : longest),
+    undefined,
+  );
+  test.skip(!document, '미리볼 실제 원고가 없습니다.');
+  await page.goto(`/posts/${encodeURIComponent(document!.latest.post.id)}`);
+  if (testInfo.project.use.colorScheme === 'dark') {
+    await page.locator('html').evaluate((element) => {
+      element.dataset.theme = 'dark';
+    });
+  }
+  const desktop = page.viewportSize()!.width >= 1200;
+  const toc = page.locator('[data-article-toc]');
+  const header = page.getByRole('banner');
+  // 메뉴를 실제로 조작해 hydration을 확인하고, 헤더 밖에 포커스를 둔 채 읽기를 시작한다.
+  await page.getByRole('button', { name: '메뉴 열기' }).click();
+  const menu = page.getByRole('dialog', { name: '둘러보기' });
+  await expect(menu).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(menu).not.toBeVisible();
+  await page.getByRole('main').focus();
+  await page.locator('[data-article-prose]').evaluate((element) => {
+    window.scrollTo(0, element.getBoundingClientRect().top + window.scrollY + window.innerHeight);
+  });
+  const stickyTop = await toc.evaluate((element) => parseFloat(getComputedStyle(element).top));
+  await expect.poll(async () => Math.round((await toc.boundingBox())!.y)).toBe(stickyTop);
+  await expect
+    .poll(async () => {
+      const bounds = (await header.boundingBox())!;
+      return Math.round(bounds.y + bounds.height);
+    })
+    .toBeLessThanOrEqual(0);
+
+  await page.evaluate(() => window.scrollBy(0, -200));
+  await expect.poll(async () => Math.round((await header.boundingBox())!.y)).toBe(0);
+  await expect.poll(async () => Math.round((await toc.boundingBox())!.y)).toBe(stickyTop);
+
+  if (!desktop) {
+    const readingPosition = await page.evaluate(() => window.scrollY);
+    await toc.locator('summary').click();
+    await expect(toc.locator('details')).toHaveAttribute('open');
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(readingPosition);
+  }
+  const navigation = toc.locator('nav:visible');
+  const link = navigation.getByRole('link').nth(2);
+  const href = await link.getAttribute('href');
+  expect(href).toMatch(/^#/);
+  await link.click();
+  if (!desktop) await expect(toc.locator('details')).not.toHaveAttribute('open');
+  await expect.poll(() => page.evaluate(() => window.location.hash)).toBe(href);
+  const heading = page.locator(`[id=${JSON.stringify(decodeURIComponent(href!.slice(1)))}]`);
+  await expect(heading).toBeFocused();
+  const bounds = (await heading.boundingBox())!;
+  const obstruction = desktop
+    ? (await header.boundingBox())!.height
+    : (await toc.boundingBox())!.y + (await toc.boundingBox())!.height;
+  expect(bounds.y).toBeGreaterThanOrEqual(obstruction);
+  expect(bounds.y).toBeLessThan(page.viewportSize()!.height);
+});
 
 test('실제 원고 목록에서 초안을 열 수 있고 초안은 사이트맵에 없다', async ({ page, request }) => {
   await page.goto('/posts');
@@ -62,7 +124,7 @@ for (const {
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(post.title);
     await expect(page.locator('article')).toHaveAttribute('data-post-version', post.version);
     await expect(page.locator('[data-article-prose]')).not.toHaveText('');
-    // 전역 overflow-x: hidden으로 가려지는 본문·목차의 잘림도 확인한다.
+    // 가로 넘침을 숨기는 전역 스타일로 본문·목차가 잘리지 않는지도 확인한다.
     for (const element of await page.locator('[data-article-prose], [data-article-toc]').all()) {
       const bounds = await element.boundingBox();
       expect(bounds).not.toBeNull();
