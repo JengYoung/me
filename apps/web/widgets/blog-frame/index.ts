@@ -1,3 +1,4 @@
+export { BlogFrame } from './ui/blog-frame';
 export {
   Header,
   ScrollHeaderPlugin,

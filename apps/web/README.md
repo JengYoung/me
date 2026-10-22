@@ -165,7 +165,7 @@ pnpm --filter web exec playwright install --with-deps chromium
 pnpm --filter web test:e2e
 ```
 
-현재 홈은 `null`을 반환하고 Header·Sidebar가 앱 경로에 연결되어 있지 않습니다. `app/page.tsx` 옆의 `app/page.e2e.spec.ts`는 홈 문서·스크립트·스타일 로딩과 브라우저 오류, 없는 경로의 404 응답·안내 화면을 검사합니다. 이 실행을 Header·Sidebar의 앱 사용자 흐름 검증이나 전체 앱 기능 검증으로 간주하지 않습니다.
+루트 레이아웃은 `widgets/blog-frame`의 `BlogFrame`으로 공통 Header·Sidebar와 본문 상단 여백을 연결합니다. 홈 본문은 아직 `null`이며, 메뉴에는 구현된 홈·포스트 경로를 제공합니다. `app/page.e2e.spec.ts`는 문서·리소스 로딩과 404 응답을, `app/layout.e2e.spec.ts`는 기본 라이트 테마, 헤더와 본문의 배치, 사이드바의 키보드 닫기·포커스 복귀·메뉴 이동을 검사합니다.
 
 테스트 소스는 대상 파일과 같은 디렉터리에 둡니다. `e2e/`, `tests/`, `__tests__/` 같은 별도 테스트 디렉터리를 만들지 않습니다. E2E 파일명은 `<대상 파일명>.e2e.spec.ts`이며, 여러 페이지를 거치는 흐름은 주된 대상 페이지·기능 파일 옆에 둡니다. 공용 setup은 설정 파일 옆에, 테스트 전용 helper·fixture는 사용하는 테스트 옆에 둡니다.
 

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { BlogFrame } from '../widgets/blog-frame';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" data-theme="light">
-      <body className="min-h-svh bg-bg-surface font-sans text-ink">{children}</body>
+      <body className="min-h-svh bg-bg-surface font-sans text-ink">
+        <BlogFrame>{children}</BlogFrame>
+      </body>
     </html>
   );
 }
