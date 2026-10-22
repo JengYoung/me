@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "post:new": "pnpm --filter web post:new",
+    "post:edit": "pnpm --filter web post:edit",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "storybook": "turbo run storybook --filter=web",

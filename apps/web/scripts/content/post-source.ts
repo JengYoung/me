@@ -1,7 +1,7 @@
-import { mkdir, open, readdir, rmdir, unlink } from 'node:fs/promises';
+import { mkdir, open, readFile, readdir, realpath, rmdir, unlink } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { stringify } from 'yaml';
+import { parseDocument, stringify } from 'yaml';
 import { loadPosts, parsePostMetadata } from '../../entities/post/api/load-posts.ts';
 import type { PostMetadata } from '../../entities/post/model/post.ts';
 
@@ -54,6 +54,27 @@ export async function writingContext(contentRoot = docsRoot) {
   return { entries, ids, series };
 }
 
+export async function postDirectory(contentRoot: string, postId: string) {
+  const error = postIdError(postId);
+  if (error) throw new Error(error);
+  const postsRoot = await realpath(path.join(contentRoot, 'posts'));
+  const directory = await realpath(path.join(postsRoot, postId));
+  if (path.dirname(directory) !== postsRoot) throw new Error('글 폴더가 docs/posts 밖을 가리킵니다.');
+  return directory;
+}
+
+export function updateFrontmatter(source: string, changes: Record<string, unknown>) {
+  const match = /^(\uFEFF?---\r?\n)([\s\S]*?)(\r?\n---(?:\r?\n|$))/.exec(source);
+  if (!match) throw new Error('frontmatter가 필요합니다.');
+  const document = parseDocument(match[2]!);
+  if (document.errors.length) throw new Error(document.errors[0]!.message);
+  for (const [key, value] of Object.entries(changes)) {
+    if (value === undefined) document.delete(key);
+    else document.set(key, value);
+  }
+  return `---\n${document.toString({ lineWidth: 0 })}---\n${source.slice(match[0].length)}`;
+}
+
 export async function createPost({
   contentRoot = docsRoot,
   postId,
@@ -92,4 +113,28 @@ export async function createPost({
     throw error;
   }
   return filename;
+}
+
+export async function editPost({
+  contentRoot = docsRoot,
+  postId,
+  local = false,
+}: {
+  contentRoot?: string;
+  postId: string;
+  local?: boolean;
+}) {
+  const directory = await postDirectory(contentRoot, postId);
+  const entry = (await loadPosts(contentRoot, { includeDrafts: true })).find(
+    (entry) => entry.latest.post.id === postId,
+  );
+  if (!entry) throw new Error(`수정할 원고가 없습니다: ${postId}`);
+  if (entry.latest.post.isDraft) return { filename: await realpath(entry.latest.sourcePath), created: false };
+  const filename = path.join(directory, local ? '0.0.0.local.mdx' : '0.0.0.mdx');
+  const source = updateFrontmatter(await readFile(entry.latest.sourcePath, 'utf8'), {
+    publishedAt: '',
+    reason: undefined,
+  });
+  await writeNewFile(filename, source);
+  return { filename, created: true };
 }
