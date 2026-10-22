@@ -42,7 +42,9 @@ MDX는 Markdown 요소의 HTML 이름에 컴포넌트를 연결하는 기능을 
 
 현재 구현안의 공개 API와 MDX 매핑은 [`apps/web/shared/article/index.ts`](../../../apps/web/shared/article/index.ts), 사용 예시는 [`article.stories.tsx`](../../../apps/web/shared/article/ui/article.stories.tsx)에서 확인한다. 전역 `shared/ui`와 분리된 아티클 영역이며, 기존 블로그의 이미지·코드 복사·안내 상자·본문 요소 구성을 참고한다. props는 이 구현과 예시를 보고 사용자 피드백으로 확정한다.
 
-- `articleMdxComponents`를 각 MDX의 `components`에 전달하고 `ArticleProse` 안에 본문 스타일을 한정한다. 글 로더와 발행 명령이 이 매핑을 연결하고 자산 경로·공개 여부를 검증하는 단계는 별도 구현 범위다.
+- Next.js의 [`mdx-components.tsx`](../../../apps/web/mdx-components.tsx)가 `articleMdxComponents`를 연결하고 `ArticleProse` 안에 본문 스타일을 한정한다. [`scripts/generate-posts.ts`](../../../apps/web/scripts/generate-posts.ts)는 공개 글의 최신 정적 import와 과거 버전의 지연 로딩 목록을 생성한다. 작성·수정·공개 파일 준비 명령은 [로컬 콘텐츠 발행 절차](publishing.md)를 따른다.
+- `pnpm --filter web dev`는 실제 `docs/posts`의 초안을 포함해 `localhost:3000/posts`에서 로컬 미리보기를 제공한다. `content:preview`도 동일한 `dev` 명령이며 별도 개발 화면을 만들지 않는다. 기존 `0.x.x.local.md`를 포함한 초안은 원래 경로·본문·날짜를 보존하며, 개발용 생성물과 빌드 경로를 공개 빌드와 분리한다. 초안은 검색·사이트맵·공개 빌드에 포함하지 않고, 미리보기를 발행으로 취급하지 않는다. 같은 글 폴더의 비버전 이미지 참조는 초안 미리보기에서만 허용한다.
+- 포스트 상세 페이지의 빌드·조회·검증 방법은 [`screens/posts/README.md`](../../../apps/web/screens/posts/README.md)에서 확인한다. 현재 MDX 처리기는 frontmatter 제목을 페이지의 유일한 h1으로 사용하며, 본문의 h2 이하 제목에 중복 없는 앵커와 목차를 생성한다. 이 구현을 임의의 MDX 실행 문법 전체에 대한 허용 정책으로 확대하지 않는다.
 - 이미지의 기본 Markdown 문법과 `ArticleImage`는 같은 구현을 사용한다. 단독 이미지는 캡션을 담는 `figure`, 문장·링크 안의 이미지는 `span`으로 처리해 문단 안에 `figure`를 중첩하지 않는다.
 - 이미지 표시 너비는 현재 구현안의 `pcWidth`·`moWidth`로 지정하고, 원본 치수 `width`·`height`와 구분한다. 자산 경로는 이 프로젝트의 콘텐츠 저장 계약을 따른다.
 - 코드 블록과 안내 상자는 기존 작성 이름인 `CodeBlock`·`Callout`도 동일 구현에 연결한다. 복사만 클라이언트에서 처리하고 본문 컴포넌트는 서버에서도 렌더링할 수 있게 유지한다.
@@ -53,6 +55,7 @@ MDX는 Markdown 요소의 HTML 이름에 컴포넌트를 연결하는 기능을 
 - 사용자가 별도로 지정한 인용 표현은 기존 왼쪽 세로선 대신 큰 여는·닫는 따옴표와 얇은 괄호형 테두리를 사용한다. 인용 본문에는 조선일보명조체를 적용하고, 출처는 기존 본문 글꼴로 우측에 표시한다. Markdown `>`와 `ArticleQuote`에 동일하게 적용하며, 장식 따옴표는 보조기술에서 숨긴다. 이 글꼴은 인용에만 한정하며 전역 디자인 토큰으로 확대하지 않는다.
 - 색상·여백·반경은 Figma 정본과 대조한 현재 프로젝트의 동일 토큰을 재사용한다. 기존 블로그와 토큰이 같으면 새 토큰이나 별칭을 만들지 않는다. 안내 상자는 상태별 배경색과 일반 본문색을 사용한다.
 - 사용자가 요청한 기존 아티클 표현으로 본문 `text-body-2`와 굵기 `300`, 코드의 고정폭 글꼴과 Shiki `dark-plus` 테마를 유지한다. 굵기·코드 글꼴·Shiki 색상은 아티클에 한정한 이식 사항이며, 새 Figma 토큰으로 간주하거나 전역 디자인 정책으로 확대하지 않는다.
+- 표의 기본 글자 크기는 모바일·데스크톱 모두 `text-body-3`의 14px을 사용한다. 헤더와 본문 셀에 같은 크기를 적용한다.
 - 코드 영역은 사이트 Light/Dark와 관계없이 Dark 모드를 유지한다. Markdown 코드 펜스는 [`shared/article/build.ts`](../../../apps/web/shared/article/build.ts)의 `rehypeArticleCode`로 빌드 시 강조한다. 하이라이터를 UI 공개 API나 클라이언트 번들에 포함하지 않는다.
 - 강조 결과의 `pre` 색상과 토큰별 `span`을 보존한다. 복사용 원문은 강조 전에 저장해 들여쓰기·빈 줄·마지막 줄바꿈을 유지한다. 언어 미지정·알 수 없는 언어는 일반 텍스트로 표시한다.
 - 빌드를 거치지 않은 직접 `CodeBlock` 사용도 같은 코드 영역·글꼴·복사를 사용하며, 문자열 자체를 브라우저에서 구문 분석하지 않는다. 실제 강조 예시는 Storybook의 `HighlightedCode`에서 확인한다.
