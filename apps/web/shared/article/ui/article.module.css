@@ -155,6 +155,26 @@
   list-style: none;
 }
 
+.table {
+  /* 넓은 표는 글자를 잘게 쪼개지 않고 바깥 영역에서 가로로 스크롤한다. */
+  overflow-wrap: normal;
+}
+
+.table tr > :is(th, td) + :is(th, td) {
+  border-inline-start: 1px solid var(--color-border);
+}
+
+.table tr + tr > :is(th, td),
+.table :is(thead, tbody, tfoot) + :is(thead, tbody, tfoot) > tr:first-child > :is(th, td) {
+  border-top: 1px solid var(--color-border);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .table tbody tr:hover {
+    background: var(--color-bg-canvas);
+  }
+}
+
 @media (width >= 1200px) {
   .prose {
     padding: var(--spacing-24px);

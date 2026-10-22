@@ -179,18 +179,18 @@ export function ArticleTable({ label = '표', ...props }: ArticleTableProps) {
       aria-label={label}
       // oxlint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- 긴 표의 가로 스크롤 영역을 키보드로 탐색한다.
       tabIndex={0}
-      className="min-w-0 overflow-x-auto rounded-8 focus-visible:outline-2 focus-visible:outline-ring"
+      className="min-w-0 overflow-x-auto rounded-12 border border-border bg-bg-surface focus-visible:outline-2 focus-visible:outline-ring"
     >
-      <table {...props} className="w-full border-collapse text-body-2" />
+      <table {...props} className={`${styles.table} w-full border-separate border-spacing-0 text-body-2`} />
     </section>
   );
 }
 
 export function ArticleTableHead(props: ElementProps<'thead'>) {
-  return <thead {...props} />;
+  return <thead {...props} className="bg-bg-canvas text-ink-secondary" />;
 }
 export function ArticleTableBody(props: ElementProps<'tbody'>) {
-  return <tbody {...props} />;
+  return <tbody {...props} className="text-ink" />;
 }
 export function ArticleTableRow(props: ElementProps<'tr'>) {
   return <tr {...props} />;
@@ -220,7 +220,7 @@ export function ArticleTableHeader({
     <th
       {...props}
       scope={scope}
-      className={`border border-border bg-bg-subtle px-16px py-12px font-semibold ${alignmentClass(align ?? style?.textAlign)}`}
+      className={`px-16px py-12px align-middle text-body-3 font-medium desktop:px-24px desktop:py-16px ${alignmentClass(align ?? style?.textAlign)}`}
     />
   );
 }
@@ -231,7 +231,10 @@ export function ArticleTableCell({
   ...props
 }: Omit<ComponentPropsWithoutRef<'td'>, 'className' | 'dangerouslySetInnerHTML'>) {
   return (
-    <td {...props} className={`border border-border px-16px py-12px ${alignmentClass(align ?? style?.textAlign)}`} />
+    <td
+      {...props}
+      className={`px-16px py-12px align-top desktop:px-24px desktop:py-16px ${alignmentClass(align ?? style?.textAlign)}`}
+    />
   );
 }
 
