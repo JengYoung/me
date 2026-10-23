@@ -164,7 +164,7 @@ test('project source index is tracked without becoming a second policy body', (t
   for (const [file, content] of Object.entries(before)) assert.equal(read(root, file), content, file);
 });
 
-for (const name of ['storage.md', 'mdx.md', 'publishing.md']) {
+for (const name of ['storage.md', 'mdx.md', 'publishing.md', 'series.md']) {
   const source = `.agent-source/project/content/${name}`;
 
   test(`${name}: selective source changes are tracked without copying the body into outputs`, (t) => {

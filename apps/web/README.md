@@ -120,12 +120,12 @@ pnpm --filter web test:watch
 `vitest.config.ts`에 정의한 실행 환경은 다음과 같습니다.
 
 - `node`: `shared/**/*.ssr.test.tsx`를 DOM 전역 없이 실행합니다.
-- `chromium-mobile-light`: 390×844px, 밝은 테마에서 `shared/**/*.browser.test.tsx`를 실행합니다.
+- `chromium-mobile-light`: 390×844px, 밝은 테마에서 `shared/**/*.browser.test.tsx`·`screens/**/*.browser.test.tsx`를 실행합니다.
 - `chromium-desktop-dark`: 1440×900px, 어두운 테마에서 같은 브라우저 테스트를 실행합니다.
 
 Header의 슬롯·제목, 스크롤 방향·포커스에 따른 노출, 플러그인 해제를 확인합니다. Sidebar는 열기·닫기, 제어 상태, ARIA 연결, Tab 순환·포커스 복귀, 배경 클릭 차단, unmount 시 inert·스크롤 잠금 해제를 확인합니다. hydration에서는 서버 DOM의 재사용과 인스턴스별 ID·ARIA 연결, 오류 부재를 검사합니다.
 
-브라우저 테스트는 앱 CSS·로컬 폰트를 사용하고 StrictMode를 적용합니다. `vitest-browser-react/pure`의 `render`를 사용하며 설정 파일 옆 `vitest.setup.ts`의 `afterEach`가 각 테스트 종료 시 DOM·portal·effect를 정리합니다. 테스트가 직접 만든 DOM·구독·spy·전역 상태는 획득 직후 `onTestFinished`에 정리를 등록합니다. 수동 hydration root도 테스트가 직접 해제합니다.
+브라우저 테스트는 앱 CSS·로컬 폰트를 사용하고 StrictMode를 적용합니다. `next/link`·`next/image`는 미리 번들링하고 Next.js가 치환하는 클라이언트 환경값에는 기본값을 제공합니다. 이 설정은 Browser Mode에만 적용하며 Node 프로젝트의 실제 환경변수·공개 판정은 유지합니다. `vitest-browser-react/pure`의 `render`를 사용하며 설정 파일 옆 `vitest.setup.ts`의 `afterEach`가 각 테스트 종료 시 DOM·portal·effect를 정리합니다. 테스트가 직접 만든 DOM·구독·spy·전역 상태는 획득 직후 `onTestFinished`에 정리를 등록합니다. 수동 hydration root도 테스트가 직접 해제합니다.
 
 파일을 지정하거나 실행 순서를 바꿔 격리를 확인할 수 있습니다.
 
@@ -165,7 +165,7 @@ pnpm --filter web exec playwright install --with-deps chromium
 pnpm --filter web test:e2e
 ```
 
-루트 레이아웃은 `widgets/blog-frame`의 `BlogFrame`으로 공통 Header·Sidebar와 본문 상단 여백을 연결합니다. 홈 본문은 아직 `null`이며, 메뉴에는 구현된 홈·포스트 경로를 제공합니다. `app/page.e2e.spec.ts`는 문서·리소스 로딩과 404 응답을, `app/layout.e2e.spec.ts`는 기본 라이트 테마, 헤더와 본문의 배치, 사이드바의 키보드 닫기·포커스 복귀·메뉴 이동을 검사합니다.
+루트 레이아웃은 `widgets/blog-frame`의 `BlogFrame`으로 공통 Header·Sidebar와 본문 상단 여백을 연결합니다. 홈 본문은 아직 `null`이며, 메뉴에는 홈·포스트·시리즈·일기 경로를 제공합니다. `app/page.e2e.spec.ts`는 문서·리소스 로딩과 404 응답을, `app/layout.e2e.spec.ts`는 기본 라이트 테마, 헤더와 본문의 배치, 사이드바의 키보드 닫기·포커스 복귀·메뉴 이동을 검사합니다.
 
 상세 목차는 데스크톱에서 본문 오른쪽, 모바일에서 접이식 메뉴로 스크롤 중에도 유지됩니다. 모바일 목차를 선택하면 메뉴를 접고 고정 영역 아래의 제목으로 이동합니다. 실제 원고를 읽는 `page.preview.e2e.spec.ts`에서 스크롤 중 목차 위치와 제목 이동을 검사합니다. 미리보기 E2E의 Next.js 산출물은 `.next-preview-e2e/`로 분리해 `.next-preview/`를 쓰는 로컬 개발 서버와 충돌하지 않게 합니다.
 
@@ -178,6 +178,46 @@ pnpm --filter web test:e2e app/page.e2e.spec.ts
 ```
 
 새 앱 흐름은 대상 파일 옆 E2E에서 `@playwright/test`를 가져와 작성합니다. `page.goto()`로 실제 앱 경로에 접속하고 사용자에게 보이는 결과를 검사합니다. 컴포넌트·Hook·함수의 세부 조건은 Vitest에 두며, 별도로 mount한 컴포넌트나 Storybook을 앱 E2E의 대상으로 삼지 않습니다. 앱 화면이 연결되면 메뉴 이동·키보드 포커스·스크롤 잠금 등 실제 사용자 흐름을 추가합니다.
+
+## 시리즈 작성·확인
+
+포스트 frontmatter에 `series: { id: building-my-blog, order: 10 }`을 작성하면 시리즈로 묶입니다. `order`는 오름차순 정렬값입니다. `10, 20, 30`으로 작성해도 화면은 `1번째 글, 2번째 글, 3번째 글`로 표시하며 같은 시리즈의 현재 글끼리 중복 정렬값은 허용하지 않습니다.
+
+루트에서 `pnpm dev`를 실행하면 실제 초안을 포함한 시리즈를 <http://localhost:3000/series>에서 확인할 수 있습니다. 기본은 리스트이고 `?showType=carousel`로 캐러셀을 봅니다. 시리즈 상세의 첫 글·전체 챕터와 포스트 상세의 시리즈 목차·이전/다음으로 이어서 읽을 수 있습니다.
+
+`docs/series/series.json`은 Git으로 관리합니다. 수집기가 처음 발견한 ID를 빈 `title`·`description`으로 등록하면 작성자가 두 값을 채웁니다. `thumbnail`은 선택이며 `docs/series` 기준 상대 이미지 경로입니다. 예를 들어 아래 항목의 이미지는 `docs/series/building-my-blog/cover.png`입니다.
+
+```json
+{
+  "id": "building-my-blog",
+  "title": "직접 입력할 시리즈 제목",
+  "description": "직접 입력할 시리즈 소개",
+  "thumbnail": "./building-my-blog/cover.png",
+  "derived": { "posts": [], "postCount": 0, "updatedAt": null }
+}
+```
+
+JSON 최상위는 위 항목들의 배열입니다. `derived`는 자동 계산되므로 직접 작성할 필요가 없습니다. 재수집해도 제목·소개·대표 이미지 참조와 사용하지 않는 시리즈 정의를 보존합니다. 시리즈에는 MDX 버전 파일이 없습니다. 원고는 기존 `docs/posts/{postId}`에 유지합니다.
+
+- 제목·소개가 비었거나 공백뿐이면 `pnpm content:validate`와 공개 빌드가 시리즈 ID·필드·JSON 경로를 표시하고 실패합니다. 오류가 나도 새 항목은 남으므로 해당 JSON을 편집한 뒤 다시 실행합니다. 개발 화면은 미입력 제목을 ID로 구분하고 저장된 값을 대신 채우지 않습니다.
+- 이미지를 생략하거나 빈 문자열로 두면 기존 캐릭터를 사용합니다. 지정한 PNG·JPEG·WebP·AVIF·GIF의 누락·폴더 밖 경로·공개용 `.local.` 참조는 검증 오류입니다. 사용 중인 이미지만 공개 산출물에 포함합니다.
+- Git 관리 `derived`는 개발 중에도 **공개 글만** 기록합니다. 최신 공개 버전당 한 편이며 초안만 있는 시리즈의 편수는 `0`입니다. 개발 화면은 별도 미리보기 카탈로그를 사용하므로 초안 편수와 JSON의 공개 편수가 다를 수 있습니다.
+- 시리즈는 기존 글의 새 수정본까지 포함한 최근 수정순입니다. 캐러셀의 최근 글 3편은 최초 발행순입니다. 공개 글이 없는 시리즈는 공개 목록·상세·사이트맵에서 제외합니다.
+- `/series`와 `/series/{seriesId}`의 canonical은 `https://jengyoung.co.kr`의 쿼리 없는 주소입니다. 보기 전환 쿼리는 canonical에 포함하지 않습니다.
+
+원고·JSON·이미지를 저장하면 개발 화면이 갱신됩니다. 생성 모듈은 `entities/series/generated/`와 `generated-preview/`로 분리하며 Git에서 제외합니다. 명령은 원고나 자산을 자동 공개하지 않으며 커밋·푸시·배포는 별도입니다.
+
+```bash
+pnpm content:validate
+pnpm --filter web content:generate
+pnpm --filter web build
+pnpm --filter web test --project=node
+pnpm --filter web test:e2e:preview app/series/page.preview.e2e.spec.ts
+```
+
+수집·검증 테스트는 임시 폴더를 정리하며 실제 원고를 변경하지 않습니다. 앱 E2E는 실제 초안을 읽어 목록·캐러셀·챕터·키보드·스와이프·JavaScript 없는 읽기를 확인합니다. 공개 빌드 E2E를 실행하려면 시리즈 JSON의 제목·소개와 이미지 참조를 먼저 완성해야 합니다.
+
+콘텐츠 계약의 정본은 [시리즈 수집·탐색 계약](../../.agent-source/project/content/series.md)입니다.
 
 ## SVG 아이콘
 

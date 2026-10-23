@@ -31,18 +31,19 @@
     ".agent-source/adapters/codex/work-plan-hook.json": "241269917594ee3292e184c03be1b0785f07d941ad06248a011e9fc38257ed9b",
     ".agent-source/conventions/code-quality/source.md": "b94809c0fa51d7b063ea90414b30b74377042ee1c45fd4df4e161e0ffc957ec4",
     ".agent-source/conventions/react-best-practices/source.md": "c98c26a26d85726b859f6553d1546a4666b62f4e5706fbff448a616122ac1b85",
-    ".agent-source/conventions/test-writing/source.md": "f39044c5e7c277ae5b17a44bdf76867ce1e584b5d89e277b21205cb8ea0c9fe3",
+    ".agent-source/conventions/test-writing/source.md": "e976df84683ecb814089844007c6e6a6cc575efe456212411b14966c9a01a96e",
     ".agent-source/hooks/work-plan/source.md": "eec8be577224d26fd15c899173f16d03bcd9d633bda6a378062807cf6ec29189",
-    ".agent-source/project/content.md": "02cd81bdf689d64720c8e5a13642910772e52266bbebfa6987dfa90fd12d92b3",
-    ".agent-source/project/content/mdx.md": "1c73b41348c9f9927425317e99557a245fb54fc1550bbb8e215277336fceb65b",
-    ".agent-source/project/content/publishing.md": "ea4cc225344535a222aef15a02d0f5665f8095bf0a0260c9838f7b8299b3d31e",
-    ".agent-source/project/content/storage.md": "8d1130ed9974e0408fff771a638bb041b7814e520e49594f5e5ee26e19686065",
+    ".agent-source/project/content.md": "57424c1637c6c526ff9785eaa5a150ca418fdde22e9c551173bfb454c065630a",
+    ".agent-source/project/content/mdx.md": "1943acf329439faba14e0f5ad1918fea0d645c77350f2297436afd501baff798",
+    ".agent-source/project/content/publishing.md": "a7602e2f84082096e70d3d47cb0dc36c46b608874d78f67457fa4d5dd76e8554",
+    ".agent-source/project/content/series.md": "6db4335818279e1d9120090f640ea9df09078bb7c05a5445a00657ca25f4ff05",
+    ".agent-source/project/content/storage.md": "b0d9ffa7d3706a67848d978a32bb27db1b3e1f51c938fea5d2225808a15818c9",
     ".agent-source/project/design-tokens.md": "a61e7decca90600d4ba27a10e2046f1cc9e05695ea2bee9db86a3c78f49bb53f",
     ".agent-source/project/maintenance.md": "cbfb9dc4305446f115f9b03dc44b2354b73ee7e6d7202d72f2406b2da2a49334",
     ".agent-source/project/purpose.md": "4b28d8c9259987f7f84aad17ea368155c15ce0d778abd05b26b790a1357fe174",
     ".agent-source/project/quality.md": "a6f2ed11bb082f82adc6df92258e3f4b41b3c3e9d3dbe33783da1c02cefdf4b0",
     ".agent-source/project/scope.md": "dbe7dfb7b379d0934f41049683f1e6e895d6733f0796ac572bdbccf5261452f5",
-    ".agent-source/project/source.md": "c6780c4dd82208e06e2b48a6f31cd52a57194e2c5b89e594962008ff5cc42de4",
+    ".agent-source/project/source.md": "d9760abf504dbdc79b8135771cf1aaa629fcca983d2169baf56ae2a38cce7035",
     ".agent-source/project/versioning.md": "73f8e760bdfb8f80ff2395aa5467aacca0afe68776741a6d735bc37c7e6b622f",
     ".agent-source/project/workflow.md": "4001b94342c783bab8fedac458ffe23901f8d0f18046635536748b32ebcf10cf",
     ".agent-source/skills/changesets-version/source.md": "3fcde6f04a67e8327c4d64a34ebe3ebc85b0fe473459540db350aba6966311e3",
@@ -53,7 +54,7 @@
     ".agent-source/skills/work-plan/source.md": "eb7e0680701e7dde2e84548b92147c6ef57cdee2617b1f9b9362ae571b2ab955",
     ".agent-source/targets.json": "026db3a25a3373f2b34eb330d1c8d8d13c78b52095f9105ee7bf0cca5f061928",
     "scripts/instruction-hooks.mjs": "178bce9997041290d8c9451e90b64dc4035c7a4216a688166035350e379bef68",
-    "scripts/instruction-model.mjs": "4f94b5de7b8f148b0230580364892f6a5e6c86ce8b117875d7c367591a4e113d",
+    "scripts/instruction-model.mjs": "e77f2e55510dcf0fdeeeb8cd7ed693b65dfe7fff9e5a0bb0d2154e65763ad669",
     "scripts/sync-instructions.mjs": "3d7595e357bee044b4bf0169470424a6b54f9aa6f00f8a1fa2346fba3f1317e3"
   },
   "outputs": {
@@ -188,7 +189,7 @@
       ]
     },
     ".claude/rules/test-writing.md": {
-      "sha256": "ec379936eb3dd5956d1c1fe906219b98b23d3b27ad1e276e788cd21d292ecbe3",
+      "sha256": "1c925dafd94337b38a19ef8f9462c3b373b4c2c9d632e5b5f24c277d5f04d39f",
       "source": ".agent-source/conventions/test-writing/source.md",
       "target": "claude",
       "facets": [
@@ -312,7 +313,7 @@
       ]
     },
     ".codex/test-writing.md": {
-      "sha256": "6f359c30bd3a71017b6214c5892d5c952ff492758abb8b79ffb23821b54b4239",
+      "sha256": "44760a2a0bb410cd188597fbea48b4d928c222442b994b96dcc0def43c57cc78",
       "source": ".agent-source/conventions/test-writing/source.md",
       "target": "codex",
       "facets": [
@@ -320,7 +321,7 @@
       ]
     },
     "AGENTS.md": {
-      "sha256": "d5ba122ecd5f8f608876878eb78162ebb615f958ac931b0939f5dc3bc2c3978f",
+      "sha256": "80428cc3026ac4b8cfc1660895795f93286aec767a4c1700fd752618bf6e47c5",
       "source": ".agent-source/project/source.md",
       "target": "codex",
       "facets": [
@@ -334,7 +335,7 @@
       ]
     },
     "CLAUDE.md": {
-      "sha256": "cda314d5c713cb0646a6fd87295856e62e5bd809255f3e97c4fb623288f961c1",
+      "sha256": "d3bf5e6ac4242dd1ee908122476f302c3439aa89df9f57a9fbe2f7d9ad0766fa",
       "source": ".agent-source/project/source.md",
       "target": "claude",
       "facets": [

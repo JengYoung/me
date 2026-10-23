@@ -33,6 +33,7 @@ const PROJECT_REFERENCES = {
     '.agent-source/project/content/storage.md',
     '.agent-source/project/content/mdx.md',
     '.agent-source/project/content/publishing.md',
+    '.agent-source/project/content/series.md',
   ],
 };
 const SKILL_FACETS = {

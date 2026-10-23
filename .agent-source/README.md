@@ -57,6 +57,7 @@ node scripts/benchmark-instruction-hooks.mjs
 | [project/content/storage.md](project/content/storage.md)       | 콘텐츠 저장·공개 판정·버전·자산·조회·이력 계약                                         |
 | [project/content/mdx.md](project/content/mdx.md)               | 아티클 Markdown·MDX 작성과 전용 컴포넌트 계약                                          |
 | [project/content/publishing.md](project/content/publishing.md) | 로컬 발행 명령·검증·Git 반영과 배포의 경계                                             |
+| [project/content/series.md](project/content/series.md)         | 시리즈 JSON·공개 집계·캐러셀·상세·챕터 탐색 계약                                       |
 | [project/versioning.md](project/versioning.md)                 | 앱·패키지의 Changesets 버전 관리                                                       |
 | [project/maintenance.md](project/maintenance.md)               | 공통 원천·도구별 어댑터·재생성 원칙                                                    |
 | [project/scope.md](project/scope.md)                           | 작업 범위와 제외 사항                                                                  |
@@ -77,7 +78,7 @@ node scripts/benchmark-instruction-hooks.mjs
 
 `project/source.md`에는 목차만 두며 규칙은 주제별 파일에서 수정한다. 생성기의 `PROJECT_SOURCES`가 각 파일과 계약 변수를 연결하고, 파일의 첫 `#` 제목을 제외한 본문을 어댑터에 전달한다. 필수 파일의 누락·빈 본문·제목 누락은 쓰기 전에 검출한다. 목차와 모든 주제 원천의 해시를 관리하며, 여러 주제를 합친 생성물의 원천 표시는 `project/source.md`를 유지한다. 목차의 탐색용 링크는 생성 지침에 삽입하지 않는다.
 
-`CONTENT`에는 작업별 원천 경로 안내만 넣는다. `PROJECT_REFERENCES`에 등록한 `project/content/`의 세 상세 원천은 Codex·Claude가 필요한 작업에서 직접 읽으며, 기본 지침이나 도구별 파일에 본문을 복제하지 않는다. 생성기는 이 원천의 누락·빈 본문·제목 누락과 안내의 참조 누락을 검사하고 입력 해시를 관리한다. 상세 원천만 바뀌면 기본 지침 본문은 그대로이고 관리 해시만 갱신된다. 이 방식으로 기본 로딩과 무관한 작업에서 읽는 분량을 줄인다.
+`CONTENT`에는 작업별 원천 경로 안내만 넣는다. `PROJECT_REFERENCES`에 등록한 `project/content/`의 상세 원천은 Codex·Claude가 필요한 작업에서 직접 읽으며, 기본 지침이나 도구별 파일에 본문을 복제하지 않는다. 생성기는 이 원천의 누락·빈 본문·제목 누락과 안내의 참조 누락을 검사하고 입력 해시를 관리한다. 상세 원천만 바뀌면 기본 지침 본문은 그대로이고 관리 해시만 갱신된다. 이 방식으로 기본 로딩과 무관한 작업에서 읽는 분량을 줄인다.
 
 ## 작업 전 안내와 hook
 

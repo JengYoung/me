@@ -20,6 +20,7 @@
 | 저장·발행본·버전·자산·조회·이력   | [content/storage.md](content/storage.md)       |
 | 아티클 Markdown·MDX·본문 컴포넌트 | [content/mdx.md](content/mdx.md)               |
 | 로컬 발행 명령·검증·Git·배포 경계 | [content/publishing.md](content/publishing.md) |
+| 시리즈 JSON·집계·목록·챕터 탐색   | [content/series.md](content/series.md)         |
 
 코드 품질·테스트 작성·React의 상세 정책은 `../conventions/`에 있으며, 위 파일에서는 해당 정책의 적용 범위를 안내한다.
 
