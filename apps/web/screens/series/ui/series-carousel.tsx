@@ -15,16 +15,43 @@ const CONTROL_CLASS_NAME =
 
 export function SeriesCarousel({ items }: { items: readonly SeriesOverviewItem[] }) {
   const [activeId, setActiveId] = useState<string | null>(items[0]?.id ?? null);
-  const [expression, setExpression] = useState<CharacterExpression>('happy');
+  const [expressions, setExpressions] = useState<Record<string, CharacterExpression>>(() =>
+    items[0] ? { [items[0].id]: 'happy' } : {},
+  );
   const [motion, setMotion] = useState<'next' | 'previous' | null>(null);
   const direction = useRef<'next' | 'previous'>('next');
+  const viewport = useRef<HTMLDivElement>(null);
+  const queuedDirection = useRef<'next' | 'previous' | null>(null);
 
   function selectSeries(nextId: string | null) {
     if (!nextId || nextId === activeId) return;
-    setMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches ? null : direction.current);
-    const candidates = POSITIVE_EXPRESSIONS.filter((candidate) => candidate !== expression);
-    setExpression(candidates[Math.floor(Math.random() * candidates.length)]!);
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const moving = viewport.current
+      ?.querySelector('[data-part="slide"]:not([hidden])')
+      ?.getAnimations()
+      .some((animation) => animation.playState === 'running' || animation.playState === 'paused');
+    // 같은 방향의 연속 입력은 현재 이동 뒤에 이어간다. 반대 입력은 즉시 현재 위치에서 되돌린다.
+    if (!reduced && moving && motion === direction.current) {
+      queuedDirection.current = direction.current;
+      return;
+    }
+    queuedDirection.current = null;
+    setMotion(reduced ? null : direction.current);
+    if (!expressions[nextId]) {
+      const candidates = POSITIVE_EXPRESSIONS.filter((candidate) => candidate !== expressions[activeId ?? '']);
+      const expression = candidates[Math.floor(Math.random() * candidates.length)]!;
+      setExpressions((current) => ({ ...current, [nextId]: expression }));
+    }
     setActiveId(nextId);
+  }
+
+  function finishMotion(next: () => void, previous: () => void) {
+    const queued = queuedDirection.current;
+    queuedDirection.current = null;
+    if (!queued) return;
+    direction.current = queued;
+    if (queued === 'next') next();
+    else previous();
   }
 
   if (items.length === 0) return <p className="text-body-2 text-ink-secondary">아직 시리즈가 없습니다.</p>;
@@ -39,6 +66,7 @@ export function SeriesCarousel({ items }: { items: readonly SeriesOverviewItem[]
       aria-label="시리즈 둘러보기"
       aria-roledescription="캐러셀"
       className={styles.carousel}
+      data-direction={motion ?? undefined}
     >
       {(api) => (
         <>
@@ -77,20 +105,42 @@ export function SeriesCarousel({ items }: { items: readonly SeriesOverviewItem[]
           <output aria-live="polite" aria-atomic="true" className="sr-only">
             {items.length}개 중 {api.index + 1}번째 시리즈, {items[api.index]?.title}
           </output>
-          <div {...api.getViewportProps()} aria-live="off" className={styles.viewport}>
+          <div {...api.getViewportProps()} ref={viewport} aria-live="off" className={styles.viewport}>
             {items.map((item) => (
               <Carousel.Slide
                 key={item.id}
                 value={item.id}
                 aria-roledescription="슬라이드"
                 className={styles.slide}
-                data-direction={api.value === item.id ? motion : undefined}
+                aria-hidden={api.value !== item.id || undefined}
+                inert={api.value !== item.id || undefined}
+                onTransitionEnd={(event) => {
+                  if (
+                    event.target === event.currentTarget &&
+                    event.propertyName === 'transform' &&
+                    api.value === item.id
+                  )
+                    finishMotion(api.next, api.previous);
+                }}
+                onTransitionCancel={(event) => {
+                  if (
+                    event.target === event.currentTarget &&
+                    event.nativeEvent.propertyName === 'transform' &&
+                    api.value === item.id &&
+                    window.matchMedia('(prefers-reduced-motion: reduce)').matches
+                  )
+                    finishMotion(api.next, api.previous);
+                }}
+                onAnimationEnd={(event) => {
+                  if (event.target === event.currentTarget && api.value === item.id)
+                    finishMotion(api.next, api.previous);
+                }}
               >
-                {/* 비활성 시리즈도 서버 HTML에 본문과 링크를 남깁니다. hidden은 접근성 트리와 Tab 순서에서 제외합니다. */}
+                {/* 퇴장 중에도 시각적 전환만 유지하고, 비활성 시리즈의 읽기·포커스·클릭은 즉시 차단합니다. */}
                 <SeriesCover
                   item={item}
                   active={api.value === item.id}
-                  expression={expression}
+                  expression={expressions[item.id] ?? 'happy'}
                   onSwipe={(value) => {
                     direction.current = value;
                     if (value === 'next') api.next();

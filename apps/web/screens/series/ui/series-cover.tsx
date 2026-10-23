@@ -24,7 +24,7 @@ export function SeriesCover({
 
   return (
     <>
-      {active && item.thumbnail && (
+      {item.thumbnail && (
         <div className={styles.backdrop} aria-hidden="true">
           {/* 작은 소스 한 장을 확대합니다. 스크롤/포인터마다 다시 그리는 backdrop-filter는 사용하지 않습니다. */}
           <Image src={item.thumbnail} alt="" fill sizes="48px" className="object-cover" />
