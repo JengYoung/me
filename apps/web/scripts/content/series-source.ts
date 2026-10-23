@@ -20,19 +20,23 @@ export function parseSeriesRegistry(source: string, filename: string): SeriesDef
       !isRecord(item) ||
       typeof item.id !== 'string' ||
       !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(item.id) ||
+      (item.label !== undefined && typeof item.label !== 'string') ||
       typeof item.title !== 'string' ||
       typeof item.description !== 'string' ||
       (item.thumbnail !== undefined && typeof item.thumbnail !== 'string')
     ) {
-      throw new Error(`${filename}: id·title·description 문자열과 선택 thumbnail 경로를 확인하세요.`);
+      throw new Error(`${filename}: id·title·description 문자열과 선택 label 문자열·thumbnail 경로를 확인하세요.`);
     }
-    if (Object.keys(item).some((key) => !['id', 'title', 'description', 'thumbnail', 'derived'].includes(key))) {
+    if (
+      Object.keys(item).some((key) => !['id', 'label', 'title', 'description', 'thumbnail', 'derived'].includes(key))
+    ) {
       throw new Error(`${filename}: 시리즈 ${item.id}에 알 수 없는 필드가 있습니다.`);
     }
     if (ids.has(item.id)) throw new Error(`${filename}: 중복 시리즈 ID ${item.id}`);
     ids.add(item.id);
     return {
       id: item.id,
+      ...(item.label === undefined ? {} : { label: item.label as string }),
       title: item.title,
       description: item.description,
       ...(item.thumbnail === undefined ? {} : { thumbnail: item.thumbnail as string }),
@@ -94,7 +98,7 @@ export async function synchronizeSeries(contentRoot: string, includeDrafts = fal
     if (!id || ids.has(id)) continue;
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id))
       throw new Error(`시리즈 ID는 소문자 영문·숫자·하이픈으로 작성하세요: ${id}`);
-    definitions.push({ id, title: '', description: '' });
+    definitions.push({ id, label: '', title: '', description: '' });
     ids.add(id);
   }
   // oxlint-disable-next-line unicorn/no-array-sort -- JSON 파싱으로 만든 지역 배열이다.

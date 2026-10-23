@@ -19,13 +19,20 @@ async function workspace(files: Record<string, string>) {
 function post(id: string, order: number, date = '2026-10-20T10:00:00+09:00') {
   return `---\ntitle: 글 ${order}\npublishedAt: "${date}"\nseries: { id: ${id}, order: ${order} }\n---\n본문은 목록에 포함하지 않는다`;
 }
-const definitions = JSON.stringify([{ id: 'a', title: '직접 쓴 제목', description: '직접 쓴 소개', thumbnail: '' }]);
+const definitions = JSON.stringify([
+  { id: 'a', label: '직접 쓴 이름', title: '직접 쓴 제목', description: '직접 쓴 소개', thumbnail: '' },
+]);
 
 test('새 시리즈를 빈 제목·소개로 남기고 빌드 검증에서 수정 경로와 필드를 알려준다', async () => {
   const root = await workspace({ 'posts/first/1.0.0.mdx': post('a', 10) });
   await expect(validateSeries(root)).rejects.toThrow(/series\.json.*a\.title.*a\.description/);
   const filename = path.join(root, 'series/series.json');
-  expect(JSON.parse(await readFile(filename, 'utf8'))[0]).toMatchObject({ id: 'a', title: '', description: '' });
+  expect(JSON.parse(await readFile(filename, 'utf8'))[0]).toMatchObject({
+    id: 'a',
+    label: '',
+    title: '',
+    description: '',
+  });
   await writeFile(filename, definitions);
   expect(await validateSeries(root)).toBe(1);
   await writeFile(filename, JSON.stringify([{ id: 'a', title: '  ', description: '\n' }]));
@@ -43,8 +50,10 @@ test('재수집은 작성 필드를 보존하고 최신 공개 버전만 정렬�
   expect(series[0]!.posts.map((item) => item.id)).toEqual(['first', 'second']);
   expect(series[0]!.postCount).toBe(2);
   expect(series[0]!.updatedAt).toBe('2026-10-22T10:00:00+09:00');
+  expect(series[0]!.label).toBe('직접 쓴 이름');
   const original = await readFile(filename, 'utf8');
   expect(JSON.parse(original)[0]).toMatchObject({
+    label: '직접 쓴 이름',
     title: '직접 쓴 제목',
     description: '직접 쓴 소개',
     thumbnail: '',
@@ -63,6 +72,16 @@ test('재수집은 작성 필드를 보존하고 최신 공개 버전만 정렬�
   expect(original).not.toContain('본문은');
 });
 
+test.each([null, 42, { text: '잘못된 이름' }])(
+  '문자열이 아닌 label은 원본을 덮어쓰지 않고 거부한다: %j',
+  async (label) => {
+    const source = JSON.stringify([{ id: 'a', label, title: '제목', description: '소개' }]);
+    const root = await workspace({ 'series/series.json': source });
+    await expect(synchronizeSeries(root)).rejects.toThrow(/series\.json.*label 문자열/);
+    expect(await readFile(path.join(root, 'series/series.json'), 'utf8')).toBe(source);
+  },
+);
+
 test('미리보기의 초안 소속·제목은 공개 JSON 집계와 공개 런타임 모듈을 오염시키지 않는다', async () => {
   const root = await workspace({
     'series/series.json': definitions,
@@ -73,6 +92,7 @@ test('미리보기의 초안 소속·제목은 공개 JSON 집계와 공개 런�
   const outputRoot = path.join(root, 'public-output');
   await generateSeries({ contentRoot: root, outputRoot });
   const publicModule = await readFile(path.join(outputRoot, 'catalog.generated.ts'), 'utf8');
+  expect(publicModule).toContain('"label":"직접 쓴 이름"');
   const previewRoot = path.join(root, 'preview-output');
   await generateSeries({ contentRoot: root, outputRoot: previewRoot, includeDrafts: true });
   const records = JSON.parse(await readFile(path.join(root, 'series/series.json'), 'utf8'));

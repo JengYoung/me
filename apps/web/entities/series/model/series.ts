@@ -1,5 +1,7 @@
 export interface SeriesDefinition {
   id: string;
+  /** URL의 id와 독립적인 시리즈 표시 이름. */
+  label?: string;
   title: string;
   description: string;
   /** docs/series 기준의 상대 이미지 경로. */
@@ -36,9 +38,9 @@ export function seriesPath(id: string) {
   return `/series/${encodeURIComponent(id)}`;
 }
 
-/** 미입력 제목은 로컬 미리보기에서 ID로 식별한다. JSON의 빈 입력은 바꾸지 않는다. */
-export function seriesTitle(series: Pick<SeriesDefinition, 'id' | 'title'>) {
-  return series.title.trim() || series.id;
+/** 표시 이름을 우선하며, 미입력 항목은 기존 제목·ID로 식별한다. 저장 값은 바꾸지 않는다. */
+export function seriesTitle(series: Pick<SeriesDefinition, 'id' | 'label' | 'title'>) {
+  return series.label?.trim() || series.title.trim() || series.id;
 }
 
 const time = (value: string | null) => (value ? Date.parse(value) || 0 : 0);
@@ -67,7 +69,7 @@ export function collectSeries(definitions: readonly SeriesDefinition[], posts: r
   }
   const ids = new Set(definitions.map((item) => item.id));
   for (const id of groups.keys()) if (!ids.has(id)) throw new Error(`시리즈 정의가 없습니다: ${id}`);
-  const result = definitions.flatMap(({ id, title, description }): Series[] => {
+  const result = definitions.flatMap(({ id, label, title, description }): Series[] => {
     const members = groups.get(id);
     if (!members?.length) return [];
     // oxlint-disable-next-line unicorn/no-array-sort -- 수집기가 소유한 새 배열이다.
@@ -79,6 +81,7 @@ export function collectSeries(definitions: readonly SeriesDefinition[], posts: r
     return [
       {
         id,
+        ...(label === undefined ? {} : { label }),
         title,
         description,
         posts: members,

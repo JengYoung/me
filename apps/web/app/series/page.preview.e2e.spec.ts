@@ -4,7 +4,7 @@ import { expect, test } from '@playwright/test';
 import { parse } from 'yaml';
 
 const docs = path.resolve(import.meta.dirname, '../../docs');
-const registry: { id: string; title: string }[] = JSON.parse(
+const registry: { id: string; label?: string; title: string }[] = JSON.parse(
   await readFile(path.join(docs, 'series/series.json'), 'utf8'),
 );
 const groups = new Map<string, { id: string; title: string; order: number }[]>();
@@ -37,13 +37,21 @@ test('실제 시리즈의 리스트·캐러셀을 URL로 전환하고 키보드�
   }
   const list = page.getByRole('list', { name: '모든 시리즈' });
   await expect(list.getByRole('listitem')).toHaveCount(groups.size);
+  for (const item of registry.filter((entry) => groups.has(entry.id) && entry.label?.trim())) {
+    const link = list
+      .getByRole('link')
+      .filter({ has: page.getByRole('heading', { name: item.label!.trim(), exact: true }) });
+    await expect(link).toHaveAttribute('href', `/series/${item.id}`);
+  }
   const firstHref = await list.getByRole('link').first().getAttribute('href');
+  const firstTitle = await list.getByRole('heading').first().textContent();
   await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href', 'https://jengyoung.co.kr/series');
   await page.getByRole('link', { name: '캐러셀로 보기', exact: true }).click();
   await expect(page).toHaveURL(/\/series\?showType=carousel$/);
   const carousel = page.getByRole('region', { name: '시리즈 둘러보기' });
   await expect(carousel).toBeVisible();
   await expect(carousel.getByRole('group')).toHaveCount(1);
+  await expect(carousel.getByRole('group').getByRole('heading', { level: 2 })).toHaveText(firstTitle!);
   if (groups.size > 1) {
     const next = carousel.getByRole('button', { name: '다음 시리즈' });
     await next.focus();
@@ -69,15 +77,19 @@ test('실제 시리즈의 리스트·캐러셀을 URL로 전환하고 키보드�
 test('시리즈 상세와 포스트의 전체 챕터·현재 위치·이전 다음이 같은 순서다', async ({ page }) => {
   test.skip(groups.size === 0, '실제 원고에 시리즈가 없습니다.');
   const [id, posts] = [...groups.entries()][0]!;
-  const title = registry.find((item) => item.id === id)!.title || id;
+  const definition = registry.find((item) => item.id === id)!;
+  const title = definition.label?.trim() || definition.title.trim() || id;
   await page.goto(`/series/${id}`);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(title);
+  await expect(page).toHaveTitle(title);
+  await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href', `https://jengyoung.co.kr/series/${id}`);
   const chapters = page.getByRole('list', { name: '시리즈 글 목록' });
   await expect(chapters.getByRole('heading')).toHaveText(posts.map((post) => post.title));
   await expect(chapters.getByText(/번째 글$/)).toHaveText(posts.map((_, index) => `${index + 1}번째 글`));
   await page.getByRole('link', { name: '첫 글부터 읽기' }).click();
   await expect(page).toHaveURL(new RegExp(`/posts/${posts[0]!.id}$`));
   const navigation = page.getByRole('navigation', { name: '현재 시리즈 탐색' });
+  await expect(navigation.getByRole('heading', { level: 2 })).toHaveText(title);
   await expect(navigation.getByRole('list', { name: '현재 시리즈 목차' }).getByRole('link')).toHaveCount(posts.length);
   await expect(navigation.locator('a[aria-current=page]')).toHaveAttribute('href', `/posts/${posts[0]!.id}`);
   await expect(navigation.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1');
