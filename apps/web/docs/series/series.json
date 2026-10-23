@@ -1,0 +1,22 @@
+[
+  {
+    "id": "building-my-blog",
+    "title": "",
+    "description": "",
+    "derived": {
+      "posts": [],
+      "postCount": 0,
+      "updatedAt": null
+    }
+  },
+  {
+    "id": "mdx",
+    "title": "",
+    "description": "",
+    "derived": {
+      "posts": [],
+      "postCount": 0,
+      "updatedAt": null
+    }
+  }
+]
