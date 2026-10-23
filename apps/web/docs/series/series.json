@@ -1,6 +1,7 @@
 [
   {
     "id": "building-my-blog",
+    "label": "블로그 개발기",
     "title": "",
     "description": "",
     "derived": {
@@ -11,6 +12,7 @@
   },
   {
     "id": "mdx",
+    "label": "mdx",
     "title": "",
     "description": "",
     "derived": {
