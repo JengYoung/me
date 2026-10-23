@@ -93,10 +93,18 @@ export function SeriesCarousel({ items }: { items: readonly SeriesOverviewItem[]
               <div aria-hidden="true" className={`${styles.position} text-detail text-ink-muted`}>
                 <div className={styles.progress}>
                   {items.map((item) => (
-                    <span key={item.id} data-active={item.id === api.value} />
+                    <span key={item.id} className={styles.progressTrack} />
                   ))}
+                  <span
+                    className={styles.progressIndicator}
+                    data-part="position-indicator"
+                    style={{
+                      width: `calc((100% - var(--spacing-4px) * ${items.length - 1}) / ${items.length})`,
+                      transform: `translateX(calc((100% + var(--spacing-4px)) * ${api.index}))`,
+                    }}
+                  />
                 </div>
-                <span className="rounded-full bg-bg-surface px-8px py-4px">
+                <span className="rounded-full bg-bg-surface px-8px py-4px tabular-nums">
                   {api.index + 1} / {items.length}
                 </span>
               </div>

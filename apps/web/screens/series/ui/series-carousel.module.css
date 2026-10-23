@@ -149,20 +149,26 @@
 }
 
 .progress {
+  position: relative;
   display: flex;
   flex: 1;
   gap: var(--spacing-4px);
 }
 
-.progress span {
+.progressTrack {
   flex: 1;
   height: var(--spacing-4px);
   border-radius: var(--radius-full);
   background: var(--color-border);
 }
 
-.progress [data-active='true'] {
+.progressIndicator {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  border-radius: var(--radius-full);
   background: var(--color-action-primary-bg);
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .details {
@@ -342,6 +348,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .progressIndicator,
   .carousel[data-direction] .slide {
     animation: none;
     transition: none;
