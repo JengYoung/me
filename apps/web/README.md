@@ -185,11 +185,12 @@ pnpm --filter web test:e2e app/page.e2e.spec.ts
 
 루트에서 `pnpm dev`를 실행하면 실제 초안을 포함한 시리즈를 <http://localhost:3000/series>에서 확인할 수 있습니다. 기본은 리스트이고 `?showType=carousel`로 캐러셀을 봅니다. 시리즈 상세의 첫 글·전체 챕터와 포스트 상세의 시리즈 목차·이전/다음으로 이어서 읽을 수 있습니다.
 
-`docs/series/series.json`은 Git으로 관리합니다. 수집기가 처음 발견한 ID를 빈 `title`·`description`으로 등록하면 작성자가 두 값을 채웁니다. `thumbnail`은 선택이며 `docs/series` 기준 상대 이미지 경로입니다. 예를 들어 아래 항목의 이미지는 `docs/series/building-my-blog/cover.png`입니다.
+`docs/series/series.json`은 Git으로 관리합니다. 수집기가 처음 발견한 ID를 빈 `label`·`title`·`description`으로 등록합니다. `label`은 URL의 ID와 별개로 지정하는 표시 이름입니다. 화면과 페이지 메타데이터에는 `label`을 우선 사용하고, 생략하거나 비우면 `title` → ID 순서로 표시합니다. `title`·`description`은 공개 전에 작성해야 합니다. `thumbnail`은 선택이며 `docs/series` 기준 상대 이미지 경로입니다. 예를 들어 아래 항목의 이미지는 `docs/series/building-my-blog/cover.png`입니다.
 
 ```json
 {
   "id": "building-my-blog",
+  "label": "블로그 개발기",
   "title": "직접 입력할 시리즈 제목",
   "description": "직접 입력할 시리즈 소개",
   "thumbnail": "./building-my-blog/cover.png",
@@ -197,9 +198,9 @@ pnpm --filter web test:e2e app/page.e2e.spec.ts
 }
 ```
 
-JSON 최상위는 위 항목들의 배열입니다. `derived`는 자동 계산되므로 직접 작성할 필요가 없습니다. 재수집해도 제목·소개·대표 이미지 참조와 사용하지 않는 시리즈 정의를 보존합니다. 시리즈에는 MDX 버전 파일이 없습니다. 원고는 기존 `docs/posts/{postId}`에 유지합니다.
+JSON 최상위는 위 항목들의 배열입니다. `derived`는 자동 계산되므로 직접 작성할 필요가 없습니다. 재수집해도 표시 이름·제목·소개·대표 이미지 참조와 사용하지 않는 시리즈 정의를 보존합니다. `label`을 바꾸어도 시리즈 ID와 기존 URL은 유지합니다. 시리즈에는 MDX 버전 파일이 없습니다. 원고는 기존 `docs/posts/{postId}`에 유지합니다.
 
-- 제목·소개가 비었거나 공백뿐이면 `pnpm content:validate`와 공개 빌드가 시리즈 ID·필드·JSON 경로를 표시하고 실패합니다. 오류가 나도 새 항목은 남으므로 해당 JSON을 편집한 뒤 다시 실행합니다. 개발 화면은 미입력 제목을 ID로 구분하고 저장된 값을 대신 채우지 않습니다.
+- 제목·소개가 비었거나 공백뿐이면 `pnpm content:validate`와 공개 빌드가 시리즈 ID·필드·JSON 경로를 표시하고 실패합니다. 오류가 나도 새 항목은 남으므로 해당 JSON을 편집한 뒤 다시 실행합니다. `label`이 있어도 이 검증은 유지합니다. 개발 화면은 표시 이름·제목이 모두 없으면 ID로 구분하고 저장된 값을 대신 채우지 않습니다.
 - 이미지를 생략하거나 빈 문자열로 두면 기존 캐릭터를 사용합니다. 지정한 PNG·JPEG·WebP·AVIF·GIF의 누락·폴더 밖 경로·공개용 `.local.` 참조는 검증 오류입니다. 사용 중인 이미지만 공개 산출물에 포함합니다.
 - Git 관리 `derived`는 개발 중에도 **공개 글만** 기록합니다. 최신 공개 버전당 한 편이며 초안만 있는 시리즈의 편수는 `0`입니다. 개발 화면은 별도 미리보기 카탈로그를 사용하므로 초안 편수와 JSON의 공개 편수가 다를 수 있습니다.
 - 시리즈는 기존 글의 새 수정본까지 포함한 최근 수정순입니다. 캐러셀의 최근 글 3편은 최초 발행순입니다. 공개 글이 없는 시리즈는 공개 목록·상세·사이트맵에서 제외합니다.
