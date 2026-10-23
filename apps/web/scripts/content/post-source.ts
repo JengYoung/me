@@ -70,7 +70,7 @@ export async function createPost({
   const context = await writingContext(contentRoot);
   if (context.ids.has(postId)) throw new Error(`이미 같은 ID의 글이 있습니다: ${postId}`);
   if (series && context.series.get(series.id)?.has(series.order))
-    throw new Error('다른 글·초안에서 사용 중인 시리즈 순번입니다.');
+    throw new Error('다른 글·초안에서 사용 중인 시리즈 정렬값입니다.');
   const data = { title, summary, publishedAt: '', tags, ...(series ? { series } : {}) };
   const source = `---\n${stringify(data, { lineWidth: 0 })}---\n\n## 시작하며\n\n본문을 작성하세요.\n`;
   const directory = path.join(contentRoot, 'posts', postId);

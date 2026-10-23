@@ -55,7 +55,7 @@ await run(async () => {
       select({
         message: '시리즈 선택',
         options: [
-          { value: '', label: '없음(추후 생성 예정)' },
+          { value: '', label: '시리즈 없음' },
           ...[...context.series.keys()].map((id) => ({ value: id, label: id })),
           { value: '__new__', label: '새 시리즈 ID 입력' },
         ],
@@ -69,7 +69,7 @@ await run(async () => {
       order = Number(
         await answer(
           text({
-            message: '시리즈 내 순번',
+            message: '시리즈 정렬값 (order)',
             defaultValue: String(next),
             placeholder: String(next),
             validate: (value) => {
@@ -77,7 +77,7 @@ await run(async () => {
               return !Number.isSafeInteger(number) || number < 1
                 ? '1 이상의 정수를 입력하세요.'
                 : used.has(number)
-                  ? '이미 사용 중인 순번입니다.'
+                  ? '이미 사용 중인 정렬값입니다.'
                   : undefined;
             },
           }),

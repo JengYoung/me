@@ -35,14 +35,14 @@ test('새 글은 입력한 메타데이터로 비공개 MDX를 만들고 날짜�
   expect(await readFile(filename, 'utf8')).toContain('## 시작하며');
 });
 
-test('같은 ID·경로 이탈·중복 시리즈 순번을 거부하고 기존 원고를 보존한다', async () => {
+test('같은 ID·경로 이탈·중복 시리즈 정렬값을 거부하고 기존 원고를 보존한다', async () => {
   const contentRoot = await workspace();
   const input = { contentRoot, postId: 'first', title: '원본', series: { id: 'react', order: 1 } };
   const filename = await createPost(input);
   const original = await readFile(filename, 'utf8');
   await expect(createPost({ ...input, title: '덮어쓰기' })).rejects.toThrow('같은 ID');
   await expect(createPost({ ...input, postId: '../outside' })).rejects.toThrow('글 ID');
-  await expect(createPost({ ...input, postId: 'second' })).rejects.toThrow('순번');
+  await expect(createPost({ ...input, postId: 'second' })).rejects.toThrow('정렬값');
   expect(await readFile(filename, 'utf8')).toBe(original);
 });
 
