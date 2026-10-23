@@ -4,7 +4,8 @@
     "allowImportingTsExtensions": true,
     "paths": {
       "@post-content/*": ["./screens/posts/generated/*"],
-      "@diary-content/*": ["./screens/diary/generated/*"]
+      "@diary-content/*": ["./screens/diary/generated/*"],
+      "@series-content/*": ["./entities/series/generated/*"]
     },
     "plugins": [
       {

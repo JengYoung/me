@@ -51,7 +51,13 @@ next-env.d.ts
 /.next-e2e/
 /.next-preview/
 /.next-preview-e2e/
+/.next-series-preview/
+/.next-series-check/
 
 # Diary content modules
 /screens/diary/generated/
 /screens/diary/generated-preview/
+
+# Series runtime catalogs (docs/series/series.json is tracked)
+/entities/series/generated/
+/entities/series/generated-preview/

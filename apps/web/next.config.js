@@ -45,12 +45,16 @@ export default function config(phase) {
       resolveAlias: {
         '@post-content/*': `./screens/posts/${preview ? 'generated-preview' : 'generated'}/*`,
         '@diary-content/*': `./screens/diary/${preview ? 'generated-preview' : 'generated'}/*`,
+        '@series-content/*': `./entities/series/${preview ? 'generated-preview' : 'generated'}/*`,
       },
     },
     webpack(config) {
       config.resolve.alias['@post-content'] = generatedRoot;
       config.resolve.alias['@diary-content'] = fileURLToPath(
         new URL(`./screens/diary/${preview ? 'generated-preview' : 'generated'}`, import.meta.url),
+      );
+      config.resolve.alias['@series-content'] = fileURLToPath(
+        new URL(`./entities/series/${preview ? 'generated-preview' : 'generated'}`, import.meta.url),
       );
       return config;
     },
