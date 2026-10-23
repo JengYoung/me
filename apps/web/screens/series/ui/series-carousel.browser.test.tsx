@@ -52,13 +52,17 @@ test('모바일의 긴 설명은 펼치고 접을 수 있고 숨겨진 최근 �
 
 test('순환 전환은 현재 시리즈만 노출하며 동작 줄이기 설정에서 애니메이션을 생략한다', async () => {
   const screen = await render(<SeriesCarousel items={[seriesItem('first'), seriesItem('second')]} />);
+  const firstCover = screen.getByRole('link', { name: 'first 시리즈 제목 시리즈 썸네일' }).element();
+  const expression = firstCover.querySelector('svg')!.getAttribute('data-expression');
   const next = screen.getByRole('button', { name: '다음 시리즈' });
   await next.click();
   await expect.element(screen.getByRole('heading', { name: 'second 시리즈 제목' })).toBeVisible();
   await expect.element(screen.getByRole('heading', { name: 'first 시리즈 제목' })).not.toBeInTheDocument();
+  expect(firstCover.closest<HTMLElement>('[data-part="slide"]')!.inert).toBe(true);
+  expect(firstCover.querySelector('svg')!.getAttribute('data-expression')).toBe(expression);
   await expect.element(screen.getByRole('status')).toHaveTextContent('2개 중 2번째 시리즈, second 시리즈 제목');
   await next.click();
   await expect.element(screen.getByRole('heading', { name: 'first 시리즈 제목' })).toBeVisible();
-  const cover = screen.getByRole('link', { name: 'first 시리즈 제목 시리즈 썸네일' }).element();
-  expect(getComputedStyle(cover.parentElement!).animationName).toBe('none');
+  expect(firstCover.querySelector('svg')!.getAttribute('data-expression')).toBe(expression);
+  expect(firstCover.closest('[data-part="slide"]')!.getAnimations({ subtree: true })).toHaveLength(0);
 });

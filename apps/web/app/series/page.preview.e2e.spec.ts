@@ -1,6 +1,7 @@
 import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { expect, test } from '@playwright/test';
+import type { Locator } from '@playwright/test';
 import { parse } from 'yaml';
 
 const docs = path.resolve(import.meta.dirname, '../../docs');
@@ -147,5 +148,162 @@ test('모바일에서 가로 스와이프는 시리즈를 전환하고 링크로
     await expect(page).toHaveURL(/\/series\?showType=carousel$/);
   } finally {
     await session.detach();
+  }
+});
+
+async function pauseSlideTransition(carousel: Locator) {
+  await carousel.evaluate((root) => {
+    // 이 테스트의 페이지가 소유한 전환을 한 번만 고정한다. 페이지 종료 시 리스너도 정리된다.
+    const freeze = (event: Event) => {
+      const transition = event as TransitionEvent;
+      if (transition.propertyName !== 'transform' || !(transition.target as HTMLElement).matches('[data-part="slide"]'))
+        return;
+      root.removeEventListener('transitionrun', freeze);
+      for (const animation of root.getAnimations({ subtree: true })) {
+        const duration = animation.effect?.getTiming().duration;
+        if (typeof duration !== 'number') continue;
+        animation.pause();
+        animation.currentTime = duration / 5;
+      }
+    };
+    root.addEventListener('transitionrun', freeze);
+  });
+}
+
+test('슬라이드 전체가 좌우로 이어서 이동하고 전환 중인 이전 글은 탐색에서 제외된다', async ({ page }, testInfo) => {
+  test.skip(groups.size < 2, '두 개 이상의 실제 시리즈가 필요합니다.');
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/series?showType=carousel');
+  if (testInfo.project.use.colorScheme === 'dark') {
+    await page.locator('html').evaluate((element) => {
+      element.dataset.theme = 'dark';
+    });
+  }
+  const carousel = page.getByRole('region', { name: '시리즈 둘러보기' });
+  // 실제 조작으로 hydration을 기다린다.
+  await carousel.getByRole('button', { name: '다음 시리즈' }).click();
+  await carousel.evaluate(async (root) => {
+    await Promise.allSettled(root.getAnimations({ subtree: true }).map((animation) => animation.finished));
+  });
+
+  for (const direction of ['next', 'previous'] as const) {
+    const outgoingId = await carousel.getByRole('group').getAttribute('id');
+    await pauseSlideTransition(carousel);
+    await carousel.getByRole('button', { name: direction === 'next' ? '다음 시리즈' : '이전 시리즈' }).click();
+    await expect
+      .poll(() =>
+        carousel.evaluate((root) =>
+          root.getAnimations({ subtree: true }).some((animation) => animation.playState === 'paused'),
+        ),
+      )
+      .toBe(true);
+    const frame = await carousel.evaluate((root, outgoingId) => {
+      const outgoing = root.querySelector<HTMLElement>(`[id="${outgoingId}"]`)!;
+      const incoming = root.querySelector<HTMLElement>('[data-part="slide"]:not([hidden])')!;
+      const read = (element: HTMLElement) => {
+        const style = getComputedStyle(element);
+        const rect = element.getBoundingClientRect();
+        return {
+          x: rect.x,
+          width: rect.width,
+          offset: new DOMMatrixReadOnly(style.transform).m41,
+          display: style.display,
+          inert: element.inert,
+          ariaHidden: element.getAttribute('aria-hidden'),
+        };
+      };
+      return { outgoing: read(outgoing), incoming: read(incoming) };
+    }, outgoingId);
+    expect(frame.outgoing.display).not.toBe('none');
+    expect(frame.outgoing.inert).toBe(true);
+    expect(frame.outgoing.ariaHidden).toBe('true');
+    expect(frame.incoming.inert).toBe(false);
+    expect(Math.abs(frame.outgoing.offset)).toBeGreaterThan(frame.outgoing.width / 8);
+    expect(Math.abs(frame.incoming.offset)).toBeGreaterThan(frame.incoming.width / 8);
+    if (direction === 'next') {
+      expect(frame.outgoing.offset).toBeLessThan(0);
+      expect(frame.incoming.offset).toBeGreaterThan(0);
+      expect(Math.abs(frame.outgoing.x + frame.outgoing.width - frame.incoming.x)).toBeLessThan(1);
+    } else {
+      expect(frame.outgoing.offset).toBeGreaterThan(0);
+      expect(frame.incoming.offset).toBeLessThan(0);
+      expect(Math.abs(frame.incoming.x + frame.incoming.width - frame.outgoing.x)).toBeLessThan(1);
+    }
+    await expect(carousel.getByRole('group')).toHaveCount(1);
+    await carousel.evaluate(async (root) => {
+      const animations = root.getAnimations({ subtree: true });
+      for (const animation of animations) animation.play();
+      await Promise.allSettled(animations.map((animation) => animation.finished));
+    });
+  }
+
+  const title = await carousel.getByRole('group').getByRole('heading', { level: 2 }).textContent();
+  for (let index = 0; index < 3; index++) {
+    await carousel.getByRole('button', { name: '다음 시리즈' }).click();
+    await carousel.getByRole('button', { name: '이전 시리즈' }).click();
+  }
+  await carousel.evaluate(async (root) => {
+    await Promise.allSettled(root.getAnimations({ subtree: true }).map((animation) => animation.finished));
+  });
+  await expect(carousel.getByRole('group').getByRole('heading', { level: 2 })).toHaveText(title!);
+  expect(
+    await carousel.evaluate((root) =>
+      [...root.querySelectorAll('[data-part="slide"][hidden]')].every(
+        (slide) => getComputedStyle(slide).display === 'none',
+      ),
+    ),
+  ).toBe(true);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await carousel.getByRole('button', { name: '다음 시리즈' }).click();
+  await expect(carousel.getByRole('group')).toHaveCount(1);
+  expect(await carousel.evaluate((root) => root.getAnimations({ subtree: true }).length)).toBe(0);
+});
+
+test('같은 방향의 연속 입력은 현재 이동 뒤에 이어지고 동작 줄이기로 전환해도 입력이 남지 않는다', async ({ page }) => {
+  test.skip(groups.size < 2, '두 개 이상의 실제 시리즈가 필요합니다.');
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/series?showType=carousel');
+  const carousel = page.getByRole('region', { name: '시리즈 둘러보기' });
+  const next = carousel.getByRole('button', { name: '다음 시리즈' });
+  await next.click();
+  await carousel.evaluate(async (root) => {
+    await Promise.allSettled(root.getAnimations({ subtree: true }).map((animation) => animation.finished));
+  });
+
+  for (const reduceDuringTransition of [false, true]) {
+    const expectedTitle = await carousel.evaluate((root) => {
+      const slides = [...root.querySelectorAll<HTMLElement>('[data-part="slide"]')];
+      const index = slides.findIndex((slide) => !slide.hidden);
+      return slides[(index + 2) % slides.length]!.querySelector('h2')!.textContent!;
+    });
+    await pauseSlideTransition(carousel);
+    await next.click();
+    await expect
+      .poll(() =>
+        carousel.evaluate((root) =>
+          root.getAnimations({ subtree: true }).some((animation) => animation.playState === 'paused'),
+        ),
+      )
+      .toBe(true);
+    const incomingId = await carousel.getByRole('group').getAttribute('id');
+    await next.click();
+    await expect(carousel.getByRole('group')).toHaveAttribute('id', incomingId!);
+
+    if (reduceDuringTransition) {
+      await page.emulateMedia({ reducedMotion: 'reduce' });
+    } else {
+      await carousel.evaluate(async (root) => {
+        const animations = root.getAnimations({ subtree: true });
+        for (const animation of animations) animation.play();
+        await Promise.allSettled(animations.map((animation) => animation.finished));
+      });
+    }
+    await expect(carousel.getByRole('group').getByRole('heading', { level: 2 })).toHaveText(expectedTitle);
+    await carousel.evaluate(async (root) => {
+      await Promise.allSettled(root.getAnimations({ subtree: true }).map((animation) => animation.finished));
+    });
+    expect(await carousel.evaluate((root) => root.getAnimations({ subtree: true }).length)).toBe(0);
   }
 });
