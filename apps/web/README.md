@@ -1,5 +1,21 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).
 
+## 홈 · issue-15
+
+`pnpm dev` 후 `/`에서 실제 콘텐츠와 연결된 홈을 확인합니다. `app/page.tsx`는 메타데이터와
+`screens/home`의 페이지를 연결하며, 공통 Canvas 배경은 `shared/ui/grid-background`의 공개 API로 제공합니다.
+새 3D 의존성 없이 레퍼런스의 파동·낙하 계산을 사용하고, 캐릭터와 Canvas 코드는 필요할 때 불러옵니다.
+
+동작·선정·접근성·성능 계약의 정본은 [홈 지침](../../.agent-source/project/content/home.md)입니다.
+
+```bash
+pnpm --filter web test --project node screens/home shared/ui/grid-background
+pnpm --filter web test:e2e:preview app/page.preview.e2e.spec.ts
+```
+
+E2E는 별도 개발 서버를 소유하고 실제 원고를 읽기만 합니다. 캡처는 `test-results/e2e/`에 남깁니다.
+공개 빌드는 기존 콘텐츠 검증을 그대로 거치므로 시리즈 제목·소개 등 미완성 필드를 먼저 작성해야 합니다.
+
 ## 캐릭터 · issue-9
 
 `shared/ui/character`에서 `Character`, `AnimatedCharacter`, `CharacterExpression`을 가져옵니다.
