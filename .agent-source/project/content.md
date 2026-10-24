@@ -3,6 +3,8 @@
 콘텐츠 작업 전에 아래 원천 중 현재 작업 범위에 해당하는 문서만 읽고 적용한다. 여러 범위가 겹치면 필요한 문서를 함께 읽으며, 미확정 항목을 임의로 확정하지 않는다.
 
 - 저장·이관·공개 판정·버전·자산·조회·검색·수정 이력: `.agent-source/project/content/storage.md`
+- 포스트·일기 목록의 정렬 옵션·기본값·URL·동률 처리: `.agent-source/project/content/listing.md`
+- 홈 소개·최근 콘텐츠·그리드 모션·스크롤·폴백: `.agent-source/project/content/home.md`
 - 아티클 Markdown·MDX 문법·본문 컴포넌트: `.agent-source/project/content/mdx.md`
 - 로컬 발행 명령·검증·Git 반영과 배포의 경계: `.agent-source/project/content/publishing.md`
 - 시리즈 JSON·수집·정렬·목록·캐러셀·챕터 탐색: `.agent-source/project/content/series.md`

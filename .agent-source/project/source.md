@@ -18,6 +18,8 @@
 | 콘텐츠 작업 범위                  | 상세 원천                                      |
 | --------------------------------- | ---------------------------------------------- |
 | 저장·발행본·버전·자산·조회·이력   | [content/storage.md](content/storage.md)       |
+| 포스트·일기 목록 정렬·URL·동률 처리 | [content/listing.md](content/listing.md)       |
+| 홈 소개·최근 콘텐츠·그리드 모션·폴백 | [content/home.md](content/home.md)             |
 | 아티클 Markdown·MDX·본문 컴포넌트 | [content/mdx.md](content/mdx.md)               |
 | 로컬 발행 명령·검증·Git·배포 경계 | [content/publishing.md](content/publishing.md) |
 | 시리즈 JSON·집계·목록·챕터 탐색   | [content/series.md](content/series.md)         |
