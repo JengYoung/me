@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import { playwright } from '@vitest/browser-playwright';
 import svgr from 'vite-plugin-svgr';
 import { defineConfig } from 'vitest/config';
+import { fileURLToPath } from 'node:url';
 import svgrOptions from './svgr.config.js';
 
 export default defineConfig({
@@ -33,6 +34,11 @@ export default defineConfig({
         // Next.js가 치환하는 클라이언트 환경값은 독립 브라우저 테스트에서 기본값을 사용한다.
         // Node 프로젝트의 실제 process.env와 콘텐츠 공개 판정에는 적용하지 않는다.
         define: { 'process.env': '{}' },
+        resolve: {
+          alias: [
+            { find: /^next\/image$/, replacement: fileURLToPath(new URL('./vitest.next-image.ts', import.meta.url)) },
+          ],
+        },
         test: {
           include: ['shared/**/*.browser.test.tsx', 'screens/**/*.browser.test.tsx'],
           setupFiles: ['./vitest.setup.ts'],
