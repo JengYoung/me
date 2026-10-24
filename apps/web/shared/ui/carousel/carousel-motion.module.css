@@ -1,0 +1,86 @@
+.viewport {
+  position: relative;
+  min-width: 0;
+  overflow-x: clip;
+  isolation: isolate;
+}
+
+.slide {
+  position: relative;
+  min-width: 0;
+  isolation: isolate;
+  transform: translateX(0);
+}
+
+.slide:not([hidden]) {
+  z-index: 1;
+}
+
+.slide[hidden] {
+  display: none;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* 퇴장 화면은 전환 동안만 그린다. 읽기·포커스는 소비 UI의 inert로 즉시 제외한다. */
+@supports (transition-behavior: allow-discrete) {
+  .root[data-direction] .slide {
+    transition:
+      transform 380ms cubic-bezier(0.22, 1, 0.36, 1),
+      display 380ms allow-discrete;
+  }
+
+  .root[data-direction='next'] .slide[hidden] {
+    transform: translateX(-100%);
+  }
+
+  .root[data-direction='previous'] .slide[hidden] {
+    transform: translateX(100%);
+  }
+
+  @starting-style {
+    .root[data-direction='next'] .slide:not([hidden]) {
+      transform: translateX(100%);
+    }
+
+    .root[data-direction='previous'] .slide:not([hidden]) {
+      transform: translateX(-100%);
+    }
+  }
+}
+
+@supports not (transition-behavior: allow-discrete) {
+  .root[data-direction='next'] .slide:not([hidden]) {
+    animation: enter-next 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .root[data-direction='previous'] .slide:not([hidden]) {
+    animation: enter-previous 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes enter-next {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes enter-previous {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root[data-direction] .slide {
+    animation: none;
+    transition: none;
+  }
+}

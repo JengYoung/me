@@ -1,9 +1,10 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Carousel } from '@repo/ui';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import type { CharacterExpression } from '../../../shared/ui/character';
+import { carouselMotionStyles, useCarouselMotion } from '../../../shared/ui/carousel';
 import type { SeriesOverviewItem } from '../model/get-series-overview';
 import { SeriesCover } from './series-cover';
 import { SeriesSlideDetails } from './series-slide-details';
@@ -18,41 +19,17 @@ export function SeriesCarousel({ items }: { items: readonly SeriesOverviewItem[]
   const [expressions, setExpressions] = useState<Record<string, CharacterExpression>>(() =>
     items[0] ? { [items[0].id]: 'happy' } : {},
   );
-  const [motion, setMotion] = useState<'next' | 'previous' | null>(null);
-  const direction = useRef<'next' | 'previous'>('next');
-  const viewport = useRef<HTMLDivElement>(null);
-  const queuedDirection = useRef<'next' | 'previous' | null>(null);
-
-  function selectSeries(nextId: string | null) {
-    if (!nextId || nextId === activeId) return;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const moving = viewport.current
-      ?.querySelector('[data-part="slide"]:not([hidden])')
-      ?.getAnimations()
-      .some((animation) => animation.playState === 'running' || animation.playState === 'paused');
-    // 같은 방향의 연속 입력은 현재 이동 뒤에 이어간다. 반대 입력은 즉시 현재 위치에서 되돌린다.
-    if (!reduced && moving && motion === direction.current) {
-      queuedDirection.current = direction.current;
-      return;
-    }
-    queuedDirection.current = null;
-    setMotion(reduced ? null : direction.current);
-    if (!expressions[nextId]) {
-      const candidates = POSITIVE_EXPRESSIONS.filter((candidate) => candidate !== expressions[activeId ?? '']);
-      const expression = candidates[Math.floor(Math.random() * candidates.length)]!;
-      setExpressions((current) => ({ ...current, [nextId]: expression }));
-    }
-    setActiveId(nextId);
-  }
-
-  function finishMotion(next: () => void, previous: () => void) {
-    const queued = queuedDirection.current;
-    queuedDirection.current = null;
-    if (!queued) return;
-    direction.current = queued;
-    if (queued === 'next') next();
-    else previous();
-  }
+  const transition = useCarouselMotion({
+    value: activeId,
+    onValueChange(nextId) {
+      if (!expressions[nextId]) {
+        const candidates = POSITIVE_EXPRESSIONS.filter((candidate) => candidate !== expressions[activeId ?? '']);
+        const expression = candidates[Math.floor(Math.random() * candidates.length)]!;
+        setExpressions((current) => ({ ...current, [nextId]: expression }));
+      }
+      setActiveId(nextId);
+    },
+  });
 
   if (items.length === 0) return <p className="text-body-2 text-ink-secondary">아직 시리즈가 없습니다.</p>;
 
@@ -60,13 +37,13 @@ export function SeriesCarousel({ items }: { items: readonly SeriesOverviewItem[]
     <Carousel.Root
       slides={items.map((item) => ({ value: item.id, label: item.title }))}
       value={activeId}
-      onValueChange={selectSeries}
+      onValueChange={transition.select}
       defaultRotating={false}
       loop
       aria-label="시리즈 둘러보기"
       aria-roledescription="캐러셀"
-      className={styles.carousel}
-      data-direction={motion ?? undefined}
+      className={`${styles.carousel} ${carouselMotionStyles.root}`}
+      data-direction={transition.motion ?? undefined}
     >
       {(api) => (
         <>
@@ -76,7 +53,7 @@ export function SeriesCarousel({ items }: { items: readonly SeriesOverviewItem[]
                 aria-label="이전 시리즈"
                 className={`${CONTROL_CLASS_NAME} ${styles.previous}`}
                 onClickCapture={() => {
-                  direction.current = 'previous';
+                  transition.setDirection('previous');
                 }}
               >
                 <ArrowLeft size={20} aria-hidden="true" />
@@ -85,7 +62,7 @@ export function SeriesCarousel({ items }: { items: readonly SeriesOverviewItem[]
                 aria-label="다음 시리즈"
                 className={`${CONTROL_CLASS_NAME} ${styles.next}`}
                 onClickCapture={() => {
-                  direction.current = 'next';
+                  transition.setDirection('next');
                 }}
               >
                 <ArrowRight size={20} aria-hidden="true" />
@@ -113,47 +90,28 @@ export function SeriesCarousel({ items }: { items: readonly SeriesOverviewItem[]
           <output aria-live="polite" aria-atomic="true" className="sr-only">
             {items.length}개 중 {api.index + 1}번째 시리즈, {items[api.index]?.title}
           </output>
-          <div {...api.getViewportProps()} ref={viewport} aria-live="off" className={styles.viewport}>
+          <div
+            {...api.getViewportProps()}
+            ref={transition.viewport}
+            aria-live="off"
+            className={`${styles.viewport} ${carouselMotionStyles.viewport}`}
+          >
             {items.map((item) => (
               <Carousel.Slide
                 key={item.id}
                 value={item.id}
                 aria-roledescription="슬라이드"
-                className={styles.slide}
+                className={`${styles.slide} ${carouselMotionStyles.slide}`}
                 aria-hidden={api.value !== item.id || undefined}
                 inert={api.value !== item.id || undefined}
-                onTransitionEnd={(event) => {
-                  if (
-                    event.target === event.currentTarget &&
-                    event.propertyName === 'transform' &&
-                    api.value === item.id
-                  )
-                    finishMotion(api.next, api.previous);
-                }}
-                onTransitionCancel={(event) => {
-                  if (
-                    event.target === event.currentTarget &&
-                    event.nativeEvent.propertyName === 'transform' &&
-                    api.value === item.id &&
-                    window.matchMedia('(prefers-reduced-motion: reduce)').matches
-                  )
-                    finishMotion(api.next, api.previous);
-                }}
-                onAnimationEnd={(event) => {
-                  if (event.target === event.currentTarget && api.value === item.id)
-                    finishMotion(api.next, api.previous);
-                }}
+                {...transition.slideEvents(api.value === item.id, api)}
               >
                 {/* 퇴장 중에도 시각적 전환만 유지하고, 비활성 시리즈의 읽기·포커스·클릭은 즉시 차단합니다. */}
                 <SeriesCover
                   item={item}
                   active={api.value === item.id}
                   expression={expressions[item.id] ?? 'happy'}
-                  onSwipe={(value) => {
-                    direction.current = value;
-                    if (value === 'next') api.next();
-                    else api.previous();
-                  }}
+                  onSwipe={(value) => transition.move(value, api)}
                 />
                 <SeriesSlideDetails item={item} active={api.value === item.id} />
               </Carousel.Slide>
