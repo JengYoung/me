@@ -6,18 +6,8 @@ import Link from 'next/link';
 
 import type { HomeContentItem } from '../model/get-home-content';
 import { useCubeArrival } from '../lib/use-cube-arrival';
+import { ContentDate } from './content-date';
 import styles from './home-content.module.css';
-
-function ContentDate({ item }: { item: HomeContentItem }) {
-  if (!item.dateTime) return <span>{item.isDraft ? '작성 중' : '날짜 미지정'}</span>;
-  return (
-    <time dateTime={item.dateTime}>
-      {new Intl.DateTimeFormat('ko-KR', { dateStyle: 'medium', timeZone: 'Asia/Seoul' }).format(
-        new Date(item.dateTime),
-      )}
-    </time>
-  );
-}
 
 export function ContentCube({ item }: { item: HomeContentItem }) {
   const [expanded, setExpanded] = useState(false);

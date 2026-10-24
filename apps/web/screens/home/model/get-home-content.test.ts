@@ -91,4 +91,16 @@ describe('홈 콘텐츠 선정', () => {
   it('빈 카탈로그에 임의의 글이나 시리즈를 만들지 않는다', () => {
     expect(getHomeContent([], [])).toEqual({ posts: [], series: [] });
   });
+
+  it('시리즈 소개가 비어 있어도 개별 글의 요약을 시리즈 목적으로 대신 표시하지 않는다', () => {
+    const result = getHomeContent([], [collection('blog', null, { description: '', posts: [post('one', '')] })]);
+    expect(result.series[0]?.summary).toBe('');
+  });
+
+  it('홈 시리즈에는 개별 글 목록을 전달하지 않고 소개와 글 수만 제공한다', () => {
+    const result = getHomeContent([], [collection('blog', null, { posts: [post('one', '')], postCount: 1 })]);
+    expect(result.series[0]).toMatchObject({ summary: '소개', postCount: 1 });
+    expect(result.series[0]).not.toHaveProperty('recentPosts');
+    expect(result.series[0]).not.toHaveProperty('posts');
+  });
 });

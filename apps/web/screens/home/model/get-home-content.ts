@@ -15,6 +15,11 @@ export interface HomeContentItem {
   isDraft?: boolean;
 }
 
+export interface HomeSeriesItem extends HomeContentItem {
+  kind: 'series';
+  postCount: number;
+}
+
 const timestamp = (value: string | null) => (value ? Date.parse(value) || 0 : 0);
 
 /** 카탈로그의 본문·과거 버전 없이 홈에서 필요한 최근 메타데이터만 전달한다. */
@@ -47,11 +52,11 @@ export function getHomeContent(posts: readonly Post[], series: readonly Series[]
       // oxlint-disable-next-line unicorn/no-array-sort -- 새 배열만 정렬하며 원본 카탈로그는 보존한다.
       .sort((a, b) => timestamp(b.updatedAt) - timestamp(a.updatedAt) || a.id.localeCompare(b.id, 'en'))
       .slice(0, 3)
-      .map((item): HomeContentItem => ({
+      .map((item): HomeSeriesItem => ({
         id: item.id,
         kind: 'series',
         title: seriesTitle(item),
-        summary: item.description || item.posts[0]?.summary || '',
+        summary: item.description,
         tags: [...(tags.get(item.id) ?? [])],
         href: seriesPath(item.id),
         dateTime: item.updatedAt,
