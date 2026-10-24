@@ -19,7 +19,13 @@ export default defineConfig({
         test: {
           name: 'node',
           environment: 'node',
-          include: ['shared/**/*.ssr.test.tsx', 'entities/**/*.test.ts', 'scripts/**/*.test.ts'],
+          include: [
+            'shared/**/*.ssr.test.tsx',
+            'shared/**/*.test.ts',
+            'screens/**/*.test.ts',
+            'entities/**/*.test.ts',
+            'scripts/**/*.test.ts',
+          ],
         },
       },
       {
