@@ -1,8 +1,8 @@
 'use client';
 
-import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useCarouselSwipe } from '../../../shared/ui/carousel';
 import { Character } from '../../../shared/ui/character';
 import type { CharacterExpression } from '../../../shared/ui/character';
 import type { SeriesOverviewItem } from '../model/get-series-overview';
@@ -19,8 +19,7 @@ export function SeriesCover({
   expression: CharacterExpression;
   onSwipe: (direction: 'next' | 'previous') => void;
 }) {
-  const gesture = useRef<{ x: number; y: number } | null>(null);
-  const swiped = useRef(false);
+  const swipe = useCarouselSwipe(onSwipe);
 
   return (
     <>
@@ -35,28 +34,7 @@ export function SeriesCover({
           href={`/series/${item.id}`}
           aria-label={`${item.title} 시리즈 썸네일`}
           className={`${styles.coverLink} bg-bg-subtle focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring`}
-          onPointerDown={(event) => {
-            swiped.current = false;
-            gesture.current =
-              event.pointerType === 'touch' && event.isPrimary ? { x: event.clientX, y: event.clientY } : null;
-          }}
-          onPointerCancel={() => {
-            gesture.current = null;
-          }}
-          onPointerUp={(event) => {
-            const start = gesture.current;
-            gesture.current = null;
-            if (!start) return;
-            const dx = event.clientX - start.x;
-            const dy = event.clientY - start.y;
-            if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
-            swiped.current = true;
-            onSwipe(dx < 0 ? 'next' : 'previous');
-          }}
-          onClick={(event) => {
-            if (swiped.current && event.detail !== 0) event.preventDefault();
-            swiped.current = false;
-          }}
+          {...swipe}
         >
           {item.thumbnail ? (
             <>

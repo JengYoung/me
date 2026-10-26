@@ -1,5 +1,25 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).
 
+## 콘텐츠 작성
+
+포스트·일기·시리즈의 작성, 수정, 미리보기, 검증, 발행은 [콘텐츠 작성·발행 안내](../../.agent-source/project/content/publishing.md)에서 시작합니다.
+
+## 홈 · issue-15
+
+`pnpm dev` 후 `/`에서 실제 콘텐츠와 연결된 홈을 확인합니다. `app/page.tsx`는 메타데이터와
+`screens/home`의 페이지를 연결하며, 공통 Canvas 배경은 `shared/ui/grid-background`의 공개 API로 제공합니다.
+새 3D 의존성 없이 레퍼런스의 파동·낙하 계산을 사용하고, 캐릭터와 Canvas 코드는 필요할 때 불러옵니다.
+
+동작·선정·접근성·성능 계약의 정본은 [홈 지침](../../.agent-source/project/content/home.md)입니다.
+
+```bash
+pnpm --filter web test --project node screens/home shared/ui/grid-background
+pnpm --filter web test:e2e:preview app/page.preview.e2e.spec.ts
+```
+
+E2E는 별도 개발 서버를 소유하고 실제 원고를 읽기만 합니다. 캡처는 `test-results/e2e/`에 남깁니다.
+공개 빌드는 기존 콘텐츠 검증을 그대로 거치므로 시리즈 제목·소개 등 미완성 필드를 먼저 작성해야 합니다.
+
 ## 캐릭터 · issue-9
 
 `shared/ui/character`에서 `Character`, `AnimatedCharacter`, `CharacterExpression`을 가져옵니다.
@@ -178,47 +198,6 @@ pnpm --filter web test:e2e app/page.e2e.spec.ts
 ```
 
 새 앱 흐름은 대상 파일 옆 E2E에서 `@playwright/test`를 가져와 작성합니다. `page.goto()`로 실제 앱 경로에 접속하고 사용자에게 보이는 결과를 검사합니다. 컴포넌트·Hook·함수의 세부 조건은 Vitest에 두며, 별도로 mount한 컴포넌트나 Storybook을 앱 E2E의 대상으로 삼지 않습니다. 앱 화면이 연결되면 메뉴 이동·키보드 포커스·스크롤 잠금 등 실제 사용자 흐름을 추가합니다.
-
-## 시리즈 작성·확인
-
-포스트 frontmatter에 `series: { id: building-my-blog, order: 10 }`을 작성하면 시리즈로 묶입니다. `order`는 오름차순 정렬값입니다. `10, 20, 30`으로 작성해도 화면은 `1번째 글, 2번째 글, 3번째 글`로 표시하며 같은 시리즈의 현재 글끼리 중복 정렬값은 허용하지 않습니다.
-
-루트에서 `pnpm dev`를 실행하면 실제 초안을 포함한 시리즈를 <http://localhost:3000/series>에서 확인할 수 있습니다. 기본은 리스트이고 `?showType=carousel`로 캐러셀을 봅니다. 시리즈 상세의 첫 글·전체 챕터와 포스트 상세의 시리즈 목차·이전/다음으로 이어서 읽을 수 있습니다.
-
-`docs/series/series.json`은 Git으로 관리합니다. 수집기가 처음 발견한 ID를 빈 `label`·`title`·`description`으로 등록합니다. `label`은 URL의 ID와 별개로 지정하는 표시 이름입니다. 화면과 페이지 메타데이터에는 `label`을 우선 사용하고, 생략하거나 비우면 `title` → ID 순서로 표시합니다. `title`·`description`은 공개 전에 작성해야 합니다. `thumbnail`은 선택이며 `docs/series` 기준 상대 이미지 경로입니다. 예를 들어 아래 항목의 이미지는 `docs/series/building-my-blog/cover.png`입니다.
-
-```json
-{
-  "id": "building-my-blog",
-  "label": "블로그 개발기",
-  "title": "직접 입력할 시리즈 제목",
-  "description": "직접 입력할 시리즈 소개",
-  "thumbnail": "./building-my-blog/cover.png",
-  "derived": { "posts": [], "postCount": 0, "updatedAt": null }
-}
-```
-
-JSON 최상위는 위 항목들의 배열입니다. `derived`는 자동 계산되므로 직접 작성할 필요가 없습니다. 재수집해도 표시 이름·제목·소개·대표 이미지 참조와 사용하지 않는 시리즈 정의를 보존합니다. `label`을 바꾸어도 시리즈 ID와 기존 URL은 유지합니다. 시리즈에는 MDX 버전 파일이 없습니다. 원고는 기존 `docs/posts/{postId}`에 유지합니다.
-
-- 제목·소개가 비었거나 공백뿐이면 `pnpm content:validate`와 공개 빌드가 시리즈 ID·필드·JSON 경로를 표시하고 실패합니다. 오류가 나도 새 항목은 남으므로 해당 JSON을 편집한 뒤 다시 실행합니다. `label`이 있어도 이 검증은 유지합니다. 개발 화면은 표시 이름·제목이 모두 없으면 ID로 구분하고 저장된 값을 대신 채우지 않습니다.
-- 이미지를 생략하거나 빈 문자열로 두면 기존 캐릭터를 사용합니다. 지정한 PNG·JPEG·WebP·AVIF·GIF의 누락·폴더 밖 경로·공개용 `.local.` 참조는 검증 오류입니다. 사용 중인 이미지만 공개 산출물에 포함합니다.
-- Git 관리 `derived`는 개발 중에도 **공개 글만** 기록합니다. 최신 공개 버전당 한 편이며 초안만 있는 시리즈의 편수는 `0`입니다. 개발 화면은 별도 미리보기 카탈로그를 사용하므로 초안 편수와 JSON의 공개 편수가 다를 수 있습니다.
-- 시리즈는 기존 글의 새 수정본까지 포함한 최근 수정순입니다. 캐러셀의 최근 글 3편은 최초 발행순입니다. 공개 글이 없는 시리즈는 공개 목록·상세·사이트맵에서 제외합니다.
-- `/series`와 `/series/{seriesId}`의 canonical은 `https://jengyoung.co.kr`의 쿼리 없는 주소입니다. 보기 전환 쿼리는 canonical에 포함하지 않습니다.
-
-원고·JSON·이미지를 저장하면 개발 화면이 갱신됩니다. 생성 모듈은 `entities/series/generated/`와 `generated-preview/`로 분리하며 Git에서 제외합니다. 명령은 원고나 자산을 자동 공개하지 않으며 커밋·푸시·배포는 별도입니다.
-
-```bash
-pnpm content:validate
-pnpm --filter web content:generate
-pnpm --filter web build
-pnpm --filter web test --project=node
-pnpm --filter web test:e2e:preview app/series/page.preview.e2e.spec.ts
-```
-
-수집·검증 테스트는 임시 폴더를 정리하며 실제 원고를 변경하지 않습니다. 앱 E2E는 실제 초안을 읽어 목록·캐러셀·챕터·키보드·스와이프·JavaScript 없는 읽기를 확인합니다. 공개 빌드 E2E를 실행하려면 시리즈 JSON의 제목·소개와 이미지 참조를 먼저 완성해야 합니다.
-
-콘텐츠 계약의 정본은 [시리즈 수집·탐색 계약](../../.agent-source/project/content/series.md)입니다.
 
 ## SVG 아이콘
 

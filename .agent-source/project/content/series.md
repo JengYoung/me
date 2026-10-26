@@ -2,6 +2,37 @@
 
 [이슈 #14](https://github.com/JengYoung/me/issues/14)의 확정 범위다. 포스트 원고는 `apps/web/docs/posts/{postId}`에 유지한다. 시리즈에 편입하거나 순서를 바꾸어도 기존 글 주소·버전 이력·본문을 이동하거나 중복 저장하지 않는다. 일기는 시리즈 대상이 아니다.
 
+새 글 생성부터 미리보기·검증·발행까지의 시작점은 [콘텐츠 작성·발행 안내](publishing.md)다. 이 문서는 시리즈 작성 예시와 세부 계약을 관리한다.
+
+## 작성 예시
+
+1. 포스트 생성 명령에서 시리즈를 지정하거나, 포스트 frontmatter에 다음 관계를 작성한다. 같은 시리즈의 다른 글은 같은 `id`와 서로 다른 `order`를 사용한다.
+
+   ```yaml
+   series:
+     id: my-series
+     order: 10
+   ```
+
+2. 저장소 루트에서 `pnpm dev`를 실행하면 실제 초안을 수집해 새 시리즈를 `apps/web/docs/series/series.json`에 등록한다. JSON 최상위 배열에서 해당 ID의 작성 필드를 편집한다. 다음은 항목 하나의 예시이며 기존 배열을 통째로 교체하지 않는다.
+
+   ```json
+   {
+     "id": "my-series",
+     "label": "시리즈 표시 이름",
+     "title": "직접 입력할 시리즈 제목",
+     "description": "직접 입력할 시리즈 소개",
+     "thumbnail": "./my-series/cover.png",
+     "derived": { "posts": [], "postCount": 0, "updatedAt": null }
+   }
+   ```
+
+3. `thumbnail`을 사용하려면 예시 기준 `apps/web/docs/series/my-series/cover.png`에 이미지를 준비한다. 이미지가 없으면 이 필드를 생략하거나 비워 기존 캐릭터를 사용한다.
+4. 저장한 뒤 <http://localhost:3000/series>에서 목록을, <http://localhost:3000/series?showType=carousel>에서 캐러셀을 확인한다. 시리즈 상세와 포스트의 시리즈 목차·이전/다음도 같은 집계를 사용한다.
+5. `pnpm content:validate --drafts`로 검사한다. 제목·소개가 비었다는 오류가 나면 JSON에 남은 해당 ID의 필드를 채운 뒤 다시 실행한다. 공개 파일 준비와 빌드는 [발행 안내](publishing.md)를 따른다.
+
+`derived`는 직접 편집하지 않는다. 공개 글만 집계하므로 초안만 있는 시리즈는 `posts: []`, `postCount: 0`, `updatedAt: null`이 정상이다. 개발 화면의 초안 포함 편수는 별도의 미리보기 카탈로그를 사용한다. 공개 집계를 다시 계산하려면 `pnpm --filter web content:generate`를 실행한다.
+
 ## 1. 단일 JSON과 작성 필드
 
 - `apps/web/docs/series/series.json` 한 파일을 Git으로 관리한다. 배열의 각 항목은 `id`, `title`, `description`, 선택적인 `label`·`thumbnail`, 자동 계산되는 `derived`를 가진다. 시리즈 자체에 버전 파일·MDX·공개 이력을 만들지 않는다.
@@ -26,6 +57,7 @@
 - `content:validate`와 공개 빌드는 JSON에 등록된 제목·소개 중 빈 문자열이나 공백만 있는 값이 있으면 실패한다. 오류는 JSON 경로·시리즈 ID·필드를 표시하고 새 빈 항목은 작성할 수 있게 남긴다. 이미지 참조도 검증한다.
 - 개발 서버는 기존 포스트 미리보기 기준으로 현재 초안도 집계하고 원고·JSON·이미지 변경을 감지한다. 표시 이름·제목이 모두 미입력이면 화면에서 ID로 구분하며 JSON 값을 채우지 않는다. 미리보기 표시와 noindex를 유지한다.
 - 미리보기 카탈로그는 공개 카탈로그와 별도로 생성한다. 개발 중에도 Git 관리 JSON의 `derived`는 공개 글만 기록한다. 초안 전용 시리즈를 공개 페이지·사이트맵·브라우저 산출물에 넣지 않는다.
+- 생성 모듈은 `apps/web/entities/series/generated/`와 `generated-preview/`로 분리하고 Git에서 제외한다.
 - 원고·자산을 자동 발행하거나 실제 원고를 검증용 샘플로 바꾸지 않는다. 수집·검증·발행 준비는 커밋·푸시·배포와 별개다.
 
 ## 4. 읽기 화면과 탐색
@@ -44,3 +76,12 @@
 - Vitest로 새 항목·빈 필드·JSON 오류·작성 값 보존·반복 생성·최신 공개 집계·중복 정렬값·날짜 정렬·이미지 경계·초안 격리를 검사한다.
 - Playwright E2E는 실제 원고로 목록·캐러셀·상세·챕터 이동·직접 접속·URL 상태·키보드·모바일 스와이프·JavaScript 없는 읽기를 검사한다. 테스트 목적으로 실제 원고를 수정하거나 공개하지 않는다.
 - Light/Dark·mobile/desktop과 빈 상태·단일 항목·대표 이미지 유무·긴 내용·없는 ID를 확인하고, 실제 확인한 항목과 미검증 항목을 구분한다.
+
+개발자가 수집·화면 구현을 검증할 때는 저장소 루트에서 다음 명령을 사용한다.
+
+```sh
+pnpm --filter web test --project=node
+pnpm --filter web test:e2e:preview app/series/page.preview.e2e.spec.ts
+```
+
+수집 테스트는 임시 폴더를 정리하며 실제 원고를 변경하지 않는다. 앱 E2E는 실제 초안을 읽는다. 공개 빌드 E2E 전에 시리즈 제목·소개와 이미지 참조를 완성해야 하며, 공개 본문·과거 버전 전환의 검증에는 실제 공개 원고가 필요하다.

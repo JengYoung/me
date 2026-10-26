@@ -28,7 +28,7 @@ function HeaderNavigation({ pathname }: { pathname: string }) {
             className="inline-flex min-h-48px items-center gap-12px rounded-8 text-title-2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
           >
             <Character size={40} decorative />
-            <span>JengYoung</span>
+            <span className="text-title-3 font-bold">JengYoung</span>
           </Link>
         }
         rightChildren={

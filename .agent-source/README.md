@@ -55,6 +55,8 @@ node scripts/benchmark-instruction-hooks.mjs
 | [project/design-tokens.md](project/design-tokens.md)           | Figma 정본·디자인 토큰·반응형 계약                                                     |
 | [project/content.md](project/content.md)                       | 콘텐츠 작업 범위별로 필요한 상세 원천을 선택하는 안내                                  |
 | [project/content/storage.md](project/content/storage.md)       | 콘텐츠 저장·공개 판정·버전·자산·조회·이력 계약                                         |
+| [project/content/listing.md](project/content/listing.md)       | 포스트·일기 목록의 정렬 옵션·기본값·URL·동률 처리 계약                                 |
+| [project/content/home.md](project/content/home.md)             | 홈 소개·최근 콘텐츠·그리드 모션·스크롤·폴백 계약                                       |
 | [project/content/mdx.md](project/content/mdx.md)               | 아티클 Markdown·MDX 작성과 전용 컴포넌트 계약                                          |
 | [project/content/publishing.md](project/content/publishing.md) | 로컬 발행 명령·검증·Git 반영과 배포의 경계                                             |
 | [project/content/series.md](project/content/series.md)         | 시리즈 JSON·공개 집계·캐러셀·상세·챕터 탐색 계약                                       |

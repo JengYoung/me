@@ -17,17 +17,7 @@ mise exec -- pnpm --version
 
 ## 블로그 작성
 
-저장소 루트에서 실행합니다.
-
-```sh
-pnpm post:new                       # 새 글: ID·제목·요약·태그·시리즈를 대화형으로 입력
-pnpm post:edit                      # 기존 초안 또는 최신 공개 글의 수정 초안
-pnpm --filter web dev               # localhost:3000/posts에서 실제 초안 미리보기
-pnpm content:validate --drafts      # 원고·MDX·이미지 검사
-pnpm post:publish                  # 버전 분류·발행 시각을 확인하고 새 공개 파일 준비
-```
-
-`post:new --local`은 Git에서 제외하는 `0.0.0.local.mdx`를 만듭니다. `post:publish --dry-run`으로 파일 생성 전 결과를 확인할 수 있습니다. 각 명령은 `--help`를 지원합니다. 발행 준비는 기존 원고와 이미지를 보존하며, 커밋·배포는 작성자가 별도로 진행합니다. 상세 규칙은 [작성·발행 계약](.agent-source/project/content/publishing.md)을 참고합니다.
+포스트·일기·시리즈의 작성, 수정, 미리보기, 검증, 발행은 [콘텐츠 작성·발행 안내](.agent-source/project/content/publishing.md)에서 시작합니다.
 
 ## What's inside?
 

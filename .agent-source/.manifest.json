@@ -33,17 +33,19 @@
     ".agent-source/conventions/react-best-practices/source.md": "c98c26a26d85726b859f6553d1546a4666b62f4e5706fbff448a616122ac1b85",
     ".agent-source/conventions/test-writing/source.md": "e976df84683ecb814089844007c6e6a6cc575efe456212411b14966c9a01a96e",
     ".agent-source/hooks/work-plan/source.md": "eec8be577224d26fd15c899173f16d03bcd9d633bda6a378062807cf6ec29189",
-    ".agent-source/project/content.md": "57424c1637c6c526ff9785eaa5a150ca418fdde22e9c551173bfb454c065630a",
+    ".agent-source/project/content.md": "bade948f029399f856de946e2c9072c0fadf04c9f2ffc5e1ae51353a64461792",
+    ".agent-source/project/content/home.md": "d092d0882c588d14366501af480cf1209c90b2f7859c483d99dec4bb747f73b2",
+    ".agent-source/project/content/listing.md": "b5cded06e85416a138bdf88de3190284c42a3f2c917d814a058b5dd52308574c",
     ".agent-source/project/content/mdx.md": "1943acf329439faba14e0f5ad1918fea0d645c77350f2297436afd501baff798",
-    ".agent-source/project/content/publishing.md": "a7602e2f84082096e70d3d47cb0dc36c46b608874d78f67457fa4d5dd76e8554",
-    ".agent-source/project/content/series.md": "5a56609ff69f775b7ef6e499ec0e16b9f5b92ab03e74abb1568697a3ce9b1864",
-    ".agent-source/project/content/storage.md": "b0d9ffa7d3706a67848d978a32bb27db1b3e1f51c938fea5d2225808a15818c9",
+    ".agent-source/project/content/publishing.md": "dcde41bb054b32a82e93292ef5a960c1fcf4a44a227981cfc116b175b974825f",
+    ".agent-source/project/content/series.md": "97b8f48fbfb4e60849d4f39bb600dfeb2d0e7fe318cd724f42b21e755e9191ad",
+    ".agent-source/project/content/storage.md": "1da0101824520bda58a44bff10ab4cbbeb1cf7f67a5115c37578c9e2e873ee90",
     ".agent-source/project/design-tokens.md": "a61e7decca90600d4ba27a10e2046f1cc9e05695ea2bee9db86a3c78f49bb53f",
     ".agent-source/project/maintenance.md": "cbfb9dc4305446f115f9b03dc44b2354b73ee7e6d7202d72f2406b2da2a49334",
     ".agent-source/project/purpose.md": "4b28d8c9259987f7f84aad17ea368155c15ce0d778abd05b26b790a1357fe174",
     ".agent-source/project/quality.md": "a6f2ed11bb082f82adc6df92258e3f4b41b3c3e9d3dbe33783da1c02cefdf4b0",
     ".agent-source/project/scope.md": "dbe7dfb7b379d0934f41049683f1e6e895d6733f0796ac572bdbccf5261452f5",
-    ".agent-source/project/source.md": "d9760abf504dbdc79b8135771cf1aaa629fcca983d2169baf56ae2a38cce7035",
+    ".agent-source/project/source.md": "867c657c833d2eedd131ebc4d2be4ca0e60a6f98407666d0b978e03e33097420",
     ".agent-source/project/versioning.md": "73f8e760bdfb8f80ff2395aa5467aacca0afe68776741a6d735bc37c7e6b622f",
     ".agent-source/project/workflow.md": "4001b94342c783bab8fedac458ffe23901f8d0f18046635536748b32ebcf10cf",
     ".agent-source/skills/changesets-version/source.md": "3fcde6f04a67e8327c4d64a34ebe3ebc85b0fe473459540db350aba6966311e3",
@@ -54,7 +56,7 @@
     ".agent-source/skills/work-plan/source.md": "eb7e0680701e7dde2e84548b92147c6ef57cdee2617b1f9b9362ae571b2ab955",
     ".agent-source/targets.json": "026db3a25a3373f2b34eb330d1c8d8d13c78b52095f9105ee7bf0cca5f061928",
     "scripts/instruction-hooks.mjs": "178bce9997041290d8c9451e90b64dc4035c7a4216a688166035350e379bef68",
-    "scripts/instruction-model.mjs": "e77f2e55510dcf0fdeeeb8cd7ed693b65dfe7fff9e5a0bb0d2154e65763ad669",
+    "scripts/instruction-model.mjs": "81de5a593c652682ae8683ebd4439057b363ec63a73c3771759119356911bf8d",
     "scripts/sync-instructions.mjs": "3d7595e357bee044b4bf0169470424a6b54f9aa6f00f8a1fa2346fba3f1317e3"
   },
   "outputs": {
@@ -321,7 +323,7 @@
       ]
     },
     "AGENTS.md": {
-      "sha256": "80428cc3026ac4b8cfc1660895795f93286aec767a4c1700fd752618bf6e47c5",
+      "sha256": "75f0c186b0c41aad120fd06c3e27e66e4265762763e3cfadb5e41e61bd5e12e0",
       "source": ".agent-source/project/source.md",
       "target": "codex",
       "facets": [
@@ -335,7 +337,7 @@
       ]
     },
     "CLAUDE.md": {
-      "sha256": "d3bf5e6ac4242dd1ee908122476f302c3439aa89df9f57a9fbe2f7d9ad0766fa",
+      "sha256": "1d20581c3a7c90cf7db7ff8c2f2f00db3a052ea989402252de9480e71f1b016b",
       "source": ".agent-source/project/source.md",
       "target": "claude",
       "facets": [

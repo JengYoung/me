@@ -31,6 +31,8 @@ const PROJECT_SOURCES = {
 const PROJECT_REFERENCES = {
   CONTENT: [
     '.agent-source/project/content/storage.md',
+    '.agent-source/project/content/listing.md',
+    '.agent-source/project/content/home.md',
     '.agent-source/project/content/mdx.md',
     '.agent-source/project/content/publishing.md',
     '.agent-source/project/content/series.md',
