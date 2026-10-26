@@ -4,7 +4,7 @@ import { randomUUID } from 'node:crypto';
 import { loadPosts } from '../../entities/post/api/load-posts.ts';
 import { collectSeries } from '../../entities/series/model/series.ts';
 import type { SeriesDefinition, SeriesRecord } from '../../entities/series/model/series.ts';
-import { isRecord } from '../../shared/content/index.ts';
+import { isRecord } from '../../shared/lib/validation/index.ts';
 
 export function parseSeriesRegistry(source: string, filename: string): SeriesDefinition[] {
   let data: unknown;

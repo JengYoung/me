@@ -1,5 +1,5 @@
 import { SeriesPage } from '../../screens/series';
-import { pageMetadata } from '../../shared/seo';
+import { pageMetadata } from '../../shared/lib/seo';
 
 export const metadata = pageMetadata({
   title: '시리즈',

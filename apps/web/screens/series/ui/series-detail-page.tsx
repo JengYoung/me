@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { series, seriesPath, seriesTitle } from '../../../entities/series';
 import { postPath } from '../../../entities/post';
-import { pageMetadata } from '../../../shared/seo';
+import { pageMetadata } from '../../../shared/lib/seo';
 import { Character } from '../../../shared/ui/character';
 import { SeriesDate } from './series-date';
 

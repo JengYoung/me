@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import type { Post } from '../../../entities/post';
-import { ArticleHeader } from '../../../shared/article';
+import { ArticleHeader } from '../../../shared/ui/article';
 import Link from 'next/link';
 import { series, seriesPath, seriesTitle } from '../../../entities/series';
 

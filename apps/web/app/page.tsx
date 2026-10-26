@@ -1,5 +1,5 @@
 import { HomePage } from '../screens/home';
-import { pageMetadata } from '../shared/seo';
+import { pageMetadata } from '../shared/lib/seo';
 
 export const metadata = pageMetadata({
   title: '황재영 | Break the Brake',

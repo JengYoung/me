@@ -20,7 +20,7 @@ MDX와 콘텐츠 이미지는 `docs`에서 관리하며 `app` 아래에 별도�
 
 ```sh
 pnpm --filter web test --project node entities/post scripts/generate-posts.test.ts scripts/mdx
-pnpm --filter web test shared/article
+pnpm --filter web test shared/ui/article shared/lib/mdx
 pnpm --filter web check-types
 pnpm --filter web test:e2e
 pnpm --filter web test:e2e:preview

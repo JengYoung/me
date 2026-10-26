@@ -3,7 +3,7 @@ import { posts } from '../screens/posts';
 import { postPath } from '../entities/post';
 import { diary } from '../screens/diary';
 import { diaryPath } from '../entities/diary';
-import { absoluteUrl } from '../shared/seo';
+import { absoluteUrl } from '../shared/lib/seo';
 import { series, seriesPath } from '../entities/series';
 
 export default function sitemap(): MetadataRoute.Sitemap {

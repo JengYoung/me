@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { diaryPath, formatEntryDate } from '../../../entities/diary';
-import { ArticleLayout, ArticleBackLink, ArticleHeader } from '../../../shared/article';
-import { absoluteUrl, pageMetadata } from '../../../shared/seo';
+import { ArticleLayout, ArticleBackLink, ArticleHeader } from '../../../shared/ui/article';
+import { absoluteUrl, pageMetadata } from '../../../shared/lib/seo';
 import { diary } from '@diary-content/catalog.generated';
 import { currentDiary } from '@diary-content/current.generated';
 

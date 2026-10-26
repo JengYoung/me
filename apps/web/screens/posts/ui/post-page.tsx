@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { postPath } from '../../../entities/post';
-import { absoluteUrl, pageMetadata } from '../../../shared/seo';
-import { ArticleLayout, ArticleBackLink } from '../../../shared/article';
+import { absoluteUrl, pageMetadata } from '../../../shared/lib/seo';
+import { ArticleLayout, ArticleBackLink } from '../../../shared/ui/article';
 import { posts } from '@post-content/catalog.generated';
 import { currentPosts } from '@post-content/current.generated';
 import { PostArticle } from './post-article';

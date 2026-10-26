@@ -1,5 +1,5 @@
 import { diaryPath, formatEntryDate } from '../../../entities/diary';
-import { ArticleList } from '../../../shared/article';
+import { ArticleList } from '../../../shared/ui/article';
 import { diary } from '@diary-content/catalog.generated';
 
 export function DiaryPage() {

@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
-
-export const SITE_ORIGIN = 'https://jengyoung.co.kr';
+import { SITE_ORIGIN } from '../../config';
 
 export function absoluteUrl(pathname: string) {
   const url = new URL(pathname, SITE_ORIGIN);
