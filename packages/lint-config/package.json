@@ -11,7 +11,7 @@
   },
   "scripts": {
     "lint": "oxlint .",
-    "test": "node --test fsd/*.test.ts plugin-lifecycle/*.test.ts tests/*.test.mjs",
+    "test": "node --test *.test.mjs fsd/*.test.ts plugin-lifecycle/*.test.ts tests/*.test.mjs",
     "check-types": "tsc --noEmit"
   },
   "dependencies": {

@@ -20,10 +20,12 @@ function fixture(t) {
     '.agent-source/project',
     '.agent-source/conventions',
     '.agent-source/skills',
+    '.agent-source/hooks',
     '.agent-source/adapters',
     '.agent-source/targets.json',
     'scripts/sync-instructions.mjs',
     'scripts/instruction-model.mjs',
+    'scripts/instruction-hooks.mjs',
     'scripts/check-instruction-runtime.mjs',
   ]) {
     fs.mkdirSync(path.dirname(path.join(root, relative)), { recursive: true });
@@ -90,6 +92,144 @@ test('check reports missing outputs and content drift without touching files', (
   assert.ok(result.errors.some((error) => error.startsWith('CLAUDE.md:')));
   assert.deepEqual(snapshot(root), before);
 });
+
+const projectTopics = [
+  ['purpose.md', 'PURPOSE'],
+  ['workflow.md', 'WORKFLOW'],
+  ['quality.md', 'QUALITY'],
+  ['design-tokens.md', 'DESIGN_TOKENS'],
+  ['content.md', 'CONTENT'],
+  ['versioning.md', 'VERSIONING'],
+  ['maintenance.md', 'MAINTENANCE'],
+  ['scope.md', 'NON_GOALS'],
+];
+
+for (const [name, variable] of projectTopics) {
+  test(`${name}: topic changes reach each tool exactly once and checks are read-only`, (t) => {
+    const root = fixture(t);
+    const source = `.agent-source/project/${name}`;
+    assert.equal(sync(root, 'write').ok, true);
+    const policy = `${name}에 추가한 공통 계약.`;
+    write(root, source, `${read(root, source)}\n${policy}\n`);
+    const before = snapshot(root);
+    assert.equal(sync(root).ok, false);
+    assert.deepEqual(snapshot(root), before);
+    assert.equal(sync(root, 'write').ok, true);
+    const manifest = JSON.parse(read(root, '.agent-source/.manifest.json'));
+    assert.equal(manifest.inputs[source], createHash('sha256').update(read(root, source)).digest('hex'));
+    for (const target of ['codex', 'claude']) {
+      const files = Object.entries(manifest.outputs).filter(
+        ([, record]) =>
+          record.target === target &&
+          record.source === '.agent-source/project/source.md' &&
+          record.facets.includes(variable),
+      );
+      assert.equal(files.length, 1, `${target}: ${variable}`);
+      assert.equal(read(root, files[0][0]).split(policy).length - 1, 1);
+    }
+    assert.equal(sync(root).ok, true);
+    assert.deepEqual(sync(root, 'write').changes, []);
+  });
+
+  for (const [condition, content] of [
+    ['missing', null],
+    ['empty', '# 주제\n\n<!-- 아직 작성하지 않은 계약 -->\n'],
+    ['without a title', '- 제목이 없는 계약\n'],
+  ]) {
+    test(`${name}: ${condition} source blocks generation without writes`, (t) => {
+      const root = fixture(t);
+      const file = `.agent-source/project/${name}`;
+      if (content === null) fs.unlinkSync(path.join(root, file));
+      else write(root, file, content);
+      const before = snapshot(root);
+      assert.throws(
+        () => sync(root, 'write'),
+        (error) => error.message.startsWith(`${file}:`) && /필수 원천|주제 제목/.test(error.message),
+      );
+      assert.deepEqual(snapshot(root), before);
+    });
+  }
+}
+
+test('project source index is tracked without becoming a second policy body', (t) => {
+  const root = fixture(t);
+  assert.equal(sync(root, 'write').ok, true);
+  const index = '.agent-source/project/source.md';
+  const before = Object.fromEntries(Object.keys(build(root).outputs).map((file) => [file, read(root, file)]));
+  write(root, index, `${read(root, index)}\n원천 파일을 찾기 위한 추가 안내.\n`);
+  assert.equal(sync(root).ok, false);
+  const result = sync(root, 'write');
+  assert.equal(result.ok, true);
+  assert.deepEqual(result.changes, ['update: .agent-source/.manifest.json']);
+  for (const [file, content] of Object.entries(before)) assert.equal(read(root, file), content, file);
+});
+
+for (const name of ['storage.md', 'listing.md', 'home.md', 'mdx.md', 'publishing.md', 'series.md']) {
+  const source = `.agent-source/project/content/${name}`;
+
+  test(`${name}: selective source changes are tracked without copying the body into outputs`, (t) => {
+    const root = fixture(t);
+    assert.equal(sync(root, 'write').ok, true);
+    const beforeOutputs = Object.fromEntries(Object.keys(build(root).outputs).map((file) => [file, read(root, file)]));
+    for (const entrypoint of ['AGENTS.md', 'CLAUDE.md']) assert.ok(beforeOutputs[entrypoint].includes(`\`${source}\``));
+
+    write(root, source, `${read(root, source)}\n해당 작업에서만 읽을 상세 계약.\n`);
+    const beforeCheck = snapshot(root);
+    assert.equal(sync(root).ok, false);
+    assert.deepEqual(snapshot(root), beforeCheck);
+
+    const result = sync(root, 'write');
+    assert.equal(result.ok, true);
+    assert.deepEqual(result.changes, ['update: .agent-source/.manifest.json']);
+    const manifest = JSON.parse(read(root, '.agent-source/.manifest.json'));
+    assert.equal(manifest.inputs[source], createHash('sha256').update(read(root, source)).digest('hex'));
+    for (const [file, content] of Object.entries(beforeOutputs)) assert.equal(read(root, file), content, file);
+    assert.equal(sync(root).ok, true);
+  });
+
+  for (const [condition, content] of [
+    ['missing', null],
+    ['empty', '# 상세 계약\n\n<!-- 미작성 -->\n'],
+    ['without a title', '- 제목 없는 상세 계약\n'],
+  ]) {
+    test(`${name}: ${condition} selective source blocks generation without writes`, (t) => {
+      const root = fixture(t);
+      if (content === null) fs.unlinkSync(path.join(root, source));
+      else write(root, source, content);
+      const before = snapshot(root);
+      assert.throws(
+        () => sync(root, 'write'),
+        (error) => error.message.startsWith(`${source}:`) && /필수 원천|주제 제목/.test(error.message),
+      );
+      assert.deepEqual(snapshot(root), before);
+    });
+  }
+
+  test(`${name}: a missing entrypoint reference blocks generation without writes`, (t) => {
+    const root = fixture(t);
+    const routing = '.agent-source/project/content.md';
+    write(root, routing, read(root, routing).replace(source, '.agent-source/project/content/missing.md'));
+    const before = snapshot(root);
+    assert.throws(() => sync(root, 'write'), /상세 원천 .*를 명시적으로 연결해야 합니다/);
+    assert.deepEqual(snapshot(root), before);
+  });
+}
+
+for (const target of ['codex', 'claude']) {
+  for (const variable of ['DESIGN_TOKENS', 'CONTENT', 'VERSIONING']) {
+    test(`${target}: ${variable} cannot be omitted or duplicated`, (t) => {
+      const root = fixture(t);
+      const file = `.agent-source/adapters/${target}/project.md`;
+      const original = read(root, file);
+      for (const content of [original.replace(`{{${variable}}}`, ''), `${original}\n{{${variable}}}\n`]) {
+        write(root, file, content);
+        const before = snapshot(root);
+        assert.throws(() => sync(root, 'write'), new RegExp(`계약 변수 ${variable}`));
+        assert.deepEqual(snapshot(root), before);
+      }
+    });
+  }
+}
 
 test('code quality source reaches both native instructions with its own provenance', (t) => {
   const root = fixture(t);
@@ -342,8 +482,8 @@ test('source changes reach both tools and references are copied independently', 
   sync(root, 'write');
   write(
     root,
-    '.agent-source/project/source.md',
-    `${read(root, '.agent-source/project/source.md')}\n추가 프로젝트 계약.\n`,
+    '.agent-source/project/scope.md',
+    `${read(root, '.agent-source/project/scope.md')}\n추가 프로젝트 계약.\n`,
   );
   write(
     root,
@@ -427,7 +567,7 @@ test('manual changes block the entire write plan and remain intact', (t) => {
   const root = fixture(t);
   sync(root, 'write');
   write(root, 'CLAUDE.md', '사용자가 직접 작성한 내용\n');
-  write(root, '.agent-source/project/source.md', `${read(root, '.agent-source/project/source.md')}\n새 원칙\n`);
+  write(root, '.agent-source/project/scope.md', `${read(root, '.agent-source/project/scope.md')}\n새 원칙\n`);
   const before = snapshot(root);
   assert.equal(sync(root, 'write').ok, false);
   assert.deepEqual(snapshot(root), before);
@@ -650,7 +790,7 @@ test('unmanaged symlinked skills remain untouched', (t) => {
   t.after(() => fs.rmSync(outside, { recursive: true, force: true }));
   write(outside, 'SKILL.md', '사용자 스킬');
   fs.symlinkSync(outside, path.join(root, '.agents/skills/custom'), 'dir');
-  write(root, '.agent-source/project/source.md', read(root, '.agent-source/project/source.md') + '\n추가 계약\n');
+  write(root, '.agent-source/project/scope.md', read(root, '.agent-source/project/scope.md') + '\n추가 계약\n');
   assert.equal(sync(root, 'write').ok, true);
   assert.equal(read(outside, 'SKILL.md'), '사용자 스킬');
   assert.equal(fs.lstatSync(path.join(root, '.agents/skills/custom')).isSymbolicLink(), true);
@@ -674,3 +814,82 @@ test('a permission failure leaves the manifest unchanged and can be retried', (t
   assert.equal(sync(root, 'write').ok, true);
   assert.equal(sync(root).ok, true);
 });
+
+for (const file of ['.codex/hooks.json', '.claude/settings.json']) {
+  test(`${file}: hook sync preserves existing settings and accepts later user settings`, (t) => {
+    const root = fixture(t);
+    const existing = {
+      permissions: { deny: ['Read(.env)'] },
+      hooks: {
+        UserPromptSubmit: [{ hooks: [{ type: 'command', command: 'printf existing' }] }],
+        Stop: [{ hooks: [{ type: 'command', command: 'printf stop' }] }],
+      },
+    };
+    write(root, file, JSON.stringify(existing));
+    assert.equal(sync(root, 'write').ok, true);
+    const installed = JSON.parse(read(root, file));
+    assert.deepEqual(installed.permissions, existing.permissions);
+    assert.deepEqual(installed.hooks.Stop, existing.hooks.Stop);
+    assert.deepEqual(installed.hooks.UserPromptSubmit[0], existing.hooks.UserPromptSubmit[0]);
+    assert.equal(installed.hooks.UserPromptSubmit.length, 2);
+    installed.permissions.deny.push('Read(secret.txt)');
+    write(root, file, JSON.stringify(installed));
+    const before = snapshot(root);
+    assert.equal(sync(root).ok, true);
+    assert.deepEqual(sync(root, 'write').changes, []);
+    assert.deepEqual(snapshot(root), before);
+    const source = '.agent-source/hooks/work-plan/source.md';
+    write(root, source, `${read(root, source).trim()} New reminder.\n`);
+    assert.equal(sync(root, 'write').ok, true);
+    const updated = JSON.parse(read(root, file));
+    assert.deepEqual(updated.permissions, installed.permissions);
+    assert.deepEqual(updated.hooks.Stop, installed.hooks.Stop);
+    assert.deepEqual(updated.hooks.UserPromptSubmit[0], installed.hooks.UserPromptSubmit[0]);
+    assert.equal(updated.hooks.UserPromptSubmit.length, 2);
+    assert.ok(updated.hooks.UserPromptSubmit[1].hooks[0].command.includes('New reminder.'));
+  });
+
+  test(`${file}: edited or removed owned hooks stop all writes`, (t) => {
+    const root = fixture(t);
+    assert.equal(sync(root, 'write').ok, true);
+    const original = read(root, file);
+    const edited = JSON.parse(original);
+    edited.hooks.UserPromptSubmit[0].hooks[0].timeout = 10;
+    for (const content of [JSON.stringify(edited), '{"hooks":{}}']) {
+      write(root, file, content);
+      const before = snapshot(root);
+      assert.equal(sync(root, 'write').ok, false);
+      assert.deepEqual(snapshot(root), before);
+    }
+  });
+
+  test(`${file}: disabling a managed hook preserves unrelated settings and hooks`, (t) => {
+    const root = fixture(t);
+    const existing = { hooks: { Stop: [{ hooks: [{ type: 'command', command: 'printf kept' }] }] } };
+    write(root, file, JSON.stringify(existing));
+    assert.equal(sync(root, 'write').ok, true);
+    const targets = JSON.parse(read(root, '.agent-source/targets.json'));
+    for (const target of targets.targets) target.workPlanHook = false;
+    write(root, '.agent-source/targets.json', JSON.stringify(targets));
+    assert.equal(sync(root, 'write').ok, true);
+    assert.deepEqual(JSON.parse(read(root, file)), existing);
+    const other = file === '.codex/hooks.json' ? '.claude/settings.json' : '.codex/hooks.json';
+    assert.equal(fs.existsSync(path.join(root, other)), false);
+    assert.equal(sync(root).ok, true);
+  });
+
+  test(`${file}: invalid existing JSON and symlink destinations are preserved`, (t) => {
+    const root = fixture(t);
+    write(root, file, '{ invalid');
+    const before = snapshot(root);
+    assert.throws(() => sync(root, 'write'), SyntaxError);
+    assert.deepEqual(snapshot(root), before);
+    fs.unlinkSync(path.join(root, file));
+    const outside = fs.mkdtempSync(path.join(os.tmpdir(), 'hook-outside-'));
+    t.after(() => fs.rmSync(outside, { recursive: true, force: true }));
+    write(outside, 'settings.json', '{}');
+    fs.symlinkSync(path.join(outside, 'settings.json'), path.join(root, file));
+    assert.throws(() => sync(root, 'write'), /심볼릭 링크/);
+    assert.equal(read(outside, 'settings.json'), '{}');
+  });
+}

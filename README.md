@@ -15,6 +15,10 @@ mise exec -- pnpm --version
 
 셸에 mise가 활성화되어 있으면 이 프로젝트에서 해당 버전이 자동 선택됩니다. 그 외에는 `mise exec -- pnpm <명령>`으로 실행합니다. 버전을 갱신할 때는 `mise.toml`과 `package.json`을 함께 수정합니다.
 
+## 블로그 작성
+
+포스트·일기·시리즈의 작성, 수정, 미리보기, 검증, 발행은 [콘텐츠 작성·발행 안내](.agent-source/project/content/publishing.md)에서 시작합니다.
+
 ## What's inside?
 
 This Turborepo includes the following packages/apps:

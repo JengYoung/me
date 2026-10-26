@@ -59,6 +59,7 @@ export function createFsdPolicy(cwd: string, options: FsdOptions = {}) {
         aliases: normalizeAliases({ '@': '.', '~': '.' }, options.aliases ?? {}, definition.aliases ?? {}),
       };
     })
+    // oxlint-disable-next-line unicorn/no-array-sort -- map으로 생성한 새 배열만 정렬하므로 입력을 변경하지 않습니다.
     .sort((a, b) => b.path.length - a.path.length);
   if (new Set(roots.map((root) => root.path)).size !== roots.length) {
     throw new Error('FSD roots must resolve to different directories.');

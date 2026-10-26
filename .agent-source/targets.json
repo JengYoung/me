@@ -5,6 +5,7 @@
       "name": "codex",
       "entrypoint": "AGENTS.md",
       "skillRoot": ".agents/skills",
+      "workPlanHook": true,
       "documents": [
         {
           "path": ".codex/instructions.md",
@@ -28,6 +29,7 @@
       "name": "claude",
       "entrypoint": "CLAUDE.md",
       "skillRoot": ".claude/skills",
+      "workPlanHook": true,
       "runtime": {
         "status": "deferred",
         "reason": "로그인 만료 = 잠정 보류"

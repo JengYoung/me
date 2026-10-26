@@ -1,0 +1,24 @@
+[
+  {
+    "id": "building-my-blog",
+    "label": "블로그 개발기",
+    "title": "우당탕탕 블로그 개발기",
+    "description": "기획과 컴포넌트 설계부터 글의 버전 관리와 발행까지! 블로그를 직접 만들며 부딪힌 문제와 선택의 이유를 기록한다 😁",
+    "derived": {
+      "posts": [],
+      "postCount": 0,
+      "updatedAt": null
+    }
+  },
+  {
+    "id": "mdx",
+    "label": "mdx",
+    "title": "MDX 추적기 🔍",
+    "description": "MDX 파일은 어떻게 블로그 화면이 될까? 번들러와 컴파일러부터 문법 트리, React 컴포넌트, 브라우저 렌더링까지 따라가 보았다.",
+    "derived": {
+      "posts": [],
+      "postCount": 0,
+      "updatedAt": null
+    }
+  }
+]

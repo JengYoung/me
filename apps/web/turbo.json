@@ -1,0 +1,21 @@
+{
+  "extends": ["//"],
+  "tasks": {
+    "build": {
+      "env": ["BLOG_NEXT_DIST_DIR", "BLOG_CONTENT_PREVIEW", "NODE_ENV"],
+      "outputs": ["$TURBO_EXTENDS$", ".next-e2e/**", "!.next-e2e/cache/**", "screens/posts/generated/**"]
+    },
+    "check-types": {
+      "env": ["BLOG_NEXT_DIST_DIR", "BLOG_CONTENT_PREVIEW", "NODE_ENV"],
+      "outputs": ["screens/posts/generated/**"]
+    },
+    "dev": {
+      "env": ["BLOG_NEXT_DIST_DIR", "BLOG_CONTENT_PREVIEW", "NODE_ENV"]
+    },
+    "content:preview": {
+      "cache": false,
+      "persistent": true,
+      "env": ["BLOG_CONTENT_PREVIEW", "BLOG_NEXT_DIST_DIR", "NODE_ENV"]
+    }
+  }
+}

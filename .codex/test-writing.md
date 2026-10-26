@@ -22,6 +22,7 @@
 - 같은 디렉터리에 놓는 것은 파일 배치 규칙이다. E2E는 계속 실제 앱 서버와 `page.goto()`를 사용하며 대상 컴포넌트를 직접 import·mount하는 테스트로 바꾸지 않는다. 테스트 파일을 제품의 공개 API에서 export하거나 런타임 코드에서 import하지 않는다.
 - Playwright는 앱 소스 범위에서 `**/*.e2e.spec.ts`만 수집한다. Vitest의 수집 패턴과 구분하고 빌드·보고서·의존성 디렉터리는 수집 대상에서 제외한다.
 - 테스트 전용 helper·fixture는 사용하는 테스트 옆에 둔다. 공통 runner setup은 `vitest.setup.ts`처럼 해당 설정 파일 옆에 둔다. 자동 생성되는 `test-results/`·`playwright-report/`는 테스트 소스가 아니며 Git에서 제외한다.
+- 포스트 E2E는 실제 `apps/web/docs/posts`를 읽는다. `docs`나 `app`에 데모·테스트용 콘텐츠 트리를 만들지 않는다. 실제 원고와 자산은 읽기만 하며, 테스트를 위해 초안을 공개 버전으로 바꾸거나 발행본을 추가하지 않는다. 로더·변환기의 단위 테스트에 필요한 최소 입력은 테스트가 소유한 임시 경로에서 만들고 정리한다.
 
 ## 독립성과 가독성
 
@@ -51,9 +52,10 @@
 
 - 실행 명령과 의존성은 대상 `package.json`·테스트 파일·설정을 먼저 확인한다. 루트 `package.json`에는 `test` 스크립트가 없다. `pnpm test`나 루트 품질 검사만으로 전체 테스트가 실행됐다고 보고하지 않는다.
 - 현재 `scripts/*.test.mjs`와 `packages/lint-config`는 Node.js 내장 `node:test`를 사용한다. 생성기 변경은 `node --test scripts/sync-instructions.test.mjs`, 품질 도구 적용 범위 변경은 `node --test scripts/code-quality.test.mjs`, lint 플러그인·프리셋 변경은 `pnpm --filter @repo/lint-config test`로 검증한다. 단독 실행에는 해당 테스트 파일을 지정한다.
-- `apps/web`은 현재 `pnpm --filter web test`로 Vitest를 실행한다. `vitest.config.ts`의 Node 프로젝트는 `shared/**/*.ssr.test.tsx`, 기존 Browser Mode 프로젝트는 `shared/**/*.browser.test.tsx`를 모바일 Light·데스크톱 Dark의 Chromium에서 검사한다. 여기서 Playwright는 Vitest의 브라우저 실행 provider이며 앱 통합 테스트 runner가 아니다. 이 기존 구성의 최초 실행에는 `pnpm --filter web exec playwright install chromium --only-shell`이 필요하다.
+- `apps/web`은 현재 `pnpm --filter web test`로 Vitest를 실행한다. `vitest.config.ts`의 Node 프로젝트는 `shared/**/*.ssr.test.tsx`와 `entities/**/*.test.ts`·`scripts/**/*.test.ts`의 글 로더·MDX 변환·시리즈 집계를, Browser Mode 프로젝트는 `shared/**/*.browser.test.tsx`·`screens/**/*.browser.test.tsx`를 모바일 Light·데스크톱 Dark의 Chromium에서 검사한다. Next.js 클라이언트 환경값의 기본 치환은 Browser Mode에만 적용하고 Node 콘텐츠 검증의 실제 환경변수를 바꾸지 않는다. 여기서 Playwright는 Vitest의 브라우저 실행 provider이며 앱 통합 테스트 runner가 아니다. 이 구성의 최초 실행에는 `pnpm --filter web exec playwright install chromium --only-shell`이 필요하다.
 - `apps/web`의 앱 통합 테스트는 `pnpm --filter web test:e2e`로 실행한다. `playwright.config.ts`는 앱 루트부터 대상 파일 옆의 `**/*.e2e.spec.ts`를 수집하며 `.gitignore`의 제외 경로를 따른다. `webServer`로 프로덕션 빌드·서버를 실행해 `http://127.0.0.1:3100`에서 Chromium 데스크톱 Dark·모바일 Light를 검사한다. 최초 실행에는 `pnpm --filter web exec playwright install chromium`, Linux CI에서는 `install --with-deps chromium`으로 브라우저 실행 환경을 준비한다. 3100 포트의 기존 서버를 재사용하지 않으며 서버와 테스트별 page·컨텍스트는 Playwright가 정리한다.
-- 현재 앱 E2E는 빈 홈의 문서·리소스 로딩과 404 응답을 검사한다. Header·Sidebar는 아직 앱 경로에 연결되어 있지 않으므로 관련 사용자 흐름까지 검증됐다고 보고하지 않는다. 실제 앱 흐름이 구현되면 E2E 시나리오를 추가한다. 기존 Vitest Browser Mode나 Storybook의 컴포넌트 검사를 앱 E2E로 대체하지 않는다. `apps/docs`·`packages/ui`에는 별도 테스트 runner가 없으며 앱의 컴포넌트 테스트를 공유 UI 전체 검증으로 보고하지 않는다.
+- 현재 앱 E2E는 빈 홈의 문서·리소스 로딩·404 응답과 실제 `docs/posts` 기준 목록·사이트맵·공개 상세 주소·초안 비공개를 검사한다. `BLOG_NEXT_DIST_DIR`로 빌드 경로만 분리한다. 공개 원고가 없거나 과거 발행본이 없는 경우, 본문·버전 전환 검증까지 통과했다고 보고하지 않는다. Header·Sidebar는 아직 앱 경로에 연결되어 있지 않으므로 관련 사용자 흐름까지 검증됐다고 보고하지 않는다. 기존 Vitest Browser Mode나 Storybook의 컴포넌트 검사를 앱 E2E로 대체하지 않는다. `apps/docs`·`packages/ui`에는 별도 테스트 runner가 없으며 앱의 컴포넌트 테스트를 공유 UI 전체 검증으로 보고하지 않는다.
+- 초안 미리보기 E2E는 `pnpm --filter web test:e2e:preview`로 실행한다. `playwright.preview.config.ts`가 `**/*.preview.e2e.spec.ts`만 수집하고, 일반 개발 명령인 `dev --port 3102`로 실제 초안을 읽는 서버를 실행한다. 공개 E2E에서는 이 파일을 제외한다. 미리보기 E2E는 실제 초안의 본문·이미지 로딩·모바일 넘침·검색 제외를 검사하며, 공개 본문이나 과거 버전 전환 검증을 대신하지 않는다. 생성 모듈은 `screens/posts/generated-preview/`, 개발 빌드는 `.next-preview/`를 사용해 공개 생성물과 분리한다. 테스트 중 실제 원고와 이미지를 수정하지 않는다.
 - 기존 앱 Browser Mode 테스트는 `vitest-browser-react/pure`의 `render`와 StrictMode를 사용한다. `vitest.config.ts` 옆 `vitest.setup.ts`의 `afterEach`가 DOM·portal·effect를 정리하고, 그 뒤 테스트별 `onTestFinished`가 직접 획득한 자원과 전역을 복원한다. 수동 hydration root는 테스트가 직접 해제하며 React `act` 환경도 복원한다. 테스트별 가변 fixture를 공용 setup에 숨기지 않는다.
 - `node:test`의 정리는 테스트 컨텍스트의 `t.after`·`t.mock` 또는 `try/finally`를 사용한다. Vitest의 `onTestFinished`·`vi`와 혼용하지 않는다. Vitest Node 프로젝트는 Vitest의 API를 사용하며, 실행 환경이 Node라는 이유로 `node:test`와 혼동하지 않는다. runner를 바꾸면 자동 cleanup·hook 순서를 다시 확인한다.
 

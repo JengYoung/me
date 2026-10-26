@@ -1,8 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 // page.tsx가 제공하는 홈 진입점에서 앱의 기동·리소스·라우팅을 검사한다.
-// 현재 홈은 빈 페이지이며,
-// Header·Sidebar의 사용자 흐름은 앱 경로에 연결된 뒤 별도 시나리오로 추가한다.
+// 공통 Header·Sidebar의 사용자 흐름은 layout.e2e.spec.ts에서 검사한다.
 test('홈 문서와 앱 리소스를 오류 없이 불러온다', async ({ page }) => {
   const runtimeErrors: string[] = [];
   const failedResources: string[] = [];

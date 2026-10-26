@@ -44,3 +44,20 @@ yarn-error.log*
 next-env.d.ts
 
 *.local.*
+
+# MDX 빌드 생성물과 독립된 E2E 빌드
+/screens/posts/generated/
+/screens/posts/generated-preview/
+/.next-e2e/
+/.next-preview/
+/.next-preview-e2e/
+/.next-series-preview/
+/.next-series-check/
+
+# Diary content modules
+/screens/diary/generated/
+/screens/diary/generated-preview/
+
+# Series runtime catalogs (docs/series/series.json is tracked)
+/entities/series/generated/
+/entities/series/generated-preview/

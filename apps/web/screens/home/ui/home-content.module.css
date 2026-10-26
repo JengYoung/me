@@ -1,0 +1,318 @@
+.content {
+  overflow: clip;
+  padding-bottom: var(--spacing-64px);
+}
+
+.section {
+  max-width: var(--container-7xl);
+  margin-inline: auto;
+  padding: var(--spacing-64px) var(--spacing-24px);
+}
+
+.list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  gap: var(--spacing-64px);
+  margin-block: var(--spacing-64px);
+}
+
+.list > li {
+  width: 100%;
+  max-width: 22rem;
+}
+
+.item {
+  container-type: inline-size;
+  position: relative;
+  --cube-x: -8deg;
+  --cube-y: -12deg;
+  --cube-z: -2deg;
+  --cube-offset: 0.045;
+  --float-duration: 6s;
+  --float-delay: -1s;
+  --arrival-delay: 0ms;
+}
+
+/* 회전·부유로 튀어나온 모서리까지 같은 고정 영역에서 감지합니다.
+   면이 포인터 아래에서 사라져도 enter/leave가 반복되지 않습니다. */
+.item::before {
+  content: '';
+  position: absolute;
+  inset: calc(-1 * var(--spacing-32px));
+}
+
+.arrival {
+  /* 포커스로 출현 transform이 해제되어도 링크를 hover 감지 영역 앞에 유지합니다. */
+  position: relative;
+  z-index: 1;
+  transform-origin: 50% 50cqi;
+}
+
+.list > li:nth-child(3n + 2) .item {
+  --cube-x: -6deg;
+  --cube-y: 14deg;
+  --cube-z: 2deg;
+  --cube-offset: -0.045;
+  --float-duration: 7.2s;
+  --float-delay: -3s;
+  --arrival-delay: 120ms;
+}
+
+.list > li:nth-child(3n) .item {
+  --cube-x: 7deg;
+  --cube-y: -10deg;
+  --cube-z: 1deg;
+  --cube-offset: 0.02;
+  --float-duration: 6.6s;
+  --float-delay: -4s;
+  --arrival-delay: 240ms;
+}
+
+.scene {
+  --cube-size: 100cqi;
+  width: 100%;
+  aspect-ratio: 1;
+  perspective: 1600px;
+  pointer-events: none;
+}
+
+.floating,
+.cube {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.floating {
+  animation: cube-float var(--float-duration) ease-in-out var(--float-delay) infinite;
+  animation-play-state: paused;
+}
+
+.item[data-visible='true'] .floating {
+  animation-play-state: running;
+}
+
+.item[data-expanded='true'] .floating,
+.item:focus-within .floating {
+  animation-play-state: paused;
+}
+
+.cube {
+  /* 회전으로 치우친 실루엣을 보정해 좁은 화면에서도 모서리 여백을 확보합니다. */
+  transform: translateX(calc(var(--cube-size) * var(--cube-offset))) translateZ(calc(var(--cube-size) / -2))
+    rotateX(var(--cube-x)) rotateY(var(--cube-y)) rotateZ(var(--cube-z));
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.item[data-expanded='true'] .cube {
+  transform: translateX(0) translateZ(calc(var(--cube-size) / -2)) rotateX(0deg) rotateY(-90deg) rotateZ(0deg);
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  /* 읽고 조작하는 콘텐츠 면은 Light/Dark Semantic 토큰을 따른다. */
+  border: 1px solid var(--color-border);
+  background: var(--color-action-primary-bg);
+  color: var(--color-action-primary-fg);
+  backface-visibility: hidden;
+}
+
+.front {
+  transform: translateZ(calc(var(--cube-size) / 2));
+}
+
+.right {
+  background: var(--color-action-primary-hover);
+  transform: rotateY(90deg) translateZ(calc(var(--cube-size) / 2));
+}
+
+.left {
+  background: var(--color-action-primary-pressed);
+  transform: rotateY(-90deg) translateZ(calc(var(--cube-size) / 2));
+}
+
+.back {
+  background: var(--color-action-primary-pressed);
+  transform: rotateY(180deg) translateZ(calc(var(--cube-size) / 2));
+}
+
+.top {
+  background: var(--color-action-primary-bg);
+  transform: rotateX(90deg) translateZ(calc(var(--cube-size) / 2));
+}
+
+.bottom {
+  background: var(--color-action-primary-pressed);
+  transform: rotateX(-90deg) translateZ(calc(var(--cube-size) / 2));
+}
+
+.cover,
+.details {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  pointer-events: auto;
+}
+
+.cover {
+  overflow-y: auto;
+}
+
+.cover:hover,
+.cover:active {
+  background: var(--color-action-primary-hover);
+}
+
+.thumbnail {
+  position: relative;
+  min-height: 35%;
+  flex: 1;
+}
+
+.details {
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+}
+
+.item[data-expanded='true'] .details {
+  opacity: 1;
+}
+
+.detailsScroll {
+  min-height: 0;
+  overflow-y: auto;
+  flex: 1;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-action-primary-fg) var(--color-action-primary-hover);
+}
+
+.item[data-observed='true']:not([data-entered='true']) .arrival {
+  opacity: 0;
+}
+
+.item[data-observed='true']:not([data-entered='true']) .cover,
+.item[data-observed='true']:not([data-entered='true']) .details {
+  pointer-events: none;
+}
+
+.item[data-observed='true'][data-entered='true'] .arrival {
+  animation: cube-arrive 1400ms cubic-bezier(0.22, 0.61, 0.36, 1) var(--arrival-delay) both;
+}
+
+.item[data-observed='true'][data-entered='true'] .cover {
+  animation: cube-content-reveal 1400ms ease-out var(--arrival-delay) both;
+}
+
+/* 키보드로 이동하면 출현 애니메이션을 건너뛰고 바로 읽을 수 있습니다. */
+.item[data-observed='true'][data-immediate='true'] .arrival,
+.item[data-observed='true'][data-immediate='true'] .cover {
+  opacity: 1;
+  pointer-events: auto;
+  animation: none;
+}
+
+@keyframes cube-arrive {
+  from {
+    transform: translateY(var(--cube-rise-y, 55svh)) scale(var(--cube-enter-scale, 0.07));
+  }
+  to {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes cube-content-reveal {
+  0%,
+  25% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes cube-float {
+  0%,
+  100% {
+    transform: translateY(var(--spacing-8px));
+  }
+  50% {
+    transform: translateY(calc(-1 * var(--spacing-8px)));
+  }
+}
+
+@media (width < 1200px) {
+  .item {
+    --cube-x: -6deg;
+    --cube-y: -8deg;
+    --cube-z: -1deg;
+  }
+
+  .list > li:nth-child(3n + 2) .item {
+    --cube-x: -4deg;
+    --cube-y: 8deg;
+    --cube-z: 1deg;
+  }
+
+  .list > li:nth-child(3n) .item {
+    --cube-x: 5deg;
+    --cube-y: -6deg;
+    --cube-z: 1deg;
+  }
+}
+
+@media (width >= 1200px) {
+  .section {
+    padding-inline: var(--spacing-64px);
+  }
+
+  .section + .section {
+    padding-top: var(--spacing-64px);
+  }
+
+  .list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding-block: var(--spacing-32px);
+  }
+
+  .list > li:nth-child(3n + 1) {
+    padding-top: var(--spacing-32px);
+  }
+
+  .list > li:nth-child(3n + 2) {
+    padding-top: 0;
+  }
+
+  .list > li:nth-child(3n) {
+    padding-top: var(--spacing-64px);
+  }
+
+  .list[data-count='2'] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item[data-observed='true']:not([data-entered='true']) .cover,
+  .item[data-observed='true']:not([data-entered='true']) .details {
+    pointer-events: auto;
+  }
+
+  .item .arrival,
+  .item[data-observed='true'] .arrival,
+  .item[data-observed='true']:not([data-entered='true']) .arrival,
+  .item[data-observed='true'][data-entered='true'] .cover,
+  .floating {
+    opacity: 1;
+    animation: none;
+  }
+
+  .cube,
+  .details {
+    transition: none;
+  }
+}

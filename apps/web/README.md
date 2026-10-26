@@ -1,5 +1,25 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).
 
+## 콘텐츠 작성
+
+포스트·일기·시리즈의 작성, 수정, 미리보기, 검증, 발행은 [콘텐츠 작성·발행 안내](../../.agent-source/project/content/publishing.md)에서 시작합니다.
+
+## 홈 · issue-15
+
+`pnpm dev` 후 `/`에서 실제 콘텐츠와 연결된 홈을 확인합니다. `app/page.tsx`는 메타데이터와
+`screens/home`의 페이지를 연결하며, 공통 Canvas 배경은 `shared/ui/grid-background`의 공개 API로 제공합니다.
+새 3D 의존성 없이 레퍼런스의 파동·낙하 계산을 사용하고, 캐릭터와 Canvas 코드는 필요할 때 불러옵니다.
+
+동작·선정·접근성·성능 계약의 정본은 [홈 지침](../../.agent-source/project/content/home.md)입니다.
+
+```bash
+pnpm --filter web test --project node screens/home shared/ui/grid-background
+pnpm --filter web test:e2e:preview app/page.preview.e2e.spec.ts
+```
+
+E2E는 별도 개발 서버를 소유하고 실제 원고를 읽기만 합니다. 캡처는 `test-results/e2e/`에 남깁니다.
+공개 빌드는 기존 콘텐츠 검증을 그대로 거치므로 시리즈 제목·소개 등 미완성 필드를 먼저 작성해야 합니다.
+
 ## 캐릭터 · issue-9
 
 `shared/ui/character`에서 `Character`, `AnimatedCharacter`, `CharacterExpression`을 가져옵니다.
@@ -120,12 +140,12 @@ pnpm --filter web test:watch
 `vitest.config.ts`에 정의한 실행 환경은 다음과 같습니다.
 
 - `node`: `shared/**/*.ssr.test.tsx`를 DOM 전역 없이 실행합니다.
-- `chromium-mobile-light`: 390×844px, 밝은 테마에서 `shared/**/*.browser.test.tsx`를 실행합니다.
+- `chromium-mobile-light`: 390×844px, 밝은 테마에서 `shared/**/*.browser.test.tsx`·`screens/**/*.browser.test.tsx`를 실행합니다.
 - `chromium-desktop-dark`: 1440×900px, 어두운 테마에서 같은 브라우저 테스트를 실행합니다.
 
 Header의 슬롯·제목, 스크롤 방향·포커스에 따른 노출, 플러그인 해제를 확인합니다. Sidebar는 열기·닫기, 제어 상태, ARIA 연결, Tab 순환·포커스 복귀, 배경 클릭 차단, unmount 시 inert·스크롤 잠금 해제를 확인합니다. hydration에서는 서버 DOM의 재사용과 인스턴스별 ID·ARIA 연결, 오류 부재를 검사합니다.
 
-브라우저 테스트는 앱 CSS·로컬 폰트를 사용하고 StrictMode를 적용합니다. `vitest-browser-react/pure`의 `render`를 사용하며 설정 파일 옆 `vitest.setup.ts`의 `afterEach`가 각 테스트 종료 시 DOM·portal·effect를 정리합니다. 테스트가 직접 만든 DOM·구독·spy·전역 상태는 획득 직후 `onTestFinished`에 정리를 등록합니다. 수동 hydration root도 테스트가 직접 해제합니다.
+브라우저 테스트는 앱 CSS·로컬 폰트를 사용하고 StrictMode를 적용합니다. `next/link`·`next/image`는 미리 번들링하고 Next.js가 치환하는 클라이언트 환경값에는 기본값을 제공합니다. 이 설정은 Browser Mode에만 적용하며 Node 프로젝트의 실제 환경변수·공개 판정은 유지합니다. `vitest-browser-react/pure`의 `render`를 사용하며 설정 파일 옆 `vitest.setup.ts`의 `afterEach`가 각 테스트 종료 시 DOM·portal·effect를 정리합니다. 테스트가 직접 만든 DOM·구독·spy·전역 상태는 획득 직후 `onTestFinished`에 정리를 등록합니다. 수동 hydration root도 테스트가 직접 해제합니다.
 
 파일을 지정하거나 실행 순서를 바꿔 격리를 확인할 수 있습니다.
 
@@ -165,7 +185,9 @@ pnpm --filter web exec playwright install --with-deps chromium
 pnpm --filter web test:e2e
 ```
 
-현재 홈은 `null`을 반환하고 Header·Sidebar가 앱 경로에 연결되어 있지 않습니다. `app/page.tsx` 옆의 `app/page.e2e.spec.ts`는 홈 문서·스크립트·스타일 로딩과 브라우저 오류, 없는 경로의 404 응답·안내 화면을 검사합니다. 이 실행을 Header·Sidebar의 앱 사용자 흐름 검증이나 전체 앱 기능 검증으로 간주하지 않습니다.
+루트 레이아웃은 `widgets/blog-frame`의 `BlogFrame`으로 공통 Header·Sidebar와 본문 상단 여백을 연결합니다. 홈 본문은 아직 `null`이며, 메뉴에는 홈·포스트·시리즈·일기 경로를 제공합니다. `app/page.e2e.spec.ts`는 문서·리소스 로딩과 404 응답을, `app/layout.e2e.spec.ts`는 기본 라이트 테마, 헤더와 본문의 배치, 사이드바의 키보드 닫기·포커스 복귀·메뉴 이동을 검사합니다.
+
+상세 목차는 데스크톱에서 본문 오른쪽, 모바일에서 접이식 메뉴로 스크롤 중에도 유지됩니다. 모바일 목차를 선택하면 메뉴를 접고 고정 영역 아래의 제목으로 이동합니다. 실제 원고를 읽는 `page.preview.e2e.spec.ts`에서 스크롤 중 목차 위치와 제목 이동을 검사합니다. 미리보기 E2E의 Next.js 산출물은 `.next-preview-e2e/`로 분리해 `.next-preview/`를 쓰는 로컬 개발 서버와 충돌하지 않게 합니다.
 
 테스트 소스는 대상 파일과 같은 디렉터리에 둡니다. `e2e/`, `tests/`, `__tests__/` 같은 별도 테스트 디렉터리를 만들지 않습니다. E2E 파일명은 `<대상 파일명>.e2e.spec.ts`이며, 여러 페이지를 거치는 흐름은 주된 대상 페이지·기능 파일 옆에 둡니다. 공용 setup은 설정 파일 옆에, 테스트 전용 helper·fixture는 사용하는 테스트 옆에 둡니다.
 

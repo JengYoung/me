@@ -1,4 +1,14 @@
-# Header
+# BlogFrame과 Header
+
+`BlogFrame`은 앱 루트 레이아웃에서 공통 헤더·사이드바와 본문 상단 여백을 연결합니다. 기존 `shared/ui`의 `Header`, `ScrollHeaderPlugin`, `Sidebar`와 `shared/ui/character`의 `Character`를 조합하며, 홈·포스트·일기 메뉴를 제공합니다. 경로가 바뀌면 메뉴 상태도 초기화하고, 본문은 서버 컴포넌트 children으로 유지합니다.
+
+```tsx
+import { BlogFrame } from '../widgets/blog-frame';
+
+<BlogFrame>{children}</BlogFrame>;
+```
+
+아래는 재사용하는 Header의 API입니다.
 
 구현과 공개 API는 `shared/ui`에 있습니다. `widgets/blog-frame` 진입점은 기존 사용처를 위해 같은 API를 재수출합니다.
 

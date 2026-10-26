@@ -2,6 +2,10 @@
   "name": "me",
   "private": true,
   "scripts": {
+    "post:new": "pnpm --filter web post:new",
+    "post:edit": "pnpm --filter web post:edit",
+    "post:publish": "pnpm --filter web post:publish",
+    "content:validate": "pnpm --filter web content:validate",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "storybook": "turbo run storybook --filter=web",
@@ -12,7 +16,10 @@
     "check-types": "turbo run check-types",
     "changeset": "changeset",
     "changeset:status": "changeset status --verbose",
-    "release:version": "changeset version && pnpm install --lockfile-only --no-frozen-lockfile --ignore-scripts"
+    "release:version": "changeset version && pnpm install --lockfile-only --no-frozen-lockfile --ignore-scripts",
+    "diary:new": "pnpm --filter web diary:new",
+    "diary:edit": "pnpm --filter web diary:edit",
+    "diary:publish": "pnpm --filter web diary:publish"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.3",
