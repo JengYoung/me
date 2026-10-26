@@ -18,7 +18,11 @@ export function getSeriesStaticParams() {
 export function getSeriesMetadata(id: string) {
   const item = getSeries(id);
   return {
-    ...pageMetadata({ title: seriesTitle(item), description: item.description, pathname: seriesPath(id) }),
+    ...pageMetadata({
+      title: `Series — ${seriesTitle(item)}`,
+      description: item.description,
+      pathname: seriesPath(id),
+    }),
     ...(item.hasDrafts ? { robots: { index: false, follow: false } } : {}),
   };
 }

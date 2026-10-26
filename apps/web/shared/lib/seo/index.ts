@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { SITE_ORIGIN } from '../../config';
+import { SITE_NAME, SITE_ORIGIN } from '../../config';
 
 export function absoluteUrl(pathname: string) {
   const url = new URL(pathname, SITE_ORIGIN);
@@ -18,11 +18,12 @@ export function pageMetadata({
   pathname: string;
 }): Metadata {
   const canonical = absoluteUrl(pathname);
+  const fullTitle = `${title} | ${SITE_NAME}`;
   return {
     title,
     description,
     alternates: { canonical },
-    openGraph: { title, description, url: canonical, locale: 'ko_KR', type: 'website' },
-    twitter: { card: 'summary', title, description },
+    openGraph: { title: fullTitle, description, url: canonical, locale: 'ko_KR', type: 'website' },
+    twitter: { card: 'summary', title: fullTitle, description },
   };
 }

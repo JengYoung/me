@@ -13,8 +13,9 @@ export function getDiaryStaticParams() {
 export function getDiaryMetadata(entryId: string): Metadata {
   const entry = diary.find((item) => item.id === entryId);
   if (!entry) notFound();
-  if (entry.isDraft) return { title: entry.title, description: entry.summary, robots: { index: false, follow: false } };
-  const metadata = pageMetadata({ title: entry.title, description: entry.summary, pathname: diaryPath(entry.id) });
+  const title = `Diary — ${entry.entryDate.slice(2).replaceAll('-', '')}`;
+  if (entry.isDraft) return { title, description: entry.summary, robots: { index: false, follow: false } };
+  const metadata = pageMetadata({ title, description: entry.summary, pathname: diaryPath(entry.id) });
   return {
     ...metadata,
     openGraph: { ...metadata.openGraph, type: 'article', publishedTime: entry.publishedAt, tags: entry.tags },

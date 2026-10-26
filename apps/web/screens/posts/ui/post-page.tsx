@@ -17,8 +17,9 @@ export function getPostStaticParams() {
 export function getPostMetadata(postId: string): Metadata {
   const post = posts.find((item) => item.id === postId);
   if (!post) notFound();
-  if (post.isDraft) return { title: post.title, description: post.summary, robots: { index: false, follow: false } };
-  const metadata = pageMetadata({ title: post.title, description: post.summary, pathname: postPath(post.id) });
+  const title = `Post — ${post.title}`;
+  if (post.isDraft) return { title, description: post.summary, robots: { index: false, follow: false } };
+  const metadata = pageMetadata({ title, description: post.summary, pathname: postPath(post.id) });
   return {
     ...metadata,
     openGraph: {
