@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { Fragment } from 'react';
-import { articleMdxComponents } from '../mdx-components';
+import { articleMdxComponents } from './mdx-components';
 import CodeExample from './code.example.md';
 import { ArticleCallout } from './article-callout';
 import { ArticleCodeBlock } from './article-code-block';

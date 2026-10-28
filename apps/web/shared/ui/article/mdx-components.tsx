@@ -1,7 +1,7 @@
 import type { MDXComponents } from 'mdx/types';
 import type { ComponentProps } from 'react';
-import { ArticleCallout } from './ui/article-callout';
-import { ArticleCodeBlock } from './ui/article-code-block';
+import { ArticleCallout } from './article-callout';
+import { ArticleCodeBlock } from './article-code-block';
 import {
   ArticleBreak,
   ArticleCode,
@@ -25,9 +25,9 @@ import {
   ArticleTableRow,
   ArticleTaskCheckbox,
   ArticleUnorderedList,
-} from './ui/article-elements';
-import { ArticleImage, ArticleMarkdownImage } from './ui/article-image';
-import { ArticleProse } from './ui/article-prose';
+} from './article-elements';
+import { ArticleImage, ArticleMarkdownImage } from './article-image';
+import { ArticleProse } from './article-prose';
 
 /** 각 MDX의 components prop에 전달한다. 전역 UI의 HTML 요소에는 적용하지 않는다. */
 export const articleMdxComponents = {

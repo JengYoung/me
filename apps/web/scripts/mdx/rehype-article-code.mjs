@@ -1,1 +1,1 @@
-export { rehypeArticleCode as default } from '../../shared/article/build.ts';
+export { rehypeArticleCode as default } from '../../shared/lib/mdx/index.ts';

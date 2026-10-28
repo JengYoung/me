@@ -1,7 +1,7 @@
 import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { parseArticleMetadata, parseFrontmatter } from '../../../shared/content/index.ts';
-import { entryDateError } from '../model/diary.ts';
+import { parseFrontmatter } from '../../../shared/lib/frontmatter/index.ts';
+import { parseDiaryMetadataFields } from '../model/metadata.ts';
 import type { DiaryEntry } from '../model/diary.ts';
 
 export interface DiaryDocument {
@@ -10,19 +10,12 @@ export interface DiaryDocument {
 }
 
 export function parseDiaryMetadata(source: string, filename: string): Omit<DiaryEntry, 'id'> {
-  const data = parseFrontmatter(source, filename);
-  for (const key of ['series', 'version', 'revisions', 'history', 'reason', 'status']) {
-    if (key in data) throw new Error(`${filename}: diary는 시리즈·히스토리를 지원하지 않습니다 (${key}).`);
-  }
-  const metadata = parseArticleMetadata(data, filename, true);
-  const error = typeof data.entryDate === 'string' ? entryDateError(data.entryDate) : 'entryDate가 필요합니다.';
-  if (error) throw new Error(`${filename}: ${error}`);
-  const entryDate = data.entryDate as string;
+  const metadata = parseDiaryMetadataFields(parseFrontmatter(source, filename), filename);
+  const { entryDate } = metadata;
   if (path.basename(path.dirname(filename)) !== entryDate.slice(0, 4))
     throw new Error(`${filename}: 연도 폴더는 entryDate의 연도와 같아야 합니다.`);
   return {
     ...metadata,
-    entryDate,
     ...(!metadata.publishedAt || filename.endsWith('.local.mdx') ? { isDraft: true as const } : {}),
   };
 }

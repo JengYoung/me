@@ -1,5 +1,9 @@
 import { DiaryPage } from '../../screens/diary';
-import { pageMetadata } from '../../shared/seo';
+import { parsePageNumber } from '../../shared/lib/pagination';
+import { pageMetadata } from '../../shared/lib/seo';
 
-export const metadata = pageMetadata({ title: '일기', description: '일상의 기록', pathname: '/diary' });
+export async function generateMetadata({ searchParams }: { searchParams: Promise<{ page?: string | string[] }> }) {
+  const page = parsePageNumber((await searchParams).page);
+  return pageMetadata({ title: `Diary — ${page}페이지`, description: '재영의 일기록', pathname: '/diary' });
+}
 export default DiaryPage;

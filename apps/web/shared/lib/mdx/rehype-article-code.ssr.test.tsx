@@ -2,7 +2,7 @@ import { compile, run } from '@mdx-js/mdx';
 import { renderToStaticMarkup } from 'react-dom/server';
 import * as runtime from 'react/jsx-runtime';
 import { expect, test } from 'vitest';
-import { articleMdxComponents } from '../mdx-components';
+import { articleMdxComponents } from '../../ui/article';
 import { rehypeArticleCode } from './rehype-article-code';
 
 test('MDX 빌드가 Dark+ 강조를 만들고 복사할 원문과 언어를 보존한다', async () => {

@@ -1,6 +1,7 @@
 import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { isRecord as record, parseFrontmatter, parseArticleMetadata } from '../../../shared/content/index.ts';
+import { parseFrontmatter } from '../../../shared/lib/frontmatter/index.ts';
+import { parsePostMetadataFields } from '../model/metadata.ts';
 import { compareVersions, isPublicVersion } from '../model/post.ts';
 import type { Post, PostMetadata, PostRevision } from '../model/post.ts';
 
@@ -16,27 +17,7 @@ export interface PostEntry {
 }
 
 export function parsePostMetadata(source: string, filename: string, isDraft = false): PostMetadata {
-  function fail(message: string): never {
-    throw new Error(`${filename}: ${message}`);
-  }
-  const data = parseFrontmatter(source, filename);
-  const metadata = parseArticleMetadata(data, filename, isDraft);
-  if (data.reason !== undefined && typeof data.reason !== 'string') return fail('reason은 문자열이어야 합니다.');
-  if (
-    data.series !== undefined &&
-    (!record(data.series) ||
-      typeof data.series.id !== 'string' ||
-      !data.series.id.trim() ||
-      typeof data.series.order !== 'number' ||
-      !Number.isSafeInteger(data.series.order) ||
-      data.series.order < 1)
-  )
-    return fail('series에는 id와 1 이상의 정수 order가 필요합니다.');
-  return {
-    ...metadata,
-    ...(data.reason === undefined ? {} : { reason: data.reason as string }),
-    ...(data.series === undefined ? {} : { series: data.series as PostMetadata['series'] }),
-  };
+  return parsePostMetadataFields(parseFrontmatter(source, filename), filename, isDraft);
 }
 
 /** 기본은 공개 MDX만 읽는다. 초안은 로컬 미리보기 명령에서만 명시적으로 요청한다. */

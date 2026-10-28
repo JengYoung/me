@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { series, seriesPath, seriesTitle } from '../../../entities/series';
 import { postPath } from '../../../entities/post';
-import { pageMetadata } from '../../../shared/seo';
+import { pageMetadata } from '../../../shared/lib/seo';
 import { Character } from '../../../shared/ui/character';
 import { SeriesDate } from './series-date';
 
@@ -18,7 +18,11 @@ export function getSeriesStaticParams() {
 export function getSeriesMetadata(id: string) {
   const item = getSeries(id);
   return {
-    ...pageMetadata({ title: seriesTitle(item), description: item.description, pathname: seriesPath(id) }),
+    ...pageMetadata({
+      title: `Series — ${seriesTitle(item)}`,
+      description: item.description,
+      pathname: seriesPath(id),
+    }),
     ...(item.hasDrafts ? { robots: { index: false, follow: false } } : {}),
   };
 }
