@@ -109,7 +109,9 @@ pnpm build-storybook
 - 도구 모음에서 Light/Dark와 390·1199·1200·1440px 화면 크기를 선택합니다. `Mobile` 스토리는 390px로 고정되므로 크기를 자유롭게 바꾸려면 `Default` 스토리를 사용합니다.
 - `Sidebar / Open And Close`의 `play`는 열기, Escape로 닫기, 닫기 버튼, 트리거로의 포커스 복귀를 검증합니다. 이 스토리를 열면 실행되며 결과는 Interactions 패널에서 확인합니다. `build-storybook`은 `play`를 실행하지 않습니다.
 
-앱의 `app/globals.css`, `app/design-token.css`, 로컬 Pretendard 폰트를 공유합니다. Storybook에서는 `@tailwindcss/vite`로 CSS와 폰트 경로를 처리하고, `public/`을 정적 파일로 제공합니다. 테마는 `html[data-theme]`에 적용되므로 `document.body`에 렌더링하는 portal에도 전달됩니다.
+앱의 `app/globals.css`, `app/design-token.css`, `app/fonts.ts`의 Noto Sans KR 설정을 공유합니다. 앱은 `next/font/google`로 폰트를 빌드 시 내려받아 자체 제공하고, Storybook은 Next.js Vite 어댑터로 같은 폰트 설정을 처리합니다. `subsets: ['latin']`은 preload 범위이며 한글 지원을 제한하지 않습니다. Storybook에서는 `@tailwindcss/vite`로 CSS를 처리하고, `public/`을 정적 파일로 제공합니다. 테마와 폰트 변수는 `html`에 적용되므로 `document.body`에 렌더링하는 portal에도 전달됩니다.
+
+Storybook 미리보기는 어댑터가 Google Fonts CDN에서 글꼴을 불러오므로 네트워크 연결이 필요합니다. 앱의 자체 제공 방식과 다르므로 폰트 성능 측정은 앱의 프로덕션 빌드에서 진행합니다. Noto Sans KR의 라이선스는 `public/fonts/noto-sans-kr/OFL.txt`에 보관합니다.
 
 ### 스토리 추가
 

@@ -1,4 +1,3 @@
-import { preload } from 'react-dom';
 import { HomePage } from '../screens/home';
 import { SITE_DEFAULT_TITLE } from '../shared/config';
 import { pageMetadata } from '../shared/lib/seo';
@@ -13,10 +12,4 @@ export const metadata = {
   title: { absolute: SITE_DEFAULT_TITLE },
 };
 
-export default function Page() {
-  const heroFontUrl = new URL('../public/fonts/pretendard/PretendardVariable.subset.91.woff2', import.meta.url)
-    .pathname;
-  preload(heroFontUrl, { as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' });
-
-  return <HomePage />;
-}
+export default HomePage;

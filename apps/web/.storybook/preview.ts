@@ -1,5 +1,6 @@
 import { withThemeByDataAttribute } from '@storybook/addon-themes';
 import type { Preview, ReactRenderer } from '@storybook/nextjs-vite';
+import { blogFont } from '../app/fonts';
 import '../app/globals.css';
 import './preview.css';
 
@@ -7,6 +8,7 @@ const preview: Preview = {
   tags: ['autodocs'],
   beforeAll: () => {
     document.documentElement.lang = 'ko';
+    document.documentElement.classList.add(blogFont.variable);
   },
   decorators: [
     withThemeByDataAttribute<ReactRenderer>({

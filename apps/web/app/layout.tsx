@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { SITE_NAME, SITE_DEFAULT_TITLE } from '../shared/config';
 import { BlogFrame } from '../widgets/blog-frame';
+import { blogFont } from './fonts';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -13,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" data-theme="light">
+    <html lang="ko" data-theme="light" className={blogFont.variable}>
       <body className="min-h-svh bg-bg-surface font-sans text-ink">
         <BlogFrame>{children}</BlogFrame>
       </body>

@@ -37,7 +37,7 @@ test('홈 문서와 앱 리소스를 오류 없이 불러온다', async ({ page 
   await expect(page.locator('script[src]')).not.toHaveCount(0);
   await expect(page.locator('link[rel="stylesheet"]')).not.toHaveCount(0);
   await expect(page.locator('body')).toHaveCSS('overflow-x', 'clip');
-  await expect(page.locator('body')).toHaveCSS('font-family', /Pretendard Variable/);
+  await expect(page.locator('body')).toHaveCSS('font-family', /Noto Sans KR/);
   expect(failedResources, '앱 리소스 요청 실패').toEqual([]);
   expect(runtimeErrors, '초기 로딩 중 브라우저 오류').toEqual([]);
 });
