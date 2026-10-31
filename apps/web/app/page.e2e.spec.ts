@@ -48,3 +48,22 @@ test('존재하지 않는 앱 경로는 404 상태와 안내 화면을 반환한
   expect(response?.status()).toBe(404);
   await expect(page.getByRole('heading', { name: '404', exact: true })).toBeVisible();
 });
+
+test('주입한 사이트 주소를 홈·목록 메타데이터와 사이트맵에 반영한다', async ({ page, request, baseURL }) => {
+  for (const [pathname, canonicalPath] of [
+    ['/', '/'],
+    ['/posts?page=2', '/posts'],
+    ['/diary?page=3', '/diary'],
+    ['/series?page=2', '/series'],
+  ] as const) {
+    expect((await page.goto(pathname))?.status()).toBe(200);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `${baseURL}${canonicalPath}`);
+    await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content', `${baseURL}${canonicalPath}`);
+  }
+
+  const sitemap = await request.get('/sitemap.xml');
+  expect(sitemap.status()).toBe(200);
+  const urls = [...(await sitemap.text()).matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1]!);
+  expect(urls).toContain(`${baseURL}/series`);
+  expect(urls.every((url) => new URL(url).origin === baseURL)).toBe(true);
+});

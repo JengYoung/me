@@ -1,5 +1,19 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).
 
+## 환경변수
+
+`SITE_ORIGIN`은 canonical·Open Graph·JSON-LD·사이트맵의 대표 사이트 주소이며 서버에서만 읽습니다.
+개발 서버·빌드·배포된 서버에 모두 필요하고, 누락되거나 경로·쿼리·해시·인증 정보가 포함된 주소이면 오류로 처리합니다.
+`https://example.com` 또는 `http://localhost:3000`처럼 origin만 지정하며 `NEXT_PUBLIC_` 접두어는 사용하지 않습니다.
+
+로컬에서는 `.env.example`을 참고해 앱 루트인 `apps/web/.env.local`에 값을 설정합니다.
+이 파일은 Git에서 제외하며 Vault 토큰을 넣지 않습니다. Vault 값을 변경하면 로컬 환경변수도 갱신하고 개발 서버를 재시작합니다.
+앱은 Vault에 직접 접속하지 않습니다. 배포 시에는 Vault의 값을 Vercel 환경변수에 동기화한 뒤 새 배포를 시작해야 합니다.
+Vercel 동기화 파이프라인은 아직 구성하지 않았습니다.
+
+Turbo의 관련 작업 `env`에 `SITE_ORIGIN`을 등록하고 `.env*`를 빌드 입력에 포함해 주소 변경을 캐시에 반영합니다.
+E2E는 테스트 서버 주소를 `SITE_ORIGIN`으로 명시적으로 주입하므로 로컬 Vault나 운영 도메인에 의존하지 않습니다.
+
 ## 콘텐츠 작성
 
 포스트·일기·시리즈의 작성, 수정, 미리보기, 검증, 발행은 [콘텐츠 작성·발행 안내](../../.agent-source/project/content/publishing.md)에서 시작합니다.

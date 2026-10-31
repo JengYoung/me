@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import { SITE_NAME, SITE_ORIGIN } from '../../config';
+import { SITE_NAME, getSiteOrigin } from '../../config';
 
 export function absoluteUrl(pathname: string) {
-  const url = new URL(pathname, SITE_ORIGIN);
+  const url = new URL(pathname, getSiteOrigin());
   url.search = '';
   url.hash = '';
   return url.href;
