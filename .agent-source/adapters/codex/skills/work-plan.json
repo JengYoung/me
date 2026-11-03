@@ -1,0 +1,10 @@
+{
+  "interface": {
+    "display_name": "작업 전 안내",
+    "short_description": "작업 전에 목표와 실제 담당, 구체적인 순서와 방법을 설명합니다",
+    "default_prompt": "$work-plan 현재 요청의 목표, 담당 에이전트, 순서와 방법을 먼저 설명하고 진행해줘."
+  },
+  "policy": {
+    "allow_implicit_invocation": true
+  }
+}

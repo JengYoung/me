@@ -8,6 +8,10 @@
 
 # testing
 /coverage
+/test-results/
+/.vitest/
+/playwright-report/
+/blob-report/
 
 # next.js
 /.next/
@@ -15,6 +19,10 @@
 
 # production
 /build
+/storybook-static/
+/storybook.log
+/build-storybook.log
+/debug-storybook.log
 
 # misc
 .DS_Store
@@ -27,6 +35,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -34,3 +43,22 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+*.local.*
+
+# MDX 빌드 생성물과 독립된 E2E 빌드
+/screens/posts/generated/
+/screens/posts/generated-preview/
+/.next-e2e/
+/.next-preview/
+/.next-preview-e2e/
+/.next-series-preview/
+/.next-series-check/
+
+# Diary content modules
+/screens/diary/generated/
+/screens/diary/generated-preview/
+
+# Series runtime catalogs (docs/series/series.json is tracked)
+/entities/series/generated/
+/entities/series/generated-preview/

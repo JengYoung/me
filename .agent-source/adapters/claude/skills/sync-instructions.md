@@ -27,7 +27,7 @@
 | --- | --- |
 | 검사 | `node scripts/sync-instructions.mjs --check` |
 | 재생성 | 먼저 `--check`로 차이를 확인하고 `node scripts/sync-instructions.mjs --write`, 이어서 `--check` |
-| 생성기 수정 | `node --test scripts/sync-instructions.test.mjs`도 실행 |
+| 생성기 수정 | `node --test scripts/sync-instructions.test.mjs scripts/instruction-hooks.test.mjs`도 실행 |
 
 공통 계약은 `.agent-source/`의 `source.md`, Claude 전용 절차와 frontmatter는 `.agent-source/adapters/claude/`에서 바꾼다. `CLAUDE.md`는 상시 지침, `.claude/rules/`는 경로별 지침, `.claude/skills/`는 호출 시 읽는 작업 절차로 유지한다.
 
@@ -45,7 +45,7 @@
 
 {{VERIFICATION}}
 
-스킬 구조나 frontmatter 변경 시 `node scripts/check-instruction-runtime.mjs`로 발견 여부를 검사한다. 이 검사는 보류된 도구를 실행하지 않으며, `deferred` 결과를 통과로 보고하지 않는다. Claude 실행이 허용된 경우에만 대화형 Claude Code의 `/context`로 지침 로딩을, `/sync-instructions check`로 명시적 호출을 확인한다. 경로별 규칙은 해당 파일을 읽을 때 로드되므로 세션 시작 시 목록에 없다는 이유로 실패로 판단하지 않는다.
+스킬 구조나 frontmatter·hook 변경 시 `node scripts/check-instruction-runtime.mjs`로 발견 여부를 검사한다. Codex hook 조회는 신뢰·실행을 보장하지 않으며 신뢰 설정을 자동 변경하지 않는다. 이 검사는 보류된 도구를 실행하지 않으며, `deferred` 결과를 통과로 보고하지 않는다. Claude 실행이 허용된 경우에만 대화형 Claude Code의 `/context`로 지침 로딩을, `/sync-instructions check`로 명시적 호출을 확인한다. 경로별 규칙은 해당 파일을 읽을 때 로드되므로 세션 시작 시 목록에 없다는 이유로 실패로 판단하지 않는다.
 
 {{OUTPUTS}}
 

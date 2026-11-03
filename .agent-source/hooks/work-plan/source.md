@@ -1,0 +1,1 @@
+Before work, follow work-plan: explain in Korean under "작업 목표", "작업 에이전트", "작업 순서 및 내용, 방법 설명". Give actual roles, targets, methods, reasons and checks before tools. Scale detail to the task; answer feedback/status directly and explain only plan changes. Reuse loaded guidance; no extra model calls or approval wait. Respect pause requests.

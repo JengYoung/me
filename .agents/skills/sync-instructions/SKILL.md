@@ -26,12 +26,12 @@ AI 지침·스킬의 동기화나 검사를 요청받았거나, 해당 원천 �
 1. 현재 프로젝트 루트의 `.agent-source/targets.json`과 변경된 원천을 확인한다. 실행에는 Node.js 24 이상이 필요하다. 셸 명령은 현재 환경의 실행 규칙을 따른다.
 2. `node scripts/sync-instructions.mjs --check`를 실행한다. 검사 요청이면 차이와 종료 코드를 보고하고 끝낸다.
 3. 동기화 요청이면 필요한 공통 원천 또는 `.agent-source/adapters/`의 대상 도구 어댑터를 수정한다. 생성 파일은 직접 편집하지 않는다.
-4. `node scripts/sync-instructions.mjs --write` 후 `node scripts/sync-instructions.mjs --check`를 실행한다. 생성기를 바꿨다면 `node --test scripts/sync-instructions.test.mjs`도 실행한다.
-5. `.agents/skills/`가 Codex의 스킬 설치 경로다. 같은 스킬을 `.codex/skills/`에 중복 설치하지 않는다. 도구별 구조나 메타데이터를 바꿨다면 `node scripts/check-instruction-runtime.mjs`로 설치된 CLI의 스킬 발견과 중복 등록 여부도 확인한다. 이 검사는 보류된 도구를 실행하지 않으며, `deferred` 결과를 통과로 보고하지 않는다.
+4. `node scripts/sync-instructions.mjs --write` 후 `node scripts/sync-instructions.mjs --check`를 실행한다. 생성기를 바꿨다면 `node --test scripts/sync-instructions.test.mjs scripts/instruction-hooks.test.mjs`도 실행한다.
+5. `.agents/skills/`가 Codex의 스킬 설치 경로다. 같은 스킬을 `.codex/skills/`에 중복 설치하지 않는다. 도구별 구조나 메타데이터·hook을 바꿨다면 `node scripts/check-instruction-runtime.mjs`로 스킬과 Codex hook의 발견 여부도 확인한다. hook의 신뢰 상태와 실제 실행을 구분하며 신뢰 설정을 자동 변경하지 않는다. 이 검사는 보류된 도구를 실행하지 않으며, `deferred` 결과를 통과로 보고하지 않는다.
 
 ## 충돌과 승인
 
-관리되지 않은 파일과 수동 변경을 보존한다. 삭제는 이전 생성 내용 그대로인 관리 파일에만 허용한다. 검사 중에는 원천·생성물·관리 기록을 수정하지 않는다.
+관리되지 않은 파일과 수동 변경을 보존한다. 삭제는 이전 생성 내용 그대로인 관리 파일에만 허용한다. hook 설정에서는 생성 표시가 있는 work-plan 그룹만 관리하고 다른 설정·hook은 보존한다. 검사 중에는 원천·생성물·관리 기록을 수정하지 않는다.
 
 `.codex`와 `.agents`는 작업 공간 안에서도 쓰기가 보호될 수 있다. 필수 쓰기가 권한 오류로 실패하고 실행 도구가 권한 상승을 지원하면, 정확히 그 생성 명령에 `sandbox_permissions: "require_escalated"`와 이유를 붙여 승인 요청한다. 승인 거절이나 승인 요청 불가 상태에서는 차단된 경로와 재실행 명령을 보고한다. 다른 도구·임시 경로로 우회해 덮어쓰지 않는다.
 

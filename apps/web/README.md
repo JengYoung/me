@@ -1,5 +1,67 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).
 
+## 환경변수
+
+`SITE_ORIGIN`은 canonical·Open Graph·JSON-LD·사이트맵의 대표 사이트 주소이며 서버에서만 읽습니다.
+개발 서버·빌드·배포된 서버에 모두 필요하고, 누락되거나 경로·쿼리·해시·인증 정보가 포함된 주소이면 오류로 처리합니다.
+`https://example.com` 또는 `http://localhost:3000`처럼 origin만 지정하며 `NEXT_PUBLIC_` 접두어는 사용하지 않습니다.
+
+로컬에서는 `.env.example`을 참고해 앱 루트인 `apps/web/.env.local`에 값을 설정합니다.
+이 파일은 Git에서 제외하며 Vault 토큰을 넣지 않습니다. Vault 값을 변경하면 로컬 환경변수도 갱신하고 개발 서버를 재시작합니다.
+앱은 Vault에 직접 접속하지 않습니다. 배포 시에는 Vault의 값을 Vercel 환경변수에 동기화한 뒤 새 배포를 시작해야 합니다.
+Vercel 동기화 파이프라인은 아직 구성하지 않았습니다.
+
+Turbo의 관련 작업 `env`에 `SITE_ORIGIN`을 등록하고 `.env*`를 빌드 입력에 포함해 주소 변경을 캐시에 반영합니다.
+E2E는 테스트 서버 주소를 `SITE_ORIGIN`으로 명시적으로 주입하므로 로컬 Vault나 운영 도메인에 의존하지 않습니다.
+
+## 콘텐츠 작성
+
+포스트·일기·시리즈의 작성, 수정, 미리보기, 검증, 발행은 [콘텐츠 작성·발행 안내](../../.agent-source/project/content/publishing.md)에서 시작합니다.
+
+## 홈 · issue-15
+
+`pnpm dev` 후 `/`에서 실제 콘텐츠와 연결된 홈을 확인합니다. `app/page.tsx`는 메타데이터와
+`screens/home`의 페이지를 연결하며, 공통 Canvas 배경은 `shared/ui/grid-background`의 공개 API로 제공합니다.
+새 3D 의존성 없이 레퍼런스의 파동·낙하 계산을 사용하고, 캐릭터와 Canvas 코드는 필요할 때 불러옵니다.
+
+동작·선정·접근성·성능 계약의 정본은 [홈 지침](../../.agent-source/project/content/home.md)입니다.
+
+```bash
+pnpm --filter web test --project node screens/home shared/ui/grid-background
+pnpm --filter web test:e2e:preview app/page.preview.e2e.spec.ts
+```
+
+E2E는 별도 개발 서버를 소유하고 실제 원고를 읽기만 합니다. 캡처는 `test-results/e2e/`에 남깁니다.
+공개 빌드는 기존 콘텐츠 검증을 그대로 거치므로 시리즈 제목·소개 등 미완성 필드를 먼저 작성해야 합니다.
+
+## 캐릭터 · issue-9
+
+`shared/ui/character`에서 `Character`, `AnimatedCharacter`, `CharacterExpression`을 가져옵니다.
+정적 SVG 11종은 `public/characters/character`에 있으며, `app/favicon.ico`, `app/icon.svg`,
+`app/apple-icon.png`는 Next.js 파일 규약으로 자동 적용됩니다.
+
+```tsx
+import { AnimatedCharacter } from '../shared/ui/character';
+
+<AnimatedCharacter expression="happy" size={240} playing speed={1} loop />;
+```
+
+루트에서 `pnpm storybook`을 실행하고 `Shared / Character`를 열면 표정 도감, 애니메이션 갤러리,
+props 플레이그라운드, Light/Dark 비교 스토리를 볼 수 있습니다. `Playground`의 Controls에서
+props를 조절하고, 공통 도구 모음에서 테마와 화면 크기를 바꿉니다.
+`playing`, `speed`(0.1–3배), `loop`, `replayKey`, `showEffects`로 재생을 제어합니다.
+화면 밖이나 숨겨진 탭에서는 일시정지하고, `prefers-reduced-motion: reduce`에서는 정지 상태를 보여줍니다.
+의미가 있는 이미지는 표정별 접근 가능한 이름을 제공하며, 장식용은 `decorative`로 숨깁니다.
+
+SVG와 React 도형 데이터의 편집 원본은 `scripts/generate-character.mjs`입니다.
+`pnpm --filter web characters:generate`로 함께 재생성합니다. 파비콘은 별도로 보존한 자산입니다.
+캐릭터 원색은 [Figma Brand](https://www.figma.com/design/GfYyF8klIKTizVSaE9g34S?node-id=13-616)의
+`primary/500` · `secondary/500`이며, 스토리 표면·텍스트·액션은 앱의 Semantic 토큰을 사용합니다.
+
+검증 명령은 `pnpm --filter web test`, `pnpm --filter web lint`,
+`pnpm --filter web check-types`, `pnpm build-storybook`, `pnpm --filter web build`입니다.
+캐릭터 테스트는 기존 Vitest Browser Mode의 모바일 Light·데스크톱 Dark 환경에서 실행합니다.
+
 ## Getting Started
 
 First, run the development server:
@@ -18,7 +80,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load Inter, a custom Google Font.
+기본 글꼴은 자체 제공하는 Pretendard Variable 다이나믹 서브셋입니다. 폰트 파일과 라이선스는 `public/fonts/pretendard/`에서 관리합니다.
 
 ## Learn More
 
@@ -34,3 +96,144 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Storybook
+
+`apps/web`의 컴포넌트를 [Storybook for Next.js (Vite)](https://storybook.js.org/docs/get-started/frameworks/nextjs-vite)로 확인합니다. 저장소 루트에서 실행합니다.
+
+```bash
+pnpm storybook
+```
+
+브라우저에서 <http://localhost:6006>을 엽니다. Next.js 개발 서버는 별도로 실행하지 않아도 됩니다. 앱 디렉터리에서는 `pnpm storybook`, 루트에서 앱만 직접 실행하려면 `pnpm --filter web storybook`을 사용합니다.
+
+```bash
+pnpm build-storybook
+```
+
+정적 결과는 `apps/web/storybook-static/`에 생성되며 Git에서 제외됩니다. Turbo는 의존 패키지 변경을 빌드 입력에 포함하고 정적 결과를 캐시합니다. 기본 `pnpm dev`와 `pnpm build`에는 Storybook이 포함되지 않습니다.
+
+### 미리보기
+
+- Header: 기본, 긴 제목, 모바일, 스크롤 플러그인 스토리.
+- Sidebar: 기본, 처음부터 열림, 모바일, 열기·닫기 상호작용 스토리.
+- Close: 기본, 16·20·24·32px 크기, 부모 색상 상속, 아이콘 버튼, 접근성 이름 스토리. `Shared / Icons / Close`에서 확인합니다.
+- Character: 표정 도감, 재생 제어가 있는 애니메이션 갤러리, Controls 플레이그라운드, Light/Dark 비교 스토리. `Shared / Character`에서 확인합니다.
+- Docs에서 컴포넌트 사용법을 확인하고 Controls에서 Header의 제목을 변경할 수 있습니다. 고정 헤더와 Sidebar portal은 Docs에서도 개별 iframe 안에 표시됩니다.
+- 도구 모음에서 Light/Dark와 390·1199·1200·1440px 화면 크기를 선택합니다. `Mobile` 스토리는 390px로 고정되므로 크기를 자유롭게 바꾸려면 `Default` 스토리를 사용합니다.
+- `Sidebar / Open And Close`의 `play`는 열기, Escape로 닫기, 닫기 버튼, 트리거로의 포커스 복귀를 검증합니다. 이 스토리를 열면 실행되며 결과는 Interactions 패널에서 확인합니다. `build-storybook`은 `play`를 실행하지 않습니다.
+
+앱의 `app/globals.css`, `app/design-token.css`와 `public/fonts/pretendard/`의 Pretendard Variable v1.3.9 다이나믹 서브셋을 공유합니다. 화면 CSS는 `experimental.inlineCss`로 HTML에 포함하고, 폰트 CSS는 루트 레이아웃에서 preload한 뒤 `afterInteractive` 스크립트로 적용합니다. JavaScript가 꺼져 있으면 `noscript`의 stylesheet를 사용합니다. 전체 92개 서브셋 중 현재 표시하는 문자에 필요한 파일만 브라우저가 선택하며, 특정 문자를 위한 폰트 파일을 수동으로 preload하지 않습니다.
+
+Storybook은 `@tailwindcss/vite`로 CSS를 처리하고, `public/`을 정적 파일로 제공합니다. `.storybook/preview-head.html`에서 같은 로컬 폰트 CSS를 불러오므로 외부 폰트 CDN 연결은 필요하지 않습니다. 테마와 폰트 변수는 `html`에서 상속되어 `document.body`에 렌더링하는 portal에도 전달됩니다. 폰트 성능 측정은 앱의 프로덕션 빌드에서 진행하며, Pretendard의 SIL Open Font License는 `public/fonts/pretendard/OFL.txt`에 보관합니다.
+
+### 스토리 추가
+
+`app`, `shared`, `entities`, `features`, `widgets`, `screens` 아래에 `*.stories.ts` 또는 `*.stories.tsx`를 컴포넌트와 함께 추가합니다. `Meta`, `StoryObj`는 `@storybook/nextjs-vite`에서 가져오고, 예제는 `shared/ui/layout/header.stories.tsx`를 참고합니다. 스토리를 제품 코드의 `index.ts`에서 export하지 않습니다.
+
+스타일에는 Figma Brand에 등록된 Semantic·Typography·숫자 여백·반경 토큰을 사용합니다. 화면 분기는 앱의 `mobile:`(<1200px), `desktop:`(≥1200px) 계약을 따릅니다. 설정은 `.storybook/main.ts`, 전역 스타일·테마·viewport는 `.storybook/preview.ts`에서 관리합니다.
+
+```bash
+pnpm --filter web lint
+pnpm --filter web check-types
+pnpm build-storybook
+```
+
+Storybook 10.6.2의 하위 의존성 `tsconfck@3.1.6`은 TypeScript 5만 peer 범위에 명시해 현재 TypeScript 7에서 설치 경고가 발생합니다. 저장소의 TypeScript 버전은 유지하며 타입 검사와 실제 빌드로 호환성을 확인합니다.
+
+Vite 8의 정적 빌드에는 기존 컴포넌트의 `use client` 지시문에 대한 `MODULE_LEVEL_DIRECTIVE` 경고가 출력됩니다. Storybook은 클라이언트에서 렌더링하며 빌드는 완료됩니다. 이 경고를 없애기 위해 제품 컴포넌트의 지시문을 제거하지 않습니다.
+
+## 컴포넌트 테스트
+
+Header·Sidebar·Character는 Vitest Browser Mode와 Playwright의 실제 Chromium으로 검사합니다. 저장소 루트에서 최초 한 번 브라우저를 설치한 뒤 실행합니다. Next.js나 Storybook 서버는 필요하지 않습니다.
+
+```bash
+pnpm --filter web exec playwright install chromium --only-shell
+pnpm --filter web test
+pnpm --filter web test:watch
+```
+
+`vitest.config.ts`에 정의한 실행 환경은 다음과 같습니다.
+
+- `node`: `shared/**/*.ssr.test.tsx`를 DOM 전역 없이 실행합니다.
+- `chromium-mobile-light`: 390×844px, 밝은 테마에서 `shared/**/*.browser.test.tsx`·`screens/**/*.browser.test.tsx`를 실행합니다.
+- `chromium-desktop-dark`: 1440×900px, 어두운 테마에서 같은 브라우저 테스트를 실행합니다.
+
+Header의 슬롯·제목, 스크롤 방향·포커스에 따른 노출, 플러그인 해제를 확인합니다. Sidebar는 열기·닫기, 제어 상태, ARIA 연결, Tab 순환·포커스 복귀, 배경 클릭 차단, unmount 시 inert·스크롤 잠금 해제를 확인합니다. hydration에서는 서버 DOM의 재사용과 인스턴스별 ID·ARIA 연결, 오류 부재를 검사합니다.
+
+브라우저 테스트는 앱 CSS·로컬 폰트를 사용하고 StrictMode를 적용합니다. `next/link`·`next/image`는 미리 번들링하고 Next.js가 치환하는 클라이언트 환경값에는 기본값을 제공합니다. 이 설정은 Browser Mode에만 적용하며 Node 프로젝트의 실제 환경변수·공개 판정은 유지합니다. `vitest-browser-react/pure`의 `render`를 사용하며 설정 파일 옆 `vitest.setup.ts`의 `afterEach`가 각 테스트 종료 시 DOM·portal·effect를 정리합니다. 테스트가 직접 만든 DOM·구독·spy·전역 상태는 획득 직후 `onTestFinished`에 정리를 등록합니다. 수동 hydration root도 테스트가 직접 해제합니다.
+
+파일을 지정하거나 실행 순서를 바꿔 격리를 확인할 수 있습니다.
+
+```bash
+pnpm --filter web test shared/ui/layout/sidebar.browser.test.tsx
+pnpm --filter web test --sequence.shuffle --sequence.seed=20261020
+```
+
+이 명령의 검증 범위는 Chromium 컴포넌트 동작과 Node SSR입니다. 실제 앱을 실행하는 E2E는 아래 명령으로 분리합니다. 다른 브라우저와 Figma 픽셀 비교는 현재 구성에 포함하지 않습니다. 루트의 lint·타입 검사와 `build-storybook`은 컴포넌트 테스트를 대신 실행하지 않습니다.
+
+## 앱 통합 테스트: Playwright E2E
+
+`playwright.config.ts`의 `webServer`가 `next build` 후 `next start`로 실제 앱을 실행합니다. 테스트는 `http://127.0.0.1:3100`에 접속하며 종료 시 서버도 정리합니다. 실행 중인 개발 서버를 재사용하지 않으므로 3100 포트는 비어 있어야 합니다.
+
+저장소 루트에서 실행합니다.
+
+```bash
+pnpm --filter web exec playwright install chromium
+pnpm --filter web test:e2e
+```
+
+- `chromium-desktop-dark`: 1440×900px, 데스크톱 Chrome·Dark.
+- `chromium-mobile-light`: 390×844px, Chromium의 모바일·터치 에뮬레이션·Light.
+- 각 테스트는 Playwright의 독립된 `page`·브라우저 컨텍스트를 사용합니다. 기본 재시도는 없으며 최대 2개 worker로 병렬 실행합니다.
+- 실패 시 스크린샷과 trace는 `test-results/e2e/`, HTML 보고서는 `playwright-report/`에 남습니다. 생성물은 Git에서 제외합니다.
+
+```bash
+pnpm --filter web test:e2e --project=chromium-mobile-light
+pnpm --filter web test:e2e:ui
+pnpm --filter web test:e2e:report
+```
+
+Linux CI에서는 의존성 설치 후 브라우저와 시스템 라이브러리를 함께 준비합니다. 아래 명령을 CI 작업에 추가할 수 있으며 GitHub Actions 워크플로는 아직 구성하지 않았습니다.
+
+```bash
+pnpm --filter web exec playwright install --with-deps chromium
+pnpm --filter web test:e2e
+```
+
+루트 레이아웃은 `widgets/blog-frame`의 `BlogFrame`으로 공통 Header·Sidebar와 본문 상단 여백을 연결합니다. 홈 본문은 아직 `null`이며, 메뉴에는 홈·포스트·시리즈·일기 경로를 제공합니다. `app/page.e2e.spec.ts`는 문서·리소스 로딩과 404 응답을, `app/layout.e2e.spec.ts`는 기본 라이트 테마, 헤더와 본문의 배치, 사이드바의 키보드 닫기·포커스 복귀·메뉴 이동을 검사합니다.
+
+상세 목차는 데스크톱에서 본문 오른쪽, 모바일에서 접이식 메뉴로 스크롤 중에도 유지됩니다. 모바일 목차를 선택하면 메뉴를 접고 고정 영역 아래의 제목으로 이동합니다. 실제 원고를 읽는 `page.preview.e2e.spec.ts`에서 스크롤 중 목차 위치와 제목 이동을 검사합니다. 미리보기 E2E의 Next.js 산출물은 `.next-preview-e2e/`로 분리해 `.next-preview/`를 쓰는 로컬 개발 서버와 충돌하지 않게 합니다.
+
+테스트 소스는 대상 파일과 같은 디렉터리에 둡니다. `e2e/`, `tests/`, `__tests__/` 같은 별도 테스트 디렉터리를 만들지 않습니다. E2E 파일명은 `<대상 파일명>.e2e.spec.ts`이며, 여러 페이지를 거치는 흐름은 주된 대상 페이지·기능 파일 옆에 둡니다. 공용 setup은 설정 파일 옆에, 테스트 전용 helper·fixture는 사용하는 테스트 옆에 둡니다.
+
+`playwright.config.ts`는 앱 루트의 `**/*.e2e.spec.ts`만 수집하고 `.gitignore`의 제외 경로를 따릅니다. Vitest의 `.browser.test.tsx`·`.ssr.test.tsx`와 구분되며, 생성 보고서·빌드 산출물은 수집하지 않습니다. 특정 페이지의 테스트만 실행할 수도 있습니다.
+
+```bash
+pnpm --filter web test:e2e app/page.e2e.spec.ts
+```
+
+새 앱 흐름은 대상 파일 옆 E2E에서 `@playwright/test`를 가져와 작성합니다. `page.goto()`로 실제 앱 경로에 접속하고 사용자에게 보이는 결과를 검사합니다. 컴포넌트·Hook·함수의 세부 조건은 Vitest에 두며, 별도로 mount한 컴포넌트나 Storybook을 앱 E2E의 대상으로 삼지 않습니다. 앱 화면이 연결되면 메뉴 이동·키보드 포커스·스크롤 잠금 등 실제 사용자 흐름을 추가합니다.
+
+## SVG 아이콘
+
+공통 아이콘 원본은 `shared/ui/icons/*.svg`에 두고 `?react`를 붙여 가져옵니다. SVGO 최적화와 SVGR의 React 컴포넌트 변환은 빌드 중 실행됩니다. 브라우저에는 변환된 SVG 컴포넌트가 포함되며 SVG 파일을 받기 위한 별도 요청은 발생하지 않습니다.
+
+`CloseIcon`처럼 크기·색상·ARIA props를 전달하는 공통 UI 아이콘은 `shared/ui/icons`에서 원본, 공개 API, 스토리를 함께 관리합니다. `public`은 `/images/example.svg`처럼 URL로 직접 표시하거나 다운로드할 정적 자산에 사용합니다. URL로 읽는 파일은 현재 `?react` import 변환을 거치지 않습니다. 폴더명 자체가 성능을 결정하지 않으며, SVG를 React 컴포넌트로 포함할지 별도 이미지로 로드할지에 따라 선택합니다.
+
+```tsx
+// shared/ui/layout에서는 icons의 공개 API를 사용합니다.
+import { CloseIcon } from '../icons';
+
+<button type="button" aria-label="닫기">
+  <CloseIcon aria-hidden="true" focusable="false" className="size-24px" />
+</button>;
+```
+
+`shared/ui/icons/index.ts`에서 `export { default as CloseIcon } from './close.svg?react'`로 공개합니다. 다른 FSD 영역에서 사용하는 아이콘은 `shared/ui/index.ts`에도 export하고 해당 공개 API로 가져옵니다. `className`, ARIA 속성 등 표준 SVG props를 전달할 수 있습니다. 장식용 아이콘은 숨기고 버튼에 이름을 제공하며, 아이콘 자체가 의미를 전달하면 `role="img"`와 `aria-label`을 지정합니다.
+
+`svgr.config.js`를 Next.js Turbopack, Storybook Vite, Vitest가 공유합니다. `viewBox`를 유지하고 고정 `width`·`height`는 제거하므로 크기는 기존 디자인 토큰으로 명시합니다. 단색 아이콘은 `currentColor`로 색상을 상속합니다. SVGO는 ID 접두어도 적용하며 SVGR의 Prettier 실행은 비활성화합니다.
+
+`?react`가 없는 SVG import는 프레임워크의 기존 이미지 처리를 따릅니다. 큰 삽화까지 React 아이콘으로 변환하지 말고 용도에 맞게 정적 이미지로 사용합니다. `next build --webpack`용 로더는 구성하지 않았으며 현재 앱의 기본 Turbopack 빌드를 사용합니다.
+
+`pnpm --filter web test`에서 실제 SVG 변환을 거친 SSR·사이드바 동작을 검사합니다. Lighthouse 점수는 전체 페이지의 영향을 받으므로 변환 도입만으로 고정된 점수를 보장하지 않습니다. 성능을 비교할 때는 같은 화면의 프로덕션 빌드에서 SVG 요청·번들 크기·레이아웃 이동과 반복 측정 결과를 함께 확인합니다.

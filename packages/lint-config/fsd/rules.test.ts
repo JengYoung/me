@@ -9,6 +9,8 @@ RuleTester.it = it;
 
 const cwd = '/fsd-project';
 const filename = (path: string) => `${cwd}/src/${path}`;
+const sliceLayers = ['entities', 'features', 'widgets', 'pages', 'screens'];
+const layerOptions = { layers: ['shared', ...sliceLayers, 'app'] };
 const tester = new RuleTester({ cwd, languageOptions: { parserOptions: { lang: 'ts' } } });
 
 tester.run('fsd-layer-imports', layerImports, {
@@ -53,11 +55,12 @@ tester.run('fsd-layer-imports', layerImports, {
       code,
       errors: [{ messageId: 'invalidDirection', data: { fromLayer: 'entities', toLayer: 'features' } }],
     })),
-    {
-      filename: filename('features/auth/model/session.ts'),
-      code: "import '@/features/cart';",
+    ...sliceLayers.map((layer) => ({
+      filename: filename(`${layer}/consumer/index.ts`),
+      code: `export { value } from '@/${layer}/example';`,
+      options: [layerOptions],
       errors: [{ messageId: 'crossSliceSameLayer' }],
-    },
+    })),
     {
       filename: filename('entities/cart/model/cart.ts'),
       code: "import '@/entities/user/@x/order';",
@@ -91,6 +94,33 @@ tester.run('fsd-public-api', publicApi, {
     { filename: filename('features/auth/model/session.ts'), code: "import '../api/login';" },
     { filename: filename('features/auth/ui/login.ts'), code: "import '@/shared/ui/button';" },
     { filename: filename('shared/ui/button/button.ts'), code: "import './styles';" },
+    ...sliceLayers.map((layer) => ({
+      filename: filename(`${layer}/example/index.ts`),
+      code: [
+        "export { value } from './model/nested/value';",
+        "export type { Value } from './model/types';",
+        "export * from './ui/view';",
+      ].join('\n'),
+      options: [layerOptions],
+    })),
+    { filename: filename('shared/api/index.ts'), code: "export { request } from './client/request';" },
+    { filename: filename('shared/config/index.ts'), code: "export * from './env/settings';" },
+    { filename: filename('shared/ui/index.ts'), code: "export { Header } from './layout/header';" },
+    {
+      filename: filename('shared/ui/index.ts'),
+      code: "export type { HeaderProps } from './layout/header.types';",
+    },
+    { filename: filename('shared/lib/index.ts'), code: "export * from './date/format';" },
+    {
+      filename: filename('shared/ui/public.ts'),
+      code: "export { Header } from './layout/header';",
+      options: [{ publicApiFiles: ['public'] }],
+    },
+    {
+      filename: filename('shared/api/public.ts'),
+      code: "export { request } from './client/request';",
+      options: [{ publicApiFiles: ['public'], sharedModuleSegments: ['api'] }],
+    },
     { filename: filename('entities/cart/model/cart.ts'), code: "import '@/entities/user/@x/cart';" },
     { filename: filename('features/auth/index.ts'), code: "export { default } from 'react';" },
     {
@@ -119,6 +149,35 @@ tester.run('fsd-public-api', publicApi, {
     {
       filename: filename('features/auth/ui/login.ts'),
       code: "import '@/shared/ui/button/button';",
+      errors: [{ messageId: 'usePublicApi' }],
+    },
+    ...sliceLayers.map((layer) => ({
+      filename: filename('app/providers/index.ts'),
+      code: `export { value } from '@/${layer}/example/model/nested/value';`,
+      options: [layerOptions],
+      errors: [{ messageId: 'usePublicApi', data: { layer, publicName: 'example' } }],
+    })),
+    ...[
+      { file: 'shared/ui/index.ts', code: "import { Header } from './layout/header'; export { Header };" },
+      { file: 'shared/ui/registry.ts', code: "export { Header } from './layout/header';" },
+      { file: 'shared/lib/index.ts', code: "export { Header } from '../ui/layout/header';" },
+      { file: 'shared/ui/button/index.ts', code: "export { Header } from '../layout/header';" },
+      { file: 'features/auth/ui/login.ts', code: "export { Header } from '@/shared/ui/layout/header';" },
+    ].map(({ file, code }) => ({
+      filename: filename(file),
+      code,
+      errors: [{ messageId: 'usePublicApi', data: { layer: 'shared', publicName: 'ui/layout' } }],
+    })),
+    {
+      filename: filename('shared/ui/index.ts'),
+      code: "export { Header } from '../../../other/shared/ui/layout/header';",
+      options: [{ roots: ['src', 'other'] }],
+      errors: [{ messageId: 'usePublicApi' }],
+    },
+    {
+      filename: filename('shared/ui/index.ts'),
+      code: "export { Header } from './layout/header';",
+      options: [{ publicApiFiles: ['public'] }],
       errors: [{ messageId: 'usePublicApi' }],
     },
     {

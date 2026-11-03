@@ -19,7 +19,9 @@ export function createImportListener(context: Context, check: 'checkLayers' | 'c
     if (!from || source?.type !== 'Literal' || typeof source.value !== 'string') return;
     const to = policy.resolveImport(source.value, from, filename);
     if (!to) return;
-    const violation = policy[check](from, to);
+    const isReexport = node.type === 'ExportNamedDeclaration' || node.type === 'ExportAllDeclaration';
+    const violation =
+      check === 'checkPublicApi' ? policy.checkPublicApi(from, to, isReexport) : policy.checkLayers(from, to);
     if (violation) context.report({ node: source, ...violation });
   };
   return {

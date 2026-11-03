@@ -59,6 +59,7 @@ export function createFsdPolicy(cwd: string, options: FsdOptions = {}) {
         aliases: normalizeAliases({ '@': '.', '~': '.' }, options.aliases ?? {}, definition.aliases ?? {}),
       };
     })
+    // oxlint-disable-next-line unicorn/no-array-sort -- map으로 생성한 새 배열만 정렬하므로 입력을 변경하지 않습니다.
     .sort((a, b) => b.path.length - a.path.length);
   if (new Set(roots.map((root) => root.path)).size !== roots.length) {
     throw new Error('FSD roots must resolve to different directories.');
@@ -114,6 +115,15 @@ export function createFsdPolicy(cwd: string, options: FsdOptions = {}) {
     from.root === to.root && from.layer === to.layer && from.slice !== undefined && from.slice === to.slice;
   const sameScope = (from: FsdLocation, to: FsdLocation): boolean =>
     from.root === to.root && from.scope.join('/') === to.scope.join('/');
+  const sharedSegmentEntrypoint = (from: FsdLocation, to: FsdLocation): boolean =>
+    from.root === to.root &&
+    from.layer === 'shared' &&
+    to.layer === 'shared' &&
+    from.scope.length === 2 &&
+    to.scope.length === 3 &&
+    from.parts[1] === to.parts[1] &&
+    from.parts.length === 3 &&
+    isPublicFile(from.parts[2] ?? '');
   const entityCrossApi = (from: FsdLocation, to: FsdLocation): boolean =>
     (options.allowEntityCrossImports ?? true) &&
     from.root === to.root &&
@@ -149,9 +159,11 @@ export function createFsdPolicy(cwd: string, options: FsdOptions = {}) {
     return undefined;
   }
 
-  function checkPublicApi(from: FsdLocation, to: FsdLocation): FsdViolation | undefined {
+  function checkPublicApi(from: FsdLocation, to: FsdLocation, isReexport = false): FsdViolation | undefined {
     if ((options.publicApiIgnoreLayers ?? []).includes(to.layer)) return undefined;
     if (sameScope(from, to) || entityCrossApi(from, to)) return undefined;
+    // A Shared segment barrel defines its API by re-exporting its own child modules.
+    if (isReexport && sharedSegmentEntrypoint(from, to)) return undefined;
     const remainder = to.parts.slice(to.scope.length);
     const publicScope = to.scope.length >= 2 && !isFile(to.scope[to.scope.length - 1] ?? '');
     if (publicScope && (remainder.length === 0 || (remainder.length === 1 && isPublicFile(remainder[0] ?? '')))) {

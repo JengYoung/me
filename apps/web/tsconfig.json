@@ -2,6 +2,11 @@
   "extends": "@repo/typescript-config/nextjs.json",
   "compilerOptions": {
     "allowImportingTsExtensions": true,
+    "paths": {
+      "@post-content/*": ["./screens/posts/generated/*"],
+      "@diary-content/*": ["./screens/diary/generated/*"],
+      "@series-content/*": ["./entities/series/generated/*"]
+    },
     "plugins": [
       {
         "name": "next"
@@ -9,6 +14,14 @@
     ],
     "strictNullChecks": true
   },
-  "include": ["**/*.ts", "**/*.mts", "**/*.tsx", "next-env.d.ts", "next.config.js", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "**/*.ts",
+    "**/*.mts",
+    "**/*.tsx",
+    ".storybook/**/*.ts",
+    "next-env.d.ts",
+    "next.config.js",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": ["node_modules", "storybook-static"]
 }

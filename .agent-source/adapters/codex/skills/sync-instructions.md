@@ -19,8 +19,8 @@
 1. 현재 프로젝트 루트의 `.agent-source/targets.json`과 변경된 원천을 확인한다. 실행에는 Node.js 24 이상이 필요하다. 셸 명령은 현재 환경의 실행 규칙을 따른다.
 2. `node scripts/sync-instructions.mjs --check`를 실행한다. 검사 요청이면 차이와 종료 코드를 보고하고 끝낸다.
 3. 동기화 요청이면 필요한 공통 원천 또는 `.agent-source/adapters/`의 대상 도구 어댑터를 수정한다. 생성 파일은 직접 편집하지 않는다.
-4. `node scripts/sync-instructions.mjs --write` 후 `node scripts/sync-instructions.mjs --check`를 실행한다. 생성기를 바꿨다면 `node --test scripts/sync-instructions.test.mjs`도 실행한다.
-5. `.agents/skills/`가 Codex의 스킬 설치 경로다. 같은 스킬을 `.codex/skills/`에 중복 설치하지 않는다. 도구별 구조나 메타데이터를 바꿨다면 `node scripts/check-instruction-runtime.mjs`로 설치된 CLI의 스킬 발견과 중복 등록 여부도 확인한다. 이 검사는 보류된 도구를 실행하지 않으며, `deferred` 결과를 통과로 보고하지 않는다.
+4. `node scripts/sync-instructions.mjs --write` 후 `node scripts/sync-instructions.mjs --check`를 실행한다. 생성기를 바꿨다면 `node --test scripts/sync-instructions.test.mjs scripts/instruction-hooks.test.mjs`도 실행한다.
+5. `.agents/skills/`가 Codex의 스킬 설치 경로다. 같은 스킬을 `.codex/skills/`에 중복 설치하지 않는다. 도구별 구조나 메타데이터·hook을 바꿨다면 `node scripts/check-instruction-runtime.mjs`로 스킬과 Codex hook의 발견 여부도 확인한다. hook의 신뢰 상태와 실제 실행을 구분하며 신뢰 설정을 자동 변경하지 않는다. 이 검사는 보류된 도구를 실행하지 않으며, `deferred` 결과를 통과로 보고하지 않는다.
 
 ## 충돌과 승인
 

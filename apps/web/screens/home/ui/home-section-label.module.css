@@ -1,0 +1,13 @@
+.icon {
+  transition: transform 200ms ease-out;
+}
+
+.link:is(:hover, :focus-visible) .icon {
+  transform: translate(var(--spacing-4px), calc(-1 * var(--spacing-4px)));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon {
+    transition: none;
+  }
+}

@@ -1,0 +1,196 @@
+.layout {
+  display: grid;
+  min-width: 0;
+  gap: var(--spacing-24px);
+}
+.editorial,
+.intro {
+  display: contents;
+}
+.heading {
+  order: 0;
+}
+.panels {
+  order: 2;
+  min-width: 0;
+  touch-action: pan-y pinch-zoom;
+}
+.panel {
+  min-width: 0;
+}
+.navigation {
+  order: 3;
+  min-width: 0;
+}
+.selector {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+}
+.rollingViewport {
+  height: calc(var(--spacing-64px) * 1.5);
+  min-width: 0;
+  overflow: clip;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black var(--spacing-8px),
+    black calc(100% - var(--spacing-8px)),
+    transparent
+  );
+}
+.rollingTrack {
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.option {
+  display: flex;
+  height: var(--spacing-64px);
+  width: 100%;
+  align-items: center;
+  gap: var(--spacing-12px);
+  padding-inline: var(--spacing-4px);
+  text-align: left;
+  color: var(--color-ink-muted);
+  cursor: pointer;
+  filter: blur(var(--spacing-4px));
+  transition:
+    filter 380ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 380ms;
+}
+.option[aria-pressed='true'] {
+  color: var(--color-ink);
+  filter: none;
+}
+.option > span {
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.option[data-position='previous'] > span {
+  transform: translateY(var(--spacing-16px));
+}
+.option[data-position='next'] > span {
+  transform: translateY(calc(var(--spacing-16px) * -1));
+}
+.option:focus-visible {
+  outline-offset: -2px;
+}
+.control {
+  display: grid;
+  justify-self: center;
+  place-items: center;
+  width: var(--spacing-48px);
+  height: var(--spacing-48px);
+  border-radius: var(--radius-4);
+  color: var(--color-ink-muted);
+  cursor: pointer;
+}
+.control:hover:not(:disabled) {
+  color: var(--color-action-primary-bg);
+}
+.control:active:not(:disabled) {
+  color: var(--color-action-primary-pressed);
+}
+.control:disabled {
+  color: var(--color-ink-muted);
+  opacity: 0.5;
+  cursor: default;
+}
+.progress {
+  flex: 1;
+  height: var(--spacing-4px);
+  overflow: hidden;
+  border-radius: var(--radius-full);
+  background: var(--color-border);
+}
+.playback {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: var(--spacing-8px);
+  margin-top: var(--spacing-12px);
+}
+.pageButtons {
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+.pageButton {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--spacing-32px);
+  height: var(--spacing-48px);
+  border-radius: var(--radius-4);
+  color: var(--color-ink-muted);
+  cursor: pointer;
+}
+.pageButton[aria-pressed='true'],
+.pageButton:hover {
+  color: var(--color-action-primary-bg);
+}
+.pageButton[aria-pressed='true']::after {
+  content: '';
+  position: absolute;
+  inset-inline: var(--spacing-8px);
+  bottom: var(--spacing-8px);
+  height: var(--spacing-4px);
+  border-radius: var(--radius-full);
+  background: var(--color-action-primary-bg);
+}
+.progressIndicator {
+  display: block;
+  height: 100%;
+  background: var(--color-action-primary-bg);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.feature {
+  display: grid;
+  min-width: 0;
+  gap: var(--spacing-24px);
+}
+.cover {
+  display: block;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+  background: var(--color-bg-subtle);
+}
+/* 기본 캐릭터 자산의 원래 Brand Primary 100 배경을 유지한다. */
+.cover[data-fallback='true'] {
+  background: var(--color-primary-100);
+}
+@media (width < 1200px) {
+  .layout {
+    max-width: var(--container-xl);
+    margin-inline: auto;
+  }
+}
+@media (width >= 1200px) {
+  .layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    gap: var(--spacing-48px);
+  }
+  .editorial {
+    display: block;
+    min-width: 0;
+  }
+  .intro {
+    display: block;
+  }
+  .navigation {
+    margin-block: var(--spacing-32px);
+  }
+  .feature {
+    gap: var(--spacing-32px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rollingTrack,
+  .option,
+  .option > span,
+  .progressIndicator {
+    transition: none;
+  }
+}

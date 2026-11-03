@@ -1,0 +1,5 @@
+{
+  "argument-hint": "[check | add | version 또는 작업 요청]",
+  "disable-model-invocation": false,
+  "user-invocable": true
+}

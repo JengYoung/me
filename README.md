@@ -15,6 +15,10 @@ mise exec -- pnpm --version
 
 셸에 mise가 활성화되어 있으면 이 프로젝트에서 해당 버전이 자동 선택됩니다. 그 외에는 `mise exec -- pnpm <명령>`으로 실행합니다. 버전을 갱신할 때는 `mise.toml`과 `package.json`을 함께 수정합니다.
 
+## 블로그 작성
+
+포스트·일기·시리즈의 작성, 수정, 미리보기, 검증, 발행은 [콘텐츠 작성·발행 안내](.agent-source/project/content/publishing.md)에서 시작합니다.
+
 ## What's inside?
 
 This Turborepo includes the following packages/apps:
@@ -40,6 +44,12 @@ This Turborepo has some additional tools already setup for you:
 - [Oxfmt](https://oxc.rs/docs/guide/usage/formatter) for shared UI formatting
 
 루트에서 `pnpm lint`, `pnpm format`, `pnpm format:check`를 실행합니다. 포맷 명령은 해당 스크립트가 있는 패키지에 적용되며, 현재 대상은 `@repo/ui`입니다. Next.js·React·FSD 린트 설정은 [lint-config](packages/lint-config/README.md), React 포맷 설정은 [format-config](packages/format-config/README.md)를 참고합니다.
+
+### Versioning
+
+Changesets로 앱·패키지별 독립 버전을 관리합니다. `pnpm changeset`으로 변경을 기록하고, `pnpm changeset:status`로 다음 버전을 확인한 뒤, 릴리즈 준비 시 `pnpm release:version`으로 버전·changelog·lockfile을 갱신합니다.
+
+설정과 상세 절차는 [버전 관리 안내](.changeset/README.md)를 참고합니다. AI 작업에는 Codex의 `$changesets-version` 또는 Claude Code의 `/changesets-version`을 사용합니다.
 
 ### Build
 
