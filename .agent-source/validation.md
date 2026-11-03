@@ -60,7 +60,7 @@ Codex의 `agents/openai.yaml`은 실제 로더로 해석을 확인했다. 자동
 
 ## 테스트 작성 계약 검증
 
-검증일: 2026-10-20. 사용자 지정 `blog` 저장소의 테스트 작성 계약과 예시를 참고해 독립성·실패 시 정리·시간·React 검증 원칙을 공통 원천에 추가했다. 실행 범위와 fixture 예시는 현재 저장소의 Node 테스트에 맞췄다.
+검증일: 2026-10-20. 독립성·실패 시 정리·시간·React 검증 원칙을 공통 원천에 추가했다. 실행 범위와 fixture 예시는 현재 저장소의 Node 테스트에 맞췄다.
 
 - `node scripts/sync-instructions.mjs --write` 후 `--check` 통과. `TEST_WRITING` 계약은 Codex의 `.codex/test-writing.md`와 Claude의 `.claude/rules/test-writing.md`에 각각 한 번 포함되며, 각 파일의 원천·해시를 관리한다. Codex는 `AGENTS.md`의 명시 참조로, Claude는 테스트·fixture·설정 경로 규칙과 `CLAUDE.md`의 참조로 연결했다.
 - `node --test scripts/sync-instructions.test.mjs` 35개 통과. 새 계약의 양쪽 반영, 원천 누락·공백·어댑터 중복·진입점 연결 누락, 수동 수정 보존, 반복 생성의 무변경을 검증했다. 기존 경로 검증의 제어문자 정규식을 같은 범위의 문자 검사로 바꾸고, U+0000~U+0020·역슬래시·콜론·절대 경로·상위 경로 거부와 쓰기 없음도 확인했다.
