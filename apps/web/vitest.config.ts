@@ -8,7 +8,7 @@ import svgrOptions from './svgr.config.js';
 
 export default defineConfig({
   plugins: [svgr({ svgrOptions }), react(), tailwindcss()],
-  optimizeDeps: { include: ['next/link', 'next/image'] },
+  optimizeDeps: { include: ['next/link', 'next/image', 'next/dynamic'] },
   // globals.css가 상대 경로로 가져오는 로컬 폰트도 Vite 소스로 처리한다.
   publicDir: false,
   // 앱 CSS를 그대로 사용하되 Next.js의 PostCSS 처리를 중복 실행하지 않는다.
