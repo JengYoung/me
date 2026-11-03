@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu } from 'lucide-react';
 import { Header, ScrollHeaderPlugin, Sidebar } from '../../../shared/ui';
-import { Character } from '../../../shared/ui/character';
 
 const navigation = [
   { href: '/', label: '홈' },
@@ -27,7 +27,7 @@ function HeaderNavigation({ pathname }: { pathname: string }) {
             aria-label="JengYoung 홈"
             className="inline-flex min-h-48px items-center gap-12px rounded-8 text-title-2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
           >
-            <Character size={40} decorative />
+            <Image src="/characters/character/00-neutral.svg" alt="" width={40} height={40} loading="eager" />
             <span className="text-title-3 font-bold">JengYoung</span>
           </Link>
         }

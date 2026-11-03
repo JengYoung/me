@@ -27,7 +27,10 @@ for (const directory of await readdir(path.join(docs, 'posts'), { withFileTypes:
 // oxlint-disable-next-line unicorn/no-array-sort -- 테스트가 파일에서 수집한 새 배열이다.
 for (const members of groups.values()) members.sort((a, b) => a.order - b.order);
 
-test('실제 시리즈의 리스트·캐러셀을 URL로 전환하고 키보드와 뒤로가기로 탐색한다', async ({ page }, testInfo) => {
+test('실제 시리즈의 리스트·캐러셀을 URL로 전환하고 키보드와 뒤로가기로 탐색한다', async ({
+  page,
+  baseURL,
+}, testInfo) => {
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/series');
@@ -46,7 +49,7 @@ test('실제 시리즈의 리스트·캐러셀을 URL로 전환하고 키보드�
   }
   const firstHref = await list.getByRole('link').first().getAttribute('href');
   const firstTitle = await list.getByRole('heading').first().textContent();
-  await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href', 'https://jengyoung.co.kr/series');
+  await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href', `${baseURL}/series`);
   await page.getByRole('link', { name: '캐러셀로 보기', exact: true }).click();
   await expect(page).toHaveURL(/\/series\?showType=carousel$/);
   const carousel = page.getByRole('region', { name: '시리즈 둘러보기' });
@@ -75,7 +78,7 @@ test('실제 시리즈의 리스트·캐러셀을 URL로 전환하고 키보드�
   expect(errors).toEqual([]);
 });
 
-test('시리즈 상세와 포스트의 전체 챕터·현재 위치·이전 다음이 같은 순서다', async ({ page }) => {
+test('시리즈 상세와 포스트의 전체 챕터·현재 위치·이전 다음이 같은 순서다', async ({ page, baseURL }) => {
   test.skip(groups.size === 0, '실제 원고에 시리즈가 없습니다.');
   const [id, posts] = [...groups.entries()][0]!;
   const definition = registry.find((item) => item.id === id)!;
@@ -83,7 +86,7 @@ test('시리즈 상세와 포스트의 전체 챕터·현재 위치·이전 다�
   await page.goto(`/series/${id}`);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(title);
   await expect(page).toHaveTitle(title);
-  await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href', `https://jengyoung.co.kr/series/${id}`);
+  await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href', `${baseURL}/series/${id}`);
   const chapters = page.getByRole('list', { name: '시리즈 글 목록' });
   await expect(chapters.getByRole('heading')).toHaveText(posts.map((post) => post.title));
   await expect(chapters.getByText(/번째 글$/)).toHaveText(posts.map((_, index) => `${index + 1}번째 글`));

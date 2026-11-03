@@ -7,6 +7,8 @@ import { PHASE_DEVELOPMENT_SERVER } from 'next/constants.js';
 const nextConfig = {
   agentRules: false,
   distDir: process.env.BLOG_NEXT_DIST_DIR ?? '.next',
+  // 별도 제공하는 폰트 CSS를 제외하고 화면 CSS만 HTML에 포함합니다.
+  experimental: { inlineCss: true },
   turbopack: {
     rules: {
       '*.svg': {

@@ -33,6 +33,7 @@ export default defineConfig({
   webServer: {
     env: {
       BLOG_NEXT_DIST_DIR: '.next-e2e',
+      SITE_ORIGIN: baseURL,
     },
     command: 'pnpm run build && pnpm exec next start --hostname 127.0.0.1 --port 3100',
     url: baseURL,

@@ -27,12 +27,15 @@ async function finishMotion(target: Locator) {
   });
 }
 
-test('첫 문서 스크롤로 파동·낙하·소개를 표시하고 역스크롤과 리사이즈에서 반복하지 않는다', async ({ page }, info) => {
+test('첫 문서 스크롤로 파동·낙하·소개를 표시하고 역스크롤과 리사이즈에서 반복하지 않는다', async ({
+  page,
+  baseURL,
+}, info) => {
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await openHome(page, info.project.use.colorScheme === 'dark');
   await expect(page).toHaveTitle('황재영 | Break the Brake');
-  await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href', 'https://jengyoung.co.kr/');
+  await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href', `${baseURL}/`);
   await expect(page.locator('[data-hero-copy]')).toHaveAttribute('data-position', 'fixed');
   await page.screenshot({ path: info.outputPath('home-initial.png') });
   await page.locator('[data-grid-pulse]').evaluate((element) => {

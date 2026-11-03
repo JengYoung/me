@@ -32,14 +32,14 @@ test('실제 docs의 공개 글만 포스트 목록에 표시한다', async ({ p
   if (published.length === 0) await expect(page.getByText('아직 공개된 글이 없습니다.')).toBeVisible();
 });
 
-test('사이트맵에는 실제 공개 글의 기본 주소만 포함한다', async ({ request }) => {
+test('사이트맵에는 실제 공개 글의 기본 주소만 포함한다', async ({ request, baseURL }) => {
   const response = await request.get('/sitemap.xml');
   expect(response.status()).toBe(200);
   const xml = await response.text();
   const urls = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)]
     .map((match) => match[1]!)
     .filter((url) => url.includes('/posts/'));
-  expect(new Set(urls)).toEqual(new Set(published.map(({ id }) => `https://jengyoung.co.kr${postUrl(id)}`)));
+  expect(new Set(urls)).toEqual(new Set(published.map(({ id }) => `${baseURL}${postUrl(id)}`)));
 });
 
 test('실제 초안은 기본 주소와 버전 쿼리로도 공개되지 않는다', async ({ request }) => {
@@ -54,8 +54,8 @@ test('실제 초안은 기본 주소와 버전 쿼리로도 공개되지 않는�
 
 // 공개 버전이 실제로 추가되면 그 문서의 제목·버전·canonical을 그대로 검증한다.
 for (const { id, releases } of published) {
-  test(`${id}: 실제 공개 원고의 최신·과거 버전을 읽는다`, async ({ page }) => {
-    const canonical = `https://jengyoung.co.kr${postUrl(id)}`;
+  test(`${id}: 실제 공개 원고의 최신·과거 버전을 읽는다`, async ({ page, baseURL }) => {
+    const canonical = `${baseURL}${postUrl(id)}`;
     const latest = releases.at(-1)!;
     for (const filename of [...releases].reverse()) {
       const source = await readFile(path.join(postsRoot, id, filename), 'utf8');

@@ -55,13 +55,13 @@ test('일기 목록은 실제 공개 원고만 표시하고 모바일·테마에
   await page.screenshot({ path: testInfo.outputPath('diary-list.png'), fullPage: true });
 });
 
-test('일기 사이트맵에 공개 원고의 기본 URL만 포함한다', async ({ request }) => {
+test('일기 사이트맵에 공개 원고의 기본 URL만 포함한다', async ({ request, baseURL }) => {
   const response = await request.get('/sitemap.xml');
   expect(response.status()).toBe(200);
   const urls = [...(await response.text()).matchAll(/<loc>(.*?)<\/loc>/g)]
     .map((match) => match[1]!)
     .filter((url) => url.includes('/diary/'));
-  expect(new Set(urls)).toEqual(new Set(published.map(({ id }) => `https://jengyoung.co.kr/diary/${id}`)));
+  expect(new Set(urls)).toEqual(new Set(published.map(({ id }) => `${baseURL}/diary/${id}`)));
 });
 
 test('초안·기존 Markdown·없는 일기는 직접 주소에서도 비공개다', async ({ request }) => {
@@ -79,7 +79,7 @@ test('초안·기존 Markdown·없는 일기는 직접 주소에서도 비공개
   }
 });
 
-test('일기 상세는 단일 현재 본문만 제공하고 목록으로 복귀한다', async ({ page }) => {
+test('일기 상세는 단일 현재 본문만 제공하고 목록으로 복귀한다', async ({ page, baseURL }) => {
   test.skip(published.length === 0, '실제 공개 일기가 없어 상세 탐색 검증은 실행하지 않습니다.');
   for (const { id, title } of published) {
     await page.goto(`/diary/${id}?version=1.0.0`);
@@ -87,7 +87,7 @@ test('일기 상세는 단일 현재 본문만 제공하고 목록으로 복귀�
     await expect(page.locator('article')).toHaveCount(1);
     await expect(page.locator('[data-post-version]')).toHaveCount(0);
     await expect(page.getByRole('navigation', { name: '시리즈 이어 읽기' })).toHaveCount(0);
-    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://jengyoung.co.kr/diary/${id}`);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `${baseURL}/diary/${id}`);
     await page.getByRole('link', { name: '일기 목록 보러가기' }).click();
     await expect(page).toHaveURL('/diary');
   }

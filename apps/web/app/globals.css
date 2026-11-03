@@ -1,5 +1,4 @@
 @import 'tailwindcss' source('..');
-@import '../public/fonts/pretendard/pretendard-variable.css';
 @import './design-token.css';
 
 /* 원본 블로그와 같은 경계이며, 1199.xpx도 mobile에 포함합니다. */

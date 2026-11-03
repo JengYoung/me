@@ -1,5 +1,19 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).
 
+## 환경변수
+
+`SITE_ORIGIN`은 canonical·Open Graph·JSON-LD·사이트맵의 대표 사이트 주소이며 서버에서만 읽습니다.
+개발 서버·빌드·배포된 서버에 모두 필요하고, 누락되거나 경로·쿼리·해시·인증 정보가 포함된 주소이면 오류로 처리합니다.
+`https://example.com` 또는 `http://localhost:3000`처럼 origin만 지정하며 `NEXT_PUBLIC_` 접두어는 사용하지 않습니다.
+
+로컬에서는 `.env.example`을 참고해 앱 루트인 `apps/web/.env.local`에 값을 설정합니다.
+이 파일은 Git에서 제외하며 Vault 토큰을 넣지 않습니다. Vault 값을 변경하면 로컬 환경변수도 갱신하고 개발 서버를 재시작합니다.
+앱은 Vault에 직접 접속하지 않습니다. 배포 시에는 Vault의 값을 Vercel 환경변수에 동기화한 뒤 새 배포를 시작해야 합니다.
+Vercel 동기화 파이프라인은 아직 구성하지 않았습니다.
+
+Turbo의 관련 작업 `env`에 `SITE_ORIGIN`을 등록하고 `.env*`를 빌드 입력에 포함해 주소 변경을 캐시에 반영합니다.
+E2E는 테스트 서버 주소를 `SITE_ORIGIN`으로 명시적으로 주입하므로 로컬 Vault나 운영 도메인에 의존하지 않습니다.
+
 ## 콘텐츠 작성
 
 포스트·일기·시리즈의 작성, 수정, 미리보기, 검증, 발행은 [콘텐츠 작성·발행 안내](../../.agent-source/project/content/publishing.md)에서 시작합니다.
@@ -66,7 +80,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load Inter, a custom Google Font.
+기본 글꼴은 자체 제공하는 Pretendard Variable 다이나믹 서브셋입니다. 폰트 파일과 라이선스는 `public/fonts/pretendard/`에서 관리합니다.
 
 ## Learn More
 
@@ -109,7 +123,9 @@ pnpm build-storybook
 - 도구 모음에서 Light/Dark와 390·1199·1200·1440px 화면 크기를 선택합니다. `Mobile` 스토리는 390px로 고정되므로 크기를 자유롭게 바꾸려면 `Default` 스토리를 사용합니다.
 - `Sidebar / Open And Close`의 `play`는 열기, Escape로 닫기, 닫기 버튼, 트리거로의 포커스 복귀를 검증합니다. 이 스토리를 열면 실행되며 결과는 Interactions 패널에서 확인합니다. `build-storybook`은 `play`를 실행하지 않습니다.
 
-앱의 `app/globals.css`, `app/design-token.css`, 로컬 Pretendard 폰트를 공유합니다. Storybook에서는 `@tailwindcss/vite`로 CSS와 폰트 경로를 처리하고, `public/`을 정적 파일로 제공합니다. 테마는 `html[data-theme]`에 적용되므로 `document.body`에 렌더링하는 portal에도 전달됩니다.
+앱의 `app/globals.css`, `app/design-token.css`와 `public/fonts/pretendard/`의 Pretendard Variable v1.3.9 다이나믹 서브셋을 공유합니다. 화면 CSS는 `experimental.inlineCss`로 HTML에 포함하고, 폰트 CSS는 루트 레이아웃에서 preload한 뒤 `afterInteractive` 스크립트로 적용합니다. JavaScript가 꺼져 있으면 `noscript`의 stylesheet를 사용합니다. 전체 92개 서브셋 중 현재 표시하는 문자에 필요한 파일만 브라우저가 선택하며, 특정 문자를 위한 폰트 파일을 수동으로 preload하지 않습니다.
+
+Storybook은 `@tailwindcss/vite`로 CSS를 처리하고, `public/`을 정적 파일로 제공합니다. `.storybook/preview-head.html`에서 같은 로컬 폰트 CSS를 불러오므로 외부 폰트 CDN 연결은 필요하지 않습니다. 테마와 폰트 변수는 `html`에서 상속되어 `document.body`에 렌더링하는 portal에도 전달됩니다. 폰트 성능 측정은 앱의 프로덕션 빌드에서 진행하며, Pretendard의 SIL Open Font License는 `public/fonts/pretendard/OFL.txt`에 보관합니다.
 
 ### 스토리 추가
 

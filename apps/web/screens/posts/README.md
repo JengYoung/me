@@ -2,7 +2,7 @@
 
 작성·수정·미리보기·검증·발행은 [콘텐츠 작성·발행 안내](../../../../.agent-source/project/content/publishing.md)에서 시작합니다.
 
-`app/posts/[postId]/page.tsx`는 `apps/web/docs/posts/{postId}/{version}.mdx` 중 숫자로 가장 큰 공개 버전을 정적으로 렌더링합니다. 폴더 이름이 고정된 글 식별자이며, 라우트·컴포넌트에서는 `postId`, 글 데이터에서는 `post.id`로 전달합니다. `?version=1.0.0`은 최신 HTML로 시작하고 hydration 후 해당 과거 MDX 모듈만 불러옵니다. canonical은 항상 `https://jengyoung.co.kr/posts/{postId}`입니다.
+`app/posts/[postId]/page.tsx`는 `apps/web/docs/posts/{postId}/{version}.mdx` 중 숫자로 가장 큰 공개 버전을 정적으로 렌더링합니다. 폴더 이름이 고정된 글 식별자이며, 라우트·컴포넌트에서는 `postId`, 글 데이터에서는 `post.id`로 전달합니다. `?version=1.0.0`은 최신 HTML로 시작하고 hydration 후 해당 과거 MDX 모듈만 불러옵니다. canonical은 서버 환경변수 `SITE_ORIGIN`을 기준으로 만든 `/posts/{postId}`의 절대 주소입니다.
 
 `build`는 `content:validate`·`content:generate` 후 Next.js를 빌드하고, `check-types`는 `content:generate` 후 타입을 검사합니다. `dev`는 같은 생성기로 초안까지 포함한 로컬 미리보기를 준비합니다. `scripts/generate-posts.ts`는 이 앱의 실제 `docs/posts`를 읽습니다. 생성된 최신 MDX의 정적 import와 과거 MDX의 `next/dynamic` 목록은 공개용 `generated/`, 개발용 `generated-preview/`에 있으며 Git에 포함하지 않습니다. 개발 서버는 원고 변경과 새 파일을 감지해 목록을 갱신합니다.
 
