@@ -211,7 +211,7 @@
   --radius-full: 9999px;
 }
 
-/* Typography · Noto Sans KR · 크기·굵기·행간은 Brand 토큰을 유지한다.
+/* Typography · Pretendard Variable · 크기·굵기·행간은 Brand 토큰을 유지한다.
    https://www.figma.com/design/GfYyF8klIKTizVSaE9g34S?node-id=39-514
    heading-1~6, title-1~4, body-1~4, detail · 최소 12px.
    1rem = 16px 기준이며 사용자의 기본 글자 크기에 맞춰 확대됩니다.
@@ -221,8 +221,9 @@
 
 @theme static {
   --font-sans:
-    'Noto Sans KR', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
-    'Apple SD Gothic Neo', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+    'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue',
+    'Segoe UI', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    sans-serif;
 
   /* 원시 크기·행간·굵기·자간 */
   --type-size-12: 0.75rem;

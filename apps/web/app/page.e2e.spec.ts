@@ -37,9 +37,49 @@ test('홈 문서와 앱 리소스를 오류 없이 불러온다', async ({ page 
   await expect(page.locator('script[src]')).not.toHaveCount(0);
   await expect(page.locator('link[rel="stylesheet"]')).not.toHaveCount(0);
   await expect(page.locator('body')).toHaveCSS('overflow-x', 'clip');
-  await expect(page.locator('body')).toHaveCSS('font-family', /Noto Sans KR/);
+  await expect(page.locator('body')).toHaveCSS('font-family', /Pretendard Variable/);
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          [...document.fonts].some((font) => font.family.includes('Pretendard Variable') && font.status === 'loaded') &&
+          document.fonts.check('400 16px "Pretendard Variable"', '소개 보기'),
+      ),
+    )
+    .toBe(true);
   expect(failedResources, '앱 리소스 요청 실패').toEqual([]);
   expect(runtimeErrors, '초기 로딩 중 브라우저 오류').toEqual([]);
+});
+
+test('JavaScript 없이도 같은 폰트로 홈을 읽고 목록으로 이동할 수 있다', async ({ browser, baseURL }, testInfo) => {
+  const context = await browser.newContext({
+    baseURL,
+    javaScriptEnabled: false,
+    viewport: testInfo.project.use.viewport,
+  });
+  try {
+    const page = await context.newPage();
+    await page.goto('/');
+
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Break');
+    await expect(page.getByText('안녕하세요, 개발자', { exact: false })).toBeVisible();
+    await expect(page.locator('body')).toHaveCSS('font-family', /Pretendard Variable/);
+    await expect
+      .poll(() =>
+        page.evaluate(
+          () =>
+            [...document.fonts].some(
+              (font) => font.family.includes('Pretendard Variable') && font.status === 'loaded',
+            ) && document.fonts.check('400 16px "Pretendard Variable"', '안녕하세요'),
+        ),
+      )
+      .toBe(true);
+
+    await page.getByRole('link', { name: '시리즈 목록 보러가기' }).click();
+    await expect(page).toHaveURL(/\/series\?showType=carousel$/);
+  } finally {
+    await context.close();
+  }
 });
 
 test('존재하지 않는 앱 경로는 404 상태와 안내 화면을 반환한다', async ({ page }) => {

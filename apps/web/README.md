@@ -80,7 +80,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load Inter, a custom Google Font.
+기본 글꼴은 자체 제공하는 Pretendard Variable 다이나믹 서브셋입니다. 폰트 파일과 라이선스는 `public/fonts/pretendard/`에서 관리합니다.
 
 ## Learn More
 
@@ -123,9 +123,9 @@ pnpm build-storybook
 - 도구 모음에서 Light/Dark와 390·1199·1200·1440px 화면 크기를 선택합니다. `Mobile` 스토리는 390px로 고정되므로 크기를 자유롭게 바꾸려면 `Default` 스토리를 사용합니다.
 - `Sidebar / Open And Close`의 `play`는 열기, Escape로 닫기, 닫기 버튼, 트리거로의 포커스 복귀를 검증합니다. 이 스토리를 열면 실행되며 결과는 Interactions 패널에서 확인합니다. `build-storybook`은 `play`를 실행하지 않습니다.
 
-앱의 `app/globals.css`, `app/design-token.css`, `app/fonts.ts`의 Noto Sans KR 설정을 공유합니다. 앱은 `next/font/google`로 폰트를 빌드 시 내려받아 자체 제공하고, Storybook은 Next.js Vite 어댑터로 같은 폰트 설정을 처리합니다. `subsets: ['latin']`은 preload 범위이며 한글 지원을 제한하지 않습니다. Storybook에서는 `@tailwindcss/vite`로 CSS를 처리하고, `public/`을 정적 파일로 제공합니다. 테마와 폰트 변수는 `html`에 적용되므로 `document.body`에 렌더링하는 portal에도 전달됩니다.
+앱의 `app/globals.css`, `app/design-token.css`와 `public/fonts/pretendard/`의 Pretendard Variable v1.3.9 다이나믹 서브셋을 공유합니다. 화면 CSS는 `experimental.inlineCss`로 HTML에 포함하고, 폰트 CSS는 루트 레이아웃에서 preload한 뒤 `afterInteractive` 스크립트로 적용합니다. JavaScript가 꺼져 있으면 `noscript`의 stylesheet를 사용합니다. 전체 92개 서브셋 중 현재 표시하는 문자에 필요한 파일만 브라우저가 선택하며, 특정 문자를 위한 폰트 파일을 수동으로 preload하지 않습니다.
 
-Storybook 미리보기는 어댑터가 Google Fonts CDN에서 글꼴을 불러오므로 네트워크 연결이 필요합니다. 앱의 자체 제공 방식과 다르므로 폰트 성능 측정은 앱의 프로덕션 빌드에서 진행합니다. Noto Sans KR의 라이선스는 `public/fonts/noto-sans-kr/OFL.txt`에 보관합니다.
+Storybook은 `@tailwindcss/vite`로 CSS를 처리하고, `public/`을 정적 파일로 제공합니다. `.storybook/preview-head.html`에서 같은 로컬 폰트 CSS를 불러오므로 외부 폰트 CDN 연결은 필요하지 않습니다. 테마와 폰트 변수는 `html`에서 상속되어 `document.body`에 렌더링하는 portal에도 전달됩니다. 폰트 성능 측정은 앱의 프로덕션 빌드에서 진행하며, Pretendard의 SIL Open Font License는 `public/fonts/pretendard/OFL.txt`에 보관합니다.
 
 ### 스토리 추가
 
