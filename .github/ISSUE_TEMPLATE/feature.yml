@@ -1,0 +1,81 @@
+name: 기능 요청
+description: 어떤 기능을 추가하거나 개선하고 싶으신가요?
+title: '[Feature] '
+body:
+  - type: textarea
+    id: background
+    attributes:
+      label: 배경 / 목적
+      description: 현재 어떤 문제가 있고, 이 기능으로 무엇을 해결하고 싶으신가요?
+      placeholder: |
+        현재 상황과 불편한 점, 기능이 필요한 이유를 적어 주세요.
+        연관된 이슈가 있다면 함께 연결해 주세요.
+    validations:
+      required: true
+
+  - type: textarea
+    id: requirements
+    attributes:
+      label: 요구사항
+      description: 어떤 동작이 필요하고, 구현 전에 확정해야 할 사항은 무엇인가요?
+      placeholder: |
+        - 필요한 기능과 사용자 동작:
+        - 디자인 및 docs/plan 명세와의 대응:
+        - 데이터/API 연동 여부:
+        - 미정 사항과 결정이 필요한 내용:
+    validations:
+      required: false
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: 완료 기준 (Acceptance Criteria)
+      description: 어떤 결과를 확인하면 이 기능이 완료되었다고 판단할 수 있나요?
+      placeholder: |
+        - [ ] 핵심 사용자 동작과 기대 결과를 확인한다.
+        - [ ] 해당하는 경우 mobile/desktop, Light/Dark와 Figma 디자인 토큰을 확인한다.
+        - [ ] 접근성, 오류·폴백, 화면 재진입 등 관련 상태를 확인한다.
+        - [ ] 필요한 품질 검사와 테스트를 실행하고 미검증 항목을 기록한다.
+    validations:
+      required: false
+
+  - type: textarea
+    id: references
+    attributes:
+      label: 참고 자료
+      description: 참고할 디자인, 화면 명세, 레퍼런스와 관련 이슈가 있나요?
+      placeholder: |
+        - Figma 화면 시안 (모바일 / 데스크톱):
+        - 디자인 토큰 (Figma Brand):
+        - docs/plan 문서 또는 Spec / 논의:
+        - 레퍼런스:
+        - 관련 이슈:
+        미정이거나 해당하지 않는 항목은 그 상태를 적어 주세요.
+    validations:
+      required: false
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: 영향 범위
+      description: 어떤 앱, 화면, 레이어와 기존 기능에 영향을 주나요?
+      placeholder: |
+        - 앱 / 패키지:
+        - 화면 / 경로:
+        - 레이어:
+        - 연동 대상 및 공통 기능에 미치는 영향:
+    validations:
+      required: false
+
+  - type: textarea
+    id: checklist
+    attributes:
+      label: 체크리스트
+      description: 요구사항 확정부터 구현, 검증과 문서화까지 어떤 작업이 필요한가요?
+      value: |
+        - [ ] 미정 사항과 구현 방식 확정
+        - [ ] 기능 구현
+        - [ ] 필요한 테스트 및 관련 환경·상태 검증
+        - [ ] 구현 문서 업데이트 및 사용자 영향 변경의 changeset 작성
+    validations:
+      required: false
